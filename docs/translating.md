@@ -112,3 +112,8 @@ You can submit it via:
 ## Tips
 
 - **WinMerge** ([winmerge.org](https://winmerge.org)) is an excellent free tool for comparing your translation against an updated English base file to find new or changed strings after a release.
+
+
+## Built-in Vietnamese resource
+
+Built-in repository assets use descriptive filenames such as `Vietnamese.json`; the JSON `cultureName` remains `vi-VN`. The runtime selector currently identifies built-in locales by filename, so do not rename the repository asset to the culture identifier.

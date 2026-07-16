@@ -44,6 +44,7 @@ public class LanguageInitializer() : ILanguageInitializer
         "Swedish",
         "Turkish",
         "Ukrainian",
+        "Vietnamese",
     ];
 
     public async Task UpdateLanguagesIfNeeded()

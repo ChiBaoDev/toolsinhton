@@ -71,9 +71,9 @@
     "ownedRoots": [
       "$.translate"
     ],
-    "reviewed": false,
-    "reviewer": "",
-    "reviewNote": "",
+    "reviewed": true,
+    "reviewer": "ChiBaoDev",
+    "reviewNote": "Reviewed translation workflow, API terminology, placeholders, and Vietnamese technical wording in context.",
     "shardFile": "VietnameseDraft/06-translate-remaining.json"
   }
 ]
