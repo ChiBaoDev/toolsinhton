@@ -220,6 +220,16 @@
     "reason": "MS Word is the product name used for the spell-check engine option."
   },
   {
+    "key": "$.options.shortcuts.categoryVideo",
+    "value": "Video",
+    "reason": "Video is the standard Vietnamese technical term for moving-picture media."
+  },
+  {
+    "key": "$.options.shortcuts.categoryAi",
+    "value": "AI",
+    "reason": "AI is the standard abbreviation for artificial intelligence and is retained in Vietnamese."
+  },
+  {
     "key": "$.options.shortcuts.alt",
     "value": "Alt",
     "reason": "Alt is the standard keyboard modifier label and is retained unchanged."

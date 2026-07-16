@@ -78,3 +78,5 @@ Focused verification command:
 Exact result: **25 passed / 0 failed / 25 total**.
 
 `git diff --check` completed with no output.
+Late independent tools-root review additionally corrected gap allocation terminology, media-rãnh wording, standalone Netflix shot-change and whitespace diagnostics, incrementally accumulated lines, join-file time-code offset behavior, speaker metadata conversion, title-safe subtitle-area wording, and explicit square-bracket terminology.
+A subsequent independent options review covered the remaining settings, all shortcut leaves, word lists, and language chooser. It corrected additional keyboard-focus, selection, merge direction, dialogue, clipboard, media, timing, waveform, category, import, ASSA drawing, sort, and sentence-case defects while preserving structural invariants.
