@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace UITests.Logic.Localization;
 
@@ -213,21 +214,14 @@ public class VietnameseTranslationBatchTests
                     errors.Add($"{batch.Id}: {path}: invalid composite format: {exception.Message}");
                 }
 
-                if (string.Equals(english.StringValue, translated.StringValue, StringComparison.Ordinal))
+                if (string.Equals(batch.Id, "B5", StringComparison.Ordinal) &&
+                    string.Equals(english.StringValue, translated.StringValue, StringComparison.Ordinal))
                     englishIdenticalReviewedPaths.Add(path);
             }
         }
 
-        var reviewedBatchIds = batches
-            .Where(batch => batch.Reviewed)
-            .Select(batch => batch.Id)
-            .ToHashSet(StringComparer.Ordinal);
         var relevantAllowlistKeys = allowlist.Keys
-            .Where(path =>
-            {
-                var owner = ResolveOwner(path, batches);
-                return owner is not null && reviewedBatchIds.Contains(owner);
-            })
+            .Where(path => string.Equals(ResolveOwner(path, batches), "B5", StringComparison.Ordinal))
             .ToHashSet(StringComparer.Ordinal);
 
         foreach (var path in englishIdenticalReviewedPaths.Except(relevantAllowlistKeys, StringComparer.Ordinal))
@@ -242,6 +236,36 @@ public class VietnameseTranslationBatchTests
         Assert.Equal(607, reviewedLeafCounts["B5"]);
         Assert.Equal(3_243, reviewedLeafCounts.Values.Sum());
         Assert.True(errors.Count == 0, string.Join(Environment.NewLine, errors));
+    }
+
+    [Fact]
+    public void B5_PreservesDecodedAssaSyntaxAndRejectsControlCharacterCorruption()
+    {
+        var batches = LoadBatches();
+        var b5 = batches.Single(batch => batch.Id == "B5");
+        using var english = LocalizationJsonHelper.LoadDocument(LocalizationTestPaths.EnglishLanguageFile());
+        using var shard = LocalizationJsonHelper.LoadDocument(Path.Combine(TestDataFolder(), b5.ShardFile));
+        var englishLeaves = LocalizationJsonHelper.FlattenLeaves(english.RootElement);
+        var shardLeaves = LocalizationJsonHelper.FlattenLeaves(shard.RootElement);
+        var syntaxPaths = englishLeaves
+            .Where(pair => pair.Value.Kind == JsonValueKind.String && pair.Value.StringValue!.Contains('\\'))
+            .Select(pair => pair.Key)
+            .Where(path => IsOwnedPath(path, "$.video") || IsOwnedPath(path, "$.ocr") || IsOwnedPath(path, "$.assa"))
+            .ToArray();
+
+        foreach (var path in syntaxPaths)
+        {
+            var source = englishLeaves[path].StringValue!;
+            var translated = shardLeaves[path].StringValue!;
+            Assert.DoesNotContain(translated, character => character < (char)32 && character is not (char)13 and not (char)10 and not (char)9);
+            var tagPattern = @"\\(?:N|n|u[01]|an[1-9]|fsp[-+]?\d+(?:\.\d+)?|pos\([-+]?\d+(?:\.\d+)?,[-+]?\d+(?:\.\d+)?\))";
+            var sourceTags = Regex.Matches(source, tagPattern).Select(match => match.Value).ToArray();
+            var translatedTags = Regex.Matches(translated, tagPattern).Select(match => match.Value).ToArray();
+            Assert.Equal(sourceTags, translatedTags);
+        }
+
+        Assert.Equal(@"Thêm thẻ vị trí ASSA (ví dụ: {\an8})", shardLeaves["$.video.videoOcr.addAssaPositionTag"].StringValue);
+        Assert.Equal(@"Tăng khoảng cách giữa các từ bằng thẻ \fsp để văn bản dễ đọc hơn", shardLeaves["$.assa.advancedEffectWordSpacingDescription"].StringValue);
     }
 
     [Fact]

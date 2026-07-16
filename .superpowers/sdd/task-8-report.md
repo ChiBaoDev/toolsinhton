@@ -60,7 +60,7 @@ Result: passed.
 
 - Manually re-reviewed all 607 B5 values against `.superpowers/sdd/b5-english-extract.json`, preserving exact source order/count, placeholders, markup, ASS syntax, shortcuts, bullets, significant spacing, and source-significant line breaks.
 - Rewrote internal-key values and machine-mixed prose across video burn-in, speech-to-text, TTS, shot changes, video OCR, embedded tracks, OCR preprocessing, VobSub, ASSA drawing/styles, and advanced effects.
-- Reduced the B5 untranslated allowlist to seven exact path-specific invariants: CRF, URL, the resolution `x` separator, `Tesseract + LSTM`, standalone/title OCR labels, and the established Karaoke effect name.
+- The B5 untranslated allowlist contains exactly six exact path-specific invariants: CRF, URL, the resolution `x` separator, `Tesseract + LSTM`, standalone OCR, and the OCR title pattern `OCR - {0}`.
 - Confirmed parser hardening retains ordered ASS atoms and supports the B5 `\fsp` atom while rejecting malformed/arbitrary/non-finite forms.
 
 ### Final exact verification output
@@ -72,3 +72,14 @@ Result: `Passed! - Failed: 0, Passed: 34, Skipped: 0, Total: 34`
 
 Command: `git diff --check`
 Result: passed (Git emitted only the configured LF-to-CRLF working-copy warning for the B5 JSON shard).
+
+
+### Final B5 gate evidence
+
+- Raw-byte and decoded-value audit confirmed `$.video.videoOcr.addAssaPositionTag` decodes to literal `{n8}` and `$.assa.advancedEffectWordSpacingDescription` decodes to literal `sp`; no reviewed B5 syntax value contains an unexpected control character.
+- Reviewed all 607 B5 values after the final rewrite, including OCR paths, audio-to-text, TTS, embedded tracks, progress/error messages, wrapping, styles, and advanced effects.
+- The allowlist is exactly six entries, consistently listed as `$.video.burnIn.crf=CRF`, `$.video.videoOcr.url=URL`, `$.video.resolutionSeparator=x`, `$.ocr.tesseractEngineModeBoth=Tesseract + LSTM`, `$.ocr.ocr=OCR`, and `$.ocr.ocrX=OCR - {0}`.
+- Added decoded ASS syntax/control-character regression coverage to `VietnameseTranslationBatchTests`.
+- Final verification commands: `dotnet test D:/toolsinhton/.claude/worktrees/vietnamese-localization/tests/UI/UITests.csproj -c Debug --filter "FullyQualifiedName~VietnameseTranslationBatchTests|FullyQualifiedName~CompositeFormatPlaceholderParserTests" --no-restore --verbosity quiet`; `git diff --check`; direct decoded ASS/control-character audit.
+
+Verification result: direct decoded validation passed for literal `{n8}` and `sp`, zero unexpected control characters, and exactly six allowlist entries. Combined suite passed 44/44 with 0 failures. `git diff --check` passed; Git emitted only configured LF-to-CRLF working-copy warnings.

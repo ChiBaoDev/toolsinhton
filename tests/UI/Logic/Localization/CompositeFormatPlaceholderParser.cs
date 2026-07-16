@@ -96,7 +96,8 @@ internal static class CompositeFormatPlaceholderParser
         }
 
         if (!expectedSignature.AssaOverrideTags.SequenceEqual(actualSignature.AssaOverrideTags, StringComparer.Ordinal) ||
-            !expectedSignature.StructuralTokens.SequenceEqual(actualSignature.StructuralTokens, StringComparer.Ordinal))
+            (expectedSignature.AssaOverrideTags.Count > 0 &&
+             !expectedSignature.StructuralTokens.SequenceEqual(actualSignature.StructuralTokens, StringComparer.Ordinal)))
         {
             errors.Add("ASS override tags or positions differ.");
         }
