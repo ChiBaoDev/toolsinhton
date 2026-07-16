@@ -76,10 +76,47 @@ Result: passed (Git emitted only the configured LF-to-CRLF working-copy warning 
 
 ### Final B5 gate evidence
 
-- Raw-byte and decoded-value audit confirmed `$.video.videoOcr.addAssaPositionTag` decodes to literal `{n8}` and `$.assa.advancedEffectWordSpacingDescription` decodes to literal `sp`; no reviewed B5 syntax value contains an unexpected control character.
+- Raw-byte and decoded-value audit confirmed `$.video.videoOcr.addAssaPositionTag` decodes to literal `{\an8}` and `$.assa.advancedEffectWordSpacingDescription` decodes to literal `\fsp`; no reviewed B5 syntax value contains an unexpected control character.
 - Reviewed all 607 B5 values after the final rewrite, including OCR paths, audio-to-text, TTS, embedded tracks, progress/error messages, wrapping, styles, and advanced effects.
 - The allowlist is exactly six entries, consistently listed as `$.video.burnIn.crf=CRF`, `$.video.videoOcr.url=URL`, `$.video.resolutionSeparator=x`, `$.ocr.tesseractEngineModeBoth=Tesseract + LSTM`, `$.ocr.ocr=OCR`, and `$.ocr.ocrX=OCR - {0}`.
 - Added decoded ASS syntax/control-character regression coverage to `VietnameseTranslationBatchTests`.
 - Final verification commands: `dotnet test D:/toolsinhton/.claude/worktrees/vietnamese-localization/tests/UI/UITests.csproj -c Debug --filter "FullyQualifiedName~VietnameseTranslationBatchTests|FullyQualifiedName~CompositeFormatPlaceholderParserTests" --no-restore --verbosity quiet`; `git diff --check`; direct decoded ASS/control-character audit.
 
-Verification result: direct decoded validation passed for literal `{n8}` and `sp`, zero unexpected control characters, and exactly six allowlist entries. Combined suite passed 44/44 with 0 failures. `git diff --check` passed; Git emitted only configured LF-to-CRLF working-copy warnings.
+Verification result: direct decoded validation passed for literal `{\an8}` and `\fsp`, zero unexpected control characters, and exactly six allowlist entries. Combined suite passed 44/44 with 0 failures. `git diff --check` passed; Git emitted only configured LF-to-CRLF working-copy warnings.
+
+
+## Independent final evidence correction
+
+- Replaced the accidental BEL (`0x07`) and form-feed (`0x0C`) bytes in the prior evidence with printable Markdown code spans showing the decoded literal ASS syntax `{\an8}` and `\fsp`. No B5 shard or parser source was changed.
+- Appended the independent review wave and both NOT APPROVED verdicts to `.superpowers/sdd/task-8-review-findings.md`.
+
+### Exact verification commands and results
+
+Command:
+```bash
+python - <<'PY'
+from pathlib import Path
+root=Path(r'D:/toolsinhton/.claude/worktrees/vietnamese-localization/.superpowers/sdd')
+files=sorted(root.glob('task-8*.md'))
+bad=[]
+for p in files:
+    for offset,value in enumerate(p.read_bytes()):
+        if value < 0x20 and value not in (0x09,0x0A,0x0D):
+            bad.append((p.name,offset,f'0x{value:02X}'))
+if bad:
+    for item in bad: print(f'{item[0]}:{item[1]}:{item[2]}')
+    raise SystemExit(1)
+print(f'PASS: audited {len(files)} Task 8 evidence Markdown files; no unexpected C0 controls')
+PY
+```
+
+Result: `PASS: audited 3 Task 8 evidence Markdown files; no unexpected C0 controls` (exit 0).
+
+Command:
+`dotnet test D:/toolsinhton/.claude/worktrees/vietnamese-localization/tests/UI/UITests.csproj -c Debug --filter "FullyQualifiedName~VietnameseTranslationBatchTests|FullyQualifiedName~CompositeFormatPlaceholderParserTests" --no-restore --verbosity quiet`
+
+Result: `Passed! - Failed: 0, Passed: 44, Skipped: 0, Total: 44` (duration 452 ms).
+
+Command: `git -C D:/toolsinhton/.claude/worktrees/vietnamese-localization diff --check`
+
+Result: passed (exit 0); Git emitted only the configured LF-to-CRLF working-copy warning for `.superpowers/sdd/task-8-report.md`.
