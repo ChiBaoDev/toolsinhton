@@ -1,0 +1,79 @@
+[
+  {
+    "id": "B1",
+    "ownedRoots": [
+      "$.title",
+      "$.version",
+      "$.translatedBy",
+      "$.cultureName",
+      "$.general",
+      "$.file",
+      "$.edit",
+      "$.help",
+      "$.about"
+    ],
+    "reviewed": false,
+    "reviewer": "",
+    "reviewNote": "",
+    "shardFile": "VietnameseDraft/01-general-file-edit.json"
+  },
+  {
+    "id": "B2",
+    "ownedRoots": [
+      "$.main.menu",
+      "$.main.toolbar",
+      "$.main.waveform"
+    ],
+    "reviewed": false,
+    "reviewer": "",
+    "reviewNote": "",
+    "shardFile": "VietnameseDraft/02-main-navigation.json"
+  },
+  {
+    "id": "B3",
+    "ownedRoots": [
+      "$.main",
+      "$.waveform",
+      "$.sync"
+    ],
+    "reviewed": false,
+    "reviewer": "",
+    "reviewNote": "",
+    "shardFile": "VietnameseDraft/03-main-sync-waveform.json"
+  },
+  {
+    "id": "B4",
+    "ownedRoots": [
+      "$.tools",
+      "$.spellCheck",
+      "$.options",
+      "$.plugins"
+    ],
+    "reviewed": false,
+    "reviewer": "",
+    "reviewNote": "",
+    "shardFile": "VietnameseDraft/04-tools-options.json"
+  },
+  {
+    "id": "B5",
+    "ownedRoots": [
+      "$.video",
+      "$.ocr",
+      "$.assa"
+    ],
+    "reviewed": false,
+    "reviewer": "",
+    "reviewNote": "",
+    "shardFile": "VietnameseDraft/05-video-ocr-assa.json"
+  },
+  {
+    "id": "B6",
+    "ownedRoots": [
+      "$.translate"
+    ],
+    "reviewed": false,
+    "reviewer": "",
+    "reviewNote": "",
+    "shardFile": "VietnameseDraft/06-translate-remaining.json"
+  }
+]
