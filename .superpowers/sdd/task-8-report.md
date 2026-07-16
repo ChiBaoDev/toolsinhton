@@ -120,3 +120,80 @@ Result: `Passed! - Failed: 0, Passed: 44, Skipped: 0, Total: 44` (duration 452 m
 Command: `git -C D:/toolsinhton/.claude/worktrees/vietnamese-localization diff --check`
 
 Result: passed (exit 0); Git emitted only the configured LF-to-CRLF working-copy warning for `.superpowers/sdd/task-8-report.md`.
+
+
+## Latest re-review evidence correction
+
+- Latest re-review after commit `ff01cf627` remains NOT APPROVED for spec compliance and code/translation quality because the report did not preserve the exact pre-fix control-character audit command/script and failing result.
+- This is documentation-only evidence. No B5 shard, parser, or runtime file was changed; Task 9 was not started and nothing was pushed.
+
+### Exact pre-fix control-character audit (before `ff01cf627`)
+
+Command/script run against the pre-fix report from `ff01cf627^`:
+
+```bash
+git show ff01cf627^:.superpowers/sdd/task-8-report.md | python -c "import sys; b=sys.stdin.buffer.read(); bad=[(i,x) for i,x in enumerate(b) if x<0x20 and x not in (0x09,0x0A,0x0D)]; [print(f'task-8-report.md:{i}:0x{x:02X}') for i,x in bad]; print(f'FAIL: found {len(bad)} unexpected C0 controls in pre-fix report'); raise SystemExit(1 if bad else 0)"
+```
+
+Failing output (exit 1):
+
+```text
+task-8-report.md:5392:0x07
+task-8-report.md:5468:0x0C
+task-8-report.md:6488:0x07
+task-8-report.md:6499:0x0C
+FAIL: found 4 unexpected C0 controls in pre-fix report
+pre-fix audit exit=1
+```
+
+The `0x07` bytes were BEL and the `0x0C` bytes were form-feed; the intended evidence was the printable literal ASS syntax `{{\an8}}` and `\fsp`.
+
+### Exact post-fix verification commands and results
+
+Focused 44-test command:
+
+```bash
+dotnet test D:/toolsinhton/.claude/worktrees/vietnamese-localization/tests/UI/UITests.csproj -c Debug --filter "FullyQualifiedName~VietnameseTranslationBatchTests|FullyQualifiedName~CompositeFormatPlaceholderParserTests" --no-restore --verbosity quiet
+```
+
+Output (exit 0):
+
+```text
+Test run for D:\toolsinhton\.claude\worktrees\vietnamese-localization\tests\UI\bin\Debug\net10.0\UITests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    44, Skipped:     0, Total:    44, Duration: 449 ms - UITests.dll (net10.0)
+```
+
+Post-fix C0 audit command/script:
+
+```bash
+python - <<'PY'
+from pathlib import Path
+root=Path(r'D:/toolsinhton/.claude/worktrees/vietnamese-localization/.superpowers/sdd')
+files=sorted(root.glob('task-8*.md'))
+bad=[]
+for p in files:
+    for offset,value in enumerate(p.read_bytes()):
+        if value < 0x20 and value not in (0x09,0x0A,0x0D):
+            bad.append((p.name,offset,f'0x{value:02X}'))
+if bad:
+    for item in bad: print(f'{item[0]}:{item[1]}:{item[2]}')
+    raise SystemExit(1)
+print(f'PASS: audited {len(files)} Task 8 evidence Markdown files; no unexpected C0 controls')
+PY
+```
+
+Output (exit 0):
+
+```text
+PASS: audited 3 Task 8 evidence Markdown files; no unexpected C0 controls
+```
+
+`git diff --check` command and output (exit 0):
+
+```text
+$ git -C D:/toolsinhton/.claude/worktrees/vietnamese-localization diff --check
+```
+
+No output; exit 0. The combined command run also reported `RC test=0 audit=0 diff=0`.

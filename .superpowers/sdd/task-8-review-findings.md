@@ -49,3 +49,12 @@ Verdicts remain: Spec compliance NOT APPROVED; code/translation quality NOT APPR
 ### Important
 
 18. `task-8-report.md` contained actual BEL (`0x07`) and form-feed (`0x0C`) bytes where its evidence intended the printable literal ASS syntax `{\an8}` and `\fsp`. This contradicted the report's zero-control-character claim. Replace the control bytes with unambiguous printable Markdown code spans, audit every Task 8 evidence Markdown file for unexpected C0 controls other than CR/LF/TAB, record an exact failing verification command and its result, rerun the focused Vietnamese translation/parser tests and `git diff --check`, and commit the evidence-only correction without changing the B5 shard/parser unless separate evidence proves them wrong.
+
+
+## Latest re-review after commit `ff01cf627`
+
+Verdict: Spec compliance NOT APPROVED; code/translation quality NOT APPROVED.
+
+### Documentation evidence finding
+
+51. `task-8-report.md` records the post-fix passing C0 audit, but it did not preserve the exact pre-fix audit command/script and failing output that demonstrated the BEL (`0x07`) and form-feed (`0x0C`) bytes existed before `ff01cf627`. Append that reproducible pre-fix audit evidence, retain the post-fix passing audit, and rerun/record the focused 44-test command and `git diff --check`. This remains documentation-only; do not alter B5 shard/parser/runtime files or begin Task 9/push.
