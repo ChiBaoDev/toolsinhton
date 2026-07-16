@@ -9,3 +9,24 @@ Verification: Python JSON parse passed; pwsh merge, dotnet tests, and Debug/Rele
 Commit: 4a3db758ce5413cf83a109b18dd68814ba52e9e3
 
 Concerns: rerun requested PowerShell and dotnet commands on Windows with PowerShell 7 and the .NET SDK.
+
+
+## Fix and verification evidence
+
+- Fixed the stable B6 contract in `VietnameseTranslationBatchTests.cs`: B6 is reviewed by `ChiBaoDev` with the exact manifest review note, and total reviewed ownership is B1-B6 = 3270 leaves (1053 + 171 + 188 + 1224 + 607 + 27).
+- Final-catalog tests now directly verify exact English shape, metadata, non-empty string leaves, placeholder parity, exact fully-used English-identical allowlist, and deterministic merge parity. B6 coverage checks source-significant newline preservation and placeholders.
+- Audited identical values: ordinary prose examples were translated; the remaining 57 exact values are represented once each in `VietnameseUntranslatedAllowlist.json` with path/value-specific reasons.
+- Hardened `Merge-VietnameseLanguage.ps1` to validate B1-B6 order, reviewed metadata, roots, longest-prefix ownership, shard ownership, duplicate/missing/extra paths, and non-empty string leaves.
+- Added deterministic six-shard merge workflow documentation. Existing registry and Avalonia `AssetLoader` tests cover exactly-once registration and embedded resource loading.
+
+Commands and exact results:
+
+```text
+RED: pwsh was not found (exit 127); direct dotnet RED then exposed missing LocalizationTestPaths.Language helper (CS0117). After the test helper was added, focused RED: 2 failed, 12 passed; B6 placeholder assertion and 51 missing exact allowlist entries were reported.
+Windows PowerShell merge: exit 0
+Merge parity: MERGE_PARITY= True BYTES= 307666
+dotnet test .\tests\UI\UITests.csproj -c Debug --no-restore --filter "FullyQualifiedName~VietnameseLanguageJsonTests|VietnameseTranslationBatchTests" --verbosity minimal: exit 0; Passed 16, Failed 0, Skipped 0
+dotnet test .\tests\UI\UITests.csproj -c Debug --no-restore --filter "FullyQualifiedName~UITests.Logic.Localization" --verbosity minimal: exit 0; Passed 86, Failed 0, Skipped 0
+dotnet build .\SubtitleEdit.sln -c Debug --no-restore: exit 0; Build succeeded; 0 errors, 1 pre-existing CS8600 warning in tests/libse/SubtitleFormats/EbuTtDTest.cs:103
+dotnet build .\SubtitleEdit.sln -c Release --no-restore: exit 0; Build succeeded; 0 errors, 1 pre-existing CS8600 warning in tests/libse/SubtitleFormats/EbuTtDTest.cs:103
+```
