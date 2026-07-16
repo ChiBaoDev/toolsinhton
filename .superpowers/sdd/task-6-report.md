@@ -48,3 +48,12 @@ Required combined suite:
 Exact result: **17 passed / 0 failed / 17 total**; build succeeded with **0 warnings / 0 errors**. `git diff --check` completed with no errors. The first invocation from the agent workspace failed before build with `MSB1009` because that workspace did not contain the target project; rerunning the same suite against the requested worktree project path produced the successful result above.
 
 Self-review: only the B3 shard and this task report are task-scoped changes; no allowlist update was needed because no corrected value became English-identical or ceased to be English-identical. Runtime-generated `bin`/`obj` artifacts are not staged.
+
+## Final terminology correction
+
+Updated `$.sync.adjustAllTimes` in the B3 shard to `Điều chỉnh tất cả mốc thời gian (hiện sớm hơn/muộn hơn)`, preserving JSON order and formatting. This final polish uses the more precise `mốc thời gian` terminology for subtitle timing points.
+
+Required combined suite:
+`dotnet test D:/toolsinhton/.claude/worktrees/vietnamese-localization/tests/UI/UITests.csproj -c Debug --filter "FullyQualifiedName~VietnameseTranslationBatchTests|FullyQualifiedName~CompositeFormatPlaceholderParserTests" --verbosity normal`
+
+Exact result: **17 passed / 0 failed / 17 total**; build succeeded with **0 warnings / 0 errors**. The relative-path invocation from the isolated agent workspace could not locate the project (`MSB1009`), so the same required filter was run against the requested worktree's absolute project path. No runtime artifacts are staged.
