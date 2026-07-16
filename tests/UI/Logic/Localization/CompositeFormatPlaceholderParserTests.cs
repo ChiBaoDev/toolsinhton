@@ -33,6 +33,29 @@ public class CompositeFormatPlaceholderParserTests
         Assert.NotEmpty(CompositeFormatPlaceholderParser.Compare(expected, actual));
 
     [Fact]
+    public void Compare_PreservesValidAssaOverrideTagSequenceAndContent()
+    {
+        Assert.Empty(CompositeFormatPlaceholderParser.Compare(@"{\an8}Hello {\pos(10,20)}", @"{\an8}Xin chào {\pos(10,20)}"));
+        Assert.NotEmpty(CompositeFormatPlaceholderParser.Compare(@"{\an8}Hello", @"{\an7}Xin chào"));
+        Assert.NotEmpty(CompositeFormatPlaceholderParser.Compare(@"{\an8}Hello", "Hello"));
+    }
+
+    [Theory]
+    [InlineData(@"{\arbitrary}")]
+    [InlineData(@"{\pos(10,)}")]
+    [InlineData(@"{\an}")]
+    [InlineData(@"{\pos(10,20)")]
+    public void Parse_RejectsMalformedOrUnsupportedAssaOverrideTags(string value) =>
+        Assert.Throws<FormatException>(() => CompositeFormatPlaceholderParser.Parse(value));
+
+    [Fact]
+    public void Compare_PreservesMixedLanguageAndAssaTags()
+    {
+        Assert.Empty(CompositeFormatPlaceholderParser.Compare(@"{language} {\an8}", @"{language} {\an8}"));
+        Assert.NotEmpty(CompositeFormatPlaceholderParser.Compare(@"{language} {\an8}", @"{language} {\an7}"));
+    }
+
+    [Fact]
     public void Parse_RejectsMalformedFormat() =>
         Assert.Throws<FormatException>(() => CompositeFormatPlaceholderParser.Parse("Value {0"));
 }

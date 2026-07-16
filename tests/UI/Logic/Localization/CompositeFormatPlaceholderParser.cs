@@ -1,10 +1,11 @@
-﻿namespace UITests.Logic.Localization;
+namespace UITests.Logic.Localization;
 
 internal sealed record CompositePlaceholder(string Identifier, int? Alignment, string? Format);
 internal sealed record CompositeFormatSignature(
     IReadOnlyList<CompositePlaceholder> Placeholders,
     int EscapedOpenBraceCount,
-    int EscapedCloseBraceCount);
+    int EscapedCloseBraceCount,
+    IReadOnlyList<string> AssaOverrideTags);
 
 internal static class CompositeFormatPlaceholderParser
 {
@@ -13,6 +14,7 @@ internal static class CompositeFormatPlaceholderParser
         var placeholders = new List<CompositePlaceholder>();
         var escapedOpenBraceCount = 0;
         var escapedCloseBraceCount = 0;
+        var assaOverrideTags = new List<string>();
 
         for (var position = 0; position < value.Length;)
         {
@@ -30,6 +32,10 @@ internal static class CompositeFormatPlaceholderParser
                     var closingBrace = value.IndexOf('}', position + 2);
                     if (closingBrace < 0)
                         throw new FormatException("Unterminated ASS override tag.");
+                    var tag = value[(position + 1)..closingBrace];
+                    if (!IsValidAssaOverrideTag(tag))
+                        throw new FormatException("Invalid ASS override tag.");
+                    assaOverrideTags.Add(tag);
                     position = closingBrace + 1;
                     continue;
                 }
@@ -53,7 +59,7 @@ internal static class CompositeFormatPlaceholderParser
             position++;
         }
 
-        return new CompositeFormatSignature(placeholders, escapedOpenBraceCount, escapedCloseBraceCount);
+        return new CompositeFormatSignature(placeholders, escapedOpenBraceCount, escapedCloseBraceCount, assaOverrideTags);
     }
 
     internal static IReadOnlyList<string> Compare(string expected, string actual)
@@ -79,8 +85,29 @@ internal static class CompositeFormatPlaceholderParser
             errors.Add($"Expected {expectedSignature.EscapedCloseBraceCount} escaped closing braces, actual {actualSignature.EscapedCloseBraceCount}.");
         }
 
+        if (!expectedSignature.AssaOverrideTags.SequenceEqual(actualSignature.AssaOverrideTags, StringComparer.Ordinal))
+        {
+            errors.Add("ASS override tags differ.");
+        }
+
         return errors;
     }
+
+    private static bool IsValidAssaOverrideTag(string tag)
+    {
+        var content = tag[1..];
+        if (content.StartsWith("an", StringComparison.Ordinal))
+            return content.Length == 3 && content[2] is >= '1' and <= '9';
+        if (content.StartsWith("pos(", StringComparison.Ordinal) && content.EndsWith(")"))
+        {
+            var parts = content[4..^1].Split(',');
+            return parts.Length == 2 && parts.All(IsSignedNumber);
+        }
+        return content is "N" or "u1" or "u0";
+    }
+
+    private static bool IsSignedNumber(string value) =>
+        double.TryParse(value, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out _);
 
     private static CompositePlaceholder ParsePlaceholder(string value, ref int position)
     {

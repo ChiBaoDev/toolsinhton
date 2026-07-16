@@ -275,21 +275,6 @@
     "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
   },
   {
-    "key": "$.video.audioToText.whisperXxlStandardAsia",
-    "value": "Standard Asia",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.video.textToSpeech.xVoices",
-    "value": "{0} voices",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.video.textToSpeech.xElapsed",
-    "value": "{0} elapsed",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
     "key": "$.video.textToSpeech.autoContinuePlaying",
     "value": "Auto-continue playing",
     "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
@@ -320,21 +305,6 @@
     "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
   },
   {
-    "key": "$.video.textToSpeech.actorVoicesTitle",
-    "value": "TTS - Cast",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.video.textToSpeech.actorVoicesAssignedXOfY",
-    "value": "{0} of {1} assigned",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.video.textToSpeech.setupCast",
-    "value": "Cast...",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
     "key": "$.video.shotChanges.shotChangesList",
     "value": "Shot changes list",
     "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
@@ -342,11 +312,6 @@
   {
     "key": "$.video.videoOcr.url",
     "value": "URL",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.video.videoOcr.analyzingFramesXY",
-    "value": "Analyzing frames... {0}/{1}",
     "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
   },
   {
@@ -375,63 +340,8 @@
     "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
   },
   {
-    "key": "$.ocr.paddleOcr",
-    "value": "Paddle OCR",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.assa.popIn",
-    "value": "Pop in",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.assa.spinIn",
-    "value": "Spin in",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.assa.advancedEffectTypewriter",
-    "value": "Typewriter",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
     "key": "$.assa.advancedEffectKaraoke",
     "value": "Karaoke",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.assa.advancedEffectNeonBurst",
-    "value": "Neon burst",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.video.burnIn.passX",
-    "value": "Pass {0}",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.video.burnIn.totalBitRateX",
-    "value": "Total bit rate: {0}",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.video.audioToText.reDownloadX",
-    "value": "Re-download {0}",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.assa.drawToolX",
-    "value": "Tool: {0}",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.assa.stylesTitleX",
-    "value": "Styles - {0}",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.assa.attachmentsTitleX",
-    "value": "Attachments - {0}",
     "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
   }
 ]
