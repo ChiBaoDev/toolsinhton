@@ -22,3 +22,8 @@
 | Visual sync | Đồng bộ bằng hình ảnh | Synchronization using waveform/video comparison | Sentence case |
 | Seek | Tua | Waveform and video navigation | Sentence case |
 | Audio track | Rãnh âm thanh | Selectable media audio stream | Sentence case |
+| Spectrogram | Phổ âm | Frequency-domain audio visualization; distinguish from waveform | Sentence case |
+| Sync point | Điểm đồng bộ | Point-based subtitle synchronization marker | Sentence case |
+| Offset | Độ lệch | Timing displacement; use `dịch` for the command that moves timing | Sentence case |
+| Playback speed | Tốc độ phát lại | Media playback rate; distinguish from subtitle timing speed factor | Sentence case |
+| Drop-frame | Drop-frame | SMPTE time-code counting convention; keep technical term | Lowercase in prose |

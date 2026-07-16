@@ -108,5 +108,30 @@
     "key": "$.main.menu.video",
     "value": "_Video",
     "reason": "Video is the standard Vietnamese technical term for moving-picture media; the leading underscore preserves this menu mnemonic."
+  },
+  {
+    "key": "$.waveform.spectrogramClassicViridis",
+    "value": "Viridis",
+    "reason": "Viridis is the established name of the spectrogram color map."
+  },
+  {
+    "key": "$.waveform.spectrogramClassicPlasma",
+    "value": "Plasma",
+    "reason": "Plasma is the established name of the spectrogram color map."
+  },
+  {
+    "key": "$.waveform.spectrogramClassicInferno",
+    "value": "Inferno",
+    "reason": "Inferno is the established name of the spectrogram color map."
+  },
+  {
+    "key": "$.waveform.spectrogramClassicTurbo",
+    "value": "Turbo",
+    "reason": "Turbo is the established name of the spectrogram color map."
+  },
+  {
+    "key": "$.waveform.spectrogramNeon",
+    "value": "Neon",
+    "reason": "Neon is the established name of the spectrogram color style."
   }
 ]

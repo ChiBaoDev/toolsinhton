@@ -36,9 +36,9 @@
       "$.waveform",
       "$.sync"
     ],
-    "reviewed": false,
-    "reviewer": "",
-    "reviewNote": "",
+    "reviewed": true,
+    "reviewer": "ChiBaoDev",
+    "reviewNote": "Reviewed core editing statuses, waveform actions, timing, and synchronization terminology.",
     "shardFile": "VietnameseDraft/03-main-sync-waveform.json"
   },
   {
