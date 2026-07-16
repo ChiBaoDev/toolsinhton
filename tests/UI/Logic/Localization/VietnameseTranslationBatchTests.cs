@@ -26,7 +26,7 @@ public class VietnameseTranslationBatchTests
         var expected = new[]
         {
             new VietnameseTranslationBatch("B1", ["$.title", "$.version", "$.translatedBy", "$.cultureName", "$.general", "$.file", "$.edit", "$.help", "$.about"], true, "ChiBaoDev", "Reviewed metadata, general actions, file/edit operations, help, and about terminology against the Vietnamese glossary.", "VietnameseDraft/01-general-file-edit.json"),
-            new VietnameseTranslationBatch("B2", ["$.main.menu", "$.main.toolbar", "$.main.waveform"], false, "", "", "VietnameseDraft/02-main-navigation.json"),
+            new VietnameseTranslationBatch("B2", ["$.main.menu", "$.main.toolbar", "$.main.waveform"], true, "ChiBaoDev", "Reviewed main menu mnemonics, toolbar labels/tooltips, and waveform navigation in context.", "VietnameseDraft/02-main-navigation.json"),
             new VietnameseTranslationBatch("B3", ["$.main", "$.waveform", "$.sync"], false, "", "", "VietnameseDraft/03-main-sync-waveform.json"),
             new VietnameseTranslationBatch("B4", ["$.tools", "$.spellCheck", "$.options", "$.plugins"], false, "", "", "VietnameseDraft/04-tools-options.json"),
             new VietnameseTranslationBatch("B5", ["$.video", "$.ocr", "$.assa"], false, "", "", "VietnameseDraft/05-video-ocr-assa.json"),
@@ -224,6 +224,50 @@ public class VietnameseTranslationBatchTests
     }
 
     [Fact]
+    public void B2_MenuMnemonics_ArePreservedAndUniqueWithinDisplayedSiblingGroups()
+    {
+        var b2 = LoadBatches().Single(batch => batch.Id == "B2");
+        using var english = LocalizationJsonHelper.LoadDocument(LocalizationTestPaths.EnglishLanguageFile());
+        using var shard = LocalizationJsonHelper.LoadDocument(Path.Combine(TestDataFolder(), b2.ShardFile));
+        var englishMenu = english.RootElement.GetProperty("main").GetProperty("menu");
+        var translatedMenu = shard.RootElement.GetProperty("main").GetProperty("menu");
+        var errors = new List<string>();
+
+        foreach (var property in englishMenu.EnumerateObject())
+        {
+            var englishValue = property.Value.GetString()!;
+            var translatedValue = translatedMenu.GetProperty(property.Name).GetString()!;
+            Assert.Equal(englishValue.Count(character => character == '_'), translatedValue.Count(character => character == '_'));
+        }
+
+        var siblingGroups = new Dictionary<string, string[]>
+        {
+            ["top-level"] = ["file", "edit", "tools", "spellCheckTitle", "video", "synchronization", "options", "translate", "helpTitle"],
+            ["file"] = ["new", "newKeepVideo", "newWindow", "open", "openKeepVideo", "openOriginal", "closeOriginal", "closeTranslation", "reopen", "restoreAutoBackup", "save", "saveAs", "openContainingFolder", "compare", "statistics", "import", "export", "exit"],
+            ["edit"] = ["undo", "redo", "showHistory", "find", "findNext", "replace", "multipleReplace", "rightToLeftMode", "modifySelectionDotDotDot"],
+            ["tools"] = ["adjustDurations", "applyDurationLimits", "batchConvert", "beautifyTimeCodes", "bridgeGaps", "applyMinGap", "changeCasing", "changeFormatting", "fixCommonErrors", "checkAndFixNetflixErrors", "aiReview", "makeEmptyTranslationFromCurrentSubtitle", "mergeLinesWithSameText", "mergeLinesWithSameTimeCodes", "splitBreakLongLines", "mergeShortLines", "mergeContinuationLines", "snapAllTimesToFrames", "mergeTwoSubtitles", "sortSubtitles", "renumber", "removeTextForHearingImpaired", "convertActors", "joinSubtitles", "splitSubtitle"],
+            ["spell-check"] = ["spellCheck", "findDoubleWords", "findDoubleLines", "addNameToNamesList", "getDictionaries"],
+            ["video"] = ["openVideo", "openVideoFromUrl", "closeVideoFile", "audioTracks", "speechToText", "textToSpeech", "videoOcr", "generateBurnIn", "generateTransparent", "generateImportShotChanges", "listShotChanges", "undockVideoControls", "dockVideoControls"],
+            ["synchronization"] = ["adjustAllTimes", "visualSync", "pointSync", "pointSyncViaOther", "changeFrameRate", "changeSpeed"],
+            ["options"] = ["settings", "shortcuts", "wordLists", "chooseLanguage"],
+            ["translate"] = ["autoTranslate", "translateViaCopyPaste"],
+            ["help"] = ["help", "about", "checkForUpdates"],
+            ["assa-tools"] = ["assaProgressBar", "assaChangeResolution", "assaGenerateBackground", "assaApplyAdvancedEffects", "assaApplyCustomOverrideTags", "assaSetPosition", "assaImageColorPicker", "assaDraw", "assaStyles", "assaProperties", "assaAttachments"],
+        };
+
+        foreach (var (groupName, keys) in siblingGroups)
+        {
+            var mnemonics = keys.Select(key => (Key: key, Mnemonic: ExtractMnemonic(translatedMenu.GetProperty(key).GetString()!)))
+                .Where(item => item.Mnemonic is not null)
+                .ToArray();
+            foreach (var duplicate in mnemonics.GroupBy(item => item.Mnemonic, StringComparer.OrdinalIgnoreCase).Where(group => group.Count() > 1))
+                errors.Add($"{groupName}: mnemonic '{duplicate.Key}' is duplicated by {string.Join(", ", duplicate.Select(item => item.Key))}.");
+        }
+
+        Assert.True(errors.Count == 0, string.Join(Environment.NewLine, errors));
+    }
+
+    [Fact]
     public void ReviewedBatches_HaveReviewMetadataAndExistingShardFiles()
     {
         var errors = new List<string>();
@@ -254,6 +298,14 @@ public class VietnameseTranslationBatchTests
         ?? throw new InvalidDataException($"Could not deserialize '{fileName}'.");
 
     private static string TestDataFolder() => Path.Combine(AppContext.BaseDirectory, "TestData");
+
+    private static string? ExtractMnemonic(string value)
+    {
+        var underscore = value.IndexOf('_');
+        return underscore >= 0 && underscore + 1 < value.Length
+            ? value.Substring(underscore + 1, 1)
+            : null;
+    }
 
     private static bool IsOwnedPath(string path, string root) =>
         string.Equals(path, root, StringComparison.Ordinal) ||

@@ -103,5 +103,10 @@
     "key": "$.about.payPal",
     "value": "PayPal",
     "reason": "PayPal is a product and service name and must remain unchanged."
+  },
+  {
+    "key": "$.main.menu.video",
+    "value": "_Video",
+    "reason": "Video is the standard Vietnamese technical term for moving-picture media; the leading underscore preserves this menu mnemonic."
   }
 ]

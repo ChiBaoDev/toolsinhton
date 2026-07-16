@@ -24,9 +24,9 @@
       "$.main.toolbar",
       "$.main.waveform"
     ],
-    "reviewed": false,
-    "reviewer": "",
-    "reviewNote": "",
+    "reviewed": true,
+    "reviewer": "ChiBaoDev",
+    "reviewNote": "Reviewed main menu mnemonics, toolbar labels/tooltips, and waveform navigation in context.",
     "shardFile": "VietnameseDraft/02-main-navigation.json"
   },
   {

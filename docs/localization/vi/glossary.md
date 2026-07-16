@@ -18,3 +18,7 @@
 | Placeholder | Phần giữ chỗ | .NET composite-format content | Sentence case |
 | Teletext | Teletext | Broadcast subtitle technology; keep identifier | Product spelling |
 | Frame rate | Tốc độ khung hình | Video timing | Sentence case |
+| Burned-in subtitle | Phụ đề ghi sẵn trên hình | Video rendering / OCR; distinguish from embedding a selectable subtitle track | Sentence case |
+| Visual sync | Đồng bộ bằng hình ảnh | Synchronization using waveform/video comparison | Sentence case |
+| Seek | Tua | Waveform and video navigation | Sentence case |
+| Audio track | Rãnh âm thanh | Selectable media audio stream | Sentence case |
