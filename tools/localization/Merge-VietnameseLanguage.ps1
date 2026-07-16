@@ -185,8 +185,23 @@ foreach ($entry in $englishEntries) {
 }
 
 $json = $english | ConvertTo-Json -Depth 100
+$depth = 0
 $json = (($json -split "`r?`n") | ForEach-Object {
-    $leading = $_.Length - $_.TrimStart(' ').Length
-    (' ' * [int]($leading / 2)) + $_.Substring($leading)
+    $content = $_.TrimStart(' ')
+    $lineDepth = $depth
+    if ($content.StartsWith('}') -or $content.StartsWith(']')) { $lineDepth-- }
+    $inString = $false
+    $escaped = $false
+    foreach ($character in $content.ToCharArray()) {
+        if ($inString) {
+            if ($escaped) { $escaped = $false }
+            elseif ($character -eq '\') { $escaped = $true }
+            elseif ($character -eq '"') { $inString = $false }
+        }
+        elseif ($character -eq '"') { $inString = $true }
+        elseif ($character -eq '{' -or $character -eq '[') { $depth++ }
+        elseif ($character -eq '}' -or $character -eq ']') { $depth-- }
+    }
+    (' ' * (2 * $lineDepth)) + $content
 }) -join "`n"
 [System.IO.File]::WriteAllText($OutputPath, $json + "`n", [System.Text.UTF8Encoding]::new($false))

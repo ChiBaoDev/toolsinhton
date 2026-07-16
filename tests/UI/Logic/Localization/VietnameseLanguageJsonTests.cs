@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Text;
 using System.Text.Json;
 
 namespace UITests.Logic.Localization;
@@ -82,6 +83,93 @@ public class VietnameseLanguageJsonTests
         }
 
         Assert.True(errors.Count == 0, string.Join(Environment.NewLine, errors));
+    }
+
+    [Fact]
+    public void Vietnamese_CheckedInCatalogHasDeterministicUtf8LfAndTwoSpaceFormatting()
+    {
+        var bytes = File.ReadAllBytes(LocalizationTestPaths.Language("Vietnamese.json"));
+
+        Assert.False(bytes.Length >= 3 && bytes[0] == 0xEF && bytes[1] == 0xBB && bytes[2] == 0xBF, "Vietnamese.json must not contain a UTF-8 BOM.");
+        Assert.DoesNotContain((byte)'\r', bytes);
+        Assert.Equal(0x0A, bytes[^1]);
+
+        var text = Encoding.UTF8.GetString(bytes);
+        var indents = text.Split('\n')
+            .Where(line => line.Length > 0)
+            .Select(line => line.Length - line.TrimStart(' ').Length)
+            .ToArray();
+        Assert.NotEmpty(indents);
+        Assert.Contains(2, indents);
+        Assert.All(indents, indent => Assert.Equal(0, indent % 2));
+    }
+
+    [Fact]
+    public void Vietnamese_MergeRejectsDuplicateJsonObjectMembersInTemporaryFixture()
+    {
+        var repositoryRoot = LocalizationTestPaths.RepositoryRoot();
+        var sourceTestData = Path.Combine(repositoryRoot, "tests", "UI", "TestData");
+        var fixtureRoot = Path.Combine(Path.GetTempPath(), $"Vietnamese-duplicate-{Guid.NewGuid():N}");
+        var fixtureTestData = Path.Combine(fixtureRoot, "TestData");
+        var output = Path.Combine(fixtureRoot, "Vietnamese.json");
+        try
+        {
+            CopyDirectory(sourceTestData, fixtureTestData);
+            var shard = Path.Combine(fixtureTestData, "VietnameseDraft", "06-translate-remaining.json");
+            var shardText = File.ReadAllText(shard);
+            const string member = "    \"blockXOfY\": \"Khối {0} / {1}\",";
+            Assert.Equal(1, CountOccurrences(shardText, member));
+            shardText = shardText.Replace(member, member + Environment.NewLine + member, StringComparison.Ordinal);
+            File.WriteAllText(shard, shardText, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
+
+            var script = Path.Combine(repositoryRoot, "tools", "localization", "Merge-VietnameseLanguage.ps1");
+            var startInfo = new ProcessStartInfo(FindPowerShell())
+            {
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+            };
+            startInfo.ArgumentList.Add("-NoProfile");
+            startInfo.ArgumentList.Add("-File");
+            startInfo.ArgumentList.Add(script);
+            startInfo.ArgumentList.Add("-EnglishPath");
+            startInfo.ArgumentList.Add(Path.Combine(repositoryRoot, "src", "ui", "Assets", "Languages", "English.json"));
+            startInfo.ArgumentList.Add("-ManifestPath");
+            startInfo.ArgumentList.Add(Path.Combine(fixtureTestData, "VietnameseTranslationBatches.json"));
+            startInfo.ArgumentList.Add("-OutputPath");
+            startInfo.ArgumentList.Add(output);
+
+            using var process = Process.Start(startInfo)!;
+            var standardOutput = process.StandardOutput.ReadToEnd();
+            var standardError = process.StandardError.ReadToEnd();
+            process.WaitForExit();
+
+            Assert.NotEqual(0, process.ExitCode);
+            Assert.Contains("Duplicate JSON property", standardOutput + standardError, StringComparison.OrdinalIgnoreCase);
+            Assert.False(File.Exists(output), "A duplicate-member fixture must not generate an output catalog.");
+        }
+        finally
+        {
+            if (Directory.Exists(fixtureRoot))
+                Directory.Delete(fixtureRoot, recursive: true);
+        }
+    }
+
+    private static void CopyDirectory(string source, string destination)
+    {
+        Directory.CreateDirectory(destination);
+        foreach (var file in Directory.EnumerateFiles(source))
+            File.Copy(file, Path.Combine(destination, Path.GetFileName(file)));
+        foreach (var directory in Directory.EnumerateDirectories(source))
+            CopyDirectory(directory, Path.Combine(destination, Path.GetFileName(directory)));
+    }
+
+    private static int CountOccurrences(string text, string value)
+    {
+        var count = 0;
+        for (var index = 0; (index = text.IndexOf(value, index, StringComparison.Ordinal)) >= 0; index += value.Length)
+            count++;
+        return count;
     }
 
     [Fact]
