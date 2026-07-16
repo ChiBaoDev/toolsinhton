@@ -27,3 +27,22 @@
 | Offset | Độ lệch | Timing displacement; use `dịch` for the command that moves timing | Sentence case |
 | Playback speed | Tốc độ phát lại | Media playback rate; distinguish from subtitle timing speed factor | Sentence case |
 | Drop-frame | Drop-frame | SMPTE time-code counting convention; keep technical term | Lowercase in prose |
+| Spell check | Kiểm tra chính tả | Spell-check operation and feature | Sentence case |
+| User dictionary | Từ điển người dùng | User-managed spell-check words; distinguish from names list | Sentence case |
+| Names list | Danh sách tên riêng | Proper-name list used by spell checking | Sentence case |
+| Settings | Cài đặt | Application configuration area | Sentence case |
+| Option | Tùy chọn | Individual configurable choice | Sentence case |
+| Preferences | Tùy chỉnh | User preference configuration where the source specifically says preferences | Sentence case |
+| Plugin | Trình bổ trợ | Installable application plugin; distinguish from file-name extension | Sentence case |
+| Extension | Phần mở rộng | File-name suffix or extension; not an application plugin | Sentence case |
+| Engine | Bộ máy | Processing implementation such as AI, rendering, or spell-check engine | Sentence case |
+| Model | Mô hình | AI or speech-recognition model; distinguish from engine and service | Sentence case |
+| Service | Dịch vụ | Remote or operating-system service | Sentence case |
+| Executable | Tệp thực thi | Runnable program file; distinguish from folder and path | Sentence case |
+| Command line | Dòng lệnh | Executable invocation and arguments | Sentence case |
+| Folder | Thư mục | Filesystem container; distinguish from file and path | Sentence case |
+| Path | Đường dẫn | Filesystem location string | Sentence case |
+| Casing | Kiểu chữ hoa/thường | Text capitalization transformation | Sentence case |
+| Gap | Khoảng cách | Timing interval between subtitle cues | Sentence case |
+| Duration | Thời lượng | Length of a cue, audio, or video interval | Sentence case |
+| Cue | Mục phụ đề | Timed subtitle unit when cue semantics are explicit | Sentence case |

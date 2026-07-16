@@ -6,6 +6,7 @@ public class CompositeFormatPlaceholderParserTests
     [InlineData("{0} {1}", "{1} {0}")]
     [InlineData("{{{0}}}", "{{{0}}}")]
     [InlineData("{0:0.00} / {0:0.00}", "{0:0.00} / {0:0.00}")]
+    [InlineData("Language: {language}", "Ngôn ngữ: {language}")]
     public void Compare_AcceptsSemanticMatch(string expected, string actual) =>
         Assert.Empty(CompositeFormatPlaceholderParser.Compare(expected, actual));
 

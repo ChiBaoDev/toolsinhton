@@ -133,5 +133,110 @@
     "key": "$.waveform.spectrogramNeon",
     "value": "Neon",
     "reason": "Neon is the established name of the spectrogram color style."
+  },
+  {
+    "key": "$.tools.fixCommonErrors.fixCommasExample",
+    "value": ",, -> ,",
+    "reason": "Language-independent punctuation correction example."
+  },
+  {
+    "key": "$.tools.fixCommonErrors.fixLowercaseIToUppercaseIExample",
+    "value": "What do i care. -> What do I care.",
+    "reason": "English casing example retained because it demonstrates correction of the English pronoun i to I."
+  },
+  {
+    "key": "$.tools.fixCommonErrors.fixOcrErrorExample",
+    "value": "D0n't -> Don't",
+    "reason": "English OCR-confusion example retained to demonstrate replacement of digit zero with letter o."
+  },
+  {
+    "key": "$.tools.fixCommonErrors.fixSpaceBetweenNumbersExample",
+    "value": "1 100 -> 1100",
+    "reason": "Language-independent numeric spacing correction example."
+  },
+  {
+    "key": "$.tools.beautifyTimeCodesProfile.presetNetflix",
+    "value": "Netflix",
+    "reason": "Netflix is the product/service name of the timing preset."
+  },
+  {
+    "key": "$.tools.beautifyTimeCodesProfile.presetSdi",
+    "value": "SDI",
+    "reason": "SDI is the standard interface acronym naming the timing preset."
+  },
+  {
+    "key": "$.tools.beautifyTimeCodesProfile.milliseconds",
+    "value": "ms",
+    "reason": "ms is the standard unit symbol for milliseconds."
+  },
+  {
+    "key": "$.tools.mergeTwoSubtitles.outputFormatSubRip",
+    "value": "SubRip (.srt)",
+    "reason": "SubRip and .srt identify the subtitle output format and extension."
+  },
+  {
+    "key": "$.tools.mergeTwoSubtitles.outputFormatAssa",
+    "value": "Advanced Sub Station Alpha (.ass)",
+    "reason": "Advanced Sub Station Alpha and .ass identify the subtitle output format and extension."
+  },
+  {
+    "key": "$.tools.imageBasedEdit.gamma",
+    "value": "Gamma",
+    "reason": "Gamma is the established graphics parameter name."
+  },
+  {
+    "key": "$.tools.imageBasedEdit.videoPreview",
+    "value": "Video",
+    "reason": "Video is the standard Vietnamese technical term for moving-picture media."
+  },
+  {
+    "key": "$.options.settings.timeCodeModeHhMmSsMs",
+    "value": "HH:MM:SS:MS",
+    "reason": "Language-independent hours, minutes, seconds, and milliseconds time-code pattern."
+  },
+  {
+    "key": "$.options.settings.timeCodeModeHhMmSsFf",
+    "value": "HH:MM:SS:FF",
+    "reason": "Language-independent hours, minutes, seconds, and frames time-code pattern."
+  },
+  {
+    "key": "$.options.settings.waveformMouseWheelStepMilliseconds",
+    "value": "{0} ms",
+    "reason": "The placeholder and standard millisecond unit symbol are language-independent."
+  },
+  {
+    "key": "$.options.settings.mpvOpenGl",
+    "value": "libmpv - OpenGL",
+    "reason": "libmpv and OpenGL are exact engine and graphics API identifiers."
+  },
+  {
+    "key": "$.options.settings.spellCheckEngineHunSpelll",
+    "value": "Hunspell",
+    "reason": "Hunspell is the spell-check engine product name."
+  },
+  {
+    "key": "$.options.settings.spellCheckEngineMsWord",
+    "value": "MS Word",
+    "reason": "MS Word is the product name used for the spell-check engine option."
+  },
+  {
+    "key": "$.options.shortcuts.controlMac",
+    "value": "⌃",
+    "reason": "Standard macOS Control modifier symbol."
+  },
+  {
+    "key": "$.options.shortcuts.altMac",
+    "value": "⌥",
+    "reason": "Standard macOS Option modifier symbol."
+  },
+  {
+    "key": "$.options.shortcuts.winMac",
+    "value": "⌘",
+    "reason": "Standard macOS Command modifier symbol."
+  },
+  {
+    "key": "$.options.shortcuts.shiftMac",
+    "value": "⇧",
+    "reason": "Standard macOS Shift modifier symbol."
   }
 ]

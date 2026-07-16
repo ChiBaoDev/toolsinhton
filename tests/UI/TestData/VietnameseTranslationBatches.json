@@ -49,9 +49,9 @@
       "$.options",
       "$.plugins"
     ],
-    "reviewed": false,
-    "reviewer": "",
-    "reviewNote": "",
+    "reviewed": true,
+    "reviewer": "ChiBaoDev",
+    "reviewNote": "Reviewed tools, spell-check, settings, and plugin terminology; technical engines and formats are explicitly classified.",
     "shardFile": "VietnameseDraft/04-tools-options.json"
   },
   {

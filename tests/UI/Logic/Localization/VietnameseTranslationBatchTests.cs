@@ -30,7 +30,7 @@ public class VietnameseTranslationBatchTests
             new VietnameseTranslationBatch("B1", ["$.title", "$.version", "$.translatedBy", "$.cultureName", "$.general", "$.file", "$.edit", "$.help", "$.about"], true, "ChiBaoDev", "Reviewed metadata, general actions, file/edit operations, help, and about terminology against the Vietnamese glossary.", "VietnameseDraft/01-general-file-edit.json"),
             new VietnameseTranslationBatch("B2", ["$.main.menu", "$.main.toolbar", "$.main.waveform"], true, "ChiBaoDev", "Reviewed main menu mnemonics, toolbar labels/tooltips, and waveform navigation in context.", "VietnameseDraft/02-main-navigation.json"),
             new VietnameseTranslationBatch("B3", ["$.main", "$.waveform", "$.sync"], true, "ChiBaoDev", "Reviewed core editing statuses, waveform actions, timing, and synchronization terminology.", "VietnameseDraft/03-main-sync-waveform.json"),
-            new VietnameseTranslationBatch("B4", ["$.tools", "$.spellCheck", "$.options", "$.plugins"], false, "", "", "VietnameseDraft/04-tools-options.json"),
+            new VietnameseTranslationBatch("B4", ["$.tools", "$.spellCheck", "$.options", "$.plugins"], true, "ChiBaoDev", "Reviewed tools, spell-check, settings, and plugin terminology; technical engines and formats are explicitly classified.", "VietnameseDraft/04-tools-options.json"),
             new VietnameseTranslationBatch("B5", ["$.video", "$.ocr", "$.assa"], false, "", "", "VietnameseDraft/05-video-ocr-assa.json"),
             new VietnameseTranslationBatch("B6", ["$.translate"], false, "", "", "VietnameseDraft/06-translate-remaining.json"),
         };
@@ -238,7 +238,8 @@ public class VietnameseTranslationBatchTests
         Assert.Equal(1_053, reviewedLeafCounts["B1"]);
         Assert.Equal(171, reviewedLeafCounts["B2"]);
         Assert.Equal(188, reviewedLeafCounts["B3"]);
-        Assert.Equal(1_412, reviewedLeafCounts.Values.Sum());
+        Assert.Equal(1_224, reviewedLeafCounts["B4"]);
+        Assert.Equal(2_636, reviewedLeafCounts.Values.Sum());
         Assert.True(errors.Count == 0, string.Join(Environment.NewLine, errors));
     }
 

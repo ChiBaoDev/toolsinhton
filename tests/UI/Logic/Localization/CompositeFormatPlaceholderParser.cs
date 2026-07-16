@@ -1,6 +1,6 @@
 namespace UITests.Logic.Localization;
 
-internal sealed record CompositePlaceholder(int Index, int? Alignment, string? Format);
+internal sealed record CompositePlaceholder(string Identifier, int? Alignment, string? Format);
 internal sealed record CompositeFormatSignature(
     IReadOnlyList<CompositePlaceholder> Placeholders,
     int EscapedOpenBraceCount,
@@ -76,7 +76,7 @@ internal static class CompositeFormatPlaceholderParser
     private static CompositePlaceholder ParsePlaceholder(string value, ref int position)
     {
         position++;
-        var index = ParseUnsignedInteger(value, ref position, "placeholder index");
+        var identifier = ParseIdentifier(value, ref position);
         SkipWhiteSpace(value, ref position);
 
         int? alignment = null;
@@ -118,7 +118,24 @@ internal static class CompositeFormatPlaceholderParser
         }
 
         position++;
-        return new CompositePlaceholder(index, alignment, format);
+        return new CompositePlaceholder(identifier, alignment, format);
+    }
+
+    private static string ParseIdentifier(string value, ref int position)
+    {
+        var start = position;
+        while (position < value.Length &&
+               (char.IsAsciiLetterOrDigit(value[position]) || value[position] == '_'))
+        {
+            position++;
+        }
+
+        if (position == start)
+        {
+            throw new FormatException($"Invalid placeholder identifier at position {start}.");
+        }
+
+        return value[start..position];
     }
 
     private static int ParseUnsignedInteger(string value, ref int position, string component)
@@ -147,7 +164,7 @@ internal static class CompositeFormatPlaceholderParser
 
     private static IReadOnlyList<CompositePlaceholder> Sort(IEnumerable<CompositePlaceholder> placeholders) =>
         placeholders
-            .OrderBy(p => p.Index)
+            .OrderBy(p => p.Identifier, StringComparer.Ordinal)
             .ThenBy(p => p.Alignment)
             .ThenBy(p => p.Format, StringComparer.Ordinal)
             .ToArray();
