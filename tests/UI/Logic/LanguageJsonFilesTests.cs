@@ -51,7 +51,10 @@ internal static class LocalizationTestPaths
         Directory.GetFiles(LanguagesFolder(), "*.json");
 
     internal static string EnglishLanguageFile() =>
-        Path.Combine(LanguagesFolder(), "English.json");
+        Language("English.json");
+
+    internal static string Language(string fileName) =>
+        Path.Combine(LanguagesFolder(), fileName);
 
     internal static string[] AvaloniaLanguageResources()
     {
@@ -69,7 +72,7 @@ internal static class LocalizationTestPaths
     internal static string LanguagesFolder() =>
         Path.Combine(RepositoryRoot(), "src", "ui", "Assets", "Languages");
 
-    private static string RepositoryRoot()
+    internal static string RepositoryRoot()
     {
         var dir = new DirectoryInfo(AppContext.BaseDirectory);
         while (dir is not null)

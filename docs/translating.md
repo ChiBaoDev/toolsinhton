@@ -117,3 +117,13 @@ You can submit it via:
 ## Built-in Vietnamese resource
 
 Built-in repository assets use descriptive filenames such as `Vietnamese.json`; the JSON `cultureName` remains `vi-VN`. The runtime selector currently identifies built-in locales by filename, so do not rename the repository asset to the culture identifier.
+
+## Deterministic built-in Vietnamese merge workflow
+
+The built-in Vietnamese catalog is generated from the reviewed six-shard manifest. Edit only the appropriate shard under `tests/UI/TestData/VietnameseDraft/`, keep its `$.path` ownership within the manifest, and update the manifest review metadata atomically when a batch is reviewed. Run the merge script from the repository root:
+
+```powershell
+pwsh .	ools\localization\Merge-VietnameseLanguage.ps1
+```
+
+The script validates B1 through B6 order, reviewed metadata, longest-prefix ownership, duplicate/missing/extra paths, and non-empty string leaves before writing `src/ui/Assets/Languages/Vietnamese.json` as UTF-8 JSON with two-space indentation and LF newlines. The localization tests compare the checked-in catalog with a fresh merge output after newline normalization, so generated output must be committed together with shard changes.

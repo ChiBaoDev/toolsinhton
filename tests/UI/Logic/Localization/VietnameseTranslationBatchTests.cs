@@ -33,7 +33,7 @@ public class VietnameseTranslationBatchTests
             new VietnameseTranslationBatch("B3", ["$.main", "$.waveform", "$.sync"], true, "ChiBaoDev", "Reviewed core editing statuses, waveform actions, timing, and synchronization terminology.", "VietnameseDraft/03-main-sync-waveform.json"),
             new VietnameseTranslationBatch("B4", ["$.tools", "$.spellCheck", "$.options", "$.plugins"], true, "ChiBaoDev", "Reviewed tools, spell-check, settings, and plugin terminology; technical engines and formats are explicitly classified.", "VietnameseDraft/04-tools-options.json"),
             new VietnameseTranslationBatch("B5", ["$.video", "$.ocr", "$.assa"], true, "ChiBaoDev", "Reviewed video, media processing, OCR, and Advanced SubStation Alpha terminology.", "VietnameseDraft/05-video-ocr-assa.json"),
-            new VietnameseTranslationBatch("B6", ["$.translate"], false, "", "", "VietnameseDraft/06-translate-remaining.json"),
+            new VietnameseTranslationBatch("B6", ["$.translate"], true, "ChiBaoDev", "Reviewed translation workflow, API terminology, placeholders, and Vietnamese technical wording in context.", "VietnameseDraft/06-translate-remaining.json"),
         };
 
         Assert.Equal(expected.Length, batches.Count);
@@ -214,15 +214,12 @@ public class VietnameseTranslationBatchTests
                     errors.Add($"{batch.Id}: {path}: invalid composite format: {exception.Message}");
                 }
 
-                if (string.Equals(batch.Id, "B5", StringComparison.Ordinal) &&
-                    string.Equals(english.StringValue, translated.StringValue, StringComparison.Ordinal))
+                if (string.Equals(english.StringValue, translated.StringValue, StringComparison.Ordinal))
                     englishIdenticalReviewedPaths.Add(path);
             }
         }
 
-        var relevantAllowlistKeys = allowlist.Keys
-            .Where(path => string.Equals(ResolveOwner(path, batches), "B5", StringComparison.Ordinal))
-            .ToHashSet(StringComparer.Ordinal);
+        var relevantAllowlistKeys = allowlist.Keys.ToHashSet(StringComparer.Ordinal);
 
         foreach (var path in englishIdenticalReviewedPaths.Except(relevantAllowlistKeys, StringComparer.Ordinal))
             errors.Add($"{path} is identical to English without an exact allowlist entry.");
@@ -234,8 +231,29 @@ public class VietnameseTranslationBatchTests
         Assert.Equal(188, reviewedLeafCounts["B3"]);
         Assert.Equal(1_224, reviewedLeafCounts["B4"]);
         Assert.Equal(607, reviewedLeafCounts["B5"]);
-        Assert.Equal(3_243, reviewedLeafCounts.Values.Sum());
+        Assert.Equal(27, reviewedLeafCounts["B6"]);
+        Assert.Equal(3_270, reviewedLeafCounts.Values.Sum());
         Assert.True(errors.Count == 0, string.Join(Environment.NewLine, errors));
+    }
+
+    [Fact]
+    public void B6_PreservesSourceSignificantNewlinesAndPlaceholders()
+    {
+        var b6 = LoadBatches().Single(batch => batch.Id == "B6");
+        using var english = LocalizationJsonHelper.LoadDocument(LocalizationTestPaths.EnglishLanguageFile());
+        using var shard = LocalizationJsonHelper.LoadDocument(Path.Combine(TestDataFolder(), b6.ShardFile));
+        var englishLeaves = LocalizationJsonHelper.FlattenLeaves(english.RootElement);
+        var shardLeaves = LocalizationJsonHelper.FlattenLeaves(shard.RootElement);
+
+        Assert.Equal(
+            englishLeaves["$.translate.translationFailedHint"].StringValue!.Count(character => character == '\n'),
+            shardLeaves["$.translate.translationFailedHint"].StringValue!.Count(character => character == '\n'));
+        Assert.Empty(CompositeFormatPlaceholderParser.Compare(
+            englishLeaves["$.translate.blockXOfY"].StringValue!,
+            shardLeaves["$.translate.blockXOfY"].StringValue!));
+        Assert.Empty(CompositeFormatPlaceholderParser.Compare(
+            englishLeaves["$.translate.xIsAlreadyDownloadedReDownload"].StringValue!,
+            shardLeaves["$.translate.xIsAlreadyDownloadedReDownload"].StringValue!));
     }
 
     [Fact]
