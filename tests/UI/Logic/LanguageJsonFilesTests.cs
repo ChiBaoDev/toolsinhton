@@ -12,7 +12,7 @@ public class LanguageJsonFilesTests
     public static TheoryData<string> LanguageFileNames()
     {
         var data = new TheoryData<string>();
-        foreach (var path in Directory.GetFiles(GetLanguagesFolder(), "*.json"))
+        foreach (var path in LocalizationTestPaths.LanguageFiles())
         {
             data.Add(Path.GetFileName(path));
         }
@@ -24,7 +24,7 @@ public class LanguageJsonFilesTests
     [MemberData(nameof(LanguageFileNames))]
     public void LanguageFile_IsValidJson(string fileName)
     {
-        var path = Path.Combine(GetLanguagesFolder(), fileName);
+        var path = Path.Combine(LocalizationTestPaths.LanguagesFolder(), fileName);
 
         // File.ReadAllText strips a UTF-8 BOM; the language files are saved with one.
         var json = File.ReadAllText(path);
@@ -37,31 +37,52 @@ public class LanguageJsonFilesTests
     [Fact]
     public void LanguagesFolder_ContainsLanguageFiles()
     {
-        var files = Directory.GetFiles(GetLanguagesFolder(), "*.json");
+        var files = LocalizationTestPaths.LanguageFiles();
 
         Assert.NotEmpty(files);
         Assert.Contains(files, f => Path.GetFileName(f) == "English.json");
     }
 
-    /// <summary>
-    /// Walks up from the test output directory to the repository root and returns the
-    /// <c>src/ui/Assets/Languages</c> folder. Throws when it cannot be found.
-    /// </summary>
-    private static string GetLanguagesFolder()
+}
+
+internal static class LocalizationTestPaths
+{
+    internal static string[] LanguageFiles() =>
+        Directory.GetFiles(LanguagesFolder(), "*.json");
+
+    internal static string EnglishLanguageFile() =>
+        Path.Combine(LanguagesFolder(), "English.json");
+
+    internal static string[] AvaloniaLanguageResources()
+    {
+        var projectFile = Path.Combine(RepositoryRoot(), "src", "ui", "UI.csproj");
+        var document = System.Xml.Linq.XDocument.Load(projectFile);
+        return document.Descendants("AvaloniaResource")
+            .Select(element => (string?)element.Attribute("Include"))
+            .Where(include => include is not null &&
+                              include.Replace('\\', '/').StartsWith("Assets/Languages/", StringComparison.Ordinal) &&
+                              include.EndsWith(".json", StringComparison.Ordinal))
+            .Select(include => Uri.UnescapeDataString(include!.Replace('\\', '/')))
+            .ToArray();
+    }
+
+    internal static string LanguagesFolder() =>
+        Path.Combine(RepositoryRoot(), "src", "ui", "Assets", "Languages");
+
+    private static string RepositoryRoot()
     {
         var dir = new DirectoryInfo(AppContext.BaseDirectory);
         while (dir is not null)
         {
-            var candidate = Path.Combine(dir.FullName, "src", "ui", "Assets", "Languages");
-            if (Directory.Exists(candidate))
+            if (File.Exists(Path.Combine(dir.FullName, "SubtitleEdit.sln")))
             {
-                return candidate;
+                return dir.FullName;
             }
 
             dir = dir.Parent;
         }
 
         throw new DirectoryNotFoundException(
-            $"Could not locate 'src/ui/Assets/Languages' walking up from '{AppContext.BaseDirectory}'.");
+            $"Could not locate the repository root walking up from '{AppContext.BaseDirectory}'.");
     }
 }

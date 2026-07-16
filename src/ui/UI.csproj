@@ -73,6 +73,7 @@
 		<None Remove="Assets\HunspellDictionaries.json" />
 		<None Remove="Assets\Languages\Arabic.json" />
 		<None Remove="Assets\Languages\Bulgarian.json" />
+		<None Remove="Assets\Languages\ChineseTraditional.json" />
 		<None Remove="Assets\Languages\Czech.json" />
 		<None Remove="Assets\Languages\Danish.json" />
 		<None Remove="Assets\Languages\Dutch.json" />
@@ -121,6 +122,7 @@
 		<AvaloniaResource Include="Assets\Languages\French.json" />
 		<AvaloniaResource Include="Assets\Languages\German.json" />
 		<AvaloniaResource Include="Assets\Languages\ChineseSimplified.json" />
+		<AvaloniaResource Include="Assets\Languages\ChineseTraditional.json" />
 		<AvaloniaResource Include="Assets\Languages\Hungarian.json" />
 		<AvaloniaResource Include="Assets\Languages\Italian.json" />
 		<AvaloniaResource Include="Assets\Languages\Japanese.json" />

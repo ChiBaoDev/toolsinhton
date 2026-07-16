@@ -1,6 +1,7 @@
 ﻿using Avalonia.Platform;
 using Nikse.SubtitleEdit.Logic.Config;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -13,11 +14,9 @@ public interface ILanguageInitializer
 
 public class LanguageInitializer() : ILanguageInitializer
 {
-    // List of available language files in Assets/Languages folder
-    private static readonly string[] LanguageFiles =
+    internal static IReadOnlyList<string> BuiltInLanguageNames { get; } =
     [
         "Arabic",
-        "Basque",
         "Bulgarian",
         "ChineseSimplified",
         "ChineseTraditional",
@@ -25,8 +24,6 @@ public class LanguageInitializer() : ILanguageInitializer
         "Danish",
         "Dutch",
         "English",
-        "Estonian",
-        "Farsi",
         "Finnish",
         "French",
         "German",
@@ -35,21 +32,18 @@ public class LanguageInitializer() : ILanguageInitializer
         "Italian",
         "Japanese",
         "Korean",
-        "Norwegian",
         "Macedonian",
+        "Norwegian",
         "Persian",
         "Polish",
         "Portuguese",
         "Portuguese (Brazil)",
         "Romanian",
         "Russian",
-        "Slovak",
         "Spanish",
         "Swedish",
-        "Thai",
         "Turkish",
         "Ukrainian",
-        "Vietnamese",
     ];
 
     public async Task UpdateLanguagesIfNeeded()
@@ -116,7 +110,7 @@ public class LanguageInitializer() : ILanguageInitializer
             Directory.CreateDirectory(outputDir);
         }
 
-        foreach (var languageFile in LanguageFiles)
+        foreach (var languageFile in BuiltInLanguageNames)
         {
             try
             {

@@ -1182,7 +1182,8 @@
       "titleExportDCinemaSmpte2014Png": "D-Cinema SMPTE 2014/png",
       "imageBasedSubtitleSaved": "Image-based subtitle saved",
       "titleExportBdnXml": "Export BDN/xml",
-      "titleExportWebVttThumbnails": "Export WebVTT (thumbnails)"
+      "titleExportWebVttThumbnails": "Export WebVTT (thumbnails)",
+      "titleExportDvdSup": "DVD sup (MuxMan/Scenarist)"
     },
     "statistics": {
       "title": "Statistics",
@@ -2694,7 +2695,8 @@
       "waveformColorTheme": "Color theme:",
       "waveformSaveAsCustomTheme": "Save as custom theme...",
       "waveformLoadThemeDotDotDot": "Load theme...",
-      "waveformExportThemeDotDotDot": "Export theme..."
+      "waveformExportThemeDotDotDot": "Export theme...",
+      "timeCodeUpDownStepMs": "Time up/down increment (ms)"
     },
     "shortcuts": {
       "title": "Shortcuts",
@@ -3180,7 +3182,9 @@
     "pickFallbackDatabase": "Pick fallback OCR database",
     "fallbackOcrDatabase": "Fallback OCR database",
     "showAllOllamaModels": "Show all models (not just vision-capable)",
-    "ollamaModelLikelyWrong": "Ollama returned no text - the selected model may not support OCR / vision"
+    "ollamaModelLikelyWrong": "Ollama returned no text - the selected model may not support OCR / vision",
+    "llamaCppNotDownloaded": "llama.cpp engine/model not downloaded - download via batch convert settings",
+    "llamaCppReturnedNoText": "llama.cpp returned no text - check the server and model"
   },
   "assa": {
     "assaDraw": "ASSA Draw",
