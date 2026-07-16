@@ -4,6 +4,8 @@ namespace Nikse.SubtitleEdit.Logic.Config.Language.Tools;
 
 public class LanguageApplyDurationLimits
 {
+    public string MinimumDurationMilliseconds { get; set; } = "Minimum duration (milliseconds):";
+    public string MaximumDurationMilliseconds { get; set; } = "Maximum duration (milliseconds):";
     public string Title { get; set; }
     public string FixMinDurationMs { get; set; }
     public string DoNotGoPastShotChange { get; set; }

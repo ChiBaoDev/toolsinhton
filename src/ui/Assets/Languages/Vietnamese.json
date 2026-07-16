@@ -760,6 +760,9 @@
     "transcriptionProgressModelAuto":  "(tự động)"
   },
   "main":  {
+    "layoutTitle":  "Chọn bố cục",
+    "downloadingFfmpeg":  "Đang tải ffmpeg",
+    "downloadingLibMpv":  "Đang tải libmpv",
     "menu":  {
       "file":  "_Tệp",
       "new":  "_Mới",
@@ -1064,6 +1067,10 @@
     "setUpLikeSe4ThemeSet":  "Đã đặt giao diện, biểu tượng thanh công cụ và dạng sóng theo kiểu Subtitle Edit 4."
   },
   "file":  {
+    "exportPacTitle":  "Xuất Pac",
+    "choosePacCodePage":  "Chọn bảng mã PAC",
+    "exportCavena890Title":  "Xuất Cavena 890",
+    "exportEbuStlTitle":  "Xuất EBU STL",
     "ebuSaveOptions":  {
       "title":  "Tùy chọn lưu EBU",
       "generalSubtitleInformation":  "Thông tin phụ đề chung",
@@ -1563,6 +1570,8 @@
       "recalculateRequiresOcrNote":  "Không thể tính lại — một hoặc nhiều phụ đề không có văn bản OCR. Hãy chạy OCR trước."
     },
     "applyDurationLimits":  {
+      "minimumDurationMilliseconds":  "Thời lượng tối thiểu (mili giây):",
+      "maximumDurationMilliseconds":  "Thời lượng tối đa (mili giây):",
       "title":  "Áp dụng giới hạn thời lượng",
       "fixMinDurationMs":  "Sửa thời lượng tối thiểu (ms)",
       "doNotGoPastShotChange":  "Không vượt qua điểm chuyển cảnh",

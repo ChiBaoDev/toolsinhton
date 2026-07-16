@@ -6,6 +6,9 @@ public class LanguageMain
     public LanguageMainToolbar Toolbar { get; set; } = new();
     public LanguageMainWaveform Waveform { get; set; } = new();
 
+    public string LayoutTitle { get; set; } = "Choose layout";
+    public string DownloadingFfmpeg { get; set; } = "Downloading ffmpeg";
+    public string DownloadingLibMpv { get; set; } = "Downloading libmpv";
     public string AudioTrackIsNowX { get; set; }
     public string AudioTrackX { get; set; }
     public string AutoBreakHint { get; set; }

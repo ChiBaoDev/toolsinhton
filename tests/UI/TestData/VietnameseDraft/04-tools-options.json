@@ -197,6 +197,8 @@
       "recalculateRequiresOcrNote": "Không thể tính lại — một hoặc nhiều phụ đề không có văn bản OCR. Hãy chạy OCR trước."
     },
     "applyDurationLimits": {
+      "minimumDurationMilliseconds": "Thời lượng tối thiểu (mili giây):",
+      "maximumDurationMilliseconds": "Thời lượng tối đa (mili giây):",
       "title": "Áp dụng giới hạn thời lượng",
       "fixMinDurationMs": "Sửa thời lượng tối thiểu (ms)",
       "doNotGoPastShotChange": "Không vượt qua điểm chuyển cảnh",

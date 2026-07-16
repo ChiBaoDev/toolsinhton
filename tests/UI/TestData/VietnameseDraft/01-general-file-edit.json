@@ -760,6 +760,10 @@
     "transcriptionProgressModelAuto": "(tự động)"
   },
   "file": {
+    "exportPacTitle": "Xuất Pac",
+    "choosePacCodePage": "Chọn bảng mã PAC",
+    "exportCavena890Title": "Xuất Cavena 890",
+    "exportEbuStlTitle": "Xuất EBU STL",
     "ebuSaveOptions": {
       "title": "Tùy chọn lưu EBU",
       "generalSubtitleInformation": "Thông tin phụ đề chung",

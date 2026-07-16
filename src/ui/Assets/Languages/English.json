@@ -760,6 +760,9 @@
     "transcriptionProgressModelAuto": "(auto)"
   },
   "main": {
+  "layoutTitle": "Choose layout",
+  "downloadingFfmpeg": "Downloading ffmpeg",
+  "downloadingLibMpv": "Downloading libmpv",
     "menu": {
       "file": "_File",
       "new": "_New",
@@ -1064,6 +1067,10 @@
     "setUpLikeSe4ThemeSet": "Theme, toolbar icons and waveform set to the Subtitle Edit 4 look."
   },
   "file": {
+  "exportPacTitle": "Export Pac",
+  "choosePacCodePage": "Choose PAC code page",
+  "exportCavena890Title": "Export Cavena 890",
+  "exportEbuStlTitle": "Export EBU STL",
     "ebuSaveOptions": {
       "title": "EBU save options",
       "generalSubtitleInformation": "General subtitle information",
@@ -1563,6 +1570,8 @@
       "recalculateRequiresOcrNote": "Recalculate is unavailable — one or more subtitles have no OCR text. Run OCR first."
     },
     "applyDurationLimits": {
+  "minimumDurationMilliseconds": "Minimum duration (milliseconds):",
+  "maximumDurationMilliseconds": "Maximum duration (milliseconds):",
       "title": "Apply duration limits",
       "fixMinDurationMs": "Fix minimum duration (ms)",
       "doNotGoPastShotChange": "Do not go past shot change",

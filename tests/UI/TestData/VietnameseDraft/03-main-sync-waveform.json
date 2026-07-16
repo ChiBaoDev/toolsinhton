@@ -1,5 +1,8 @@
 {
   "main": {
+    "layoutTitle": "Chọn bố cục",
+    "downloadingFfmpeg": "Đang tải ffmpeg",
+    "downloadingLibMpv": "Đang tải libmpv",
     "audioTrackIsNowX": "Rãnh âm thanh hiện tại là \"{0}\"",
     "audioTrackX": "Rãnh âm thanh {0}",
     "autoBreakHint": "Tự động ngắt các dòng đã chọn",

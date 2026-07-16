@@ -11,6 +11,10 @@ public class LanguageFile
     public LanguageManualChosenEncoding ManualChosenEncoding { get; set; } = new();
     public LanguageRestoreAutoBackup RestoreAutoBackup { get; set; } = new();
     public LanguageFilePropertiesDCinema PropertiesDCinema { get; set; } = new();
+    public string ExportPacTitle { get; set; } = "Export Pac";
+    public string ChoosePacCodePage { get; set; } = "Choose PAC code page";
+    public string ExportCavena890Title { get; set; } = "Export Cavena 890";
+    public string ExportEbuStlTitle { get; set; } = "Export EBU STL";
     public string Compare { get; set; }
     public string PreviousDifference { get; set; }
     public string NextDifference { get; set; }

@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Layout;
 using Nikse.SubtitleEdit.Logic;
+using Nikse.SubtitleEdit.Logic.Config;
 
 namespace Nikse.SubtitleEdit.Features.Files.ExportPac;
 
@@ -9,13 +10,13 @@ public class ExportPacWindow : Window
     public ExportPacWindow(ExportPacViewModel vm)
     {
         UiUtil.InitializeWindow(this, GetType().Name);
-        Title = "Export Pac";
+        Title = Se.Language.File.ExportPacTitle;
         SizeToContent = SizeToContent.WidthAndHeight;
         CanResize = false;
         vm.Window = this;
         DataContext = vm;
 
-        var labelPac = UiUtil.MakeLabel("Choose PAC code page");
+        var labelPac = UiUtil.MakeLabel(Se.Language.File.ChoosePacCodePage);
         var comboBoxPacFormats = UiUtil.MakeComboBox(vm.PacCodePages, vm, nameof(vm.SelectedPacCodePage))
             .WithMinWidth(200);
 
