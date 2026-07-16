@@ -16,6 +16,29 @@ internal static class LocalizationJsonHelper
         return result;
     }
 
+    internal static IReadOnlyList<LocalizationLeaf> FlattenLeavesInSourceOrder(JsonElement root)
+    {
+        var result = new List<LocalizationLeaf>();
+        VisitInSourceOrder(root, "$", result);
+        return result;
+    }
+
+    internal static string? CompareLeafPathOrder(
+        IReadOnlyList<string> expectedPaths,
+        IReadOnlyList<string> actualPaths)
+    {
+        if (expectedPaths.Count != actualPaths.Count)
+            return $"Leaf path count differs: expected {expectedPaths.Count}, found {actualPaths.Count}.";
+
+        for (var i = 0; i < expectedPaths.Count; i++)
+        {
+            if (!string.Equals(expectedPaths[i], actualPaths[i], StringComparison.Ordinal))
+                return $"Leaf paths are out of order at index {i}: expected {expectedPaths[i]}, found {actualPaths[i]}.";
+        }
+
+        return null;
+    }
+
     internal static IReadOnlyList<string> CompareNodeShape(JsonElement expected, JsonElement actual)
     {
         var errors = new List<string>();
@@ -63,6 +86,32 @@ internal static class LocalizationJsonHelper
             path,
             element.ValueKind,
             element.ValueKind == JsonValueKind.String ? element.GetString() : element.GetRawText());
+    }
+
+    private static void VisitInSourceOrder(JsonElement element, string path, ICollection<LocalizationLeaf> result)
+    {
+        if (element.ValueKind == JsonValueKind.Object)
+        {
+            foreach (var property in element.EnumerateObject())
+                VisitInSourceOrder(property.Value, $"{path}.{property.Name}", result);
+            return;
+        }
+
+        if (element.ValueKind == JsonValueKind.Array)
+        {
+            var index = 0;
+            foreach (var item in element.EnumerateArray())
+            {
+                VisitInSourceOrder(item, $"{path}[{index}]", result);
+                index++;
+            }
+            return;
+        }
+
+        result.Add(new LocalizationLeaf(
+            path,
+            element.ValueKind,
+            element.ValueKind == JsonValueKind.String ? element.GetString() : element.GetRawText()));
     }
 
     private static void Compare(JsonElement expected, JsonElement actual, string path, ICollection<string> errors)

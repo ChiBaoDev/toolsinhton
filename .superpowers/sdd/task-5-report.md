@@ -146,3 +146,59 @@ Result: completed with no output.
 ### Concerns
 
 None.
+
+## Second review fix
+
+### Status and files
+
+Applied the remaining Task 5 review fixes in:
+
+- `tests/UI/Logic/Localization/LocalizationJsonHelper.cs`
+- `tests/UI/Logic/Localization/LocalizationJsonHelperTests.cs`
+- `tests/UI/Logic/Localization/VietnameseTranslationBatchTests.cs`
+- `tests/UI/TestData/VietnameseDraft/02-main-navigation.json`
+
+### Corrections
+
+- Added a separate source-order leaf traversal that preserves JSON object property enumeration order and array index order; the existing sorted `FlattenLeaves` API remains unchanged.
+- Switched reviewed-shard English-order comparison to the source-order traversal and added a focused test that proves reordered properties are rejected.
+- Expanded mnemonic sibling modeling to include all reviewed localized children displayed together in File → Import and File → Export.
+- Split top-level mnemonic validation into the runtime-visible variants `base + ASSA` and `base + SSA`, so mutually exclusive ASSA/SSA entries are never validated together.
+- Corrected `$.main.menu.evenlyDistributeLines` to `Phân bổ đều các dòng (theo CPS)`. English has no mnemonic underscore for this value, and the existing mnemonic parity validation revalidates that none was added.
+- Corrected reviewed counts to B1 **1,053** + B2 **171** = **1,224** and added deterministic test assertions derived from the reviewed shard traversals.
+
+### Verification
+
+Focused helper command:
+
+```powershell
+dotnet test .\tests\UI\UITests.csproj -c Debug --filter "FullyQualifiedName~LocalizationJsonHelperTests" --verbosity minimal
+```
+
+Result: **5 passed, 0 failed, 0 skipped**.
+
+Full Vietnamese batch command:
+
+```powershell
+dotnet test .\tests\UI\UITests.csproj -c Debug --filter "FullyQualifiedName~VietnameseTranslationBatchTests" --verbosity normal
+```
+
+Result: **9 passed, 0 failed, 0 skipped**; build succeeded with **0 warnings** and **0 errors**.
+
+Formatting command:
+
+```powershell
+git diff --check
+```
+
+Result: completed with no output.
+
+### Corrected catalog counts
+
+- B1 reviewed leaves: **1,053**
+- B2 reviewed leaves: **171**
+- Total reviewed leaves: **1,224**
+
+### Concerns
+
+None.

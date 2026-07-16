@@ -51,7 +51,7 @@
       "mergeLinesWithSameText": "Gộ_p các dòng có cùng văn bản...",
       "mergeLinesWithSameTimeCodes": "Gộp các dòng có cùng mã thời gian...",
       "splitBreakLongLines": "Tách/cân đối lại các dòng dài...",
-      "evenlyDistributeLines": "Phân bố đều các dòng (theo CPS)",
+      "evenlyDistributeLines": "Phân bổ đều các dòng (theo CPS)",
       "mergeShortLines": "Gộp các dòng ngắn...",
       "mergeContinuationLines": "Gộp các dòng nối tiếp...",
       "snapAllTimesToFrames": "Căn toàn bộ thời gian theo khung hình",

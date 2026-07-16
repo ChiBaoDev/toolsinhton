@@ -151,6 +151,8 @@ public class VietnameseTranslationBatchTests
     {
         var batches = LoadBatches();
         var englishLeaves = LoadEnglishLeaves();
+        var englishLeafPathOrder = LoadEnglishLeavesInSourceOrder().Select(leaf => leaf.Path).ToArray();
+        var reviewedLeafCounts = new Dictionary<string, int>(StringComparer.Ordinal);
         var allowlist = LoadJson<UntranslatedAllowlistEntry[]>("VietnameseUntranslatedAllowlist.json")
             .ToDictionary(entry => entry.Key, StringComparer.Ordinal);
         var errors = new List<string>();
@@ -164,25 +166,25 @@ public class VietnameseTranslationBatchTests
 
             using var shard = LocalizationJsonHelper.LoadDocument(shardPath);
             var shardLeaves = LocalizationJsonHelper.FlattenLeaves(shard.RootElement);
-            var expectedPathSequence = englishLeaves.Keys
+            var shardLeavesInSourceOrder = LocalizationJsonHelper.FlattenLeavesInSourceOrder(shard.RootElement);
+            var expectedPathSequence = englishLeafPathOrder
                 .Where(path => string.Equals(ResolveOwner(path, batches), batch.Id, StringComparison.Ordinal))
                 .ToArray();
             var expectedPaths = expectedPathSequence.ToHashSet(StringComparer.Ordinal);
-            var actualPaths = shardLeaves.Keys.ToHashSet(StringComparer.Ordinal);
+            var actualPathSequence = shardLeavesInSourceOrder.Select(leaf => leaf.Path).ToArray();
+            var actualPaths = actualPathSequence.ToHashSet(StringComparer.Ordinal);
+            reviewedLeafCounts[batch.Id] = actualPathSequence.Length;
 
             foreach (var path in expectedPaths.Except(actualPaths, StringComparer.Ordinal))
                 errors.Add($"{batch.Id}: missing owned leaf {path}.");
             foreach (var path in actualPaths.Except(expectedPaths, StringComparer.Ordinal))
                 errors.Add($"{batch.Id}: extra or non-owned leaf {path}.");
 
-            var actualPathSequence = shardLeaves.Keys.ToArray();
-            if (expectedPaths.SetEquals(actualPathSequence) &&
-                !expectedPathSequence.SequenceEqual(actualPathSequence, StringComparer.Ordinal))
+            if (expectedPaths.SetEquals(actualPathSequence))
             {
-                var firstDifference = expectedPathSequence.Zip(actualPathSequence)
-                    .Select((pair, index) => (pair.First, pair.Second, Index: index))
-                    .First(item => !string.Equals(item.First, item.Second, StringComparison.Ordinal));
-                errors.Add($"{batch.Id}: owned leaves are out of English order at index {firstDifference.Index}: expected {firstDifference.First}, found {firstDifference.Second}.");
+                var orderError = LocalizationJsonHelper.CompareLeafPathOrder(expectedPathSequence, actualPathSequence);
+                if (orderError is not null)
+                    errors.Add($"{batch.Id}: {orderError}");
             }
 
             foreach (var path in expectedPaths.Intersect(actualPaths, StringComparer.Ordinal))
@@ -233,6 +235,9 @@ public class VietnameseTranslationBatchTests
         foreach (var path in relevantAllowlistKeys.Except(englishIdenticalReviewedPaths, StringComparer.Ordinal))
             errors.Add($"{path} is a stale or extra allowlist entry; the reviewed value is not identical to English.");
 
+        Assert.Equal(1_053, reviewedLeafCounts["B1"]);
+        Assert.Equal(171, reviewedLeafCounts["B2"]);
+        Assert.Equal(1_224, reviewedLeafCounts.Values.Sum());
         Assert.True(errors.Count == 0, string.Join(Environment.NewLine, errors));
     }
 
@@ -259,8 +264,11 @@ public class VietnameseTranslationBatchTests
         // $.main.menu are included when their Vietnamese value is available in a reviewed shard.
         var siblingGroups = new Dictionary<string, string[]>
         {
-            ["top-level (InitMenu.Make menu.Items)"] = ["$.main.menu.file", "$.main.menu.edit", "$.main.menu.tools", "$.plugins.title", "$.main.menu.spellCheckTitle", "$.main.menu.video", "$.main.menu.synchronization", "$.main.menu.translate", "$.main.menu.options", "$.main.menu.helpTitle", "$.main.menu.assaTools", "$.main.menu.ssaTools"],
+            ["top-level base + ASSA (InitMenu.Make menu.Items when ASSA is visible)"] = [.. TopLevelBaseMenuPaths(), "$.main.menu.assaTools"],
+            ["top-level base + SSA (InitMenu.Make menu.Items when SSA is visible)"] = [.. TopLevelBaseMenuPaths(), "$.main.menu.ssaTools"],
             ["file (File.Items)"] = MenuPaths("new", "newKeepVideo", "newWindow", "open", "openKeepVideo", "openOriginal", "closeOriginal", "closeTranslation", "reopen", "restoreAutoBackup", "save", "saveAs", "openContainingFolder", "compare", "statistics", "import", "export", "exit"),
+            ["file import (Import.Items)"] = ["$.file.import.subtitleWithManuallyChosenEncodingDotDotDot", "$.file.import.imageBasedSubtitleForOcrDotDotDot", "$.file.import.imageBasedSubtitleForEditDotDotDot", "$.file.import.imagesForOcrDotDotDot", "$.file.import.plainTextDotDotDot", "$.file.import.csvXlsxCustomColumnsDotDotDot", "$.file.import.timeCodesDotDotDot", "$.file.import.formattingDotDotDot"],
+            ["file export (Export.Items)"] = ["$.general.bluRaySup", "$.general.bdnXml", "$.file.export.titleExportDCinemaInteropPng", "$.file.export.titleExportDCinemaSmpte2014Png", "$.file.export.titleExportDvdSup", "$.general.imagesWithTimeCode", "$.file.export.titleExportVobSub", "$.file.export.customTextFormatsDotDotDot", "$.file.export.plainTextDotDotDot"],
             ["edit (Edit.Items)"] = [.. MenuPaths("undo", "redo", "showHistory", "find", "findNext", "replace", "multipleReplace", "goToLineNumber", "rightToLeftMode", "fixRightToLeftViaUnicodeControlCharacters", "removeUnicodeControlCharacters", "reverseRightToLeftStartEnd", "modifySelectionDotDotDot"), "$.general.invertSelection", "$.general.selectAll"],
             ["tools (menuItemTools.Items)"] = MenuPaths("adjustDurations", "applyDurationLimits", "batchConvert", "beautifyTimeCodes", "bridgeGaps", "applyMinGap", "changeCasing", "changeFormatting", "fixCommonErrors", "checkAndFixNetflixErrors", "aiReview", "makeEmptyTranslationFromCurrentSubtitle", "mergeLinesWithSameText", "mergeLinesWithSameTimeCodes", "splitBreakLongLines", "mergeShortLines", "mergeContinuationLines", "snapAllTimesToFrames", "mergeTwoSubtitles", "sortSubtitles", "renumber", "removeTextForHearingImpaired", "convertActors", "joinSubtitles", "splitSubtitle"),
             ["spell-check (SpellCheckTitle.Items)"] = MenuPaths("spellCheck", "findDoubleWords", "findDoubleLines", "addNameToNamesList", "getDictionaries"),
@@ -329,6 +337,12 @@ public class VietnameseTranslationBatchTests
         return LocalizationJsonHelper.FlattenLeaves(english.RootElement);
     }
 
+    private static IReadOnlyList<LocalizationLeaf> LoadEnglishLeavesInSourceOrder()
+    {
+        using var english = LocalizationJsonHelper.LoadDocument(LocalizationTestPaths.EnglishLanguageFile());
+        return LocalizationJsonHelper.FlattenLeavesInSourceOrder(english.RootElement);
+    }
+
     private static T LoadJson<T>(string fileName) =>
         JsonSerializer.Deserialize<T>(File.ReadAllText(Path.Combine(TestDataFolder(), fileName)), JsonOptions)
         ?? throw new InvalidDataException($"Could not deserialize '{fileName}'.");
@@ -353,6 +367,20 @@ public class VietnameseTranslationBatchTests
 
     private static string[] MenuPaths(params string[] keys) =>
         keys.Select(key => $"$.main.menu.{key}").ToArray();
+
+    private static string[] TopLevelBaseMenuPaths() =>
+    [
+        "$.main.menu.file",
+        "$.main.menu.edit",
+        "$.main.menu.tools",
+        "$.plugins.title",
+        "$.main.menu.spellCheckTitle",
+        "$.main.menu.video",
+        "$.main.menu.synchronization",
+        "$.main.menu.translate",
+        "$.main.menu.options",
+        "$.main.menu.helpTitle",
+    ];
 
     private static string? ExtractMnemonic(string value, string path, ICollection<string> errors)
     {
