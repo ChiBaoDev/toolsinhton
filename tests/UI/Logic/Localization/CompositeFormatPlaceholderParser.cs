@@ -1,4 +1,4 @@
-namespace UITests.Logic.Localization;
+﻿namespace UITests.Logic.Localization;
 
 internal sealed record CompositePlaceholder(string Identifier, int? Alignment, string? Format);
 internal sealed record CompositeFormatSignature(
@@ -22,6 +22,15 @@ internal static class CompositeFormatPlaceholderParser
                 {
                     escapedOpenBraceCount++;
                     position += 2;
+                    continue;
+                }
+
+                if (position + 1 < value.Length && value[position + 1] == '\\')
+                {
+                    var closingBrace = value.IndexOf('}', position + 2);
+                    if (closingBrace < 0)
+                        throw new FormatException("Unterminated ASS override tag.");
+                    position = closingBrace + 1;
                     continue;
                 }
 

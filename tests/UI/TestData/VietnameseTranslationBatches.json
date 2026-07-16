@@ -61,9 +61,9 @@
       "$.ocr",
       "$.assa"
     ],
-    "reviewed": false,
-    "reviewer": "",
-    "reviewNote": "",
+    "reviewed": true,
+    "reviewer": "ChiBaoDev",
+    "reviewNote": "Reviewed video, media processing, OCR, and Advanced SubStation Alpha terminology.",
     "shardFile": "VietnameseDraft/05-video-ocr-assa.json"
   },
   {

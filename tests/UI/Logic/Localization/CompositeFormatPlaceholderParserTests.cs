@@ -1,4 +1,4 @@
-namespace UITests.Logic.Localization;
+﻿namespace UITests.Logic.Localization;
 
 public class CompositeFormatPlaceholderParserTests
 {

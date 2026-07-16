@@ -46,3 +46,17 @@
 | Gap | Khoảng cách | Timing interval between subtitle cues | Sentence case |
 | Duration | Thời lượng | Length of a cue, audio, or video interval | Sentence case |
 | Cue | Mục phụ đề | Timed subtitle unit when cue semantics are explicit | Sentence case |
+| FFmpeg | FFmpeg | Media-processing framework identifier; keep unchanged | Product spelling |
+| libmpv | libmpv | Media playback library identifier; keep unchanged | Product spelling |
+| Matroska | Matroska | Container-format identifier; keep unchanged | Product spelling |
+| PaddleOCR | PaddleOCR | OCR engine identifier; keep unchanged | Product spelling |
+| Tesseract | Tesseract | OCR engine identifier; keep unchanged | Product spelling |
+| ASSA | ASSA | Advanced SubStation Alpha format identifier; keep unchanged | Uppercase |
+| Advanced SubStation Alpha | Advanced SubStation Alpha | Full format name when used as an identifier; keep unchanged | Product spelling |
+| Override tag | Thẻ điều khiển | ASSA formatting/control tag | Sentence case |
+| Position tag | Thẻ vị trí | ASSA positioning control tag | Sentence case |
+| Burn in | Nhúng cứng | Render subtitles into video pixels | Sentence case |
+| OCR language | Ngôn ngữ OCR | Language selected for optical character recognition | Sentence case |
+| WebVTT | WebVTT | Subtitle format identifier; keep unchanged | Product spelling |
+| VAD | VAD | Voice-activity-detection identifier; keep unchanged | Uppercase |
+| TTS | TTS | Text-to-speech identifier; keep unchanged | Uppercase |
