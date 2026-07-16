@@ -1,3 +1,5 @@
+using System.Globalization;
+using System.Text;
 using System.Text.Json;
 
 namespace UITests.Logic.Localization;
@@ -162,15 +164,26 @@ public class VietnameseTranslationBatchTests
 
             using var shard = LocalizationJsonHelper.LoadDocument(shardPath);
             var shardLeaves = LocalizationJsonHelper.FlattenLeaves(shard.RootElement);
-            var expectedPaths = englishLeaves.Keys
+            var expectedPathSequence = englishLeaves.Keys
                 .Where(path => string.Equals(ResolveOwner(path, batches), batch.Id, StringComparison.Ordinal))
-                .ToHashSet(StringComparer.Ordinal);
+                .ToArray();
+            var expectedPaths = expectedPathSequence.ToHashSet(StringComparer.Ordinal);
             var actualPaths = shardLeaves.Keys.ToHashSet(StringComparer.Ordinal);
 
             foreach (var path in expectedPaths.Except(actualPaths, StringComparer.Ordinal))
                 errors.Add($"{batch.Id}: missing owned leaf {path}.");
             foreach (var path in actualPaths.Except(expectedPaths, StringComparer.Ordinal))
                 errors.Add($"{batch.Id}: extra or non-owned leaf {path}.");
+
+            var actualPathSequence = shardLeaves.Keys.ToArray();
+            if (expectedPaths.SetEquals(actualPathSequence) &&
+                !expectedPathSequence.SequenceEqual(actualPathSequence, StringComparer.Ordinal))
+            {
+                var firstDifference = expectedPathSequence.Zip(actualPathSequence)
+                    .Select((pair, index) => (pair.First, pair.Second, Index: index))
+                    .First(item => !string.Equals(item.First, item.Second, StringComparison.Ordinal));
+                errors.Add($"{batch.Id}: owned leaves are out of English order at index {firstDifference.Index}: expected {firstDifference.First}, found {firstDifference.Second}.");
+            }
 
             foreach (var path in expectedPaths.Intersect(actualPaths, StringComparer.Ordinal))
             {
@@ -226,11 +239,13 @@ public class VietnameseTranslationBatchTests
     [Fact]
     public void B2_MenuMnemonics_ArePreservedAndUniqueWithinDisplayedSiblingGroups()
     {
-        var b2 = LoadBatches().Single(batch => batch.Id == "B2");
+        var batches = LoadBatches();
+        var b2 = batches.Single(batch => batch.Id == "B2");
         using var english = LocalizationJsonHelper.LoadDocument(LocalizationTestPaths.EnglishLanguageFile());
         using var shard = LocalizationJsonHelper.LoadDocument(Path.Combine(TestDataFolder(), b2.ShardFile));
         var englishMenu = english.RootElement.GetProperty("main").GetProperty("menu");
         var translatedMenu = shard.RootElement.GetProperty("main").GetProperty("menu");
+        var reviewedLeaves = LoadReviewedShardLeaves(batches);
         var errors = new List<string>();
 
         foreach (var property in englishMenu.EnumerateObject())
@@ -240,31 +255,52 @@ public class VietnameseTranslationBatchTests
             Assert.Equal(englishValue.Count(character => character == '_'), translatedValue.Count(character => character == '_'));
         }
 
+        // These groups mirror the MenuItem siblings built by InitMenu.Make. Paths outside
+        // $.main.menu are included when their Vietnamese value is available in a reviewed shard.
         var siblingGroups = new Dictionary<string, string[]>
         {
-            ["top-level"] = ["file", "edit", "tools", "spellCheckTitle", "video", "synchronization", "options", "translate", "helpTitle"],
-            ["file"] = ["new", "newKeepVideo", "newWindow", "open", "openKeepVideo", "openOriginal", "closeOriginal", "closeTranslation", "reopen", "restoreAutoBackup", "save", "saveAs", "openContainingFolder", "compare", "statistics", "import", "export", "exit"],
-            ["edit"] = ["undo", "redo", "showHistory", "find", "findNext", "replace", "multipleReplace", "rightToLeftMode", "modifySelectionDotDotDot"],
-            ["tools"] = ["adjustDurations", "applyDurationLimits", "batchConvert", "beautifyTimeCodes", "bridgeGaps", "applyMinGap", "changeCasing", "changeFormatting", "fixCommonErrors", "checkAndFixNetflixErrors", "aiReview", "makeEmptyTranslationFromCurrentSubtitle", "mergeLinesWithSameText", "mergeLinesWithSameTimeCodes", "splitBreakLongLines", "mergeShortLines", "mergeContinuationLines", "snapAllTimesToFrames", "mergeTwoSubtitles", "sortSubtitles", "renumber", "removeTextForHearingImpaired", "convertActors", "joinSubtitles", "splitSubtitle"],
-            ["spell-check"] = ["spellCheck", "findDoubleWords", "findDoubleLines", "addNameToNamesList", "getDictionaries"],
-            ["video"] = ["openVideo", "openVideoFromUrl", "closeVideoFile", "audioTracks", "speechToText", "textToSpeech", "videoOcr", "generateBurnIn", "generateTransparent", "generateImportShotChanges", "listShotChanges", "undockVideoControls", "dockVideoControls"],
-            ["synchronization"] = ["adjustAllTimes", "visualSync", "pointSync", "pointSyncViaOther", "changeFrameRate", "changeSpeed"],
-            ["options"] = ["settings", "shortcuts", "wordLists", "chooseLanguage"],
-            ["translate"] = ["autoTranslate", "translateViaCopyPaste"],
-            ["help"] = ["help", "about", "checkForUpdates"],
-            ["assa-tools"] = ["assaProgressBar", "assaChangeResolution", "assaGenerateBackground", "assaApplyAdvancedEffects", "assaApplyCustomOverrideTags", "assaSetPosition", "assaImageColorPicker", "assaDraw", "assaStyles", "assaProperties", "assaAttachments"],
+            ["top-level (InitMenu.Make menu.Items)"] = ["$.main.menu.file", "$.main.menu.edit", "$.main.menu.tools", "$.plugins.title", "$.main.menu.spellCheckTitle", "$.main.menu.video", "$.main.menu.synchronization", "$.main.menu.translate", "$.main.menu.options", "$.main.menu.helpTitle", "$.main.menu.assaTools", "$.main.menu.ssaTools"],
+            ["file (File.Items)"] = MenuPaths("new", "newKeepVideo", "newWindow", "open", "openKeepVideo", "openOriginal", "closeOriginal", "closeTranslation", "reopen", "restoreAutoBackup", "save", "saveAs", "openContainingFolder", "compare", "statistics", "import", "export", "exit"),
+            ["edit (Edit.Items)"] = [.. MenuPaths("undo", "redo", "showHistory", "find", "findNext", "replace", "multipleReplace", "goToLineNumber", "rightToLeftMode", "fixRightToLeftViaUnicodeControlCharacters", "removeUnicodeControlCharacters", "reverseRightToLeftStartEnd", "modifySelectionDotDotDot"), "$.general.invertSelection", "$.general.selectAll"],
+            ["tools (menuItemTools.Items)"] = MenuPaths("adjustDurations", "applyDurationLimits", "batchConvert", "beautifyTimeCodes", "bridgeGaps", "applyMinGap", "changeCasing", "changeFormatting", "fixCommonErrors", "checkAndFixNetflixErrors", "aiReview", "makeEmptyTranslationFromCurrentSubtitle", "mergeLinesWithSameText", "mergeLinesWithSameTimeCodes", "splitBreakLongLines", "mergeShortLines", "mergeContinuationLines", "snapAllTimesToFrames", "mergeTwoSubtitles", "sortSubtitles", "renumber", "removeTextForHearingImpaired", "convertActors", "joinSubtitles", "splitSubtitle"),
+            ["spell-check (SpellCheckTitle.Items)"] = MenuPaths("spellCheck", "findDoubleWords", "findDoubleLines", "addNameToNamesList", "getDictionaries"),
+            ["video (Video.Items)"] = [.. MenuPaths("openVideo", "openVideoFromUrl", "closeVideoFile", "audioTracks", "speechToText", "textToSpeech", "videoOcr", "generateBurnIn", "generateTransparent", "generateImportShotChanges", "listShotChanges", "undockVideoControls", "toggleSelectSubtitleWhilePlayingCurrentlyOn", "toggleSelectSubtitleWhilePlayingCurrentlyOff", "dockVideoControls"), "$.general.more"],
+            ["synchronization (Synchronization.Items)"] = MenuPaths("adjustAllTimes", "visualSync", "pointSync", "pointSyncViaOther", "changeFrameRate", "changeSpeed"),
+            ["translate (Translate.Items)"] = MenuPaths("autoTranslate", "translateViaCopyPaste"),
+            ["options (Options.Items)"] = MenuPaths("settings", "shortcuts", "wordLists", "chooseLanguage"),
+            ["help (HelpTitle.Items)"] = MenuPaths("checkForUpdates", "help", "about"),
+            ["ASSA tools (menuItemAssaTools.Items)"] = MenuPaths("assaProgressBar", "assaChangeResolution", "assaGenerateBackground", "assaImageColorPicker", "assaSetPosition", "assaApplyAdvancedEffects", "assaApplyCustomOverrideTags", "assaDraw", "assaProperties", "assaAttachments", "assaStyles", "filterLayersForDisplayDotDotDot"),
+            ["SSA tools (menuItemSsaTools.Items)"] = MenuPaths("assaStyles", "assaProperties", "assaAttachments"),
         };
 
-        foreach (var (groupName, keys) in siblingGroups)
+        foreach (var (groupName, paths) in siblingGroups)
         {
-            var mnemonics = keys.Select(key => (Key: key, Mnemonic: ExtractMnemonic(translatedMenu.GetProperty(key).GetString()!)))
+            var mnemonics = paths
+                .Where(reviewedLeaves.ContainsKey)
+                .Select(path => (Path: path, Mnemonic: ExtractMnemonic(reviewedLeaves[path], path, errors)))
                 .Where(item => item.Mnemonic is not null)
                 .ToArray();
-            foreach (var duplicate in mnemonics.GroupBy(item => item.Mnemonic, StringComparer.OrdinalIgnoreCase).Where(group => group.Count() > 1))
-                errors.Add($"{groupName}: mnemonic '{duplicate.Key}' is duplicated by {string.Join(", ", duplicate.Select(item => item.Key))}.");
+            foreach (var duplicate in mnemonics.GroupBy(item => item.Mnemonic, StringComparer.Ordinal).Where(group => group.Count() > 1))
+                errors.Add($"{groupName}: mnemonic '{duplicate.Key}' is duplicated by {string.Join(", ", duplicate.Select(item => item.Path))}.");
         }
 
         Assert.True(errors.Count == 0, string.Join(Environment.NewLine, errors));
+    }
+
+    [Fact]
+    public void MnemonicExtraction_AcceptsUnicodeLettersAndDigitsAndRejectsInvalidTextElements()
+    {
+        var errors = new List<string>();
+
+        Assert.Equal("Ế", ExtractMnemonic("T_ế", "composed", errors));
+        Assert.Equal("Ế", ExtractMnemonic("T_ế", "decomposed", errors));
+        Assert.Equal("7", ExtractMnemonic("M_7", "digit", errors));
+        Assert.Null(ExtractMnemonic("M_ ", "whitespace", errors));
+        Assert.Null(ExtractMnemonic("M_-", "punctuation", errors));
+        Assert.Null(ExtractMnemonic("M__", "underscore", errors));
+        Assert.Null(ExtractMnemonic("M_😀", "emoji", errors));
+        Assert.Null(ExtractMnemonic("M_a‍", "invalid-grapheme", errors));
+        Assert.Equal(5, errors.Count);
     }
 
     [Fact]
@@ -299,12 +335,49 @@ public class VietnameseTranslationBatchTests
 
     private static string TestDataFolder() => Path.Combine(AppContext.BaseDirectory, "TestData");
 
-    private static string? ExtractMnemonic(string value)
+    private static IReadOnlyDictionary<string, string> LoadReviewedShardLeaves(IReadOnlyList<VietnameseTranslationBatch> batches)
+    {
+        var values = new Dictionary<string, string>(StringComparer.Ordinal);
+        foreach (var batch in batches.Where(batch => batch.Reviewed))
+        {
+            using var shard = LocalizationJsonHelper.LoadDocument(Path.Combine(TestDataFolder(), batch.ShardFile));
+            foreach (var (path, leaf) in LocalizationJsonHelper.FlattenLeaves(shard.RootElement))
+            {
+                if (leaf.Kind == JsonValueKind.String)
+                    values[path] = leaf.StringValue!;
+            }
+        }
+
+        return values;
+    }
+
+    private static string[] MenuPaths(params string[] keys) =>
+        keys.Select(key => $"$.main.menu.{key}").ToArray();
+
+    private static string? ExtractMnemonic(string value, string path, ICollection<string> errors)
     {
         var underscore = value.IndexOf('_');
-        return underscore >= 0 && underscore + 1 < value.Length
-            ? value.Substring(underscore + 1, 1)
-            : null;
+        if (underscore < 0)
+            return null;
+
+        if (underscore + 1 >= value.Length)
+        {
+            errors.Add($"{path}: mnemonic underscore has no following text element.");
+            return null;
+        }
+
+        var element = StringInfo.GetNextTextElement(value, underscore + 1);
+        var runes = element.EnumerateRunes().ToArray();
+        var isUsable = runes.Length > 0 && Rune.IsLetterOrDigit(runes[0]) &&
+                       runes.Skip(1).All(rune => Rune.GetUnicodeCategory(rune) is
+                           UnicodeCategory.NonSpacingMark or UnicodeCategory.SpacingCombiningMark or UnicodeCategory.EnclosingMark);
+        if (!isUsable)
+        {
+            errors.Add($"{path}: mnemonic '{element}' is not a letter or digit text element.");
+            return null;
+        }
+
+        return element.Normalize(NormalizationForm.FormC).ToUpperInvariant();
     }
 
     private static bool IsOwnedPath(string path, string root) =>
