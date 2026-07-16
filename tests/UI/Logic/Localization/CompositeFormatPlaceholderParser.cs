@@ -5,7 +5,8 @@ internal sealed record CompositeFormatSignature(
     IReadOnlyList<CompositePlaceholder> Placeholders,
     int EscapedOpenBraceCount,
     int EscapedCloseBraceCount,
-    IReadOnlyList<string> AssaOverrideTags);
+    IReadOnlyList<string> AssaOverrideTags,
+    IReadOnlyList<string> StructuralTokens);
 
 internal static class CompositeFormatPlaceholderParser
 {
@@ -15,6 +16,7 @@ internal static class CompositeFormatPlaceholderParser
         var escapedOpenBraceCount = 0;
         var escapedCloseBraceCount = 0;
         var assaOverrideTags = new List<string>();
+        var structuralTokens = new List<string>();
 
         for (var position = 0; position < value.Length;)
         {
@@ -33,14 +35,17 @@ internal static class CompositeFormatPlaceholderParser
                     if (closingBrace < 0)
                         throw new FormatException("Unterminated ASS override tag.");
                     var tag = value[(position + 1)..closingBrace];
-                    if (!IsValidAssaOverrideTag(tag))
-                        throw new FormatException("Invalid ASS override tag.");
-                    assaOverrideTags.Add(tag);
+                    foreach (var atom in ParseAssaBlock(tag))
+                    {
+                        assaOverrideTags.Add(atom);
+                        structuralTokens.Add("T:" + atom);
+                    }
                     position = closingBrace + 1;
                     continue;
                 }
 
                 placeholders.Add(ParsePlaceholder(value, ref position));
+                structuralTokens.Add("P");
                 continue;
             }
 
@@ -59,7 +64,7 @@ internal static class CompositeFormatPlaceholderParser
             position++;
         }
 
-        return new CompositeFormatSignature(placeholders, escapedOpenBraceCount, escapedCloseBraceCount, assaOverrideTags);
+        return new CompositeFormatSignature(placeholders, escapedOpenBraceCount, escapedCloseBraceCount, assaOverrideTags, structuralTokens);
     }
 
     internal static IReadOnlyList<string> Compare(string expected, string actual)
@@ -85,29 +90,57 @@ internal static class CompositeFormatPlaceholderParser
             errors.Add($"Expected {expectedSignature.EscapedCloseBraceCount} escaped closing braces, actual {actualSignature.EscapedCloseBraceCount}.");
         }
 
-        if (!expectedSignature.AssaOverrideTags.SequenceEqual(actualSignature.AssaOverrideTags, StringComparer.Ordinal))
+        if (!expectedSignature.AssaOverrideTags.SequenceEqual(actualSignature.AssaOverrideTags, StringComparer.Ordinal) ||
+            !expectedSignature.StructuralTokens.SequenceEqual(actualSignature.StructuralTokens, StringComparer.Ordinal))
         {
-            errors.Add("ASS override tags differ.");
+            errors.Add("ASS override tags or positions differ.");
         }
 
         return errors;
     }
 
-    private static bool IsValidAssaOverrideTag(string tag)
+    private static IReadOnlyList<string> ParseAssaBlock(string block)
     {
-        var content = tag[1..];
-        if (content.StartsWith("an", StringComparison.Ordinal))
-            return content.Length == 3 && content[2] is >= '1' and <= '9';
-        if (content.StartsWith("pos(", StringComparison.Ordinal) && content.EndsWith(")"))
+        var atoms = new List<string>();
+        for (var p = 0; p < block.Length;)
         {
-            var parts = content[4..^1].Split(',');
-            return parts.Length == 2 && parts.All(IsSignedNumber);
+            if (block[p++] != '\\') throw new FormatException("Invalid ASS override tag.");
+            var start = p - 1;
+            while (p < block.Length && char.IsLetter(block[p])) p++;
+            var name = block[start..p];
+            if (name is "\\N" or "\\n" or "\\u0" or "\\u1") { atoms.Add(name); continue; }
+            if (name == "\\an")
+            {
+                if (p >= block.Length || block[p] is < '1' or > '9') throw new FormatException("Invalid ASS alignment tag.");
+                atoms.Add(name + block[p++]); continue;
+            }
+            if (name == "\\pos")
+            {
+                if (p >= block.Length || block[p++] != '(') throw new FormatException("Invalid ASS position tag.");
+                var x = ReadAssNumber(block, ref p);
+                if (p >= block.Length || block[p++] != ',') throw new FormatException("Invalid ASS position tag.");
+                var y = ReadAssNumber(block, ref p);
+                if (p >= block.Length || block[p++] != ')') throw new FormatException("Invalid ASS position tag.");
+                atoms.Add(name + "(" + x + "," + y + ")"); continue;
+            }
+            if (name == "\\fsp") { atoms.Add(name + ReadAssNumber(block, ref p)); continue; }
+            throw new FormatException("Invalid ASS override tag.");
         }
-        return content is "N" or "u1" or "u0";
+        return atoms;
     }
 
-    private static bool IsSignedNumber(string value) =>
-        double.TryParse(value, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out _);
+    private static string ReadAssNumber(string value, ref int position)
+    {
+        var start = position;
+        if (position < value.Length && (value[position] == '+' || value[position] == '-')) position++;
+        var hasDigits = false;
+        while (position < value.Length && char.IsAsciiDigit(value[position])) { hasDigits = true; position++; }
+        if (position < value.Length && value[position] == '.') { position++; while (position < value.Length && char.IsAsciiDigit(value[position])) { hasDigits = true; position++; } }
+        if (!hasDigits) throw new FormatException("Invalid ASS numeric value.");
+        var text = value[start..position];
+        if (!double.TryParse(text, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var number) || !double.IsFinite(number)) throw new FormatException("Invalid ASS numeric value.");
+        return text;
+    }
 
     private static CompositePlaceholder ParsePlaceholder(string value, ref int position)
     {
