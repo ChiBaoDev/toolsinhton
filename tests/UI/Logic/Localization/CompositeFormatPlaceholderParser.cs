@@ -108,7 +108,12 @@ internal static class CompositeFormatPlaceholderParser
             var start = p - 1;
             while (p < block.Length && char.IsLetter(block[p])) p++;
             var name = block[start..p];
-            if (name is "\\N" or "\\n" or "\\u0" or "\\u1") { atoms.Add(name); continue; }
+            if (name is "\\N" or "\\n") { atoms.Add(name); continue; }
+            if (name == "\\u")
+            {
+                if (p >= block.Length || block[p] is not ('0' or '1')) throw new FormatException("Invalid ASS underline tag.");
+                atoms.Add(name + block[p++]); continue;
+            }
             if (name == "\\an")
             {
                 if (p >= block.Length || block[p] is < '1' or > '9') throw new FormatException("Invalid ASS alignment tag.");

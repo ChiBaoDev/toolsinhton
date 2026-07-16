@@ -42,3 +42,20 @@ Result: `Passed! - Failed: 0, Passed: 34, Skipped: 0, Total: 34`
 
 Command: `git diff --check`
 Result: passed.
+
+## Final all-607 corrective review
+
+- Manually re-reviewed all 607 B5 values against `.superpowers/sdd/b5-english-extract.json`, preserving exact source order/count, placeholders, markup, ASS syntax, shortcuts, bullets, significant spacing, and source-significant line breaks.
+- Rewrote internal-key values and machine-mixed prose across video burn-in, speech-to-text, TTS, shot changes, video OCR, embedded tracks, OCR preprocessing, VobSub, ASSA drawing/styles, and advanced effects.
+- Reduced the B5 untranslated allowlist to seven exact path-specific invariants: CRF, URL, the resolution `x` separator, `Tesseract + LSTM`, standalone/title OCR labels, and the established Karaoke effect name.
+- Confirmed parser hardening retains ordered ASS atoms and supports the B5 `\fsp` atom while rejecting malformed/arbitrary/non-finite forms.
+
+### Final exact verification output
+
+Command:
+`dotnet test D:/toolsinhton/.claude/worktrees/vietnamese-localization/tests/UI/UITests.csproj -c Debug --filter "FullyQualifiedName~VietnameseTranslationBatchTests|FullyQualifiedName~CompositeFormatPlaceholderParserTests" --no-restore --verbosity quiet`
+
+Result: `Passed! - Failed: 0, Passed: 34, Skipped: 0, Total: 34`
+
+Command: `git diff --check`
+Result: passed (Git emitted only the configured LF-to-CRLF working-copy warning for the B5 JSON shard).

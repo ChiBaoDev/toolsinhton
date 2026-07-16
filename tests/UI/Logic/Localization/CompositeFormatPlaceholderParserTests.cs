@@ -56,6 +56,32 @@ public class CompositeFormatPlaceholderParserTests
     }
 
     [Fact]
+    public void Compare_PreservesFspRepeatedAtomsAndStructuralOrder()
+    {
+        Assert.Empty(CompositeFormatPlaceholderParser.Compare(@"{\fsp2}A{0}{\u1}B{\u1}", @"{\fsp2}X{0}{\u1}Y{\u1}"));
+        Assert.NotEmpty(CompositeFormatPlaceholderParser.Compare(@"{\fsp2}{0}{\u1}", @"{\u1}{0}{\fsp2}"));
+        Assert.NotEmpty(CompositeFormatPlaceholderParser.Compare(@"{0}{\fsp2}", @"{\fsp2}{0}"));
+    }
+
+    [Theory]
+    [InlineData(@"{\fsp}")]
+    [InlineData(@"{\fspNaN}")]
+    [InlineData(@"{\fspInfinity}")]
+    [InlineData(@"{\fsp1e999}")]
+    [InlineData(@"{\pos(NaN,20)}")]
+    [InlineData(@"{\pos(10,Infinity)}")]
+    [InlineData(@"{\pos((10),20)}")]
+    public void Parse_RejectsMalformedOrNonFiniteAssaNumbers(string value) =>
+        Assert.Throws<FormatException>(() => CompositeFormatPlaceholderParser.Parse(value));
+
+    [Fact]
+    public void Compare_PreservesLanguagePlaceholderWithMultipleAssaAtoms()
+    {
+        Assert.Empty(CompositeFormatPlaceholderParser.Compare(@"{language}{\an8\fsp2}", @"{language}{\an8\fsp2}"));
+        Assert.NotEmpty(CompositeFormatPlaceholderParser.Compare(@"{language}{\an8\fsp2}", @"{language}{\fsp2\an8}"));
+    }
+
+    [Fact]
     public void Parse_RejectsMalformedFormat() =>
         Assert.Throws<FormatException>(() => CompositeFormatPlaceholderParser.Parse("Value {0"));
 }

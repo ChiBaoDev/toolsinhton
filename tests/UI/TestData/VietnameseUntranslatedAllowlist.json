@@ -267,81 +267,31 @@
   {
     "key": "$.video.burnIn.crf",
     "value": "CRF",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.video.audioToText.whisperXxlStandard",
-    "value": "Standard",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.video.textToSpeech.autoContinuePlaying",
-    "value": "Auto-continue playing",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.video.textToSpeech.vadSilenceCompression",
-    "value": "VAD silence compression",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.video.textToSpeech.highQualityTimeStretch",
-    "value": "High-quality time-stretch (WSOLA/rubberband)",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.video.textToSpeech.silencePaddingMs",
-    "value": "Silence padding (ms)",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.video.textToSpeech.edgeTtsRate",
-    "value": "Edge-TTS rate",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.video.textToSpeech.edgeTtsVolume",
-    "value": "Edge-TTS volume",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.video.shotChanges.shotChangesList",
-    "value": "Shot changes list",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
+    "reason": "CRF is the exact constant-rate-factor encoder parameter label at this path."
   },
   {
     "key": "$.video.videoOcr.url",
     "value": "URL",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.video.mpvRenderOpenGl",
-    "value": "OpenGL",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
+    "reason": "URL is the exact standard locator acronym used by the video OCR service field."
   },
   {
     "key": "$.video.resolutionSeparator",
     "value": "x",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
+    "reason": "The lowercase x is the exact resolution dimension separator at this path."
   },
   {
     "key": "$.ocr.tesseractEngineModeBoth",
     "value": "Tesseract + LSTM",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
+    "reason": "Tesseract and LSTM are exact OCR engine identifiers in this combined mode label."
   },
   {
     "key": "$.ocr.ocr",
     "value": "OCR",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
+    "reason": "OCR is the exact optical-character-recognition acronym used as this standalone label."
   },
   {
     "key": "$.ocr.ocrX",
     "value": "OCR - {0}",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
-  },
-  {
-    "key": "$.assa.advancedEffectKaraoke",
-    "value": "Karaoke",
-    "reason": "Technical identifier, model/service name, format/example, or established UI label retained exactly."
+    "reason": "OCR is the exact acronym and {0} is the required placeholder in this title pattern."
   }
 ]

@@ -52,7 +52,7 @@
 | PaddleOCR | PaddleOCR | OCR engine identifier; keep unchanged | Product spelling |
 | Tesseract | Tesseract | OCR engine identifier; keep unchanged | Product spelling |
 | ASSA | ASSA | Advanced SubStation Alpha format identifier; keep unchanged | Uppercase |
-| Advanced SubStation Alpha | Advanced SubStation Alpha | Full format name when used as an identifier; keep unchanged | Product spelling |
+| Advanced SubStation Alpha | Advanced SubStation Alpha | Keep the full name unchanged when it identifies the ASSA format; translate descriptive prose around it naturally | Product spelling |
 | Override tag | Thẻ điều khiển | ASSA formatting/control tag | Sentence case |
 | Position tag | Thẻ vị trí | ASSA positioning control tag | Sentence case |
 | Burn in | Nhúng cứng | Render subtitles into video pixels | Sentence case |
