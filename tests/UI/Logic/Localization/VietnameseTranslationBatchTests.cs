@@ -46,6 +46,22 @@ public class VietnameseTranslationBatchTests
     }
 
     [Fact]
+    public void B1_HasExactMetadata()
+    {
+        var b1 = LoadBatches().Single(batch => batch.Id == "B1");
+
+        using var english = LocalizationJsonHelper.LoadDocument(LocalizationTestPaths.EnglishLanguageFile());
+        using var shard = LocalizationJsonHelper.LoadDocument(Path.Combine(TestDataFolder(), b1.ShardFile));
+
+        Assert.Equal("Subtitle Edit", shard.RootElement.GetProperty("title").GetString());
+        Assert.Equal(
+            english.RootElement.GetProperty("version").GetString(),
+            shard.RootElement.GetProperty("version").GetString());
+        Assert.Equal("ChiBaoDev", shard.RootElement.GetProperty("translatedBy").GetString());
+        Assert.Equal("vi-VN", shard.RootElement.GetProperty("cultureName").GetString());
+    }
+
+    [Fact]
     public void Manifest_OwnedRootsAreUniqueKnownAndUnambiguous()
     {
         var batches = LoadBatches();
@@ -104,6 +120,13 @@ public class VietnameseTranslationBatchTests
         var leaves = LoadEnglishLeaves();
         var errors = new List<string>();
 
+        foreach (var duplicate in entries
+                     .GroupBy(entry => entry.Key, StringComparer.Ordinal)
+                     .Where(group => group.Count() > 1))
+        {
+            errors.Add($"{duplicate.Key}: duplicate allowlist key.");
+        }
+
         foreach (var entry in entries)
         {
             if (entry.Key.Contains('*', StringComparison.Ordinal))
@@ -129,6 +152,7 @@ public class VietnameseTranslationBatchTests
         var allowlist = LoadJson<UntranslatedAllowlistEntry[]>("VietnameseUntranslatedAllowlist.json")
             .ToDictionary(entry => entry.Key, StringComparer.Ordinal);
         var errors = new List<string>();
+        var englishIdenticalReviewedPaths = new HashSet<string>(StringComparer.Ordinal);
 
         foreach (var batch in batches.Where(batch => batch.Reviewed))
         {
@@ -175,15 +199,26 @@ public class VietnameseTranslationBatchTests
                 }
 
                 if (string.Equals(english.StringValue, translated.StringValue, StringComparison.Ordinal))
-                {
-                    if (!allowlist.TryGetValue(path, out var entry) ||
-                        !string.Equals(entry.Value, translated.StringValue, StringComparison.Ordinal))
-                    {
-                        errors.Add($"{batch.Id}: {path} is identical to English without an exact allowlist entry.");
-                    }
-                }
+                    englishIdenticalReviewedPaths.Add(path);
             }
         }
+
+        var reviewedBatchIds = batches
+            .Where(batch => batch.Reviewed)
+            .Select(batch => batch.Id)
+            .ToHashSet(StringComparer.Ordinal);
+        var relevantAllowlistKeys = allowlist.Keys
+            .Where(path =>
+            {
+                var owner = ResolveOwner(path, batches);
+                return owner is not null && reviewedBatchIds.Contains(owner);
+            })
+            .ToHashSet(StringComparer.Ordinal);
+
+        foreach (var path in englishIdenticalReviewedPaths.Except(relevantAllowlistKeys, StringComparer.Ordinal))
+            errors.Add($"{path} is identical to English without an exact allowlist entry.");
+        foreach (var path in relevantAllowlistKeys.Except(englishIdenticalReviewedPaths, StringComparer.Ordinal))
+            errors.Add($"{path} is a stale or extra allowlist entry; the reviewed value is not identical to English.");
 
         Assert.True(errors.Count == 0, string.Join(Environment.NewLine, errors));
     }

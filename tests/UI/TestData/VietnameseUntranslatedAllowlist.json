@@ -2,106 +2,106 @@
   {
     "key": "$.title",
     "value": "Subtitle Edit",
-    "reason": "Subtitle Edit is the product name."
+    "reason": "Subtitle Edit is the product name and must remain unchanged."
   },
   {
     "key": "$.version",
     "value": "v5.1.0-beta15",
-    "reason": "Catalog version must exactly match the current English catalog version."
+    "reason": "The Vietnamese catalog version must exactly match $.version in English.json."
   },
   {
     "key": "$.general.bdnXml",
     "value": "BDN/xml",
-    "reason": "The value is an established technical format, codec, model, or standard identifier."
+    "reason": "BDN/xml is the established BDN XML subtitle-format identifier used by the application."
   },
   {
     "key": "$.general.bluRaySup",
     "value": "Blu-ray (sup)",
-    "reason": "The value is an established technical format, codec, model, or standard identifier."
+    "reason": "Blu-ray (sup) identifies the Blu-ray SUP subtitle format; the format name and extension are retained."
   },
   {
     "key": "$.general.codec",
     "value": "Codec",
-    "reason": "The value is an established technical identifier or product name and is intentionally unchanged."
+    "reason": "Codec is the standard Vietnamese technical term for the media encoder/decoder concept."
   },
   {
     "key": "$.general.ip",
     "value": "IP",
-    "reason": "The value is an established technical identifier or product name and is intentionally unchanged."
+    "reason": "IP is the standard abbreviation for Internet Protocol and is retained in Vietnamese."
   },
   {
     "key": "$.general.id",
     "value": "ID",
-    "reason": "The value is an established technical identifier or product name and is intentionally unchanged."
+    "reason": "ID is the standard abbreviation for an identifier and is retained in Vietnamese."
   },
   {
     "key": "$.general.numberSymbol",
     "value": "#",
-    "reason": "The number sign is a language-independent symbol."
+    "reason": "# is the language-independent number-sign symbol."
   },
   {
     "key": "$.general.ocrDotDotDot",
     "value": "OCR...",
-    "reason": "The value is an established technical format, codec, model, or standard identifier."
+    "reason": "OCR is the standard abbreviation for optical character recognition; the ellipsis indicates that the action opens a dialog."
   },
   {
     "key": "$.general.url",
     "value": "URL",
-    "reason": "The value is an established technical identifier or product name and is intentionally unchanged."
+    "reason": "URL is the standard abbreviation for Uniform Resource Locator and is retained in Vietnamese."
   },
   {
     "key": "$.general.alpha",
     "value": "Alpha",
-    "reason": "Alpha is the established graphics parameter name."
+    "reason": "Alpha is the established graphics parameter name for transparency or opacity."
   },
   {
     "key": "$.general.hoursMinutesSecondsMilliseconds",
     "value": "HH:MM:SS.FFF",
-    "reason": "HH:MM:SS.FFF is an established time-format identifier."
+    "reason": "HH:MM:SS.FFF is the language-independent hours, minutes, seconds, and milliseconds format pattern."
   },
   {
     "key": "$.file.ebuSaveOptions.teletext",
     "value": "Teletext",
-    "reason": "The value is an established technical identifier or product name and is intentionally unchanged."
+    "reason": "Teletext is the established name of the broadcast text and subtitle service."
   },
   {
     "key": "$.file.import.csvXlsxFilterTitle",
     "value": "CSV/XLSX",
-    "reason": "The value is an established technical format, codec, model, or standard identifier."
+    "reason": "CSV and XLSX are file-format identifiers and are retained unchanged."
   },
   {
     "key": "$.file.import.separatorTab",
     "value": "Tab",
-    "reason": "The value is an established technical identifier or product name and is intentionally unchanged."
+    "reason": "Tab is the keyboard-key label used here for the tab-character field separator."
   },
   {
     "key": "$.file.export.titleExportVobSub",
     "value": "VobSub (sub/idx)",
-    "reason": "The value is an established technical identifier or product name and is intentionally unchanged."
+    "reason": "VobSub is the subtitle-format name, and sub/idx are its associated file extensions."
   },
   {
     "key": "$.file.export.titleExportDCinemaSmpte2014Png",
     "value": "D-Cinema SMPTE 2014/png",
-    "reason": "The value is an established technical format, codec, model, or standard identifier."
+    "reason": "D-Cinema, SMPTE 2014, and png identify the cinema subtitle standard and image output format."
   },
   {
     "key": "$.edit.modifySelection.cpsLessThan",
     "value": "CPS <",
-    "reason": "The value is an established technical identifier or product name and is intentionally unchanged."
+    "reason": "CPS means characters per second in subtitle timing; < is the language-independent less-than operator."
   },
   {
     "key": "$.edit.modifySelection.cpsGreaterThan",
     "value": "CPS >",
-    "reason": "The value is an established technical identifier or product name and is intentionally unchanged."
+    "reason": "CPS means characters per second in subtitle timing; > is the language-independent greater-than operator."
   },
   {
     "key": "$.about.gitHub",
     "value": "GitHub",
-    "reason": "GitHub is a product name."
+    "reason": "GitHub is a product and service name and must remain unchanged."
   },
   {
     "key": "$.about.payPal",
     "value": "PayPal",
-    "reason": "PayPal is a product name."
+    "reason": "PayPal is a product and service name and must remain unchanged."
   }
 ]
