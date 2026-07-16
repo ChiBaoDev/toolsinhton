@@ -80,3 +80,16 @@ Exact result: **25 passed / 0 failed / 25 total**.
 `git diff --check` completed with no output.
 Late independent tools-root review additionally corrected gap allocation terminology, media-rãnh wording, standalone Netflix shot-change and whitespace diagnostics, incrementally accumulated lines, join-file time-code offset behavior, speaker metadata conversion, title-safe subtitle-area wording, and explicit square-bracket terminology.
 A subsequent independent options review covered the remaining settings, all shortcut leaves, word lists, and language chooser. It corrected additional keyboard-focus, selection, merge direction, dialogue, clipboard, media, timing, waveform, category, import, ASSA drawing, sort, and sentence-case defects while preserving structural invariants.
+## Second review-fix pass (findings 15-28)
+
+Addressed every appended finding 15-28 and swept adjacent same-family B4 values. The parser now accepts only the exact bare `{language}` token and rejects trailing spaces, tabs, newlines, alignment, format syntax, mixed identifiers, and oversized numeric indexes while preserving numeric normalization and composite-format semantics. Corrected Netflix whitespace semantics, continuation labels and case, spell-check engine terminology, conditional error-color labels, end-time controls, spacing, AI-review `rà soát` wording, merge-line labels with `dòng`, Enter-key action, toolbar-open wording, waveform centering, and source-image wording. Existing B4 structure, path order, leaf count, placeholders, markup, line breaks, mnemonics, and allowlist invariants remain intact.
+
+Focused command:
+`dotnet test D:/toolsinhton/.claude/worktrees/vietnamese-localization/tests/UI/UITests.csproj -c Debug --filter "FullyQualifiedName~VietnameseTranslationBatchTests|FullyQualifiedName~CompositeFormatPlaceholderParserTests" --logger "console;verbosity=minimal"`
+
+Exact output:
+```
+Passed!  - Failed:     0, Passed:    28, Skipped:     0, Total:    28, Duration: 421 ms - UITests.dll (net10.0)
+```
+
+`git diff --check` completed with no output.

@@ -77,12 +77,19 @@ internal static class CompositeFormatPlaceholderParser
     {
         position++;
         var identifier = ParseIdentifier(value, ref position);
-        SkipWhiteSpace(value, ref position);
 
-        if (identifier == "language" && position < value.Length && value[position] != '}')
+        if (identifier == "language")
         {
-            throw new FormatException("The {language} placeholder does not support alignment or format syntax.");
+            if (position >= value.Length || value[position] != '}')
+            {
+                throw new FormatException("The {language} placeholder must be the exact bare token.");
+            }
+
+            position++;
+            return new CompositePlaceholder(identifier, null, null);
         }
+
+        SkipWhiteSpace(value, ref position);
 
         int? alignment = null;
         if (position < value.Length && value[position] == ',')

@@ -17,6 +17,9 @@ public class CompositeFormatPlaceholderParserTests
     [InlineData("{Language}")]
     [InlineData("{language,10}")]
     [InlineData("{language:x}")]
+    [InlineData("{language }")]
+    [InlineData("{language\t}")]
+    [InlineData("{language\n}")]
     [InlineData("{999999999999999999999999999999999999999999}")]
     public void Parse_RejectsUnsupportedIdentifiersAndNamedTokenSyntax(string value) =>
         Assert.Throws<FormatException>(() => CompositeFormatPlaceholderParser.Parse(value));
