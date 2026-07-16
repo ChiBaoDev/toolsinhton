@@ -300,9 +300,7 @@ git commit -m "test: add localization validation primitives"
 - Create: `tests/UI/Logic/Localization/EnglishLanguageModelTests.cs`
 - Create: `tests/UI/Logic/Localization/LanguageResourceRegistryTests.cs`
 - Create: `tests/UI/Logic/Localization/EmbeddedLanguageResourceTests.cs`
-- Create: `src/ui/Properties/AssemblyInfo.cs`
-- Modify: `src/ui/Logic/Initializers/LanguageInitializer.cs:15-52`
-- Modify: `src/ui/UI.csproj:73-137,246-251`
+- Modify: `src/ui/UI.csproj:73-137,246-251,293-295`
 - Modify: `tests/UI/Logic/LanguageJsonFilesTests.cs:49-65`
 
 **Interfaces:**
@@ -310,17 +308,17 @@ git commit -m "test: add localization validation primitives"
 - Consumes: Task 1 helpers.
 - Consumed by: Task 9 resource shipping and Task 12 embedded fallback.
 
-- [ ] **Step 1: Expose internal production types to the UI test assembly**
+- [ ] **Step 1: Verify the existing test-assembly visibility**
 
-Create `src/ui/Properties/AssemblyInfo.cs`:
+Confirm `src/ui/UI.csproj` retains the existing assembly attribute:
 
-```csharp
-using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("UITests")]
+```xml
+<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+  <_Parameter1>UITests</_Parameter1>
+</AssemblyAttribute>
 ```
 
-This is required because the registry and language-service contracts are intentionally `internal` while `UITests` is a separate assembly.
+Do not add a second `InternalsVisibleTo` declaration. The registry and language-service contracts remain `internal` while `UITests` accesses them through this existing attribute.
 
 - [ ] **Step 2: Write failing model/registry tests**
 
@@ -410,7 +408,7 @@ Expected: both commands exit 0 and every registered language URI opens.
 - [ ] **Step 7: Commit**
 
 ```powershell
-git add -- src/ui/Properties/AssemblyInfo.cs src/ui/Logic/Initializers/LanguageInitializer.cs src/ui/UI.csproj tests/UI/Logic/LanguageJsonFilesTests.cs tests/UI/Logic/Localization/EnglishLanguageModelTests.cs tests/UI/Logic/Localization/LanguageResourceRegistryTests.cs tests/UI/Logic/Localization/EmbeddedLanguageResourceTests.cs
+git add -- src/ui/Logic/Initializers/LanguageInitializer.cs src/ui/UI.csproj tests/UI/Logic/LanguageJsonFilesTests.cs tests/UI/Logic/Localization/EnglishLanguageModelTests.cs tests/UI/Logic/Localization/LanguageResourceRegistryTests.cs tests/UI/Logic/Localization/EmbeddedLanguageResourceTests.cs
 git commit -m "test: enforce language resource registry parity"
 ```
 
@@ -457,8 +455,8 @@ internal sealed record UntranslatedAllowlistEntry(string Key, string Value, stri
 Tests must assert:
 
 1. IDs are exactly `B1` through `B6`.
-2. Every English leaf belongs to exactly one `ownedRoots` prefix.
-3. No unknown or overlapping prefix exists.
+2. Every English leaf resolves to exactly one owner using the longest matching `ownedRoots` prefix.
+3. Nested parent/child prefixes are allowed. Duplicate prefixes, unknown prefixes, and equal-specificity ambiguity are forbidden.
 4. Every allowlist record has an exact `$.path`, exact value, and non-empty reason.
 5. No allowlist key contains `*`.
 6. A reviewed batch requires non-empty reviewer/review note and an existing shard file.
@@ -739,7 +737,7 @@ Preserve `Tesseract`, `PaddleOCR`, `FFmpeg`, `libmpv`, `ASSA`, tags such as `\po
 dotnet test .\tests\UI\UITests.csproj -c Debug --filter "FullyQualifiedName~VietnameseTranslationBatchTests" --verbosity normal
 ```
 
-If the shard exceeds 650 leaves, commit `video/ocr` and `ASSA` as two consecutive green commits while retaining the same B5 ownership and reviewer metadata.
+B5 is one atomic reviewed batch and one green commit even if it exceeds 650 leaves. Do not split it into a partially reviewed intermediate commit.
 
 - [ ] **Step 4: Commit**
 
@@ -1212,8 +1210,9 @@ For installed and portable modes:
 1. Start without settings; confirm Vietnamese before the main window appears.
 2. Switch Vietnamese → English → Vietnamese.
 3. Restart after each switch; confirm persistence.
-4. Corrupt a copied Vietnamese file; confirm failed live switch keeps the prior UI and setting.
-5. Remove extracted Vietnamese file; confirm embedded fallback still starts in Vietnamese.
+4. Create a malformed custom locale file named `RollbackProbe.json` that has no embedded counterpart; confirm a failed live switch to `RollbackProbe` keeps the prior UI and setting.
+5. Corrupt a copied writable `Vietnamese.json`; confirm startup/live selection falls back to the valid embedded Vietnamese resource.
+6. Remove extracted Vietnamese file; confirm embedded fallback still starts in Vietnamese.
 
 - [ ] **Step 4: Exercise required flows at all Windows matrix points**
 
