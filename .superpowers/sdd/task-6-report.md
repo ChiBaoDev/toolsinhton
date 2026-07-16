@@ -35,3 +35,16 @@ Only task files are included. No runtime-generated files are staged.
 
 ## Concerns
 None.
+
+## Review fix
+
+Applied every Important and Minor correction from `task-6-review-findings.md`: clarified original/translation switch and merge operations; made all waveform playback-position actions and subtitle-time seeking explicit; expressed silence volume as a threshold; replaced ambiguous bare `dịch` with `di chuyển` for cell/text movement while retaining timing-shift shortcut wording; and refined matching-original import, whitespace trimming, timing-gap sorting, two-second playback return, and percentage-speed labels.
+
+Systematically re-reviewed all **188** B3 values against English source and referenced runtime contexts for status versus command wording, original/translation direction, cell/text movement versus timing shifts, waveform playback positions, silence detection, subtitle-time navigation, gaps, frames/fps, playback speed, timing speed factors, offsets, and placeholder semantics. The re-review found and corrected four additional concrete context issues: character-weighted timing distribution, subtitle timing-change terminology, waveform-centering targets, and shot-change toggling at the current playback position. Structure, source order, 188-leaf count, and the five exact bidirectional allowlist invariants remain unchanged. `xLinesMerged` intentionally has no `{0}` placeholder because the English source has none.
+
+Required combined suite:
+`dotnet test .\tests\UI\UITests.csproj -c Debug --filter "FullyQualifiedName~VietnameseTranslationBatchTests|FullyQualifiedName~CompositeFormatPlaceholderParserTests" --verbosity normal`
+
+Exact result: **17 passed / 0 failed / 17 total**; build succeeded with **0 warnings / 0 errors**. `git diff --check` completed with no errors. The first invocation from the agent workspace failed before build with `MSB1009` because that workspace did not contain the target project; rerunning the same suite against the requested worktree project path produced the successful result above.
+
+Self-review: only the B3 shard and this task report are task-scoped changes; no allowlist update was needed because no corrected value became English-identical or ceased to be English-identical. Runtime-generated `bin`/`obj` artifacts are not staged.
