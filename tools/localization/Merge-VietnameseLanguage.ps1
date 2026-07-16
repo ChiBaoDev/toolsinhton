@@ -7,20 +7,85 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-function Read-JsonObject([string]$Path) {
-    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
-        throw "JSON file does not exist: $Path"
-    }
+function Skip-JsonWhitespace([string]$Text, [ref]$Position) {
+    while ($Position.Value -lt $Text.Length -and [char]::IsWhiteSpace($Text[$Position.Value])) { $Position.Value++ }
+}
 
+function Skip-JsonString([string]$Text, [ref]$Position) {
+    if ($Text[$Position.Value] -ne '"') { throw "Expected JSON string at character $($Position.Value)." }
+    $Position.Value++
+    while ($Position.Value -lt $Text.Length) {
+        $character = $Text[$Position.Value++]
+        if ($character -eq '\') {
+            if ($Position.Value -ge $Text.Length) { throw 'Unterminated JSON escape.' }
+            if ($Text[$Position.Value++] -eq 'u') { $Position.Value += 4 }
+        } elseif ($character -eq '"') { return }
+    }
+    throw 'Unterminated JSON string.'
+}
+
+function Read-JsonString([string]$Text, [ref]$Position) {
+    $start = $Position.Value
+    Skip-JsonString $Text $Position
+    $raw = $Text.Substring($start, $Position.Value - $start)
+    $serializer = [System.Web.Script.Serialization.JavaScriptSerializer]::new()
+    return [string]$serializer.DeserializeObject($raw)
+}
+
+function Assert-UniqueJsonValue([string]$Text, [ref]$Position, [string]$Path) {
+    Skip-JsonWhitespace $Text $Position
+    if ($Position.Value -ge $Text.Length) { throw "Unexpected end of JSON at '$Path'." }
+    $character = $Text[$Position.Value]
+    if ($character -eq '"') { Skip-JsonString $Text $Position; return }
+    if ($character -eq '{') {
+        $Position.Value++
+        Skip-JsonWhitespace $Text $Position
+        $names = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+        if ($Position.Value -lt $Text.Length -and $Text[$Position.Value] -eq '}') { $Position.Value++; return }
+        while ($true) {
+            Skip-JsonWhitespace $Text $Position
+            $name = Read-JsonString $Text $Position
+            if (-not $names.Add($name)) { throw "Duplicate JSON property '$Path.$name'." }
+            Skip-JsonWhitespace $Text $Position
+            if ($Position.Value -ge $Text.Length -or $Text[$Position.Value] -ne ':') { throw "Expected ':' after JSON property '$Path.$name'." }
+            $Position.Value++
+            Assert-UniqueJsonValue $Text $Position "$Path.$name"
+            Skip-JsonWhitespace $Text $Position
+            if ($Position.Value -ge $Text.Length) { throw "Unterminated JSON object at '$Path'." }
+            if ($Text[$Position.Value] -eq '}') { $Position.Value++; return }
+            if ($Text[$Position.Value] -ne ',') { throw "Expected ',' in JSON object at '$Path'." }
+            $Position.Value++
+        }
+    }
+    if ($character -eq '[') {
+        $Position.Value++
+        $index = 0
+        Skip-JsonWhitespace $Text $Position
+        if ($Position.Value -lt $Text.Length -and $Text[$Position.Value] -eq ']') { $Position.Value++; return }
+        while ($true) {
+            Assert-UniqueJsonValue $Text $Position "$Path[$index]"
+            $index++
+            Skip-JsonWhitespace $Text $Position
+            if ($Position.Value -ge $Text.Length) { throw "Unterminated JSON array at '$Path'." }
+            if ($Text[$Position.Value] -eq ']') { $Position.Value++; return }
+            if ($Text[$Position.Value] -ne ',') { throw "Expected ',' in JSON array at '$Path'." }
+            $Position.Value++
+        }
+    }
+    while ($Position.Value -lt $Text.Length -and $Text[$Position.Value] -notin @(',', ']', '}')) { $Position.Value++ }
+}
+
+function Read-JsonObject([string]$Path) {
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) { throw "JSON file does not exist: $Path" }
     $text = [System.IO.File]::ReadAllText((Resolve-Path -LiteralPath $Path))
+    $position = 0
+    Assert-UniqueJsonValue $text ([ref]$position) '$'
+    Skip-JsonWhitespace $text ([ref]$position)
+    if ($position -ne $text.Length) { throw "Trailing content after JSON in '$Path'." }
     $serializer = [System.Web.Script.Serialization.JavaScriptSerializer]::new()
     $serializer.MaxJsonLength = [int]::MaxValue
-    try {
-        return $serializer.DeserializeObject($text)
-    }
-    catch {
-        throw "Invalid or duplicate-property JSON in '$Path': $($_.Exception.Message)"
-    }
+    try { return $serializer.DeserializeObject($text) }
+    catch { throw "Invalid JSON in '$Path': $($_.Exception.Message)" }
 }
 
 function Get-Leaves([object]$Value, [string]$Path) {
@@ -120,5 +185,8 @@ foreach ($entry in $englishEntries) {
 }
 
 $json = $english | ConvertTo-Json -Depth 100
-$json = $json.Replace("`r`n", "`n").Replace("`r", "`n")
+$json = (($json -split "`r?`n") | ForEach-Object {
+    $leading = $_.Length - $_.TrimStart(' ').Length
+    (' ' * [int]($leading / 2)) + $_.Substring($leading)
+}) -join "`n"
 [System.IO.File]::WriteAllText($OutputPath, $json + "`n", [System.Text.UTF8Encoding]::new($false))
