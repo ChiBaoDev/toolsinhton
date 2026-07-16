@@ -35,7 +35,7 @@
 
 - Fixed-scan scope is exactly `src/ui/Features/Main`, `Files`, `Edit`, `Sync`, and `Shared`; scans were rerun with the three brief patterns. Results: 18 property/markup hits and 15 call/exception hits; all retained hits are listed in the fixed-scan table above, including `InitMenu.cs` and `BinaryEditWindow.cs`.
 - Localized additions use `Se.Language`: `Main.PickVobSubLanguageTitle`, `File.ExportPacTitle`, `File.ChoosePacCodePage`, `File.ExportCavena890Title`, and `File.ExportEbuStlTitle`; PAC is rendered consistently as `PAC`.
-- Deterministic merge: `C:\Windows\System32\WindowsPowerShell1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File D:	oolsinhton\.claude\worktreesietnamese-localization	ools\localization\Merge-VietnameseLanguage.ps1` — PASS.
+- Deterministic merge: `C:\Windows\System32\WindowsPowerShell\x0B1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File D:	oolsinhton\.claude\worktrees\x0Bietnamese-localization	ools\localization\Merge-VietnameseLanguage.ps1` — PASS.
 - Focused inventory/runtime tests: `dotnet test tests/UI/UITests.csproj -c Debug --filter FullyQualifiedName~FirstPartyUiLiteralInventoryTests --no-restore --verbosity minimal` — 2/2 PASS.
 - Complete localization suite: `dotnet test tests/UI/UITests.csproj -c Debug --filter FullyQualifiedName~UITests.Logic.Localization --no-restore --verbosity minimal` — 90/90 PASS.
 - Provenance for this review-fix pass: base `e5e738d9a` through the final commit recorded below; no Task 11 work, runtime-generated files, or push included.

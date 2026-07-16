@@ -1,0 +1,407 @@
+{
+  "version": 1,
+  "roots": [
+    "src/ui/Features/Main",
+    "src/ui/Features/Files",
+    "src/ui/Features/Edit",
+    "src/ui/Features/Sync",
+    "src/ui/Features/Shared"
+  ],
+  "rows": [
+    {
+      "source": "src/ui/Features/Main/Layout/LayoutWindow.cs",
+      "line": 26,
+      "literal": "Choose layout",
+      "classification": "localized",
+      "category": "user-visible",
+      "languageKey": "$.main.layoutTitle",
+      "sourceExpression": "Se.Language.Main.LayoutTitle"
+    },
+    {
+      "source": "src/ui/Features/Files/ExportPac/ExportPacWindow.cs",
+      "line": 11,
+      "literal": "Export Pac",
+      "classification": "localized",
+      "category": "user-visible",
+      "languageKey": "$.file.exportPacTitle",
+      "sourceExpression": "Se.Language.File.ExportPacTitle"
+    },
+    {
+      "source": "src/ui/Features/Files/ExportPac/ExportPacWindow.cs",
+      "line": 17,
+      "literal": "Choose PAC code page",
+      "classification": "localized",
+      "category": "user-visible",
+      "languageKey": "$.file.choosePacCodePage",
+      "sourceExpression": "Se.Language.File.ChoosePacCodePage"
+    },
+    {
+      "source": "src/ui/Features/Files/ExportCavena890/ExportCavena890Window.cs",
+      "line": 13,
+      "literal": "Export Cavena 890",
+      "classification": "localized",
+      "category": "user-visible",
+      "languageKey": "$.file.exportCavena890Title",
+      "sourceExpression": "Se.Language.File.ExportCavena890Title"
+    },
+    {
+      "source": "src/ui/Features/Files/ExportEbuStl/ExportEbuStlWindow.cs",
+      "line": 16,
+      "literal": "Export EBU STL",
+      "classification": "localized",
+      "category": "user-visible",
+      "languageKey": "$.file.exportEbuStlTitle",
+      "sourceExpression": "Se.Language.File.ExportEbuStlTitle"
+    },
+    {
+      "source": "src/ui/Features/Shared/DownloadFfmpegWindow.cs",
+      "line": 15,
+      "literal": "Downloading ffmpeg",
+      "classification": "localized",
+      "category": "user-visible",
+      "languageKey": "$.main.downloadingFfmpeg",
+      "sourceExpression": "Se.Language.Main.DownloadingFfmpeg"
+    },
+    {
+      "source": "src/ui/Features/Shared/DownloadLibMpvWindow.cs",
+      "line": 16,
+      "literal": "Downloading libmpv",
+      "classification": "localized",
+      "category": "user-visible",
+      "languageKey": "$.main.downloadingLibMpv",
+      "sourceExpression": "Se.Language.Main.DownloadingLibMpv"
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/SetText/SetTextWindow.cs",
+      "line": 18,
+      "literal": "Set Text",
+      "classification": "localized",
+      "category": "user-visible",
+      "languageKey": "$.tools.imageBasedEdit.setText",
+      "sourceExpression": "Se.Language.Tools.ImageBasedEdit.SetText"
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryApplyDurationLimits/BinaryApplyDurationLimitsWindow.cs",
+      "line": 44,
+      "literal": "Minimum duration (milliseconds):",
+      "classification": "localized",
+      "category": "user-visible",
+      "languageKey": "$.tools.applyDurationLimits.minimumDurationMilliseconds",
+      "sourceExpression": "Se.Language.Tools.ApplyDurationLimits.MinimumDurationMilliseconds"
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryApplyDurationLimits/BinaryApplyDurationLimitsWindow.cs",
+      "line": 66,
+      "literal": "Maximum duration (milliseconds):",
+      "classification": "localized",
+      "category": "user-visible",
+      "languageKey": "$.tools.applyDurationLimits.maximumDurationMilliseconds",
+      "sourceExpression": "Se.Language.Tools.ApplyDurationLimits.MaximumDurationMilliseconds"
+    },
+    {
+      "source": "src/ui/Features/Shared/PickVobSubLanguage/PickVobSubLanguageViewModel.cs",
+      "line": 51,
+      "literal": "Pick VobSub language - {0}",
+      "classification": "localized",
+      "category": "user-visible",
+      "languageKey": "$.main.pickVobSubLanguageTitle",
+      "sourceExpression": "Se.Language.Main.PickVobSubLanguageTitle"
+    },
+    {
+      "source": "src/ui/Features/Main/Layout/InitMenu.cs",
+      "line": 214,
+      "literal": "IMSC 1.1 image profile",
+      "classification": "technical-exception",
+      "category": "format-name",
+      "reason": "Format/profile identifier must remain interoperable and verbatim."
+    },
+    {
+      "source": "src/ui/Features/Main/Layout/InitMenu.cs",
+      "line": 254,
+      "literal": "DOST/png",
+      "classification": "technical-exception",
+      "category": "format-name",
+      "reason": "Format/profile identifier must remain interoperable and verbatim."
+    },
+    {
+      "source": "src/ui/Features/Main/Layout/InitMenu.cs",
+      "line": 264,
+      "literal": "Final Cut Pro + image",
+      "classification": "technical-exception",
+      "category": "format-name",
+      "reason": "Format/profile identifier must remain interoperable and verbatim."
+    },
+    {
+      "source": "src/ui/Features/Main/Layout/InitMenu.cs",
+      "line": 289,
+      "literal": "WebVTT png",
+      "classification": "technical-exception",
+      "category": "format-name",
+      "reason": "Format/profile identifier must remain interoperable and verbatim."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditWindow.cs",
+      "line": 204,
+      "literal": "IMSC 1.1 image profile",
+      "classification": "technical-exception",
+      "category": "format-name",
+      "reason": "Format/profile identifier must remain interoperable and verbatim."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditWindow.cs",
+      "line": 209,
+      "literal": "DOST/png",
+      "classification": "technical-exception",
+      "category": "format-name",
+      "reason": "Format/profile identifier must remain interoperable and verbatim."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditWindow.cs",
+      "line": 214,
+      "literal": "Final Cut Pro + image",
+      "classification": "technical-exception",
+      "category": "format-name",
+      "reason": "Format/profile identifier must remain interoperable and verbatim."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditWindow.cs",
+      "line": 234,
+      "literal": "WebVTT png",
+      "classification": "technical-exception",
+      "category": "format-name",
+      "reason": "Format/profile identifier must remain interoperable and verbatim."
+    },
+    {
+      "source": "src/ui/Features/Edit/MultipleReplace/CsvExporter.cs",
+      "line": 13,
+      "literal": "Category,Find,ReplaceWith,Description,Active,Type",
+      "classification": "non-ui",
+      "category": "schema-identifier",
+      "reason": "CSV header is a machine-readable export schema, not display copy."
+    },
+    {
+      "source": "src/ui/Features/Shared/PickMp4Track/PickMp4TrackWindow.cs",
+      "line": 98,
+      "literal": "HandlerName",
+      "classification": "external-runtime",
+      "category": "media-metadata",
+      "reason": "Media metadata column/property identifier comes from the external runtime contract."
+    },
+    {
+      "source": "src/ui/Features/Shared/PickMp4Track/PickMp4TrackWindow.cs",
+      "line": 105,
+      "literal": "Name",
+      "classification": "external-runtime",
+      "category": "media-metadata",
+      "reason": "Media metadata column/property identifier comes from the external runtime contract."
+    },
+    {
+      "source": "src/ui/Features/Shared/PickMp4Track/PickMp4TrackWindow.cs",
+      "line": 112,
+      "literal": "Duration",
+      "classification": "external-runtime",
+      "category": "media-metadata",
+      "reason": "Media metadata column/property identifier comes from the external runtime contract."
+    },
+    {
+      "source": "src/ui/Features/Shared/PickMp4Track/PickMp4TrackWindow.cs",
+      "line": 119,
+      "literal": "IsVobSubSubtitle",
+      "classification": "external-runtime",
+      "category": "media-metadata",
+      "reason": "Media metadata column/property identifier comes from the external runtime contract."
+    },
+    {
+      "source": "src/ui/Features/Shared/PickMp4Track/PickMp4TrackWindow.cs",
+      "line": 126,
+      "literal": "StartPosition",
+      "classification": "external-runtime",
+      "category": "media-metadata",
+      "reason": "Media metadata column/property identifier comes from the external runtime contract."
+    },
+    {
+      "source": "src/ui/Features/Shared/PickMp4Track/PickMp4TrackWindow.cs",
+      "line": 160,
+      "literal": "#",
+      "classification": "external-runtime",
+      "category": "media-metadata",
+      "reason": "Media metadata column/property identifier comes from the external runtime contract."
+    },
+    {
+      "source": "src/ui/Features/Shared/PickMp4Track/PickMp4TrackWindow.cs",
+      "line": 167,
+      "literal": "Show",
+      "classification": "external-runtime",
+      "category": "media-metadata",
+      "reason": "Media metadata column/property identifier comes from the external runtime contract."
+    },
+    {
+      "source": "src/ui/Features/Shared/PickMp4Track/PickMp4TrackWindow.cs",
+      "line": 174,
+      "literal": "Duration",
+      "classification": "external-runtime",
+      "category": "media-metadata",
+      "reason": "Media metadata column/property identifier comes from the external runtime contract."
+    },
+    {
+      "source": "src/ui/Features/Shared/PickMp4Track/PickMp4TrackWindow.cs",
+      "line": 181,
+      "literal": "Text/Image",
+      "classification": "external-runtime",
+      "category": "media-metadata",
+      "reason": "Media metadata column/property identifier comes from the external runtime contract."
+    },
+    {
+      "source": "src/ui/Features/Main/MainView.cs",
+      "line": 39,
+      "literal": "MainViewModel is not registered in the service provider.",
+      "classification": "technical-exception",
+      "category": "diagnostic",
+      "reason": "Exception text is diagnostic output, not user-facing UI copy."
+    },
+    {
+      "source": "src/ui/Features/Main/Layout/InitVideoPlayer.cs",
+      "line": 151,
+      "literal": "Failed to create video player control.",
+      "classification": "technical-exception",
+      "category": "diagnostic",
+      "reason": "Exception text is diagnostic output, not user-facing UI copy."
+    },
+    {
+      "source": "src/ui/Features/Main/MainViewModel.cs",
+      "line": 1209,
+      "literal": "index",
+      "classification": "non-ui",
+      "category": "help-route",
+      "reason": "Documentation route identifier is passed to UiUtil.ShowHelp and is not displayed as UI copy."
+    },
+    {
+      "source": "src/ui/Features/Sync/VisualSync/VisualSyncViewModel.cs",
+      "line": 573,
+      "literal": "features/visual-sync",
+      "classification": "non-ui",
+      "category": "help-route",
+      "reason": "Documentation route identifier is passed to UiUtil.ShowHelp and is not displayed as UI copy."
+    },
+    {
+      "source": "src/ui/Features/Files/Statistics/StatisticsViewModel.cs",
+      "line": 707,
+      "literal": "features/statistics",
+      "classification": "non-ui",
+      "category": "help-route",
+      "reason": "Documentation route identifier is passed to UiUtil.ShowHelp and is not displayed as UI copy."
+    },
+    {
+      "source": "src/ui/Features/Edit/Replace/ReplaceViewModel.cs",
+      "line": 156,
+      "literal": "features/edit",
+      "classification": "non-ui",
+      "category": "help-route",
+      "reason": "Documentation route identifier is passed to UiUtil.ShowHelp and is not displayed as UI copy."
+    },
+    {
+      "source": "src/ui/Features/Edit/Replace/ReplaceViewModel.cs",
+      "line": 156,
+      "literal": "replace",
+      "classification": "non-ui",
+      "category": "help-route",
+      "reason": "Documentation route identifier is passed to UiUtil.ShowHelp and is not displayed as UI copy."
+    },
+    {
+      "source": "src/ui/Features/Sync/VisualSync/ManualSyncViewModel.cs",
+      "line": 50,
+      "literal": "features/change-speed",
+      "classification": "non-ui",
+      "category": "help-route",
+      "reason": "Documentation route identifier is passed to UiUtil.ShowHelp and is not displayed as UI copy."
+    },
+    {
+      "source": "src/ui/Features/Sync/PointSyncViaOther/PointSyncViaOtherViewModel.cs",
+      "line": 308,
+      "literal": "features/point-sync-via-other",
+      "classification": "non-ui",
+      "category": "help-route",
+      "reason": "Documentation route identifier is passed to UiUtil.ShowHelp and is not displayed as UI copy."
+    },
+    {
+      "source": "src/ui/Features/Edit/MultipleReplace/MultipleReplaceViewModel.cs",
+      "line": 969,
+      "literal": "features/edit",
+      "classification": "non-ui",
+      "category": "help-route",
+      "reason": "Documentation route identifier is passed to UiUtil.ShowHelp and is not displayed as UI copy."
+    },
+    {
+      "source": "src/ui/Features/Sync/PointSync/PointSyncViewModel.cs",
+      "line": 143,
+      "literal": "features/point-sync",
+      "classification": "non-ui",
+      "category": "help-route",
+      "reason": "Documentation route identifier is passed to UiUtil.ShowHelp and is not displayed as UI copy."
+    },
+    {
+      "source": "src/ui/Features/Sync/ChangeSpeed/ChangeSpeedViewModel.cs",
+      "line": 155,
+      "literal": "features/change-speed",
+      "classification": "non-ui",
+      "category": "help-route",
+      "reason": "Documentation route identifier is passed to UiUtil.ShowHelp and is not displayed as UI copy."
+    },
+    {
+      "source": "src/ui/Features/Sync/AdjustAllTimes/AdjustAllTimesViewModel.cs",
+      "line": 224,
+      "literal": "features/adjust-all-times",
+      "classification": "non-ui",
+      "category": "help-route",
+      "reason": "Documentation route identifier is passed to UiUtil.ShowHelp and is not displayed as UI copy."
+    },
+    {
+      "source": "src/ui/Features/Sync/ChangeFrameRate/ChangeFrameRateViewModel.cs",
+      "line": 160,
+      "literal": "features/change-frame-rate",
+      "classification": "non-ui",
+      "category": "help-route",
+      "reason": "Documentation route identifier is passed to UiUtil.ShowHelp and is not displayed as UI copy."
+    },
+    {
+      "source": "src/ui/Features/Edit/Find/FindViewModel.cs",
+      "line": 143,
+      "literal": "features/edit",
+      "classification": "non-ui",
+      "category": "help-route",
+      "reason": "Documentation route identifier is passed to UiUtil.ShowHelp and is not displayed as UI copy."
+    },
+    {
+      "source": "src/ui/Features/Edit/Find/FindViewModel.cs",
+      "line": 143,
+      "literal": "find",
+      "classification": "non-ui",
+      "category": "help-route",
+      "reason": "Documentation route identifier is passed to UiUtil.ShowHelp and is not displayed as UI copy."
+    },
+    {
+      "source": "src/ui/Features/Files/Compare/CompareViewModel.cs",
+      "line": 854,
+      "literal": "features/compare",
+      "classification": "non-ui",
+      "category": "help-route",
+      "reason": "Documentation route identifier is passed to UiUtil.ShowHelp and is not displayed as UI copy."
+    },
+    {
+      "source": "src/ui/Features/Files/ExportCustomTextFormat/EditCustomTextFormatWindow.cs",
+      "line": 101,
+      "literal": ".",
+      "classification": "non-ui",
+      "category": "format-separator",
+      "reason": "Punctuation separator in a custom format editor, not user-facing copy."
+    },
+    {
+      "source": "src/ui/Features/Edit/MultipleReplace/CsvImporter.cs",
+      "line": 31,
+      "literal": "Find",
+      "classification": "non-ui",
+      "category": "schema-identifier",
+      "reason": "CSV column identifier consumed by the import schema."
+    }
+  ]
+}
