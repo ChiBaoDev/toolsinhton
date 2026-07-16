@@ -220,6 +220,21 @@
     "reason": "MS Word is the product name used for the spell-check engine option."
   },
   {
+    "key": "$.options.shortcuts.alt",
+    "value": "Alt",
+    "reason": "Alt is the standard keyboard modifier label and is retained unchanged."
+  },
+  {
+    "key": "$.options.shortcuts.win",
+    "value": "Win",
+    "reason": "Win is the standard Windows-key modifier label and is retained unchanged."
+  },
+  {
+    "key": "$.options.shortcuts.shift",
+    "value": "Shift",
+    "reason": "Shift is the standard keyboard modifier label and is retained unchanged."
+  },
+  {
     "key": "$.options.shortcuts.controlMac",
     "value": "⌃",
     "reason": "Standard macOS Control modifier symbol."

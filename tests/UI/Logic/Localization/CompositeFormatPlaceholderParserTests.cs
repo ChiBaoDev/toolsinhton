@@ -4,11 +4,22 @@ public class CompositeFormatPlaceholderParserTests
 {
     [Theory]
     [InlineData("{0} {1}", "{1} {0}")]
+    [InlineData("{00}", "{0}")]
     [InlineData("{{{0}}}", "{{{0}}}")]
     [InlineData("{0:0.00} / {0:0.00}", "{0:0.00} / {0:0.00}")]
     [InlineData("Language: {language}", "Ngôn ngữ: {language}")]
     public void Compare_AcceptsSemanticMatch(string expected, string actual) =>
         Assert.Empty(CompositeFormatPlaceholderParser.Compare(expected, actual));
+
+    [Theory]
+    [InlineData("{0foo}")]
+    [InlineData("{foo}")]
+    [InlineData("{Language}")]
+    [InlineData("{language,10}")]
+    [InlineData("{language:x}")]
+    [InlineData("{999999999999999999999999999999999999999999}")]
+    public void Parse_RejectsUnsupportedIdentifiersAndNamedTokenSyntax(string value) =>
+        Assert.Throws<FormatException>(() => CompositeFormatPlaceholderParser.Parse(value));
 
     [Theory]
     [InlineData("{0} {0}", "{0}")]

@@ -79,6 +79,11 @@ internal static class CompositeFormatPlaceholderParser
         var identifier = ParseIdentifier(value, ref position);
         SkipWhiteSpace(value, ref position);
 
+        if (identifier == "language" && position < value.Length && value[position] != '}')
+        {
+            throw new FormatException("The {language} placeholder does not support alignment or format syntax.");
+        }
+
         int? alignment = null;
         if (position < value.Length && value[position] == ',')
         {
@@ -124,18 +129,20 @@ internal static class CompositeFormatPlaceholderParser
     private static string ParseIdentifier(string value, ref int position)
     {
         var start = position;
-        while (position < value.Length &&
-               (char.IsAsciiLetterOrDigit(value[position]) || value[position] == '_'))
+        if (position < value.Length && char.IsAsciiDigit(value[position]))
         {
-            position++;
+            var index = ParseUnsignedInteger(value, ref position, "placeholder index");
+            return index.ToString(System.Globalization.CultureInfo.InvariantCulture);
         }
 
-        if (position == start)
+        const string languageToken = "language";
+        if (value.AsSpan(position).StartsWith(languageToken, StringComparison.Ordinal))
         {
-            throw new FormatException($"Invalid placeholder identifier at position {start}.");
+            position += languageToken.Length;
+            return languageToken;
         }
 
-        return value[start..position];
+        throw new FormatException($"Invalid placeholder identifier at position {start}.");
     }
 
     private static int ParseUnsignedInteger(string value, ref int position, string component)
