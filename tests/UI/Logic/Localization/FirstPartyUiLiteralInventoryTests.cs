@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Nikse.SubtitleEdit.Logic.Config;
 using Nikse.SubtitleEdit.Logic.Config.Language;
 
@@ -33,16 +34,22 @@ public class FirstPartyUiLiteralInventoryTests
         Se.Language = System.Text.Json.JsonSerializer.Deserialize<SeLanguage>(File.ReadAllText(Path.Combine(RepositoryRoot(), "src", "ui", "Assets", "Languages", "Vietnamese.json")), new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
         try
         {
-        using var document = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(RepositoryRoot(), "src", "ui", "Assets", "Languages", "Vietnamese.json")));
+            using var document = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(RepositoryRoot(), "src", "ui", "Assets", "Languages", "Vietnamese.json")));
         Assert.Equal("Chọn bố cục", document.RootElement.GetProperty("main").GetProperty("layoutTitle").GetString());
         Assert.Equal("Chọn bố cục", Se.Language.Main.LayoutTitle);
-        Assert.Equal("Xuất Pac", Se.Language.File.ExportPacTitle);
+        Assert.Equal("Xuất PAC", Se.Language.File.ExportPacTitle);
         Assert.Equal("Đang tải ffmpeg", Se.Language.Main.DownloadingFfmpeg);
+        Assert.Equal("Đang tải libmpv", Se.Language.Main.DownloadingLibMpv);
+        Assert.Equal("Xuất Cavena 890", Se.Language.File.ExportCavena890Title);
+        Assert.Equal("Xuất EBU STL", Se.Language.File.ExportEbuStlTitle);
         Assert.Equal("Đặt văn bản", Se.Language.Tools.ImageBasedEdit.SetText);
         Assert.Equal("Thời lượng tối thiểu (mili giây):", Se.Language.Tools.ApplyDurationLimits.MinimumDurationMilliseconds);
         Assert.Equal("Thời lượng tối đa (mili giây):", Se.Language.Tools.ApplyDurationLimits.MaximumDurationMilliseconds);
         }
-        finally { Se.Language = previous; }
+        finally
+        {
+            Se.Language = previous;
+        }
     }
 
     private static string RepositoryRoot()

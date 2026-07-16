@@ -1,4 +1,4 @@
-﻿namespace Nikse.SubtitleEdit.Logic.Config.Language.Main;
+namespace Nikse.SubtitleEdit.Logic.Config.Language.Main;
 
 public class LanguageMain
 {
@@ -9,6 +9,7 @@ public class LanguageMain
     public string LayoutTitle { get; set; } = "Choose layout";
     public string DownloadingFfmpeg { get; set; } = "Downloading ffmpeg";
     public string DownloadingLibMpv { get; set; } = "Downloading libmpv";
+    public string PickVobSubLanguageTitle { get; set; } = "Pick VobSub language - {0}";
     public string AudioTrackIsNowX { get; set; }
     public string AudioTrackX { get; set; }
     public string AutoBreakHint { get; set; }

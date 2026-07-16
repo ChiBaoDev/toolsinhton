@@ -1,4 +1,4 @@
-﻿{
+{
   "title": "Subtitle Edit",
   "version": "v5.1.0-beta15",
   "translatedBy": "",
@@ -760,9 +760,10 @@
     "transcriptionProgressModelAuto": "(auto)"
   },
   "main": {
-  "layoutTitle": "Choose layout",
-  "downloadingFfmpeg": "Downloading ffmpeg",
-  "downloadingLibMpv": "Downloading libmpv",
+    "layoutTitle": "Choose layout",
+    "downloadingFfmpeg": "Downloading ffmpeg",
+    "downloadingLibMpv": "Downloading libmpv",
+    "pickVobSubLanguageTitle": "Pick VobSub language - {0}",
     "menu": {
       "file": "_File",
       "new": "_New",
@@ -1067,10 +1068,10 @@
     "setUpLikeSe4ThemeSet": "Theme, toolbar icons and waveform set to the Subtitle Edit 4 look."
   },
   "file": {
-  "exportPacTitle": "Export Pac",
-  "choosePacCodePage": "Choose PAC code page",
-  "exportCavena890Title": "Export Cavena 890",
-  "exportEbuStlTitle": "Export EBU STL",
+    "exportPacTitle": "Export Pac",
+    "choosePacCodePage": "Choose PAC code page",
+    "exportCavena890Title": "Export Cavena 890",
+    "exportEbuStlTitle": "Export EBU STL",
     "ebuSaveOptions": {
       "title": "EBU save options",
       "generalSubtitleInformation": "General subtitle information",

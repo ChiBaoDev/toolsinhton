@@ -763,6 +763,7 @@
     "layoutTitle":  "Chọn bố cục",
     "downloadingFfmpeg":  "Đang tải ffmpeg",
     "downloadingLibMpv":  "Đang tải libmpv",
+    "pickVobSubLanguageTitle":  "Chọn ngôn ngữ VobSub - {0}",
     "menu":  {
       "file":  "_Tệp",
       "new":  "_Mới",
@@ -1067,7 +1068,7 @@
     "setUpLikeSe4ThemeSet":  "Đã đặt giao diện, biểu tượng thanh công cụ và dạng sóng theo kiểu Subtitle Edit 4."
   },
   "file":  {
-    "exportPacTitle":  "Xuất Pac",
+    "exportPacTitle":  "Xuất PAC",
     "choosePacCodePage":  "Chọn bảng mã PAC",
     "exportCavena890Title":  "Xuất Cavena 890",
     "exportEbuStlTitle":  "Xuất EBU STL",
