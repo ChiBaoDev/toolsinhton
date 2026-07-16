@@ -17,7 +17,7 @@ Evidence is retained in `.superpowers/sdd/task-7-red-output.txt`.
 - `tests/UI/Logic/Localization/VietnameseTranslationBatchTests.cs` - stable B4 expectation and deterministic counts.
 - `tests/UI/Logic/Localization/CompositeFormatPlaceholderParser.cs` - named-placeholder support required by `{language}`.
 - `tests/UI/Logic/Localization/CompositeFormatPlaceholderParserTests.cs` - named-placeholder parity coverage.
-- `tests/UI/TestData/VietnameseUntranslatedAllowlist.json` - 21 exact bidirectional B4 invariants.
+- `tests/UI/TestData/VietnameseUntranslatedAllowlist.json` - 26 exact bidirectional B4 invariants.
 - `docs/localization/vi/glossary.md` - spell-check, settings, plugin, engine/model/service, path, executable, casing, and timing terminology.
 - `docs/localization/vi/ui-string-inventory.md` - reviewed B4 scope and count.
 
@@ -30,19 +30,20 @@ Evidence is retained in `.superpowers/sdd/task-7-red-output.txt`.
 - Reviewed B1+B2+B3+B4 total: **2,636**
 
 ## Invariants
-There are **21** English-identical B4 values, and exact bidirectional comparison confirms all 21 and only those 21 have allowlist entries. Reasons classify:
+There are **26** English-identical B4 values, and exact bidirectional comparison confirms all 26 and only those 26 have allowlist entries. Reasons classify:
 - Four language-independent or deliberately English correction examples.
 - `Netflix`, `SDI`, `Hunspell`, and `MS Word` product/engine identifiers.
 - `SubRip (.srt)` and `Advanced Sub Station Alpha (.ass)` format identifiers.
 - `HH:MM:SS:MS`, `HH:MM:SS:FF`, `ms`, and `{0} ms` patterns/units.
-- `libmpv - OpenGL` engine/API identifiers.
-- `Gamma` and `Video` established technical terms.
+- `libmpv - OpenGL` engine/API identifier.
+- `Gamma`, both `Video` category/preview values, and `AI` established technical terms or abbreviations.
+- `Alt`, `Win`, and `Shift` standard keyboard modifier labels.
 - Four macOS modifier symbols.
 
 ## Terminology review
 Systematically reviewed all 1,224 values against English source and the UI context. The review distinguishes spell checking, normal words, proper-name lists, and user dictionaries; settings, options, and preferences; plugins versus file extensions; engines, models, and services; audio, video, and text operations; casing; cues, frames, duration, gaps, offsets, and time codes; files, folders, and paths; and executables versus command-line terminology. Product, engine, model, executable, format, extension, and path identifiers remain unchanged only where the complete value is precisely allowlisted.
 
-Structural checks confirmed 1,224 exact source-ordered paths, 120 placeholder-bearing values, nine line-break values, four mnemonic-bearing values, tag parity for `<i>`, `</i>`, `<br />`, and `</br>`, and arrow semantics. The parser now validates the named `{language}` runtime token without converting it into a numeric .NET placeholder. The plugin top-level mnemonic was selected to remain unique among displayed siblings.
+Structural checks confirmed 1,224 exact source-ordered paths, 121 placeholder-bearing values, nine line-break values, four mnemonic-bearing values, tag parity for `<i>`, `</i>`, `<br />`, and `</br>`, and arrow semantics. The parser now validates the named `{language}` runtime token without converting it into a numeric .NET placeholder. The plugin top-level mnemonic was selected to remain unique among displayed siblings.
 
 ## Green evidence
 Required command:
@@ -93,3 +94,27 @@ Passed!  - Failed:     0, Passed:    28, Skipped:     0, Total:    28, Duration:
 ```
 
 `git diff --check` completed with no output.
+
+
+## Third review-fix pass (findings 29-34)
+
+Applied the final listed Task 7 review corrections: replaced residual `clipboard` with `bảng nhớ tạm` in both copy commands; corrected `continuationStyleNoneLeadingTrailingEllipsis`, `subtitleGridCenterSelectedRow`, and `waveformSetVideoPositionOnMoveStartEnd`; corrected the B4 exact English-identical count to 26 and the placeholder-bearing count to 121. The allowlist classification explicitly includes `Alt`, `Win`, `Shift`, `Video`, and `AI`. A scoped documentation sweep found no stale B4 `21`/`120` claims in task-scoped docs or reports.
+
+Focused verification command:
+`dotnet test D:/toolsinhton/.claude/worktrees/vietnamese-localization/tests/UI/UITests.csproj -c Debug --filter "FullyQualifiedName~VietnameseTranslationBatchTests|FullyQualifiedName~CompositeFormatPlaceholderParserTests" --logger "console;verbosity=minimal"`
+
+Exact output:
+```
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  LibSE -> D:\toolsinhton\.claude\worktrees\vietnamese-localization\src\libse\bin\Debug\netstandard2.1\libse.dll
+  LibUiLogic -> D:\toolsinhton\.claude\worktrees\vietnamese-localization\src\libuilogic\bin\Debug\net10.0\libuilogic.dll
+  UI -> D:\toolsinhton\.claude\worktrees\vietnamese-localization\src\ui\bin\Debug\net10.0\SubtitleEdit.dll
+  UITests -> D:\toolsinhton\.claude\worktrees\vietnamese-localization\tests\UI\bin\Debug\net10.0\UITests.dll
+Test run for D:\toolsinhton\.claude\worktrees\vietnamese-localization\tests\UI\bin\Debug\net10.0\UITests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    28, Skipped:     0, Total:    28, Duration: 406 ms - UITests.dll (net10.0)
+```
+
+`git diff --check` completed with no output (Git emitted only LF-to-CRLF normalization warnings for the three changed text files).
