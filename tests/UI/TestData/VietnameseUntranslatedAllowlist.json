@@ -1,1 +1,107 @@
-[]
+[
+  {
+    "key": "$.title",
+    "value": "Subtitle Edit",
+    "reason": "Subtitle Edit is the product name."
+  },
+  {
+    "key": "$.version",
+    "value": "v5.1.0-beta15",
+    "reason": "Catalog version must exactly match the current English catalog version."
+  },
+  {
+    "key": "$.general.bdnXml",
+    "value": "BDN/xml",
+    "reason": "The value is an established technical format, codec, model, or standard identifier."
+  },
+  {
+    "key": "$.general.bluRaySup",
+    "value": "Blu-ray (sup)",
+    "reason": "The value is an established technical format, codec, model, or standard identifier."
+  },
+  {
+    "key": "$.general.codec",
+    "value": "Codec",
+    "reason": "The value is an established technical identifier or product name and is intentionally unchanged."
+  },
+  {
+    "key": "$.general.ip",
+    "value": "IP",
+    "reason": "The value is an established technical identifier or product name and is intentionally unchanged."
+  },
+  {
+    "key": "$.general.id",
+    "value": "ID",
+    "reason": "The value is an established technical identifier or product name and is intentionally unchanged."
+  },
+  {
+    "key": "$.general.numberSymbol",
+    "value": "#",
+    "reason": "The number sign is a language-independent symbol."
+  },
+  {
+    "key": "$.general.ocrDotDotDot",
+    "value": "OCR...",
+    "reason": "The value is an established technical format, codec, model, or standard identifier."
+  },
+  {
+    "key": "$.general.url",
+    "value": "URL",
+    "reason": "The value is an established technical identifier or product name and is intentionally unchanged."
+  },
+  {
+    "key": "$.general.alpha",
+    "value": "Alpha",
+    "reason": "Alpha is the established graphics parameter name."
+  },
+  {
+    "key": "$.general.hoursMinutesSecondsMilliseconds",
+    "value": "HH:MM:SS.FFF",
+    "reason": "HH:MM:SS.FFF is an established time-format identifier."
+  },
+  {
+    "key": "$.file.ebuSaveOptions.teletext",
+    "value": "Teletext",
+    "reason": "The value is an established technical identifier or product name and is intentionally unchanged."
+  },
+  {
+    "key": "$.file.import.csvXlsxFilterTitle",
+    "value": "CSV/XLSX",
+    "reason": "The value is an established technical format, codec, model, or standard identifier."
+  },
+  {
+    "key": "$.file.import.separatorTab",
+    "value": "Tab",
+    "reason": "The value is an established technical identifier or product name and is intentionally unchanged."
+  },
+  {
+    "key": "$.file.export.titleExportVobSub",
+    "value": "VobSub (sub/idx)",
+    "reason": "The value is an established technical identifier or product name and is intentionally unchanged."
+  },
+  {
+    "key": "$.file.export.titleExportDCinemaSmpte2014Png",
+    "value": "D-Cinema SMPTE 2014/png",
+    "reason": "The value is an established technical format, codec, model, or standard identifier."
+  },
+  {
+    "key": "$.edit.modifySelection.cpsLessThan",
+    "value": "CPS <",
+    "reason": "The value is an established technical identifier or product name and is intentionally unchanged."
+  },
+  {
+    "key": "$.edit.modifySelection.cpsGreaterThan",
+    "value": "CPS >",
+    "reason": "The value is an established technical identifier or product name and is intentionally unchanged."
+  },
+  {
+    "key": "$.about.gitHub",
+    "value": "GitHub",
+    "reason": "GitHub is a product name."
+  },
+  {
+    "key": "$.about.payPal",
+    "value": "PayPal",
+    "reason": "PayPal is a product name."
+  }
+]

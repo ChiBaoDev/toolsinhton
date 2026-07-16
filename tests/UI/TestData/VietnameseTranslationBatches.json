@@ -12,9 +12,9 @@
       "$.help",
       "$.about"
     ],
-    "reviewed": false,
-    "reviewer": "",
-    "reviewNote": "",
+    "reviewed": true,
+    "reviewer": "ChiBaoDev",
+    "reviewNote": "Reviewed metadata, general actions, file/edit operations, help, and about terminology against the Vietnamese glossary.",
     "shardFile": "VietnameseDraft/01-general-file-edit.json"
   },
   {

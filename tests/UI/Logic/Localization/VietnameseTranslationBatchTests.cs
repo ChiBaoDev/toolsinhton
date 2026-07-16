@@ -25,7 +25,7 @@ public class VietnameseTranslationBatchTests
         var batches = LoadBatches();
         var expected = new[]
         {
-            new VietnameseTranslationBatch("B1", ["$.title", "$.version", "$.translatedBy", "$.cultureName", "$.general", "$.file", "$.edit", "$.help", "$.about"], false, "", "", "VietnameseDraft/01-general-file-edit.json"),
+            new VietnameseTranslationBatch("B1", ["$.title", "$.version", "$.translatedBy", "$.cultureName", "$.general", "$.file", "$.edit", "$.help", "$.about"], true, "ChiBaoDev", "Reviewed metadata, general actions, file/edit operations, help, and about terminology against the Vietnamese glossary.", "VietnameseDraft/01-general-file-edit.json"),
             new VietnameseTranslationBatch("B2", ["$.main.menu", "$.main.toolbar", "$.main.waveform"], false, "", "", "VietnameseDraft/02-main-navigation.json"),
             new VietnameseTranslationBatch("B3", ["$.main", "$.waveform", "$.sync"], false, "", "", "VietnameseDraft/03-main-sync-waveform.json"),
             new VietnameseTranslationBatch("B4", ["$.tools", "$.spellCheck", "$.options", "$.plugins"], false, "", "", "VietnameseDraft/04-tools-options.json"),
@@ -116,6 +116,73 @@ public class VietnameseTranslationBatchTests
                 errors.Add($"{entry.Key}: value does not exactly match English.");
             if (string.IsNullOrWhiteSpace(entry.Reason))
                 errors.Add($"{entry.Key}: reason is required.");
+        }
+
+        Assert.True(errors.Count == 0, string.Join(Environment.NewLine, errors));
+    }
+
+    [Fact]
+    public void ReviewedBatches_HaveExactOwnedStringLeavesValidPlaceholdersAndAllowlistedEnglishValues()
+    {
+        var batches = LoadBatches();
+        var englishLeaves = LoadEnglishLeaves();
+        var allowlist = LoadJson<UntranslatedAllowlistEntry[]>("VietnameseUntranslatedAllowlist.json")
+            .ToDictionary(entry => entry.Key, StringComparer.Ordinal);
+        var errors = new List<string>();
+
+        foreach (var batch in batches.Where(batch => batch.Reviewed))
+        {
+            var shardPath = Path.Combine(TestDataFolder(), batch.ShardFile);
+            if (!File.Exists(shardPath))
+                continue;
+
+            using var shard = LocalizationJsonHelper.LoadDocument(shardPath);
+            var shardLeaves = LocalizationJsonHelper.FlattenLeaves(shard.RootElement);
+            var expectedPaths = englishLeaves.Keys
+                .Where(path => string.Equals(ResolveOwner(path, batches), batch.Id, StringComparison.Ordinal))
+                .ToHashSet(StringComparer.Ordinal);
+            var actualPaths = shardLeaves.Keys.ToHashSet(StringComparer.Ordinal);
+
+            foreach (var path in expectedPaths.Except(actualPaths, StringComparer.Ordinal))
+                errors.Add($"{batch.Id}: missing owned leaf {path}.");
+            foreach (var path in actualPaths.Except(expectedPaths, StringComparer.Ordinal))
+                errors.Add($"{batch.Id}: extra or non-owned leaf {path}.");
+
+            foreach (var path in expectedPaths.Intersect(actualPaths, StringComparer.Ordinal))
+            {
+                var english = englishLeaves[path];
+                var translated = shardLeaves[path];
+                if (translated.Kind != JsonValueKind.String)
+                {
+                    errors.Add($"{batch.Id}: {path} must be a string leaf.");
+                    continue;
+                }
+
+                if (english.Kind != JsonValueKind.String)
+                {
+                    errors.Add($"{batch.Id}: English leaf {path} is not a string.");
+                    continue;
+                }
+
+                try
+                {
+                    foreach (var error in CompositeFormatPlaceholderParser.Compare(english.StringValue!, translated.StringValue!))
+                        errors.Add($"{batch.Id}: {path}: {error}");
+                }
+                catch (FormatException exception)
+                {
+                    errors.Add($"{batch.Id}: {path}: invalid composite format: {exception.Message}");
+                }
+
+                if (string.Equals(english.StringValue, translated.StringValue, StringComparison.Ordinal))
+                {
+                    if (!allowlist.TryGetValue(path, out var entry) ||
+                        !string.Equals(entry.Value, translated.StringValue, StringComparison.Ordinal))
+                    {
+                        errors.Add($"{batch.Id}: {path} is identical to English without an exact allowlist entry.");
+                    }
+                }
+            }
         }
 
         Assert.True(errors.Count == 0, string.Join(Environment.NewLine, errors));
