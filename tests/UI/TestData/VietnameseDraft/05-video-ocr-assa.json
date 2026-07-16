@@ -193,7 +193,7 @@
       "subtitleUpdatedFromReviewSingular": "Đã cập nhật một dòng từ phần xem lại giọng nói",
       "subtitleUpdatedFromReviewPlural": "Đã cập nhật {0} dòng từ phần xem lại giọng nói",
       "subtitleMergedLinesAppliedSingular": "Đã áp dụng một lần gộp dòng từ văn bản thành giọng nói",
-      "subtitleMergedLinesAppliedPlural": "Applied {0} dòng merges từ văn bản đến speech"
+      "subtitleMergedLinesAppliedPlural": "Đã gộp {0} dòng từ văn bản thành giọng nói"
     },
     "shotChanges": {
       "titleGenerateOrImport": "Tạo/nhập điểm chuyển cảnh",
@@ -227,7 +227,7 @@
       "textSimilarityPercent": "Gộp dòng có độ tương đồng (%)",
       "maxGapMs": "Khoảng cách tối đa giữa các dòng (ms)",
       "minDurationMs": "Thời lượng tối thiểu (ms)",
-      "addAssaPositionTag": "thêm ASSA vị trí tag (e.g. {\\an8})",
+      "addAssaPositionTag": "thêm thẻ vị trí ASSA (ví dụ: {\u0007n8})",
       "startOcr": "Bắt đầu OCR",
       "extractingFramesX": "Đang trích xuất khung hình ảnh... {0}%",
       "analyzingFramesXY": "Đang phân tích khung hình... {0}/{1}",
@@ -257,7 +257,7 @@
     "cutVideoDotDotDot": "Cắt video...",
     "embedSubtitlesDotDotDot": "Thêm/xóa phụ đề được nhúng...",
     "generateTimeCodes": "Tạo mã thời gian",
-    "checkeredImage": "Checkered ảnh",
+    "checkeredImage": "Ảnh caro",
     "saveVideoAsTitle": "Lưu video thành",
     "promptForFfmpegParamsAndGenerate": "Nhập tham số ffmpeg rồi tạo",
     "cutVideoCutSegments": "Cắt các phân đoạn",
@@ -309,7 +309,7 @@
     "reEncodeUnableToGenerateVideo": "Không thể tạo video",
     "reEncodeOutputVideoFileNotGenerated": "Chưa tạo được tệp video đầu ra: {0} Tham số: {1}",
     "reEncodeGeneratingDone": "Đã tạo xong",
-    "reEncodeGeneratedFilesX": "Tạod tệps ({0}):",
+    "reEncodeGeneratedFilesX": "Đã tạo tệp ({0}):",
     "reEncodeFfmpegParameters": "Tham số FFmpeg"
   },
   "ocr": {
@@ -444,7 +444,7 @@
     "drawSelectedShape": "Hình đã chọn",
     "drawSelectedLayer": "Lớp đã chọn",
     "drawToolX": "Công cụ: {0}",
-    "drawHelpText": "nhấp đến thêm points • Enter/F8 đến close shape • Shift+kéo đến pan • Ctrl+cuộn đến thu phóng",
+    "drawHelpText": "nhấp để thêm điểm • Enter/F8 để đóng hình • Shift+kéo để dịch khung nhìn • Ctrl+cuộn để thu phóng",
     "progressBarTitle": "Thanh tiến trình ASSA",
     "progressBarSettings": "Thanh tiến trình",
     "progressBarPosition": "Vị trí",
@@ -488,7 +488,7 @@
     "backgroundBoxTornPaperDouble": "Torn paper (trên & dưới)",
     "backgroundBoxStarburst": "Tia nổ",
     "backgroundBoxScroll": "cuộn / Parchment",
-    "stylesTitle": "Advanced Sub Station Alpha kiểu",
+    "stylesTitle": "Kiểu Advanced SubStation Alpha",
     "stylesInFile": "Kiểu trong tệp",
     "stylesSaved": "Kiểu đã lưu",
     "category": "Danh mục",
@@ -530,7 +530,7 @@
     "fontSizeChange": "Thay đổi cỡ chữ",
     "moveTextFromLeftToRight": "Di chuyển văn bản từ trái sang phải",
     "colorFromWhiteToRed": "màu từ trắng đến đỏ",
-    "rotateXSlow": "Rotate X (chậm)",
+    "rotateXSlow": "Xoay X (chậm)",
     "rotateX": "Xoay X",
     "rotateY": "Xoay Y",
     "rotateTilt": "Xoay nghiêng",

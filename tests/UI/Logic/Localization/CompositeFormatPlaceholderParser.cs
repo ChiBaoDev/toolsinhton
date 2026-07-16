@@ -25,6 +25,7 @@ internal static class CompositeFormatPlaceholderParser
                 if (position + 1 < value.Length && value[position + 1] == '{')
                 {
                     escapedOpenBraceCount++;
+                    structuralTokens.Add("E:{");
                     position += 2;
                     continue;
                 }
@@ -54,6 +55,7 @@ internal static class CompositeFormatPlaceholderParser
                 if (position + 1 < value.Length && value[position + 1] == '}')
                 {
                     escapedCloseBraceCount++;
+                    structuralTokens.Add("E:}");
                     position += 2;
                     continue;
                 }
@@ -61,7 +63,10 @@ internal static class CompositeFormatPlaceholderParser
                 throw new FormatException($"Unexpected closing brace at position {position}.");
             }
 
-            position++;
+            var textStart = position;
+            while (position < value.Length && value[position] is not ('{' or '}'))
+                position++;
+            structuralTokens.Add("X");
         }
 
         return new CompositeFormatSignature(placeholders, escapedOpenBraceCount, escapedCloseBraceCount, assaOverrideTags, structuralTokens);
