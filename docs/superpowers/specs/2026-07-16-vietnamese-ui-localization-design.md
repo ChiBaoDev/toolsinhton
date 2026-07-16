@@ -6,7 +6,7 @@
 
 ## 1. Mục tiêu
 
-Cung cấp giao diện tiếng Việt đầy đủ, tự nhiên và nhất quán cho mọi bề mặt tương tác first-party do Subtitle Edit kiểm soát. Trên mọi nền tảng, hồ sơ cấu hình được tạo mới bởi bản fork này ưu tiên tiếng Việt ngay lần chạy đầu; người dùng vẫn có thể đổi sang ngôn ngữ khác và lựa chọn đó được lưu lại.
+Cung cấp giao diện tiếng Việt đầy đủ, tự nhiên và nhất quán cho mọi bề mặt tương tác first-party do Subtitle Edit kiểm soát trên Windows. Hồ sơ cấu hình được tạo mới bởi bản fork này ưu tiên tiếng Việt ngay lần chạy đầu; người dùng vẫn có thể đổi sang ngôn ngữ khác và lựa chọn đó được lưu lại.
 
 Công việc được chia thành các giai đoạn phụ thuộc tuần tự. Mỗi commit phải build và test xanh; “độc lập” ở đây nghĩa là dễ review/hoàn tác, không có nghĩa các commit sau không phụ thuộc commit trước.
 
@@ -106,11 +106,11 @@ Quy tắc trạng thái:
 4. `SetupLanguage.txt` của bộ cài không được tạo race với loader. Trên bản fork này, UI app mặc định Vietnamese khi không có settings; file installer chỉ có thể chọn locale khác nếu logic first-run gán và lưu lựa chọn một cách xác định trước khi dựng UI. Nếu không bảo đảm được, bỏ override installer và dùng Vietnamese thống nhất.
 5. `SeOptions.LastLanguage` không thay đổi trừ khi test/tracing chứng minh nó điều khiển locale UI.
 
-Các trường hợp trên áp dụng cho Windows installed/portable, Linux và macOS.
+Các trường hợp trên áp dụng cho Windows installed và Windows portable.
 
 ### 5.4 Đổi ngôn ngữ live
 
-Giữ hành vi live reload hiện có: menu, native macOS menu, layout direction, toolbar và shortcut label được dựng lại, rồi lựa chọn được persist.
+Giữ hành vi live reload hiện có trên Windows: menu, layout direction, toolbar và shortcut label được dựng lại, rồi lựa chọn được persist. Native menu của macOS nằm ngoài phạm vi kiểm thử của đợt này và không được thay đổi có chủ đích.
 
 Việc rollback giao dịch khi file locale lỗi là hạng mục cần thiết vì setting hiện được đổi trước khi tải file. Luồng mới là: validate/load candidate → nếu thành công mới commit `Se.Settings.General.Language` và rebuild UI; nếu thất bại giữ locale/setting cũ, hiển thị thông báo localized và ghi log. Không mở rộng thành framework reliability tổng quát.
 
@@ -121,7 +121,7 @@ Việc rollback giao dịch khi file locale lỗi là hạng mục cần thiết
 - Tạo glossary, allowlist và inventory versioned.
 - Thêm test parse, key/shape parity, placeholder, metadata `vi-VN`, exact-untranslated, đồng bộ locale source/project/initializer và AssetLoader.
 - Các test chung phải xanh ngay. Gate riêng cho Vietnamese chỉ được bật trong cùng commit thêm scaffold hợp lệ hoặc thêm locale ở commit kế tiếp rồi bỏ điều kiện trong chính commit đó; không commit suite đỏ/skip vô thời hạn.
-- Bảo đảm project test UI thực sự được workflow `build-ui.yml` chạy; nếu chưa, cập nhật workflow để localization suite là CI gate.
+- Bảo đảm project test UI được chạy trong quy trình kiểm chứng Windows của nhánh này. Không mở rộng hoặc sửa CI đa nền tảng chỉ để phục vụ đợt Việt hóa.
 
 ### Giai đoạn 2 — Gói Vietnamese
 
@@ -148,10 +148,11 @@ Việc rollback giao dịch khi file locale lỗi là hạng mục cần thiết
 
 Checklist được lưu ở `docs/localization/vi/ui-verification-checklist.md`, mỗi mục có OS, DPI, kích thước cửa sổ, dữ liệu đầu vào, thao tác, kết quả và bằng chứng.
 
-Matrix tối thiểu:
+Matrix bắt buộc:
 
 - Windows 11, 100% và 150% DPI, cửa sổ 1280×720 và 1920×1080.
-- Linux và macOS: build + automated tests bắt buộc; smoke test runtime khi runner/host tương ứng của CI dự án sẵn có. Nếu host runtime không có, ghi `not-run` rõ ràng và không tuyên bố đã kiểm chứng trực quan nền tảng đó.
+- Windows installed và Windows portable.
+- Linux và macOS không thuộc phạm vi build, test hoặc xác nhận tương thích của đợt này. Không thực hiện thay đổi có chủ đích phá các nền tảng đó, nhưng cũng không tuyên bố chúng đã được kiểm chứng.
 
 Luồng bắt buộc: startup sạch; đổi Việt→Anh→Việt và restart; mở/lưu; edit/find/replace; sync; video/audio; OCR; speech-to-text; machine translation; export; settings; dialog lỗi; installer success và thiếu .NET.
 
@@ -178,7 +179,7 @@ Tiêu chí UI:
 - Integration test mở `avares://SubtitleEdit/Assets/Languages/Vietnamese.json` và kiểm tra giải nén.
 - Test startup cho không settings, settings hợp lệ, thiếu field, field rỗng và locale không tồn tại.
 - Test live switch thành công, persistence, rebuild side effects và rollback khi file lỗi.
-- `dotnet test` cho suite UI và `dotnet build` cấu hình Debug/Release theo `build-ui.yml` trên Windows và Linux; macOS theo matrix hiện có của workflow nếu được cấu hình.
+- `dotnet test` cho suite UI và `dotnet build` cấu hình Debug/Release trên Windows.
 - Build Inno Setup trên Windows cho installer.
 
 Mọi lệnh không chạy được phải được báo `blocked/not-run` kèm nguyên nhân và không thỏa Definition of Done tương ứng.
@@ -203,10 +204,10 @@ Mỗi commit chạy gate áp dụng cho trạng thái đó. Không push/PR ra up
 - `Vietnamese.json` có `cultureName: vi-VN`, parity 100% với `English.json` sau mọi khóa mới và qua toàn bộ test placeholder/allowlist.
 - Asset folder, project resource và initializer đồng bộ; Vietnamese mở được qua AssetLoader và giải nén thành công.
 - Inventory bao phủ toàn bộ nguồn §3.1, mọi mục đã phân loại và không còn mục `localized` chưa xử lý.
-- Cấu hình mới trên mọi nền tảng mặc định `Vietnamese`; cấu hình hiện hữu hợp lệ được giữ; legacy/hỏng xử lý theo §5.3.
+- Cấu hình mới trên Windows installed/portable mặc định `Vietnamese`; cấu hình hiện hữu hợp lệ được giữ; legacy/hỏng xử lý theo §5.3.
 - Live switching validate trước commit, persist đúng, rebuild menu/layout/toolbar/native menu và rollback khi lỗi.
 - Toàn bộ chuỗi installer first-party trong phạm vi, gồm 11 khóa và cảnh báo .NET 10, đã dịch; installer build đạt.
-- Automated matrix đạt; các kiểm tra runtime thủ công đạt theo checklist và matrix đã cam kết.
+- Toàn bộ automated test/build trên Windows đạt; kiểm tra runtime thủ công đạt theo checklist và matrix Windows đã cam kết.
 - Không còn lỗi UI P0/P1/P2; P3 hoãn phải có issue và bằng chứng.
 - Người dùng sign-off chất lượng ngôn ngữ dựa trên glossary, diff và checklist chạy thực tế.
 
