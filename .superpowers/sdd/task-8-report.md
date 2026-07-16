@@ -2,6 +2,19 @@
 
 Status: complete
 
+## Final B5 gate closure
+
+- Applied the final parser position fix: structural signatures now include ordinary text segments and escaped-brace tokens, so moving ASS tags relative to text or placeholders is rejected while prior placeholder, escaping, and ASS atom semantics remain intact.
+- Corrected residual B5 prose and labels, including merged-line status, ASSA position-tag help, checkered-image label, re-encode status, drawing help, and rotate/style labels.
+- Reduced the B5 allowlist to the exact six surviving technical invariants in `tests/UI/TestData/VietnameseUntranslatedAllowlist.json`; each reason is path-specific.
+- Final review covered all 607 B5 values against the English extract, including OCR, TTS, video processing, embedded tracks, wrapping, styles, colors, rotation, and advanced effects.
+
+### Final gate commands
+
+- `dotnet test D:/toolsinhton/.claude/worktrees/vietnamese-localization/tests/UI/UITests.csproj -c Debug --filter "FullyQualifiedName~VietnameseTranslationBatchTests|FullyQualifiedName~CompositeFormatPlaceholderParserTests" --no-restore --verbosity quiet`
+- `git diff --check`
+
+
 Commit: `042ca69cd feat: translate Vietnamese video OCR and ASSA UI`
 
 ## Scope
