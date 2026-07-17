@@ -1001,7 +1001,15 @@
     "pickMatroskaTrackX": "Chọn rãnh Matroska - {0}",
     "rosettaProperties": "Thuộc tính Timed Text Rosetta IMSC",
     "rosettaFontSize": "Cỡ chữ (chiều cao hàng)",
-    "xProperties": "Thuộc tính {0}"
+    "xProperties": "Thuộc tính {0}",
+    "deleteLinesTitle": "Xóa các dòng?",
+    "deleteXLinesQuestion": "Bạn có muốn xóa {0} dòng không?",
+    "enterProfileNameMessage": "Vui lòng nhập tên cấu hình",
+    "profileNameMustBeUnique": "Tên cấu hình '{0}' chỉ được dùng một lần. Vui lòng chọn tên khác.",
+    "removeImageTitle": "Xóa hình ảnh?",
+    "removeImageQuestion": "Bạn có muốn xóa {0} không?",
+    "alignmentMatchedXOfYLines": "Đã khớp {0}/{1} dòng. Không thể căn chỉnh {2} dòng và đã giữ nguyên mã thời gian ban đầu. Nếu ngôn ngữ hoặc nội dung âm thanh không khớp với kịch bản, bản chép lời có thể không chính xác.",
+    "formatNotSupportedPrefix": "Định dạng không được hỗ trợ: "
   },
   "edit": {
     "modifySelection": {
@@ -1047,7 +1055,10 @@
       "deleteCategoryConfirm": "Xóa danh mục ' {0} '?",
       "deleteRuleConfirm": "Xóa quy tắc “{0}”?",
       "findWhat": "Nội dung cần tìm",
-      "descriptionOptional": "Mô tả (tùy chọn)"
+      "descriptionOptional": "Mô tả (tùy chọn)",
+      "noRuleCategoriesSelectedForExport": "Chưa chọn nhóm quy tắc nào để xuất",
+      "unableToImportReplaceRules": "Không thể nhập quy tắc thay thế: ",
+      "noReplaceRulesFoundInFile": "Không tìm thấy quy tắc thay thế trong tệp"
     },
     "find": {
       "searchTextWatermark": "Tìm kiếm văn bản...",

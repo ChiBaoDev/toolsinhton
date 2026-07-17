@@ -533,7 +533,20 @@
       "xInActivePicture": "{0} trong vùng hình ảnh",
       "xInTopBar": "{0} trong dải trên",
       "xInBottomBar": "{0} trong dải dưới",
-      "noImageSubtitlesLoaded": "Chưa tải phụ đề dạng ảnh nào"
+      "noImageSubtitlesLoaded": "Chưa tải phụ đề dạng ảnh nào",
+      "formatNotFoundOrSupported": "Không tìm thấy hoặc không hỗ trợ định dạng phụ đề dạng hình ảnh.",
+      "encryptedVobSubNotSupported": "Không hỗ trợ phụ đề VobSub được mã hóa.",
+      "noSubtitlesToResize": "Không có phụ đề để thay đổi kích thước.",
+      "noSubtitlesToAdjust": "Không có phụ đề để điều chỉnh.",
+      "unableToLoadImageFile": "Không thể tải tệp hình ảnh.",
+      "failedToImportImage": "Không thể nhập hình ảnh: {0}",
+      "noSubtitleSelected": "Chưa chọn phụ đề",
+      "selectExactlyOneSubtitle": "Vui lòng chọn chính xác một phụ đề.",
+      "noSubtitlesFoundInFile": "Không tìm thấy phụ đề trong tệp.",
+      "unexportedChangesTitle": "Thay đổi chưa xuất",
+      "unexportedChangesQuestion": "Bạn có các thay đổi chưa xuất. Đóng và loại bỏ chúng?",
+      "deleteOneLineQuestion": "Bạn có muốn xóa một dòng không?",
+      "deleteXLinesQuestion": "Bạn có muốn xóa {0} dòng không?"
     },
     "removeTextForHearingImpaired": {
       "title": "Xóa văn bản dành cho người khiếm thính",

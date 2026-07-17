@@ -1065,7 +1065,18 @@
     "setUpLikeSe4ShortcutsAddedX": "Shortcuts added/updated: {0}",
     "setUpLikeSe4ShortcutsSkippedX": "Shortcuts skipped (no match): {0}",
     "setUpLikeSe4ReplaceRulesAddedXY": "Replace rules added: {0} (in {1} new categories)",
-    "setUpLikeSe4ThemeSet": "Theme, toolbar icons and waveform set to the Subtitle Edit 4 look."
+    "setUpLikeSe4ThemeSet": "Theme, toolbar icons and waveform set to the Subtitle Edit 4 look.",
+    "noSubtitleFound": "No subtitle found",
+    "matroskaContainsNoSubtitles": "The Matroska file does not seem to contain any subtitles.",
+    "couldNotExtractAudioClipFromVideo": "Could not extract audio clip from video.",
+    "turnSmpteTimingOff": "Turn SMPTE timing off?",
+    "mp3ContainsNoSubtitles": "This file seems to be an .mp3 audio file which does not contain subtitles.",
+    "wavContainsNoSubtitles": "This file seems to be a .wav audio file which does not contain subtitles.",
+    "openMediaViaVideoMenu": "You can open media files via the Video menu.",
+    "downloadMpvTitle": "Download mpv?",
+    "downloadMpvQuestion": "\"Subtitle Edit\" requires mpv to play video/audio.\n\nDownload and use mpv?",
+    "downloadCompleteCouldNotDeleteExistingFile": "Download complete, but could not delete existing file.",
+    "restartSeToUseNewLibMpv": "Please restart SE to use the new libmpv."
   },
   "file": {
     "exportPacTitle": "Export Pac",
@@ -1309,7 +1320,15 @@
     "pickMatroskaTrackX": "Pick Matroska track - {0}",
     "rosettaProperties": "Timed Text Rosetta IMSC properties",
     "rosettaFontSize": "Font size (row height)",
-    "xProperties": "{0} properties"
+    "xProperties": "{0} properties",
+    "deleteLinesTitle": "Delete lines?",
+    "deleteXLinesQuestion": "Do you want to delete {0} lines?",
+    "enterProfileNameMessage": "Please enter a profile name",
+    "profileNameMustBeUnique": "Profile name '{0}' can only be used once. Please choose a different name.",
+    "removeImageTitle": "Remove image?",
+    "removeImageQuestion": "Do you want to remove {0}?",
+    "alignmentMatchedXOfYLines": "Alignment matched {0} of {1} lines. {2} line(s) could not be aligned and kept their original time codes. If the audio language or content doesn't match the script, the transcription may be off.",
+    "formatNotSupportedPrefix": "Format not supported: "
   },
   "edit": {
     "modifySelection": {
@@ -1355,7 +1374,10 @@
       "deleteCategoryConfirm": "Delete category '{0}'?",
       "deleteRuleConfirm": "Delete rule '{0}'?",
       "findWhat": "Find what",
-      "descriptionOptional": "Description (optional)"
+      "descriptionOptional": "Description (optional)",
+      "noRuleCategoriesSelectedForExport": "No rule categories selected for export",
+      "unableToImportReplaceRules": "Unable to import replace rules: ",
+      "noReplaceRulesFoundInFile": "No replace rules found in file"
     },
     "find": {
       "searchTextWatermark": "Search text...",
@@ -1571,8 +1593,8 @@
       "recalculateRequiresOcrNote": "Recalculate is unavailable — one or more subtitles have no OCR text. Run OCR first."
     },
     "applyDurationLimits": {
-  "minimumDurationMilliseconds": "Minimum duration (milliseconds):",
-  "maximumDurationMilliseconds": "Maximum duration (milliseconds):",
+      "minimumDurationMilliseconds": "Minimum duration (milliseconds):",
+      "maximumDurationMilliseconds": "Maximum duration (milliseconds):",
       "title": "Apply duration limits",
       "fixMinDurationMs": "Fix minimum duration (ms)",
       "doNotGoPastShotChange": "Do not go past shot change",
@@ -1907,7 +1929,20 @@
       "xInActivePicture": "{0} in picture",
       "xInTopBar": "{0} in top bar",
       "xInBottomBar": "{0} in bottom bar",
-      "noImageSubtitlesLoaded": "No image subtitles loaded"
+      "noImageSubtitlesLoaded": "No image subtitles loaded",
+      "formatNotFoundOrSupported": "Image-based subtitle format was not found or is not supported.",
+      "encryptedVobSubNotSupported": "Encrypted VobSub subtitles are not supported.",
+      "noSubtitlesToResize": "No subtitles to resize.",
+      "noSubtitlesToAdjust": "No subtitles to adjust.",
+      "unableToLoadImageFile": "Unable to load image file.",
+      "failedToImportImage": "Failed to import image: {0}",
+      "noSubtitleSelected": "No subtitle selected",
+      "selectExactlyOneSubtitle": "Please select exactly one subtitle.",
+      "noSubtitlesFoundInFile": "No subtitles found in the file.",
+      "unexportedChangesTitle": "Unexported changes",
+      "unexportedChangesQuestion": "You have unexported changes. Close and discard them?",
+      "deleteOneLineQuestion": "Do you want to delete one line?",
+      "deleteXLinesQuestion": "Do you want to delete {0} lines?"
     },
     "removeTextForHearingImpaired": {
       "title": "Remove text for hearing impaired",

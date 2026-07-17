@@ -10,6 +10,17 @@ public class LanguageMain
     public string DownloadingFfmpeg { get; set; } = "Downloading ffmpeg";
     public string DownloadingLibMpv { get; set; } = "Downloading libmpv";
     public string PickVobSubLanguageTitle { get; set; } = "Pick VobSub language - {0}";
+    public string NoSubtitleFound { get; set; } = "No subtitle found";
+    public string MatroskaContainsNoSubtitles { get; set; } = "The Matroska file does not seem to contain any subtitles.";
+    public string CouldNotExtractAudioClipFromVideo { get; set; } = "Could not extract audio clip from video.";
+    public string TurnSmpteTimingOff { get; set; } = "Turn SMPTE timing off?";
+    public string Mp3ContainsNoSubtitles { get; set; } = "This file seems to be an .mp3 audio file which does not contain subtitles.";
+    public string WavContainsNoSubtitles { get; set; } = "This file seems to be a .wav audio file which does not contain subtitles.";
+    public string OpenMediaViaVideoMenu { get; set; } = "You can open media files via the Video menu.";
+    public string DownloadMpvTitle { get; set; } = "Download mpv?";
+    public string DownloadMpvQuestion { get; set; } = "\"Subtitle Edit\" requires mpv to play video/audio.\n\nDownload and use mpv?";
+    public string DownloadCompleteCouldNotDeleteExistingFile { get; set; } = "Download complete, but could not delete existing file.";
+    public string RestartSeToUseNewLibMpv { get; set; } = "Please restart SE to use the new libmpv.";
     public string AudioTrackIsNowX { get; set; }
     public string AudioTrackX { get; set; }
     public string AutoBreakHint { get; set; }

@@ -728,7 +728,7 @@ public partial class BinaryEditViewModel : ObservableObject
 
         if (imageSubtitle == null)
         {
-            await MessageBox.Show(Window, Se.Language.General.Error, "Image based subtitle format not found/supported.",
+            await MessageBox.Show(Window, Se.Language.General.Error, Se.Language.Tools.ImageBasedEdit.FormatNotFoundOrSupported,
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
@@ -872,7 +872,7 @@ public partial class BinaryEditViewModel : ObservableObject
                 if (selectedTrack.ContentEncodingType == 1)
                 {
                     await MessageBox.Show(Window, Se.Language.General.Error,
-                        "Encrypted VobSub subtitles are not supported.",
+                        Se.Language.Tools.ImageBasedEdit.EncryptedVobSubNotSupported,
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
                 }
@@ -1438,7 +1438,7 @@ public partial class BinaryEditViewModel : ObservableObject
         if (itemsToResize.Count == 0)
         {
             await MessageBox.Show(Window, Se.Language.General.Information,
-                "No subtitles to resize.",
+                Se.Language.Tools.ImageBasedEdit.NoSubtitlesToResize,
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
         }
@@ -1502,7 +1502,7 @@ public partial class BinaryEditViewModel : ObservableObject
         if (itemsToAdjust.Count == 0)
         {
             await MessageBox.Show(Window, Se.Language.General.Information,
-                "No subtitles to adjust.",
+                Se.Language.Tools.ImageBasedEdit.NoSubtitlesToAdjust,
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
         }
@@ -1566,7 +1566,7 @@ public partial class BinaryEditViewModel : ObservableObject
         if (itemsToAdjust.Count == 0)
         {
             await MessageBox.Show(Window, Se.Language.General.Information,
-                "No subtitles to adjust.",
+                Se.Language.Tools.ImageBasedEdit.NoSubtitlesToAdjust,
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
         }
@@ -1630,7 +1630,7 @@ public partial class BinaryEditViewModel : ObservableObject
         if (itemsToAdjust.Count == 0)
         {
             await MessageBox.Show(Window, Se.Language.General.Information,
-                "No subtitles to adjust.",
+                Se.Language.Tools.ImageBasedEdit.NoSubtitlesToAdjust,
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
         }
@@ -2212,7 +2212,7 @@ public partial class BinaryEditViewModel : ObservableObject
             using var skBitmap = SkiaSharp.SKBitmap.Decode(stream);
             if (skBitmap == null)
             {
-                await MessageBox.Show(Window, Se.Language.General.Error, "Unable to load image file.",
+                await MessageBox.Show(Window, Se.Language.General.Error, Se.Language.Tools.ImageBasedEdit.UnableToLoadImageFile,
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -2226,7 +2226,7 @@ public partial class BinaryEditViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            await MessageBox.Show(Window, Se.Language.General.Error, $"Failed to import image: {ex.Message}",
+            await MessageBox.Show(Window, Se.Language.General.Error, string.Format(Se.Language.Tools.ImageBasedEdit.FailedToImportImage, ex.Message),
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
@@ -2242,7 +2242,7 @@ public partial class BinaryEditViewModel : ObservableObject
         // Only allow if exactly one subtitle is selected
         if (SelectedSubtitle == null)
         {
-            await MessageBox.Show(Window, "No subtitle selected", "Please select exactly one subtitle.",
+            await MessageBox.Show(Window, Se.Language.Tools.ImageBasedEdit.NoSubtitleSelected, Se.Language.Tools.ImageBasedEdit.SelectExactlyOneSubtitle,
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
         }
@@ -2330,14 +2330,14 @@ public partial class BinaryEditViewModel : ObservableObject
         var imageSubtitle = await LoadImageSubtitle(fileName);
         if (imageSubtitle == null)
         {
-            await MessageBox.Show(Window, Se.Language.General.Error, "Image based subtitle format not found/supported.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            await MessageBox.Show(Window, Se.Language.General.Error, Se.Language.Tools.ImageBasedEdit.FormatNotFoundOrSupported, MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
         var ocrItems = imageSubtitle.MakeOcrSubtitleItems();
         if (ocrItems.Count == 0)
         {
-            await MessageBox.Show(Window, Se.Language.General.Error, "No subtitles found in the file.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            await MessageBox.Show(Window, Se.Language.General.Error, Se.Language.Tools.ImageBasedEdit.NoSubtitlesFoundInFile, MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
@@ -2543,8 +2543,8 @@ public partial class BinaryEditViewModel : ObservableObject
             {
                 var result = await MessageBox.Show(
                     Window,
-                    "Unexported changes",
-                    "You have unexported changes. Close and discard them?",
+                    Se.Language.Tools.ImageBasedEdit.UnexportedChangesTitle,
+                    Se.Language.Tools.ImageBasedEdit.UnexportedChangesQuestion,
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
 
@@ -2752,7 +2752,7 @@ public partial class BinaryEditViewModel : ObservableObject
                     answer = await MessageBox.Show(
                         Window!,
                         Se.Language.General.DeleteLines,
-                        $"Do you want to delete one line?",
+                        Se.Language.Tools.ImageBasedEdit.DeleteOneLineQuestion,
                         MessageBoxButtons.YesNoCancel,
                         MessageBoxIcon.Question);
                 }
@@ -2761,7 +2761,7 @@ public partial class BinaryEditViewModel : ObservableObject
                     answer = await MessageBox.Show(
                         Window!,
                         Se.Language.General.DeleteLines,
-                        $"Do you want to delete {selectedItems.Count} lines?",
+                        string.Format(Se.Language.Tools.ImageBasedEdit.DeleteXLinesQuestion, selectedItems.Count),
                         MessageBoxButtons.YesNoCancel,
                         MessageBoxIcon.Question);
                 }

@@ -128,7 +128,18 @@
     "setUpLikeSe4ShortcutsAddedX": "Phím tắt đã thêm/cập nhật: {0}",
     "setUpLikeSe4ShortcutsSkippedX": "Phím tắt đã bỏ qua (không khớp): {0}",
     "setUpLikeSe4ReplaceRulesAddedXY": "Quy tắc thay thế đã thêm: {0} (trong {1} danh mục mới)",
-    "setUpLikeSe4ThemeSet": "Đã đặt giao diện, biểu tượng thanh công cụ và dạng sóng theo kiểu Subtitle Edit 4."
+    "setUpLikeSe4ThemeSet": "Đã đặt giao diện, biểu tượng thanh công cụ và dạng sóng theo kiểu Subtitle Edit 4.",
+    "noSubtitleFound": "Không tìm thấy phụ đề",
+    "matroskaContainsNoSubtitles": "Tệp Matroska dường như không chứa phụ đề nào.",
+    "couldNotExtractAudioClipFromVideo": "Không thể trích xuất đoạn âm thanh từ video.",
+    "turnSmpteTimingOff": "Tắt định thời SMPTE?",
+    "mp3ContainsNoSubtitles": "Tệp này có vẻ là tệp âm thanh .mp3 không chứa phụ đề.",
+    "wavContainsNoSubtitles": "Tệp này có vẻ là tệp âm thanh .wav không chứa phụ đề.",
+    "openMediaViaVideoMenu": "Bạn có thể mở tệp phương tiện qua menu Video.",
+    "downloadMpvTitle": "Tải mpv xuống?",
+    "downloadMpvQuestion": "\"Subtitle Edit\" cần mpv để phát video/âm thanh.\n\nTải xuống và sử dụng mpv?",
+    "downloadCompleteCouldNotDeleteExistingFile": "Đã tải xuống xong nhưng không thể xóa tệp hiện có.",
+    "restartSeToUseNewLibMpv": "Vui lòng khởi động lại SE để sử dụng libmpv mới."
   },
   "waveform": {
     "guessTimeCodes": "Ước tính mã thời gian",

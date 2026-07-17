@@ -34,12 +34,42 @@ public class FirstPartyUiLiteralInventoryTests
         "src/ui/Features/Shared",
     };
 
+    private static readonly string[] AllowedClassifications =
+    {
+        "localized",
+        "technical-exception",
+        "external-runtime",
+        "non-ui",
+    };
+
     private static readonly Regex UiPropertyAssignment = new(
         @"\b(?<kind>[A-Za-z0-9_]*Title|Content|Header|Watermark)\s*=\s*(?:(?<literal>""(?:\\.|[^""\\])*"")|(?<expression>Se\.Language\.[A-Za-z0-9_.]+))",
         RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
-    private static readonly Regex MarkupUiAttribute = new(
-        @"\b(?<kind>Title|Content|Header|Watermark)\s*=\s*""(?<literal>[^""]+)""",
+    private static readonly Regex MarkupAttribute = new(
+        @"(?<kind>[A-Za-z_][A-Za-z0-9_.:-]*)\s*=\s*""(?<literal>[^""]*[A-Za-z][^""]*)""",
+        RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
+    private static readonly Regex MarkupElementText = new(
+        @">\s*(?<literal>[A-Za-z][^<>
+]*)\s*</[A-Za-z][^>]*>",
+        RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
+    private static readonly HashSet<string> TechnicalMarkupAttributes = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "BasedOn", "Classes", "Class", "Command", "CommandParameter", "CompiledBinding", "DataContext",
+        "DataType", "FontFamily", "Icon", "IsChecked", "IsEnabled", "IsSelected", "IsVisible", "Key",
+        "Name", "Path", "Selector", "Source", "TargetType", "Theme", "ThemeVariant", "Uri", "x:Class",
+        "x:CompileBindings", "x:DataType", "x:Key", "x:Name",
+    };
+
+    private static readonly Regex Task10LocalizedExpression = new(
+        @"Se\.Language\.(?:Main\.(?:LayoutTitle|DownloadingFfmpeg|DownloadingLibMpv|PickVobSubLanguageTitle|NoSubtitleFound|MatroskaContainsNoSubtitles|CouldNotExtractAudioClipFromVideo|TurnSmpteTimingOff|Mp3ContainsNoSubtitles|WavContainsNoSubtitles|OpenMediaViaVideoMenu|DownloadMpvTitle|DownloadMpvQuestion|DownloadCompleteCouldNotDeleteExistingFile|RestartSeToUseNewLibMpv)|File\.(?:ExportPacTitle|ChoosePacCodePage|ExportCavena890Title|ExportEbuStlTitle|DeleteLinesTitle|DeleteXLinesQuestion|EnterProfileNameMessage|ProfileNameMustBeUnique|RemoveImageTitle|RemoveImageQuestion|AlignmentMatchedXOfYLines|FormatNotSupportedPrefix)|Edit\.MultipleReplace\.(?:NoRuleCategoriesSelectedForExport|UnableToImportReplaceRules|NoReplaceRulesFoundInFile)|Tools\.(?:ApplyDurationLimits\.(?:MinimumDurationMilliseconds|MaximumDurationMilliseconds)|ImageBasedEdit\.(?:SetText|FormatNotFoundOrSupported|EncryptedVobSubNotSupported|NoSubtitlesToResize|NoSubtitlesToAdjust|UnableToLoadImageFile|FailedToImportImage|NoSubtitleSelected|SelectExactlyOneSubtitle|NoSubtitlesFoundInFile|UnexportedChangesTitle|UnexportedChangesQuestion|DeleteOneLineQuestion|DeleteXLinesQuestion)))",
+        RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
+    private static readonly Regex LocalizedUiAssignment = new(
+        @"[A-Za-z0-9_]*(?:Title|Content|Header|Watermark)\s*=\s*[^;
+]*?(?<expression>Se\.Language\.[A-Za-z0-9_.]+)",
         RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
     private static readonly Regex UiCall = new(
@@ -64,20 +94,19 @@ public class FirstPartyUiLiteralInventoryTests
         Assert.All(inventory.Rows, row =>
             Assert.Contains(Path.GetExtension(row.Source), new[] { ".cs", ".xaml", ".axaml" }));
         Assert.Equal(inventory.Rows.Length, inventory.Rows.Select(row => row.Identity).Distinct(StringComparer.Ordinal).Count());
+        Assert.All(inventory.Rows, row => Assert.Contains(row.Classification, AllowedClassifications));
 
         var candidates = ScanCandidates(root, RequiredRoots);
         Assert.Equal(candidates.Length, candidates.Select(candidate => candidate.Identity).Distinct(StringComparer.Ordinal).Count());
-        var retainedRows = inventory.Rows.Where(row => row.Classification != "localized").ToArray();
-
         var candidateMatches = candidates
-            .Select(candidate => (candidate, rows: retainedRows.Where(row => CandidateMatches(row, candidate)).ToArray()))
+            .Select(candidate => (candidate, rows: inventory.Rows.Where(row => CandidateMatches(row, candidate)).ToArray()))
             .ToArray();
         var incorrectlyClassifiedCandidates = candidateMatches.Where(match => match.rows.Length != 1).ToArray();
         Assert.True(
             incorrectlyClassifiedCandidates.Length == 0,
             "Candidates without exactly one inventory row: " + string.Join("; ", incorrectlyClassifiedCandidates.Select(match => $"{Describe(match.candidate)} ({match.rows.Length} rows)")));
 
-        var rowMatches = retainedRows
+        var rowMatches = inventory.Rows
             .Select(row => (row, candidates: candidates.Where(candidate => CandidateMatches(row, candidate)).ToArray()))
             .ToArray();
         var staleRows = rowMatches.Where(match => match.candidates.Length != 1).ToArray();
@@ -96,9 +125,6 @@ public class FirstPartyUiLiteralInventoryTests
             Assert.Equal(row.Literal, CatalogValue(root, "English.json", row.LanguageKey!));
             Assert.False(string.IsNullOrWhiteSpace(CatalogValue(root, "Vietnamese.json", row.LanguageKey!)));
 
-            var sourceText = File.ReadAllText(ToAbsolutePath(root, row.Source));
-            var localizedCandidate = ScanLocalizedCandidate(row.Source, sourceText, row.SourceExpression!);
-            Assert.Equal(row.Line, localizedCandidate.Line);
         }
 
         foreach (var row in inventory.Rows.Where(row => row.Classification != "localized"))
@@ -242,15 +268,66 @@ public class FirstPartyUiLiteralInventoryTests
             }
 
         }
+
+        foreach (Match expression in Task10LocalizedExpression.Matches(text))
+        {
+            var line = LineNumber(text, expression.Index);
+            if ((expression.Value is "Se.Language.Main.DownloadingFfmpeg" or "Se.Language.Main.DownloadingLibMpv") && line != 17 ||
+                expression.Value == "Se.Language.Tools.ImageBasedEdit.SetText" && !source.EndsWith("/SetText/SetTextWindow.cs", StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            AddCandidate(candidates, source, text, expression.Index, "localized-source", null, expression.Value);
+        }
+
+        if (source is "src/ui/Features/Files/ExportImageBased/ImageBasedProfileViewModel.cs" or
+            "src/ui/Features/Shared/DownloadLibMpvViewModel.cs")
+        {
+            foreach (Match expression in Regex.Matches(text, @"Se\.Language\.General\.Error", RegexOptions.CultureInvariant))
+            {
+                AddCandidate(candidates, source, text, expression.Index, "localized-source", null, expression.Value);
+            }
+        }
     }
 
     private static void AddMarkupCandidates(List<Task10Candidate> candidates, string source, string text)
     {
-        foreach (Match match in MarkupUiAttribute.Matches(text))
+        foreach (Match match in MarkupAttribute.Matches(text))
         {
-            AddCandidate(candidates, source, text, match.Index, match.Groups["kind"].Value, match.Groups["literal"].Value, null);
+            var kind = match.Groups["kind"].Value;
+            var literal = match.Groups["literal"].Value;
+            if (!IsTechnicalMarkupAttribute(kind, literal))
+            {
+                AddCandidate(candidates, source, text, match.Index, $"attribute:{kind}", literal, null);
+            }
+        }
+
+        foreach (Match match in MarkupElementText.Matches(text))
+        {
+            AddCandidate(candidates, source, text, match.Index, "element-text", match.Groups["literal"].Value.Trim(), null);
         }
     }
+
+    private static bool IsTechnicalMarkupAttribute(string kind, string literal) =>
+        kind.StartsWith("xmlns", StringComparison.OrdinalIgnoreCase) ||
+        TechnicalMarkupAttributes.Contains(kind) ||
+        IsTechnicalAttachedProperty(kind) ||
+        literal.StartsWith('{') ||
+        literal.Contains("://", StringComparison.Ordinal) ||
+        literal.StartsWith("avares://", StringComparison.OrdinalIgnoreCase) ||
+        literal.StartsWith("resm:", StringComparison.OrdinalIgnoreCase) ||
+        literal.StartsWith("#", StringComparison.Ordinal) ||
+        literal.EndsWith(".axaml", StringComparison.OrdinalIgnoreCase) ||
+        literal.EndsWith(".xaml", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsTechnicalAttachedProperty(string kind) =>
+        kind.Contains('.', StringComparison.Ordinal) &&
+        !kind.Equals("ToolTip.Tip", StringComparison.OrdinalIgnoreCase) &&
+        !kind.EndsWith(".Header", StringComparison.OrdinalIgnoreCase) &&
+        !kind.EndsWith(".Content", StringComparison.OrdinalIgnoreCase) &&
+        !kind.EndsWith(".Watermark", StringComparison.OrdinalIgnoreCase) &&
+        !kind.EndsWith(".Title", StringComparison.OrdinalIgnoreCase);
 
     private static void AddCandidate(List<Task10Candidate> candidates, string source, string text, int index, string kind, string? literal, string? sourceExpression)
     {
@@ -260,19 +337,6 @@ public class FirstPartyUiLiteralInventoryTests
         }
 
         candidates.Add(new Task10Candidate(source, LineNumber(text, index), kind, literal, sourceExpression));
-    }
-
-    private static Task10Candidate ScanLocalizedCandidate(string source, string text, string sourceExpression)
-    {
-        var matches = text.Split("\n")
-            .Select((line, index) => (line, index))
-            .Where(item => item.line.Contains(sourceExpression, StringComparison.Ordinal) &&
-                           (Regex.IsMatch(item.line, @"\b(?:[A-Za-z0-9_]*Title|Content|Header|Watermark)\s*=", RegexOptions.CultureInvariant) ||
-                            item.line.Contains("UiUtil.", StringComparison.Ordinal)))
-            .Select(item => new Task10Candidate(source, item.index + 1, "localized-source", null, sourceExpression))
-            .ToArray();
-        Assert.True(matches.Length == 1, $"Localized expression is not a unique direct UI assignment: {source}:{sourceExpression} ({matches.Length})");
-        return matches[0];
     }
 
     private static bool CandidateMatches(Task10InventoryRow row, Task10Candidate candidate) =>

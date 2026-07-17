@@ -15,6 +15,14 @@ public class LanguageFile
     public string ChoosePacCodePage { get; set; } = "Choose PAC code page";
     public string ExportCavena890Title { get; set; } = "Export Cavena 890";
     public string ExportEbuStlTitle { get; set; } = "Export EBU STL";
+    public string DeleteLinesTitle { get; set; } = "Delete lines?";
+    public string DeleteXLinesQuestion { get; set; } = "Do you want to delete {0} lines?";
+    public string EnterProfileNameMessage { get; set; } = "Please enter a profile name";
+    public string ProfileNameMustBeUnique { get; set; } = "Profile name '{0}' can only be used once. Please choose a different name.";
+    public string RemoveImageTitle { get; set; } = "Remove image?";
+    public string RemoveImageQuestion { get; set; } = "Do you want to remove {0}?";
+    public string AlignmentMatchedXOfYLines { get; set; } = "Alignment matched {0} of {1} lines. {2} line(s) could not be aligned and kept their original time codes. If the audio language or content doesn't match the script, the transcription may be off.";
+    public string FormatNotSupportedPrefix { get; set; } = "Format not supported: ";
     public string Compare { get; set; }
     public string PreviousDifference { get; set; }
     public string NextDifference { get; set; }

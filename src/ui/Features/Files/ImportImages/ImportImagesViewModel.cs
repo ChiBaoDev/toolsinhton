@@ -93,8 +93,8 @@ public partial class ImportImagesViewModel : ObservableObject
         {
             var answer = await MessageBox.Show(
             Window!,
-            "Remove image?",
-            $"Do you want to remove {selectedStyle.FileName}?",
+            Se.Language.File.RemoveImageTitle,
+            string.Format(Se.Language.File.RemoveImageQuestion, selectedStyle.FileName),
             MessageBoxButtons.YesNoCancel,
             MessageBoxIcon.Question);
 

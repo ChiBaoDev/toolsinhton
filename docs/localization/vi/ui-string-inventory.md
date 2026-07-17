@@ -23,7 +23,7 @@
 
 ## Task 10 fixed-scan inventory
 
-The structured source of truth is `tests/UI/TestData/Task10LiteralInventory.json`. Each current scanner candidate has one row below.
+The structured source of truth is `tests/UI/TestData/Task10LiteralInventory.json`. The scanner covers C# UI literals and localized expressions, plus all English-bearing `.xaml`/`.axaml` attributes and element text after explicit technical exclusions. Every candidate and inventory row must match exactly once.
 
 | Source | Candidate | Classification | Language key / reason |
 |---|---|---|---|
@@ -73,55 +73,55 @@ The structured source of truth is `tests/UI/TestData/Task10LiteralInventory.json
 | `src/ui/Features/Edit/Find/FindViewModel.cs:143` | `features/edit` | non-ui | Documentation route identifier is passed to UiUtil.ShowHelp and is not displayed as UI copy. |
 | `src/ui/Features/Edit/Find/FindViewModel.cs:143` | `find` | non-ui | Documentation route identifier is passed to UiUtil.ShowHelp and is not displayed as UI copy. |
 | `src/ui/Features/Files/Compare/CompareViewModel.cs:854` | `features/compare` | non-ui | Documentation route identifier is passed to UiUtil.ShowHelp and is not displayed as UI copy. |
-| `src/ui/Features/Main/MainHelpers/SubtitleFileService.cs:85` | `No subtitle found` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Main/MainHelpers/SubtitleFileService.cs:86` | `The Matroska file does not seem to contain any subtitles.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Main/MainViewModel.cs:3551` | `Could not extract audio clip from video.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Main/MainViewModel.cs:6963` | `Turn SMPTE timing off?` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Main/MainViewModel.cs:15718` | `This file seems to be an .mp3 audio file which does not contains subtitles.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Main/MainViewModel.cs:15720` | `You can open media files via the Video menu.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Main/MainViewModel.cs:15727` | `This file seems to be a .wav audio file which does not contains subtitles.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Main/MainViewModel.cs:15729` | `You can open media files via the Video menu.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Main/MainViewModel.cs:17809` | `Download mpv?` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Main/MainViewModel.cs:17810` | `{Environment.NewLine}\"Subtitle Edit\" requires mpv to play video/audio.{Environment.NewLine}{Environment.NewLine}Download and use mpv?` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Files/ExportImageBased/ExportImageBasedViewModel.cs:338` | `Delete lines?` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Files/ExportImageBased/ExportImageBasedViewModel.cs:339` | `Do you want to delete {selectedItems.Count} lines?` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Files/ExportImageBased/ImageBasedProfileViewModel.cs:86` | `Error` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Files/ExportImageBased/ImageBasedProfileViewModel.cs:87` | `Please enter a profile name` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Files/ExportImageBased/ImageBasedProfileViewModel.cs:97` | `Error` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Files/ExportImageBased/ImageBasedProfileViewModel.cs:98` | `Profile name '{profile.Name}' can only be used once. Please choose a different name.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Files/ImportImages/ImportImagesViewModel.cs:96` | `Remove image?` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Files/ImportImages/ImportImagesViewModel.cs:97` | `Do you want to remove {selectedStyle.FileName}?` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Files/ImportPlainText/ImportPlainTextViewModel.cs:323` | `Alignment matched {result.MatchedLines} of {result.TotalLines} lines. ` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Edit/MultipleReplace/CategoryExportViewModel.cs:51` | `No rule categories selected for export` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Edit/MultipleReplace/MultipleReplaceViewModel.cs:566` | `Unable to import replace rules: ` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Edit/MultipleReplace/MultipleReplaceViewModel.cs:578` | `No replace rules found in file` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:731` | `Image based subtitle format not found/supported.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:875` | `Encrypted VobSub subtitles are not supported.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:1441` | `No subtitles to resize.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:1505` | `No subtitles to adjust.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:1569` | `No subtitles to adjust.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:1633` | `No subtitles to adjust.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2215` | `Unable to load image file.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2229` | `Failed to import image: {ex.Message}` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2245` | `No subtitle selected` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2245` | `Please select exactly one subtitle.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2333` | `Image based subtitle format not found/supported.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2340` | `No subtitles found in the file.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2546` | `Unexported changes` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2547` | `You have unexported changes. Close and discard them?` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2755` | `Do you want to delete one line?` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2764` | `Do you want to delete {selectedItems.Count} lines?` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/DownloadLibMpvViewModel.cs:100` | `Error` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/DownloadLibMpvViewModel.cs:101` | `Download complete, but could not delete existing file.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/DownloadLibMpvViewModel.cs:102` | `Please restart SE to use the new libmpv.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/GetAudioClips/GetAudioClipsViewModel.cs:97` | `Could not extract audio clip from video.` | deferred-localization | User-visible message candidate is retained for the next localization task. |
-| `src/ui/Features/Shared/PickMatroskaTrack/PickMatroskaTrackViewModel.cs:179` | `Format not supported: ` | deferred-localization | User-visible message candidate is retained for the next localization task. |
+| `src/ui/Features/Main/MainHelpers/SubtitleFileService.cs:85` | `No subtitle found` | localized | `$.main.noSubtitleFound` via `Se.Language.Main.NoSubtitleFound` |
+| `src/ui/Features/Main/MainHelpers/SubtitleFileService.cs:86` | `The Matroska file does not seem to contain any subtitles.` | localized | `$.main.matroskaContainsNoSubtitles` via `Se.Language.Main.MatroskaContainsNoSubtitles` |
+| `src/ui/Features/Main/MainViewModel.cs:3551` | `Could not extract audio clip from video.` | localized | `$.main.couldNotExtractAudioClipFromVideo` via `Se.Language.Main.CouldNotExtractAudioClipFromVideo` |
+| `src/ui/Features/Main/MainViewModel.cs:6963` | `Turn SMPTE timing off?` | localized | `$.main.turnSmpteTimingOff` via `Se.Language.Main.TurnSmpteTimingOff` |
+| `src/ui/Features/Main/MainViewModel.cs:15718` | `This file seems to be an .mp3 audio file which does not contain subtitles.` | localized | `$.main.mp3ContainsNoSubtitles` via `Se.Language.Main.Mp3ContainsNoSubtitles` |
+| `src/ui/Features/Main/MainViewModel.cs:15720` | `You can open media files via the Video menu.` | localized | `$.main.openMediaViaVideoMenu` via `Se.Language.Main.OpenMediaViaVideoMenu` |
+| `src/ui/Features/Main/MainViewModel.cs:15727` | `This file seems to be a .wav audio file which does not contain subtitles.` | localized | `$.main.wavContainsNoSubtitles` via `Se.Language.Main.WavContainsNoSubtitles` |
+| `src/ui/Features/Main/MainViewModel.cs:15729` | `You can open media files via the Video menu.` | localized | `$.main.openMediaViaVideoMenu` via `Se.Language.Main.OpenMediaViaVideoMenu` |
+| `src/ui/Features/Main/MainViewModel.cs:17809` | `Download mpv?` | localized | `$.main.downloadMpvTitle` via `Se.Language.Main.DownloadMpvTitle` |
+| `src/ui/Features/Main/MainViewModel.cs:17810` | `Subtitle Edit requires mpv to play video/audio.` | localized | `$.main.downloadMpvQuestion` via `Se.Language.Main.DownloadMpvQuestion` |
+| `src/ui/Features/Files/ExportImageBased/ExportImageBasedViewModel.cs:338` | `Delete lines?` | localized | `$.file.deleteLinesTitle` via `Se.Language.File.DeleteLinesTitle` |
+| `src/ui/Features/Files/ExportImageBased/ExportImageBasedViewModel.cs:339` | `Do you want to delete {0} lines?` | localized | `$.file.deleteXLinesQuestion` via `Se.Language.File.DeleteXLinesQuestion` |
+| `src/ui/Features/Files/ExportImageBased/ImageBasedProfileViewModel.cs:86` | `Error` | localized | `$.general.error` via `Se.Language.General.Error` |
+| `src/ui/Features/Files/ExportImageBased/ImageBasedProfileViewModel.cs:87` | `Please enter a profile name` | localized | `$.file.enterProfileNameMessage` via `Se.Language.File.EnterProfileNameMessage` |
+| `src/ui/Features/Files/ExportImageBased/ImageBasedProfileViewModel.cs:97` | `Error` | localized | `$.general.error` via `Se.Language.General.Error` |
+| `src/ui/Features/Files/ExportImageBased/ImageBasedProfileViewModel.cs:98` | `Profile name {0} can only be used once. Please choose a different name.` | localized | `$.file.profileNameMustBeUnique` via `Se.Language.File.ProfileNameMustBeUnique` |
+| `src/ui/Features/Files/ImportImages/ImportImagesViewModel.cs:96` | `Remove image?` | localized | `$.file.removeImageTitle` via `Se.Language.File.RemoveImageTitle` |
+| `src/ui/Features/Files/ImportImages/ImportImagesViewModel.cs:97` | `Do you want to remove {0}?` | localized | `$.file.removeImageQuestion` via `Se.Language.File.RemoveImageQuestion` |
+| `src/ui/Features/Files/ImportPlainText/ImportPlainTextViewModel.cs:323` | `Alignment matched {0} of {1} lines.` | localized | `$.file.alignmentMatchedXOfYLines` via `Se.Language.File.AlignmentMatchedXOfYLines` |
+| `src/ui/Features/Edit/MultipleReplace/CategoryExportViewModel.cs:51` | `No rule categories selected for export` | localized | `$.edit.multipleReplace.noRuleCategoriesSelectedForExport` via `Se.Language.Edit.MultipleReplace.NoRuleCategoriesSelectedForExport` |
+| `src/ui/Features/Edit/MultipleReplace/MultipleReplaceViewModel.cs:566` | `Unable to import replace rules: ` | localized | `$.edit.multipleReplace.unableToImportReplaceRules` via `Se.Language.Edit.MultipleReplace.UnableToImportReplaceRules` |
+| `src/ui/Features/Edit/MultipleReplace/MultipleReplaceViewModel.cs:578` | `No replace rules found in file` | localized | `$.edit.multipleReplace.noReplaceRulesFoundInFile` via `Se.Language.Edit.MultipleReplace.NoReplaceRulesFoundInFile` |
+| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:731` | `Image-based subtitle format was not found or is not supported.` | localized | `$.tools.imageBasedEdit.formatNotFoundOrSupported` via `Se.Language.Tools.ImageBasedEdit.FormatNotFoundOrSupported` |
+| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:875` | `Encrypted VobSub subtitles are not supported.` | localized | `$.tools.imageBasedEdit.encryptedVobSubNotSupported` via `Se.Language.Tools.ImageBasedEdit.EncryptedVobSubNotSupported` |
+| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:1441` | `No subtitles to resize.` | localized | `$.tools.imageBasedEdit.noSubtitlesToResize` via `Se.Language.Tools.ImageBasedEdit.NoSubtitlesToResize` |
+| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:1505` | `No subtitles to adjust.` | localized | `$.tools.imageBasedEdit.noSubtitlesToAdjust` via `Se.Language.Tools.ImageBasedEdit.NoSubtitlesToAdjust` |
+| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:1569` | `No subtitles to adjust.` | localized | `$.tools.imageBasedEdit.noSubtitlesToAdjust` via `Se.Language.Tools.ImageBasedEdit.NoSubtitlesToAdjust` |
+| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:1633` | `No subtitles to adjust.` | localized | `$.tools.imageBasedEdit.noSubtitlesToAdjust` via `Se.Language.Tools.ImageBasedEdit.NoSubtitlesToAdjust` |
+| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2215` | `Unable to load image file.` | localized | `$.tools.imageBasedEdit.unableToLoadImageFile` via `Se.Language.Tools.ImageBasedEdit.UnableToLoadImageFile` |
+| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2229` | `Failed to import image: {0}` | localized | `$.tools.imageBasedEdit.failedToImportImage` via `Se.Language.Tools.ImageBasedEdit.FailedToImportImage` |
+| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2245` | `No subtitle selected` | localized | `$.tools.imageBasedEdit.noSubtitleSelected` via `Se.Language.Tools.ImageBasedEdit.NoSubtitleSelected` |
+| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2245` | `Please select exactly one subtitle.` | localized | `$.tools.imageBasedEdit.selectExactlyOneSubtitle` via `Se.Language.Tools.ImageBasedEdit.SelectExactlyOneSubtitle` |
+| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2333` | `Image-based subtitle format was not found or is not supported.` | localized | `$.tools.imageBasedEdit.formatNotFoundOrSupported` via `Se.Language.Tools.ImageBasedEdit.FormatNotFoundOrSupported` |
+| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2340` | `No subtitles found in the file.` | localized | `$.tools.imageBasedEdit.noSubtitlesFoundInFile` via `Se.Language.Tools.ImageBasedEdit.NoSubtitlesFoundInFile` |
+| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2546` | `Unexported changes` | localized | `$.tools.imageBasedEdit.unexportedChangesTitle` via `Se.Language.Tools.ImageBasedEdit.UnexportedChangesTitle` |
+| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2547` | `You have unexported changes. Close and discard them?` | localized | `$.tools.imageBasedEdit.unexportedChangesQuestion` via `Se.Language.Tools.ImageBasedEdit.UnexportedChangesQuestion` |
+| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2755` | `Do you want to delete one line?` | localized | `$.tools.imageBasedEdit.deleteOneLineQuestion` via `Se.Language.Tools.ImageBasedEdit.DeleteOneLineQuestion` |
+| `src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs:2764` | `Do you want to delete {0} lines?` | localized | `$.tools.imageBasedEdit.deleteXLinesQuestion` via `Se.Language.Tools.ImageBasedEdit.DeleteXLinesQuestion` |
+| `src/ui/Features/Shared/DownloadLibMpvViewModel.cs:100` | `Error` | localized | `$.general.error` via `Se.Language.General.Error` |
+| `src/ui/Features/Shared/DownloadLibMpvViewModel.cs:101` | `Download complete, but could not delete existing file.` | localized | `$.main.downloadCompleteCouldNotDeleteExistingFile` via `Se.Language.Main.DownloadCompleteCouldNotDeleteExistingFile` |
+| `src/ui/Features/Shared/DownloadLibMpvViewModel.cs:102` | `Please restart SE to use the new libmpv.` | localized | `$.main.restartSeToUseNewLibMpv` via `Se.Language.Main.RestartSeToUseNewLibMpv` |
+| `src/ui/Features/Shared/GetAudioClips/GetAudioClipsViewModel.cs:97` | `Could not extract audio clip from video.` | localized | `$.main.couldNotExtractAudioClipFromVideo` via `Se.Language.Main.CouldNotExtractAudioClipFromVideo` |
+| `src/ui/Features/Shared/PickMatroskaTrack/PickMatroskaTrackViewModel.cs:179` | `Format not supported: ` | localized | `$.file.formatNotSupportedPrefix` via `Se.Language.File.FormatNotSupportedPrefix` |
 
 ## Task 10 review-fix evidence
 
-- Fixed-scan scope is exactly `src/ui/Features/Main`, `Files`, `Edit`, `Sync`, and `Shared`; scans were rerun with the three brief patterns. The structured inventory contains 89 rows: 11 localized candidates and 78 retained candidates (including 43 deferred user-visible message candidates); exact bidirectional cardinality is enforced by the focused test.
-- Localized additions use `Se.Language`: `Main.PickVobSubLanguageTitle`, `File.ExportPacTitle`, `File.ChoosePacCodePage`, `File.ExportCavena890Title`, and `File.ExportEbuStlTitle`; PAC is rendered consistently as `PAC`.
-- Deterministic merge: `C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File D:\toolsinhton\.claude\worktrees\vietnamese-localization\tools\localization\Merge-VietnameseLanguage.ps1` — PASS.
-- Focused inventory/runtime tests: `dotnet test tests/UI/UITests.csproj -c Debug --filter FullyQualifiedName~FirstPartyUiLiteralInventoryTests --no-restore --verbosity minimal` — 4/4 PASS, including headless `PickVobSubLanguageViewModel.Initialize` plus window construction and the report/inventory C0-tab audit.
-- Complete localization suite: `dotnet test tests/UI/UITests.csproj -c Debug --filter FullyQualifiedName~UITests.Logic.Localization --no-restore --verbosity minimal` — 92/92 PASS.
-- Provenance for this review-fix pass: base `e5e738d9a` through the final commit recorded below; no Task 11 work, runtime-generated files, or push included.
+- Fixed scan roots are exactly `src/ui/Features/Main`, `Files`, `Edit`, `Sync`, and `Shared`.
+- The structured inventory contains 89 rows: 54 localized, 10 technical exceptions, 9 external-runtime values, and 16 non-UI values. No deferred classification remains.
+- All 43 formerly deferred user-visible candidates now resolve through typed `Se.Language` properties and matching English/Vietnamese catalog leaves.
+- Markup scanning covers every English-bearing attribute and element-text node; namespace URIs, bindings, identifiers, resource keys, paths, type/style metadata, and other technical values are explicitly excluded.
+- Localized expressions participate in the same symmetric candidate/inventory cardinality check as retained literals.
+- Catalog ownership remains in the existing B1 (`file`/`edit`), B3 (`main`), and B4 (`tools`) shards under longest-prefix ownership.

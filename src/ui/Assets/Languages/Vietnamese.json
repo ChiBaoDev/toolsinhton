@@ -1065,7 +1065,18 @@
     "setUpLikeSe4ShortcutsAddedX":  "Phím tắt đã thêm/cập nhật: {0}",
     "setUpLikeSe4ShortcutsSkippedX":  "Phím tắt đã bỏ qua (không khớp): {0}",
     "setUpLikeSe4ReplaceRulesAddedXY":  "Quy tắc thay thế đã thêm: {0} (trong {1} danh mục mới)",
-    "setUpLikeSe4ThemeSet":  "Đã đặt giao diện, biểu tượng thanh công cụ và dạng sóng theo kiểu Subtitle Edit 4."
+    "setUpLikeSe4ThemeSet":  "Đã đặt giao diện, biểu tượng thanh công cụ và dạng sóng theo kiểu Subtitle Edit 4.",
+    "noSubtitleFound":  "Không tìm thấy phụ đề",
+    "matroskaContainsNoSubtitles":  "Tệp Matroska dường như không chứa phụ đề nào.",
+    "couldNotExtractAudioClipFromVideo":  "Không thể trích xuất đoạn âm thanh từ video.",
+    "turnSmpteTimingOff":  "Tắt định thời SMPTE?",
+    "mp3ContainsNoSubtitles":  "Tệp này có vẻ là tệp âm thanh .mp3 không chứa phụ đề.",
+    "wavContainsNoSubtitles":  "Tệp này có vẻ là tệp âm thanh .wav không chứa phụ đề.",
+    "openMediaViaVideoMenu":  "Bạn có thể mở tệp phương tiện qua menu Video.",
+    "downloadMpvTitle":  "Tải mpv xuống?",
+    "downloadMpvQuestion":  "\"Subtitle Edit\" cần mpv để phát video/âm thanh.\n\nTải xuống và sử dụng mpv?",
+    "downloadCompleteCouldNotDeleteExistingFile":  "Đã tải xuống xong nhưng không thể xóa tệp hiện có.",
+    "restartSeToUseNewLibMpv":  "Vui lòng khởi động lại SE để sử dụng libmpv mới."
   },
   "file":  {
     "exportPacTitle":  "Xuất PAC",
@@ -1309,7 +1320,15 @@
     "pickMatroskaTrackX":  "Chọn rãnh Matroska - {0}",
     "rosettaProperties":  "Thuộc tính Timed Text Rosetta IMSC",
     "rosettaFontSize":  "Cỡ chữ (chiều cao hàng)",
-    "xProperties":  "Thuộc tính {0}"
+    "xProperties":  "Thuộc tính {0}",
+    "deleteLinesTitle":  "Xóa các dòng?",
+    "deleteXLinesQuestion":  "Bạn có muốn xóa {0} dòng không?",
+    "enterProfileNameMessage":  "Vui lòng nhập tên cấu hình",
+    "profileNameMustBeUnique":  "Tên cấu hình \u0027{0}\u0027 chỉ được dùng một lần. Vui lòng chọn tên khác.",
+    "removeImageTitle":  "Xóa hình ảnh?",
+    "removeImageQuestion":  "Bạn có muốn xóa {0} không?",
+    "alignmentMatchedXOfYLines":  "Đã khớp {0}/{1} dòng. Không thể căn chỉnh {2} dòng và đã giữ nguyên mã thời gian ban đầu. Nếu ngôn ngữ hoặc nội dung âm thanh không khớp với kịch bản, bản chép lời có thể không chính xác.",
+    "formatNotSupportedPrefix":  "Định dạng không được hỗ trợ: "
   },
   "edit":  {
     "modifySelection":  {
@@ -1355,7 +1374,10 @@
       "deleteCategoryConfirm":  "Xóa danh mục \u0027 {0} \u0027?",
       "deleteRuleConfirm":  "Xóa quy tắc “{0}”?",
       "findWhat":  "Nội dung cần tìm",
-      "descriptionOptional":  "Mô tả (tùy chọn)"
+      "descriptionOptional":  "Mô tả (tùy chọn)",
+      "noRuleCategoriesSelectedForExport":  "Chưa chọn nhóm quy tắc nào để xuất",
+      "unableToImportReplaceRules":  "Không thể nhập quy tắc thay thế: ",
+      "noReplaceRulesFoundInFile":  "Không tìm thấy quy tắc thay thế trong tệp"
     },
     "find":  {
       "searchTextWatermark":  "Tìm kiếm văn bản...",
@@ -1907,7 +1929,20 @@
       "xInActivePicture":  "{0} trong vùng hình ảnh",
       "xInTopBar":  "{0} trong dải trên",
       "xInBottomBar":  "{0} trong dải dưới",
-      "noImageSubtitlesLoaded":  "Chưa tải phụ đề dạng ảnh nào"
+      "noImageSubtitlesLoaded":  "Chưa tải phụ đề dạng ảnh nào",
+      "formatNotFoundOrSupported":  "Không tìm thấy hoặc không hỗ trợ định dạng phụ đề dạng hình ảnh.",
+      "encryptedVobSubNotSupported":  "Không hỗ trợ phụ đề VobSub được mã hóa.",
+      "noSubtitlesToResize":  "Không có phụ đề để thay đổi kích thước.",
+      "noSubtitlesToAdjust":  "Không có phụ đề để điều chỉnh.",
+      "unableToLoadImageFile":  "Không thể tải tệp hình ảnh.",
+      "failedToImportImage":  "Không thể nhập hình ảnh: {0}",
+      "noSubtitleSelected":  "Chưa chọn phụ đề",
+      "selectExactlyOneSubtitle":  "Vui lòng chọn chính xác một phụ đề.",
+      "noSubtitlesFoundInFile":  "Không tìm thấy phụ đề trong tệp.",
+      "unexportedChangesTitle":  "Thay đổi chưa xuất",
+      "unexportedChangesQuestion":  "Bạn có các thay đổi chưa xuất. Đóng và loại bỏ chúng?",
+      "deleteOneLineQuestion":  "Bạn có muốn xóa một dòng không?",
+      "deleteXLinesQuestion":  "Bạn có muốn xóa {0} dòng không?"
     },
     "removeTextForHearingImpaired":  {
       "title":  "Xóa văn bản dành cho người khiếm thính",

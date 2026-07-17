@@ -82,8 +82,8 @@ public class SubtitleFileService : ISubtitleFileService
     //            {
     //                var answer = await MessageBox.Show(
     //                    Window!,
-    //                    "No subtitle found",
-    //                    "The Matroska file does not seem to contain any subtitles.",
+    //                    Se.Language.Main.NoSubtitleFound,
+    //                    Se.Language.Main.MatroskaContainsNoSubtitles,
     //                    MessageBoxButtons.OK,
     //                    MessageBoxIcon.Error);
     //            }
