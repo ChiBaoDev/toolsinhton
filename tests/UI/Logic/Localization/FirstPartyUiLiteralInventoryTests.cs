@@ -273,8 +273,20 @@ public class FirstPartyUiLiteralInventoryTests
         var inventory = LoadInventory(root, "tests/UI/TestData/Task11LiteralInventory.json");
 
         Assert.Equal(RequiredTask11Roots, inventory.Roots);
+        AssertTask11RootsExist(root);
         var candidates = ScanTask11Candidates(root);
         AssertInventoryMatchesCandidates(root, inventory, candidates);
+    }
+
+    [Fact]
+    public void Task11RejectsMissingRequiredRootOtherThanPlugins()
+    {
+        const string missingRoot = "src/ui/Features/Tools";
+
+        var exception = Assert.ThrowsAny<Xunit.Sdk.XunitException>(() =>
+            AssertTask11RootsExist("unused", relativeRoot => relativeRoot != missingRoot));
+
+        Assert.Contains($"Required Task 11 root does not exist: {missingRoot}", exception.Message, StringComparison.Ordinal);
     }
 
     [AvaloniaFact]
@@ -458,6 +470,13 @@ public class FirstPartyUiLiteralInventoryTests
         }
     }
 
+
+    private static void AssertTask11RootsExist(string root, Func<string, bool>? directoryExists = null)
+    {
+        directoryExists ??= relativeRoot => Directory.Exists(ToAbsolutePath(root, relativeRoot));
+        Assert.All(RequiredTask11Roots.Where(relativeRoot => relativeRoot != "src/ui/Features/Plugins"), relativeRoot =>
+            Assert.True(directoryExists(relativeRoot), $"Required Task 11 root does not exist: {relativeRoot}"));
+    }
 
     private static void AssertInventoryMatchesCandidates(string root, Task10Inventory inventory, Task10Candidate[] candidates)
     {

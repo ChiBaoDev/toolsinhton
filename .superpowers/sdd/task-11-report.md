@@ -16,6 +16,7 @@ DONE_WITH_CONCERNS
 - Exact-column regression before matching fix: `CandidateMatchesRequiresExactColumnForLiteralRows` failed with `Expected: False; Actual: True` for a duplicate same-line literal at a different column.
 - Independent source verification before finite ranges were recorded: independently discovered localized expressions had no matching inventory rows.
 - Cleanup verification caught two real synchronization errors before GREEN: missing `$.video.audioToText.downloadXPrompt` in generated `Vietnamese.json`, then reviewed-batch counts that still included removed duplicate catalog leaves.
+- Task 11 required-root regression RED: after adding `Task11RejectsMissingRequiredRootOtherThanPlugins` and the production call, the focused test build failed with `CS0103` because `AssertTask11RootsExist` did not exist. This demonstrated the required-root behavioral gate was absent before implementation.
 
 ## Inventory
 - Total: 586
@@ -32,13 +33,15 @@ DONE_WITH_CONCERNS
 ### Focused Task 11 inventory tests
 ```text
 dotnet test D:/toolsinhton/.claude/worktrees/vietnamese-localization/tests/UI/UITests.csproj --no-restore --filter "FullyQualifiedName~FirstPartyUiLiteralInventoryTests" --logger "console;verbosity=minimal"
-Passed! - Failed: 0, Passed: 18, Skipped: 0, Total: 18, Duration: 8 s
+Passed! - Failed: 0, Passed: 19, Skipped: 0, Total: 19, Duration: 8 s
 ```
+
+The new focused regression test also passed independently: `Task11RejectsMissingRequiredRootOtherThanPlugins` — Failed: 0, Passed: 1, Total: 1. The Task 11 gate now explicitly requires every configured root except `src/ui/Features/Plugins`; Plugins remains optional and is still naturally scanned whenever present because it remains in `RequiredTask11Roots`. Task 10 root validation and scanning were unchanged.
 
 ### Complete localization suite
 ```text
 dotnet test D:/toolsinhton/.claude/worktrees/vietnamese-localization/tests/UI/UITests.csproj --no-restore --filter "FullyQualifiedName~UITests.Logic.Localization" --logger "console;verbosity=minimal"
-Passed! - Failed: 0, Passed: 106, Skipped: 0, Total: 106, Duration: 34 s
+Passed! - Failed: 0, Passed: 107, Skipped: 0, Total: 107, Duration: 34 s
 ```
 
 Reviewed Vietnamese leaf ownership after duplicate consolidation:
@@ -65,14 +68,16 @@ second=3811b024c83f32ae93279ebf5bd36fc74b8bc1b6046d2acda53622ec99130658
 ```text
 dotnet build D:/toolsinhton/.claude/worktrees/vietnamese-localization/SubtitleEdit.sln --no-restore --configuration Debug --verbosity minimal
 Build succeeded.
-0 Warning(s)
+1 Warning(s)
 0 Error(s)
-Time Elapsed 00:00:28.48
+Time Elapsed 00:00:02.51
 ```
+
+The warning is pre-existing `CS8600` in `tests/libse/SubtitleFormats/EbuTtDTest.cs:103`.
 
 ### JSON and diff validation
 ```text
-Python JSON parse of English.json, Vietnamese.json, Task11LiteralInventory.json, Task11LocalizedSourceRanges.json, VietnameseUntranslatedAllowlist.json, and the three modified reviewed shards
+Python JSON parse of English.json, Vietnamese.json, Task11LiteralInventory.json, Task11LocalizedSourceRanges.json, VietnameseUntranslatedAllowlist.json, and the four modified reviewed shards
 validated-json 8
 
 git -C D:/toolsinhton/.claude/worktrees/vietnamese-localization diff --check
