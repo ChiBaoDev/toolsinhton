@@ -120,7 +120,7 @@ public class SeGeneral
     public SeGeneral()
     {
         Version = Se.Version;
-        Language = "English";
+        Language = "Vietnamese";
         LayoutNumber = 0;
         SubtitleLineMaximumLength = 43;
         MaxNumberOfLines = 2;
