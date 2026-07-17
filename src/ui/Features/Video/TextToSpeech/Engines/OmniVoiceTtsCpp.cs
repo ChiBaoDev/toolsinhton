@@ -223,7 +223,7 @@ public class OmniVoiceTtsCpp : ITtsEngine
         var exe = GetExecutableFileName();
         if (!File.Exists(exe))
         {
-            throw new FileNotFoundException("omnivoice-tts executable not found.", exe);
+            throw new FileNotFoundException(Se.Language.Video.TextToSpeech.OmniVoiceExecutableNotFound, exe);
         }
 
         var modelPath = GetModelBasePath();
@@ -293,8 +293,7 @@ public class OmniVoiceTtsCpp : ITtsEngine
             if (!File.Exists(refTextPath))
             {
                 throw new FileNotFoundException(
-                    $"OmniVoice TTS voice cloning requires a transcript file at {refTextPath}. "
-                    + "Re-import the voice to provide its transcript.",
+                    string.Format(Se.Language.Video.TextToSpeech.OmniVoiceTranscriptRequiredX, refTextPath),
                     refTextPath);
             }
 
@@ -319,7 +318,7 @@ public class OmniVoiceTtsCpp : ITtsEngine
         Se.WriteToolsLog($"OmniVoice TTS: {exe} {string.Join(' ', psi.ArgumentList)} (voice={omniVoice}, textLen={text.Length})");
 
         var process = Process.Start(psi)
-            ?? throw new InvalidOperationException("Failed to start omnivoice-tts");
+            ?? throw new InvalidOperationException(Se.Language.Video.TextToSpeech.OmniVoiceStartFailed);
 
         try
         {

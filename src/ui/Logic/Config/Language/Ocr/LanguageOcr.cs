@@ -76,6 +76,10 @@ public class LanguageOcr
     public string BinaryImageCompareDatabase { get; set; }
     public string RemoveXFromUnknownWordsList { get; set; }
     public string DownloadingPaddleOcrEngineDotDotDot { get; set; }
+    public string DownloadingTesseractModel { get; set; }
+    public string SelectTesseractDictionary { get; set; }
+    public string Algorithm { get; set; }
+    public string AutoDrawAlgorithmTooltip { get; set; }
     public string DownloadingPaddleOcrModelsDotDotDot { get; set; }
     public string PaddleOcr { get; set; }
     public string BinaryImageCompareInspectImageMatches { get; set; }
@@ -113,6 +117,17 @@ public class LanguageOcr
     public string OllamaModelLikelyWrong { get; set; }
     public string LlamaCppNotDownloaded { get; set; }
     public string LlamaCppReturnedNoText { get; set; }
+    public string InspectBinaryOcrAdditions { get; set; }
+    public string NewRenameBinaryImageCompareDatabase { get; set; }
+    public string DownloadingCrispEmbed { get; set; }
+    public string DownloadingGoogleLensOcr { get; set; }
+    public string CloudVisionApiKeyInvalid { get; set; }
+    public string CloudVisionRequestForbidden { get; set; }
+    public string CloudVisionApiStatusErrorX { get; set; }
+    public string CloudVisionApiCallErrorX { get; set; }
+    public string DownloadingPaddleOcr { get; set; }
+    public string DownloadingTesseract { get; set; }
+    public string NewRenameNOcrDatabase { get; set; }
 
     public LanguageOcr()
     {
@@ -188,6 +203,10 @@ public class LanguageOcr
         BinaryImageCompareDatabase = "\"Binary image compare\" database";
         RemoveXFromUnknownWordsList = "Remove \"{0}\" from unknown words list";
         DownloadingPaddleOcrEngineDotDotDot = "Downloading Paddle OCR engine...";
+        DownloadingTesseractModel = "Downloading Tesseract model";
+        SelectTesseractDictionary = "Select Tesseract dictionary:";
+        Algorithm = "Algorithm";
+        AutoDrawAlgorithmTooltip = "Algorithm used by Auto-draw to generate foreground/background lines";
         DownloadingPaddleOcrModelsDotDotDot = "Downloading Paddle OCR models...";
         PaddleOcr = "Paddle OCR";
         BinaryImageCompareInspectImageMatches = "\"Binary image compare\" - Inspect image matches";
@@ -228,5 +247,16 @@ public class LanguageOcr
         OllamaModelLikelyWrong = "Ollama returned no text - the selected model may not support OCR / vision";
         LlamaCppNotDownloaded = "llama.cpp engine/model not downloaded - download via batch convert settings";
         LlamaCppReturnedNoText = "llama.cpp returned no text - check the server and model";
+        InspectBinaryOcrAdditions = "Inspect Binary OCR Additions";
+        NewRenameBinaryImageCompareDatabase = "New/rename Binary Image Compare database";
+        DownloadingCrispEmbed = "Downloading CrispEmbed";
+        DownloadingGoogleLensOcr = "Downloading Google Lens OCR";
+        CloudVisionApiKeyInvalid = "The Cloud Vision API key is invalid, or billing/API access is not enabled.";
+        CloudVisionRequestForbidden = "Cloud Vision rejected the request. Check billing, API status, and the API key.";
+        CloudVisionApiStatusErrorX = "The Cloud Vision API call failed with status code {0}.";
+        CloudVisionApiCallErrorX = "Error calling the Cloud Vision API: {0}";
+        DownloadingPaddleOcr = "Downloading Paddle OCR";
+        DownloadingTesseract = "Downloading Tesseract";
+        NewRenameNOcrDatabase = "New/rename nOCR database";
     }
 }

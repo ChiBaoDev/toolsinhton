@@ -3,6 +3,7 @@
 public class LanguageFixCommonErrors
 {
     public string Title { get; set; }
+    public string SettingsTitle { get; set; }
     public string Step1 { get; set; }
     public string WhatToFix { get; set; }
     public string Example { get; set; }
@@ -141,6 +142,7 @@ public class LanguageFixCommonErrors
     public LanguageFixCommonErrors()
     {
         Title = "Fix common errors";
+        SettingsTitle = "Fix common error settings";
         Step1 = "Step 1/2 - Choose which errors to fix";
         WhatToFix = "What to fix";
         Example = "Example";

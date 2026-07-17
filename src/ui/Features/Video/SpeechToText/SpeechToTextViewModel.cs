@@ -1473,9 +1473,13 @@ public partial class SpeechToTextViewModel : ObservableObject
                     boundary.StartSeconds, boundary.DurationSeconds, cancellationToken);
                 if (!extractOk)
                 {
-                    throw new InvalidOperationException(
-                        $"ffmpeg failed to extract chunk {i + 1}/{boundaries.Count} " +
-                        $"({boundary.StartSeconds:0.##}s → {boundary.EndSeconds:0.##}s) from {audioFileName}");
+                    throw new InvalidOperationException(string.Format(
+                        Se.Language.Video.AudioToText.FfmpegChunkExtractionFailedXXXXX,
+                        i + 1,
+                        boundaries.Count,
+                        boundary.StartSeconds.ToString("0.##"),
+                        boundary.EndSeconds.ToString("0.##"),
+                        audioFileName));
                 }
 
                 // Wrap the caller's segment progress so streaming segments coming

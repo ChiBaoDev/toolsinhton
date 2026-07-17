@@ -37,6 +37,9 @@ public class LanguageVideoOcr
     public string TestOcrRunning { get; set; }
     public string TestOcrResultX { get; set; }
     public string TestOcrNoTextFound { get; set; }
+    public string CurrentFrameExtractionFailed { get; set; }
+    public string NoFramesExtracted { get; set; }
+    public string PaddleOcrFailedX { get; set; }
 
     public LanguageVideoOcr()
     {
@@ -75,5 +78,8 @@ public class LanguageVideoOcr
         TestOcrRunning = "Testing OCR on current frame...";
         TestOcrResultX = "Test result: {0}";
         TestOcrNoTextFound = "Test: no text found in the scan area";
+        CurrentFrameExtractionFailed = "Could not extract the current frame - see the log for the ffmpeg command line.";
+        NoFramesExtracted = "No frames were extracted from the video - see the log for the ffmpeg command line.";
+        PaddleOcrFailedX = "PaddleOCR failed: {0}";
     }
 }

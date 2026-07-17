@@ -110,7 +110,7 @@ public class YtDlpDownloadService : IYtDlpDownloadService
             return Path.Combine(Se.DataFolder, "yt-dlp_macos");
         }
 
-        throw new PlatformNotSupportedException("Unsupported OS platform");
+        throw new PlatformNotSupportedException(string.Format(Se.Language.General.DownloadNotSupportedOnPlatformX, "yt-dlp"));
     }
     private static string GetUrl()
     {
@@ -129,7 +129,7 @@ public class YtDlpDownloadService : IYtDlpDownloadService
             return MacUrl;
         }
 
-        throw new PlatformNotSupportedException("Unsupported OS platform");
+        throw new PlatformNotSupportedException(string.Format(Se.Language.General.DownloadNotSupportedOnPlatformX, "yt-dlp"));
     }
 
     public async Task DownloadYtDlp(IProgress<float>? progress, CancellationToken cancellationToken)
@@ -160,7 +160,7 @@ public class YtDlpDownloadService : IYtDlpDownloadService
         {
             TryDeleteFile(filePath);
             throw new InvalidOperationException(
-                $"Downloaded yt-dlp ({assetName}) failed SHA-256 verification — expected {expected}, got {actual}. The file has been removed.");
+                string.Format(Se.Language.Video.YtDlpChecksumFailedXXX, assetName, expected, actual));
         }
     }
 
@@ -194,7 +194,7 @@ public class YtDlpDownloadService : IYtDlpDownloadService
 
         if (!File.Exists(GetFullFileName()))
         {
-            throw new InvalidOperationException("yt-dlp is not installed");
+            throw new InvalidOperationException(Se.Language.Video.YtDlpNotInstalled);
         }
 
         var args = new List<string>
@@ -258,7 +258,7 @@ public class YtDlpDownloadService : IYtDlpDownloadService
 
         if (!process.Start())
         {
-            throw new InvalidOperationException("Failed to start yt-dlp");
+            throw new InvalidOperationException(Se.Language.Video.YtDlpStartFailed);
         }
 
         process.BeginOutputReadLine();
@@ -278,7 +278,7 @@ public class YtDlpDownloadService : IYtDlpDownloadService
         {
             var details = stderrBuffer.ToString().Trim();
             throw new InvalidOperationException(
-                $"yt-dlp exited with code {process.ExitCode}." +
+                string.Format(Se.Language.Video.YtDlpExitedWithCodeX, process.ExitCode) +
                 (string.IsNullOrEmpty(details) ? string.Empty : Environment.NewLine + details));
         }
 
@@ -290,7 +290,7 @@ public class YtDlpDownloadService : IYtDlpDownloadService
         cancellationToken.ThrowIfCancellationRequested();
         if (!File.Exists(GetFullFileName()))
         {
-            throw new InvalidOperationException("yt-dlp is not installed");
+            throw new InvalidOperationException(Se.Language.Video.YtDlpNotInstalled);
         }
 
         var directory = Path.GetDirectoryName(outputStem);
@@ -326,7 +326,7 @@ public class YtDlpDownloadService : IYtDlpDownloadService
 
         if (!process.Start())
         {
-            throw new InvalidOperationException("Failed to start yt-dlp");
+            throw new InvalidOperationException(Se.Language.Video.YtDlpStartFailed);
         }
 
         var stdoutTask = process.StandardOutput.ReadToEndAsync(cancellationToken);
@@ -347,7 +347,7 @@ public class YtDlpDownloadService : IYtDlpDownloadService
         {
             var details = (await stderrTask).Trim();
             throw new InvalidOperationException(
-                $"yt-dlp subtitle download exited with code {process.ExitCode}." +
+                string.Format(Se.Language.Video.YtDlpSubtitleDownloadExitedWithCodeX, process.ExitCode) +
                 (string.IsNullOrEmpty(details) ? string.Empty : Environment.NewLine + details));
         }
     }

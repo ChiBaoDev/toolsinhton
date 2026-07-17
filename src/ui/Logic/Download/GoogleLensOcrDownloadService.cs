@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using Nikse.SubtitleEdit.Logic.Config;
 
 namespace Nikse.SubtitleEdit.Logic.Download;
 
@@ -41,12 +42,12 @@ public class GoogleLensOcrDownloadService(HttpClient httpClient) : IGoogleLensOc
         {
             if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64)
             {
-                throw new PlatformNotSupportedException("Google Lens OCR is not available for Linux ARM64.");
+                throw new PlatformNotSupportedException(string.Format(Se.Language.General.DownloadUnavailableForLinuxArm64X, "Google Lens OCR"));
             }
 
             return LinuxUrl;
         }
 
-        throw new PlatformNotSupportedException("Google Lens OCR does not support this platform");
+        throw new PlatformNotSupportedException(string.Format(Se.Language.General.DownloadNotSupportedOnPlatformX, "Google Lens OCR"));
     }
 }

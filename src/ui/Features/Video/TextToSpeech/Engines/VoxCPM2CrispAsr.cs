@@ -589,7 +589,7 @@ public class VoxCPM2CrispAsr : ITtsEngine
             if (!File.Exists(exe))
             {
                 throw new FileNotFoundException(
-                    "CrispASR executable not found. Install CrispASR via Video → Audio to text first.", exe);
+                    Se.Language.Video.TextToSpeech.CrispAsrExecutableNotFound, exe);
             }
 
             var modelFileName = GetModelFileName(modelKey);

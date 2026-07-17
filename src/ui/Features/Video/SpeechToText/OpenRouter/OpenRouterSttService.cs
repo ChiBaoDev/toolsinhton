@@ -80,7 +80,7 @@ public class OpenRouterSttService : ISttTranscriber
         {
             // Our own timeout fired, not a user cancel — surface it as an error
             // so the caller doesn't mistake it for cancellation.
-            throw new TimeoutException($"OpenRouter transcription timed out after {_settings.TimeoutSeconds} seconds.");
+            throw new TimeoutException(string.Format(Se.Language.Video.AudioToText.OpenRouterTranscriptionTimedOut, _settings.TimeoutSeconds));
         }
     }
 

@@ -1,3 +1,4 @@
+using Nikse.SubtitleEdit.Logic.Config;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Media;
@@ -15,7 +16,7 @@ public sealed class DownloadTtsWindow : Window
     public DownloadTtsWindow(DownloadTtsViewModel vm)
     {
         UiUtil.InitializeWindow(this, GetType().Name);
-        Title = "TTS - Download engine";
+        Title = Se.Language.Video.TextToSpeech.DownloadEngineTitle;
         SizeToContent = SizeToContent.WidthAndHeight;
         CanResize = false;
         WindowStartupLocation = WindowStartupLocation.CenterOwner;

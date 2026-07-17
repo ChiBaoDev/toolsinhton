@@ -147,6 +147,14 @@
     "downloadX":  "Tải xuống {0}",
     "downloadingX":  "Đang tải xuống {0}",
     "downloadingXPercent":  "Đang tải xuống {0} %",
+    "downloadUnavailableForLinuxArm64X":  "{0} không khả dụng cho Linux ARM64.",
+    "unsupportedMacOsArchitecture":  "Kiến trúc macOS không được hỗ trợ.",
+    "downloadNotSupportedOnPlatformX":  "Không hỗ trợ tải xuống {0} trên nền tảng này.",
+    "requestedUrlNotFoundX":  "Không tìm thấy URL được yêu cầu: {0}",
+    "downloadIncompleteXX":  "Tải xuống chưa hoàn tất: dự kiến {0} byte, đã nhận {1} byte",
+    "downloadFailedAfterAttemptsXXXX":  "Không thể tải tệp sau {0} lần thử. URL: {1}. Đã tải: {2}/{3} byte",
+    "archiveExtractionFailedXXX":  "Không thể giải nén bằng {0}, mã thoát {1}: {2}",
+    "archiveExecutableNotFoundXX":  "Không tìm thấy tệp thực thi {0} tại {1}",
     "duplicate":  "Nhân bản",
     "duration":  "Thời lượng",
     "durationMinutes":  "Thời lượng tính bằng phút",
@@ -1573,7 +1581,8 @@
       "unbreakShortLine":  "Bỏ ngắt dòng ngắn",
       "fixText":  "Sửa văn bản",
       "removeSpaceBetweenNumbers":  "Xóa khoảng trắng giữa các chữ số",
-      "fixDialogsOnOneLine":  "Sửa hội thoại trên một dòng"
+      "fixDialogsOnOneLine":  "Sửa hội thoại trên một dòng",
+      "settingsTitle":  "Cài đặt sửa lỗi thường gặp"
     },
     "adjustDurations":  {
       "title":  "Điều chỉnh thời lượng",
@@ -1728,7 +1737,8 @@
       "assaChangeStyleToStyle":  "sang",
       "assaChangeStyleImportStyle":  "Nhập kiểu...",
       "assaChangeStyleImportedX":  "Đã nhập: {0}",
-      "assaChangeStyleTrimUnusedStyles":  "Loại bỏ kiểu không dùng"
+      "assaChangeStyleTrimUnusedStyles":  "Loại bỏ kiểu không dùng",
+      "outputFolderNotSet":  "Thư mục đầu ra chưa được đặt."
     },
     "changeCasing":  {
       "title":  "Thay đổi kiểu chữ hoa/thường",
@@ -2015,7 +2025,8 @@
     "correctWordsX":  "Số từ đúng: {0}",
     "namesX":  "Số tên riêng: {0}",
     "addedToDictionaryX":  "Số từ đã thêm vào từ điển: {0}",
-    "doNotShowThisAgain":  "Không hiển thị lại thông báo này"
+    "doNotShowThisAgain":  "Không hiển thị lại thông báo này",
+    "editWholeTextTitle":  "Kiểm tra chính tả - Chỉnh sửa toàn bộ văn bản"
   },
   "video":  {
     "burnIn":  {
@@ -2051,6 +2062,7 @@
       "useSourceFolder":  "Dùng thư mục nguồn",
       "useSourceResolution":  "Dùng độ phân giải nguồn",
       "outputSettings":  "Tệp/thư mục đầu ra...",
+      "outputSettingsTitle":  "Cài đặt đầu ra",
       "fontSizeFactor":  "Hệ số cỡ chữ",
       "boxType":  "Loại hộp",
       "fixRightToLeft":  "Sửa hướng phải sang trái",
@@ -2062,7 +2074,8 @@
       "videoFileSize":  "Kích thước tệp video",
       "oneBox":  "Một hộp",
       "boxPerLine":  "Một hộp mỗi dòng",
-      "logoInfo":  "Chọn ảnh PNG rồi kéo ảnh đến vị trí mong muốn trên video."
+      "logoInfo":  "Chọn ảnh PNG rồi kéo ảnh đến vị trí mong muốn trên video.",
+      "currentAssaStyleInfo":  "Kiểu ASSA hiện tại sẽ được sử dụng\n\nHãy đổi định dạng phụ đề nếu bạn muốn đặt kiểu tại đây"
     },
     "videoTransparent":  {
       "title":  "Tạo video trong suốt với phụ đề",
@@ -2112,7 +2125,25 @@
       "beamSizeNote":  "0 cho tốc độ giải mã nhanh nhất. 5 cho độ chính xác tốt nhất (như Faster Whisper) nhưng mất thêm khoảng 20–30% thời gian. Giá trị lớn hơn 5 hiếm khi hữu ích.",
       "engineSettings":  "Cài đặt bộ máy chuyển giọng nói thành văn bản",
       "engineSettingsSubtitle":  "Bộ máy chuyển giọng nói thành văn bản",
-      "backendAndUpdateStatus":  "Trạng thái phần xử lý và bản cập nhật"
+      "backendAndUpdateStatus":  "Trạng thái phần xử lý và bản cập nhật",
+      "modelFileNotFound":  "Không tìm thấy tệp mô hình.",
+      "whisperCppModelMustBeGgmlBin":  "Mô hình whisper.cpp phải là tệp ggml \u0027.bin\u0027.",
+      "modelFolderNotFoundX":  "Không tìm thấy thư mục mô hình: {0}",
+      "fasterWhisperModelFolderMustContainModelBin":  "Thư mục mô hình faster-whisper phải chứa tệp \u0027model.bin\u0027.",
+      "inputAudioFileNotFound":  "Không tìm thấy tệp âm thanh đầu vào",
+      "audioFileNotFound":  "Không tìm thấy tệp âm thanh",
+      "dashScopeTranscriptionTimedOut":  "Hết thời gian chờ phiên chép lời DashScope sau {0} giây.",
+      "sttRequestTimedOut":  "Hết thời gian chờ yêu cầu STT sau {0} giây.",
+      "openRouterTranscriptionTimedOut":  "Hết thời gian chờ phiên chép lời OpenRouter sau {0} giây.",
+      "dashScopeUploadPolicyParseFailedX":  "Không thể phân tích phản hồi chính sách tải lên của DashScope. Phản hồi: {0}",
+      "dashScopeTaskIdMissingX":  "Phản hồi gửi bất đồng bộ của DashScope không chứa task_id. Phản hồi: {0}",
+      "dashScopeTranscriptionUrlMissingX":  "Tác vụ DashScope đã hoàn tất nhưng không chứa transcription_url. Phản hồi: {0}",
+      "dashScopeTaskFailedXX":  "Tác vụ phiên âm DashScope kết thúc với trạng thái {0}. Phản hồi: {1}",
+      "dashScopeUploadPolicyRequestFailedXX":  "Yêu cầu chính sách tải lên DashScope thất bại ({0}). Phản hồi: {1}",
+      "dashScopeOssUploadFailedXX":  "Tải tệp lên DashScope OSS thất bại ({0}). Phản hồi: {1}",
+      "dashScopeAsyncSubmitFailedXX":  "Gửi tác vụ bất đồng bộ đến DashScope thất bại ({0}). Phản hồi: {1}",
+      "dashScopeTaskPollFailedXX":  "Truy vấn tác vụ DashScope thất bại ({0}). Phản hồi: {1}",
+      "ffmpegChunkExtractionFailedXXXXX":  "ffmpeg không thể trích xuất đoạn {0}/{1} ({2} giây → {3} giây) từ {4}"
     },
     "textToSpeech":  {
       "title":  "Chuyển văn bản thành giọng nói",
@@ -2211,7 +2242,33 @@
       "subtitleUpdatedFromReviewSingular":  "Đã cập nhật một dòng từ phần xem lại giọng nói",
       "subtitleUpdatedFromReviewPlural":  "Đã cập nhật {0} dòng từ phần xem lại giọng nói",
       "subtitleMergedLinesAppliedSingular":  "Đã áp dụng một lần gộp dòng từ văn bản thành giọng nói",
-      "subtitleMergedLinesAppliedPlural":  "Đã gộp {0} dòng từ văn bản thành giọng nói"
+      "subtitleMergedLinesAppliedPlural":  "Đã gộp {0} dòng từ văn bản thành giọng nói",
+      "downloadEngineTitle":  "TTS - Tải bộ máy",
+      "cosyVoice3CrispAsrSettings":  "Cài đặt CosyVoice3 (CrispASR)",
+      "f5TtsCrispAsrSettings":  "Cài đặt F5-TTS (CrispASR)",
+      "indexTtsCrispAsrSettings":  "Cài đặt IndexTTS (CrispASR)",
+      "qwen3TtsCrispAsrSettings":  "Cài đặt Qwen3 TTS (CrispASR)",
+      "vibeVoiceCrispAsrSettings":  "Cài đặt VibeVoice (CrispASR)",
+      "voxCpm2CrispAsrSettings":  "Cài đặt VoxCPM2 (CrispASR)",
+      "crispAsrExecutableNotFound":  "Không tìm thấy tệp thực thi CrispASR. Hãy cài đặt CrispASR qua Video → Âm thanh thành văn bản trước.",
+      "kokoroServerExecutableNotFound":  "Không tìm thấy tệp thực thi máy chủ Kokoro TTS.",
+      "kokoroModelOrVoicesFileMissing":  "Thiếu mô hình hoặc tệp giọng nói của Kokoro TTS.",
+      "omniVoiceExecutableNotFound":  "Không tìm thấy tệp thực thi omnivoice-tts.",
+      "omniVoiceTranscriptRequiredX":  "Nhân bản giọng nói OmniVoice TTS cần tệp bản chép lời tại {0}. Hãy nhập lại giọng nói để cung cấp bản chép lời.",
+      "omniVoiceStartFailed":  "Không thể khởi động omnivoice-tts.",
+      "serverStartFailedX":  "Không thể khởi động {0}.",
+      "serverHealthTimedOutXXX":  "Máy chủ {0} không báo trạng thái sẵn sàng trong vòng {1} giây. Kết quả đầu ra cuối: {2}",
+      "allTalkServerNotReachable":  "Không thể kết nối đến máy chủ AllTalk TTS. Hãy kiểm tra xem máy chủ có đang chạy hay không.",
+      "allTalkRequestTimedOut":  "Yêu cầu đến máy chủ AllTalk TTS đã hết thời gian chờ. Hãy kiểm tra xem máy chủ có đang chạy hay không.",
+      "azureRegionRequiredForVoiceRefresh":  "Hãy đặt khu vực Azure trong cài đặt công cụ TTS trước khi làm mới danh sách giọng nói.",
+      "qwen3ServerExecutableNotFound":  "Không tìm thấy tệp thực thi máy chủ Qwen3 TTS.",
+      "chatterboxRequiresCrispAsrUpdate":  "Chatterbox cần CrispASR v0.6.0 trở lên. Hãy tải lại CrispASR qua Video → Âm thanh thành văn bản → Cài đặt bộ máy → Tải lại, rồi thử lại.",
+      "chatterboxModelCacheStaleXX":  "Chatterbox không thể tải mô hình — các tệp GGUF trong {0} có thể đã cũ hoặc tải xuống chưa hoàn tất. Hãy xóa chúng rồi thử lại để tải xuống lại. Kết quả đầu ra gốc: {1}",
+      "chatterboxTurboTokenizerMismatchX":  "Chatterbox TTS \"Turbo\" không tải được với CrispASR 0.8.0. Mô hình turbo không có lỗi — bước kiểm tra tokenizer/từ vựng của phiên bản 0.8.0 quá nghiêm ngặt và đã từ chối tập nhúng mở rộng hợp lệ (tokenizer 50257 token, kích thước từ vựng văn bản 50276). Lỗi này đã được sửa ở thượng nguồn (CrispStrobe/CrispASR#181): CrispASR mới hơn tải Turbo bình thường mà không cần tải lại. Trong thời gian chờ, hãy chuyển sang mô hình Chatterbox \"Base\"; mô hình này hoạt động.\n\n{0}",
+      "chatterboxTurboStartupCrashX":  "Mô hình Chatterbox TTS \"Turbo\" đã làm CrispASR gặp sự cố khi khởi động. Đây là sự cố đã biết ở phần phụ trợ chatterbox-turbo (đặc biệt trên macOS/CPU). Hãy thử mô hình \"Base\", hoặc báo lỗi tại https://github.com/CrispStrobe/CrispASR/issues kèm nhật ký bên dưới.\n\n{0}",
+      "processTimedOutXXX":  "\"{0} {1}\" không hoàn tất trong vòng {2} giây và đã bị dừng.",
+      "chatterboxExitedDuringStartupXX":  "crispasr (chatterbox) đã thoát trong khi khởi động (mã {0}). Kết quả đầu ra: {1}",
+      "chatterboxHealthTimedOutX":  "crispasr (chatterbox) không báo trạng thái sẵn sàng trong vòng 15 phút. Kết quả đầu ra cuối: {0}"
     },
     "shotChanges":  {
       "titleGenerateOrImport":  "Tạo/nhập điểm chuyển cảnh",
@@ -2261,7 +2318,10 @@
       "testOcr":  "Kiểm tra khung hình hiện tại",
       "testOcrRunning":  "Đang kiểm tra OCR trên khung hình hiện tại...",
       "testOcrResultX":  "Kết quả kiểm tra: {0}",
-      "testOcrNoTextFound":  "Kiểm tra: không tìm thấy văn bản trong vùng quét"
+      "testOcrNoTextFound":  "Kiểm tra: không tìm thấy văn bản trong vùng quét",
+      "currentFrameExtractionFailed":  "Không thể trích xuất khung hình hiện tại - hãy xem nhật ký để biết dòng lệnh ffmpeg.",
+      "noFramesExtracted":  "Không trích xuất được khung hình nào từ video - hãy xem nhật ký để biết dòng lệnh ffmpeg.",
+      "paddleOcrFailedX":  "PaddleOCR thất bại: {0}"
     },
     "goToVideoPosition":  "Đi đến vị trí video",
     "generateBlankVideoDotDotDot":  "Tạo video trống...",
@@ -2328,7 +2388,13 @@
     "reEncodeOutputVideoFileNotGenerated":  "Chưa tạo được tệp video đầu ra: {0}\r\nTham số: {1}",
     "reEncodeGeneratingDone":  "Đã tạo xong",
     "reEncodeGeneratedFilesX":  "Các tệp đã tạo ({0}):",
-    "reEncodeFfmpegParameters":  "Tham số FFmpeg"
+    "reEncodeFfmpegParameters":  "Tham số FFmpeg",
+    "openFromUrlNoVideoProducedXX":  "yt-dlp đã hoàn tất nhưng không tạo ra tệp video.\nThư mục tạm: {0}\nNội dung: {1}",
+    "ytDlpNotInstalled":  "yt-dlp chưa được cài đặt.",
+    "ytDlpStartFailed":  "Không thể khởi động yt-dlp.",
+    "ytDlpExitedWithCodeX":  "yt-dlp đã thoát với mã {0}.",
+    "ytDlpSubtitleDownloadExitedWithCodeX":  "Quá trình tải phụ đề bằng yt-dlp đã thoát với mã {0}.",
+    "ytDlpChecksumFailedXXX":  "Tệp yt-dlp đã tải xuống ({0}) không vượt qua bước xác minh SHA-256 — dự kiến {1}, nhận được {2}. Tệp đã bị xóa."
   },
   "waveform":  {
     "guessTimeCodes":  "Ước tính mã thời gian",
@@ -3193,6 +3259,10 @@
     "binaryImageCompareDatabase":  "Cơ sở dữ liệu \"So khớp ảnh nhị phân\"",
     "removeXFromUnknownWordsList":  "Xóa \"{0}\" khỏi danh sách từ chưa biết",
     "downloadingPaddleOcrEngineDotDotDot":  "Đang tải bộ máy PaddleOCR...",
+    "downloadingTesseractModel":  "Đang tải mô hình Tesseract",
+    "selectTesseractDictionary":  "Chọn từ điển Tesseract:",
+    "algorithm":  "Thuật toán",
+    "autoDrawAlgorithmTooltip":  "Thuật toán dùng để Tự động vẽ tạo các đường tiền cảnh/nền",
     "downloadingPaddleOcrModelsDotDotDot":  "Đang tải mô hình PaddleOCR...",
     "paddleOcr":  "PaddleOCR",
     "binaryImageCompareInspectImageMatches":  "\"So khớp ảnh nhị phân\" - Kiểm tra kết quả khớp ảnh",
@@ -3229,7 +3299,18 @@
     "showAllOllamaModels":  "Hiển thị tất cả mô hình (không chỉ mô hình hỗ trợ thị giác)",
     "ollamaModelLikelyWrong":  "Ollama không trả về văn bản; mô hình đã chọn có thể không hỗ trợ OCR/thị giác",
     "llamaCppNotDownloaded":  "Chưa tải bộ máy/mô hình llama.cpp; hãy tải xuống trong cài đặt chuyển đổi hàng loạt",
-    "llamaCppReturnedNoText":  "llama.cpp không trả về văn bản; hãy kiểm tra máy chủ và mô hình"
+    "llamaCppReturnedNoText":  "llama.cpp không trả về văn bản; hãy kiểm tra máy chủ và mô hình",
+    "inspectBinaryOcrAdditions":  "Kiểm tra các mục bổ sung Binary OCR",
+    "newRenameBinaryImageCompareDatabase":  "Cơ sở dữ liệu So khớp ảnh nhị phân mới/đổi tên",
+    "downloadingCrispEmbed":  "Đang tải CrispEmbed",
+    "downloadingGoogleLensOcr":  "Đang tải OCR Google Lens",
+    "downloadingPaddleOcr":  "Đang tải PaddleOCR",
+    "downloadingTesseract":  "Đang tải Tesseract",
+    "newRenameNOcrDatabase":  "Cơ sở dữ liệu nOCR mới/đổi tên",
+    "cloudVisionApiKeyInvalid":  "Khóa API Cloud Vision không hợp lệ hoặc tính năng thanh toán/API chưa được bật.",
+    "cloudVisionRequestForbidden":  "Cloud Vision từ chối yêu cầu. Hãy kiểm tra tính năng thanh toán, trạng thái API và khóa API.",
+    "cloudVisionApiStatusErrorX":  "Lệnh gọi API Cloud Vision thất bại với mã trạng thái {0}.",
+    "cloudVisionApiCallErrorX":  "Lỗi khi gọi API Cloud Vision: {0}"
   },
   "assa":  {
     "assaDraw":  "Vẽ ASSA",
@@ -3350,6 +3431,9 @@
     "rotation":  "Xoay",
     "imageColorPicker":  "Bộ chọn màu ảnh",
     "copyColorAsHextoClipboard":  "Sao chép mã màu hex vào bộ nhớ tạm",
+    "mouseOverColor":  "Màu khi rê chuột",
+    "clickedColor":  "Màu đã nhấp",
+    "copied":  "✓ Đã sao chép!",
     "generatingBackgroundBoxXOfY":  "Đang tạo hộp nền {0}/{1}...",
     "applyAdvancedEffectTitle":  "Áp dụng hiệu ứng nâng cao",
     "chooseEffect":  "Chọn hiệu ứng",
@@ -3430,7 +3514,8 @@
     "advancedEffectSlideInRightDescription":  "Văn bản trượt vào từ ngoài màn hình bên phải, giữ nguyên rồi thoát về bên phải",
     "advancedEffectFadeInOut":  "Hiện/mờ dần",
     "advancedEffectFadeInOutDescription":  "Văn bản hiện dần ở đầu và mờ dần ở cuối mỗi phụ đề",
-    "overrideTagsHistory":  "Lịch sử thẻ điều khiển"
+    "overrideTagsHistory":  "Lịch sử thẻ điều khiển",
+    "drawUseShapeForErase":  "Dùng hình để xóa (iclip)"
   },
   "about":  {
     "title":  "Giới thiệu về Subtitle Edit",

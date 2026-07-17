@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using Nikse.SubtitleEdit.Logic.Config;
 
 namespace Nikse.SubtitleEdit.Logic.Download;
 
@@ -41,7 +42,7 @@ public class FfmpegDownloadService : IFfmpegDownloadService
                 case Architecture.X64:
                     return MacUrl;
                 default:
-                    throw new PlatformNotSupportedException("Unsupported macOS architecture.");
+                    throw new PlatformNotSupportedException(Se.Language.General.UnsupportedMacOsArchitecture);
             }
         }
 

@@ -83,6 +83,10 @@ public class FirstPartyUiLiteralInventoryTests
         @"(?<kind>ToolTip\.SetTip|(?:[A-Za-z0-9_]+\.)?(?:ShowMessageBox|ShowToast|ShowNotification|ShowMessage|MessageBox\.Show|MessageBox|Toast|Notification)|UiUtil\.(?:Show|Display)[A-Za-z0-9_]*|throw\s+new\s+[A-Za-z0-9_]*Exception)\s*\((?<arguments>[^;]*?)\)",
         RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.Singleline);
 
+    private static readonly Regex Task11UiCall = new(
+        @"(?<kind>ToolTip\.SetTip|Show(?:MessageBox|Toast|Notification)|UiUtil\.(?:Show|Display)[A-Za-z0-9_]*|throw\s+new\s+[A-Za-z0-9_]*Exception)\s*\((?<arguments>[^;]*?)\)",
+        RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.Singleline);
+
     private static readonly Regex StringLiteral = new(
         @"""(?<literal>(?:\\.|[^""\\])*)""",
         RegexOptions.Compiled | RegexOptions.CultureInvariant);
@@ -149,13 +153,123 @@ public class FirstPartyUiLiteralInventoryTests
     }
 
     [Fact]
+    public void Task11ScannerMatchesFixedScanScope()
+    {
+        const string source = "Title = Se.Language.General.Title; Title = \"Visible title\"; MessageBox.Show(\"Excluded alias\"); ShowMessageBox(\"Included message\");";
+        var candidates = new List<Task10Candidate>();
+
+        AddCSharpCandidates(candidates, "sample.cs", source, includeLanguageMembers: false, Task11UiCall);
+
+        Assert.Equal(new[] { "Visible title", "Included message" }, candidates.Select(candidate => candidate.Literal));
+    }
+
+    [AvaloniaFact]
+    public void Task11HotspotRuntimeValuesUseVietnameseCatalog()
+    {
+        var previous = Se.Language;
+        Se.Language = LoadVietnameseLanguage();
+        try
+        {
+            Assert.Equal("Cài đặt đầu ra", Se.Language.Video.BurnIn.OutputSettingsTitle);
+            Assert.Equal("Đang tải mô hình Tesseract", Se.Language.Ocr.DownloadingTesseractModel);
+            Assert.Equal("Chọn từ điển Tesseract:", Se.Language.Ocr.SelectTesseractDictionary);
+            Assert.Equal("Thuật toán", Se.Language.Ocr.Algorithm);
+            Assert.Equal("Thuật toán dùng để Tự động vẽ tạo các đường tiền cảnh/nền", Se.Language.Ocr.AutoDrawAlgorithmTooltip);
+            Assert.Equal("Màu khi rê chuột", Se.Language.Assa.MouseOverColor);
+            Assert.Equal("Màu đã nhấp", Se.Language.Assa.ClickedColor);
+            Assert.Equal("✓ Đã sao chép!", Se.Language.Assa.Copied);
+            Assert.Equal("Cài đặt sửa lỗi thường gặp", Se.Language.Tools.FixCommonErrors.SettingsTitle);
+            Assert.Equal("Kiểm tra chính tả - Chỉnh sửa toàn bộ văn bản", Se.Language.SpellCheck.EditWholeTextTitle);
+            Assert.Equal("Kiểm tra các mục bổ sung Binary OCR", Se.Language.Ocr.InspectBinaryOcrAdditions);
+            Assert.Equal("Cơ sở dữ liệu So khớp ảnh nhị phân mới/đổi tên", Se.Language.Ocr.NewRenameBinaryImageCompareDatabase);
+            Assert.Equal("Đang tải CrispEmbed", Se.Language.Ocr.DownloadingCrispEmbed);
+            Assert.Equal("Đang tải OCR Google Lens", Se.Language.Ocr.DownloadingGoogleLensOcr);
+            Assert.Equal("Đang tải PaddleOCR", Se.Language.Ocr.DownloadingPaddleOcr);
+            Assert.Equal("Đang tải Tesseract", Se.Language.Ocr.DownloadingTesseract);
+            Assert.Equal("Cơ sở dữ liệu nOCR mới/đổi tên", Se.Language.Ocr.NewRenameNOcrDatabase);
+            Assert.Equal("Kiểu ASSA hiện tại sẽ được sử dụng\n\nHãy đổi định dạng phụ đề nếu bạn muốn đặt kiểu tại đây", Se.Language.Video.BurnIn.CurrentAssaStyleInfo);
+            Assert.Equal("TTS - Tải bộ máy", Se.Language.Video.TextToSpeech.DownloadEngineTitle);
+            Assert.Equal("Dùng hình để xóa (iclip)", Se.Language.Assa.DrawUseShapeForErase);
+            Assert.Equal("Cài đặt CosyVoice3 (CrispASR)", Se.Language.Video.TextToSpeech.CosyVoice3CrispAsrSettings);
+            Assert.Equal("Cài đặt F5-TTS (CrispASR)", Se.Language.Video.TextToSpeech.F5TtsCrispAsrSettings);
+            Assert.Equal("Cài đặt IndexTTS (CrispASR)", Se.Language.Video.TextToSpeech.IndexTtsCrispAsrSettings);
+            Assert.Equal("Cài đặt Qwen3 TTS (CrispASR)", Se.Language.Video.TextToSpeech.Qwen3TtsCrispAsrSettings);
+            Assert.Equal("Cài đặt VibeVoice (CrispASR)", Se.Language.Video.TextToSpeech.VibeVoiceCrispAsrSettings);
+            Assert.Equal("Cài đặt VoxCPM2 (CrispASR)", Se.Language.Video.TextToSpeech.VoxCpm2CrispAsrSettings);
+            Assert.Equal("Không tìm thấy tệp mô hình.", Se.Language.Video.AudioToText.ModelFileNotFound);
+            Assert.Equal("Mô hình whisper.cpp phải là tệp ggml '.bin'.", Se.Language.Video.AudioToText.WhisperCppModelMustBeGgmlBin);
+            Assert.Equal("Không tìm thấy thư mục mô hình: {0}", Se.Language.Video.AudioToText.ModelFolderNotFoundX);
+            Assert.Equal("Thư mục mô hình faster-whisper phải chứa tệp 'model.bin'.", Se.Language.Video.AudioToText.FasterWhisperModelFolderMustContainModelBin);
+            Assert.Equal("Không tìm thấy tệp âm thanh đầu vào", Se.Language.Video.AudioToText.InputAudioFileNotFound);
+            Assert.Equal("Không tìm thấy tệp âm thanh", Se.Language.Video.AudioToText.AudioFileNotFound);
+            Assert.Equal("Hết thời gian chờ phiên chép lời DashScope sau {0} giây.", Se.Language.Video.AudioToText.DashScopeTranscriptionTimedOut);
+            Assert.Equal("Hết thời gian chờ yêu cầu STT sau {0} giây.", Se.Language.Video.AudioToText.SttRequestTimedOut);
+            Assert.Equal("Hết thời gian chờ phiên chép lời OpenRouter sau {0} giây.", Se.Language.Video.AudioToText.OpenRouterTranscriptionTimedOut);
+            Assert.Equal("Không tìm thấy tệp thực thi CrispASR. Hãy cài đặt CrispASR qua Video → Âm thanh thành văn bản trước.", Se.Language.Video.TextToSpeech.CrispAsrExecutableNotFound);
+            Assert.Equal("Không tìm thấy tệp thực thi máy chủ Kokoro TTS.", Se.Language.Video.TextToSpeech.KokoroServerExecutableNotFound);
+            Assert.Equal("Thiếu mô hình hoặc tệp giọng nói của Kokoro TTS.", Se.Language.Video.TextToSpeech.KokoroModelOrVoicesFileMissing);
+            Assert.Equal("Không tìm thấy tệp thực thi omnivoice-tts.", Se.Language.Video.TextToSpeech.OmniVoiceExecutableNotFound);
+            Assert.Equal("Nhân bản giọng nói OmniVoice TTS cần tệp bản chép lời tại {0}. Hãy nhập lại giọng nói để cung cấp bản chép lời.", Se.Language.Video.TextToSpeech.OmniVoiceTranscriptRequiredX);
+            Assert.Equal("Không thể khởi động omnivoice-tts.", Se.Language.Video.TextToSpeech.OmniVoiceStartFailed);
+            Assert.Equal("Không thể khởi động {0}.", Se.Language.Video.TextToSpeech.ServerStartFailedX);
+            Assert.Equal("Máy chủ {0} không báo trạng thái sẵn sàng trong vòng {1} giây. Kết quả đầu ra cuối: {2}", Se.Language.Video.TextToSpeech.ServerHealthTimedOutXXX);
+            Assert.Equal("Không thể kết nối đến máy chủ AllTalk TTS. Hãy kiểm tra xem máy chủ có đang chạy hay không.", Se.Language.Video.TextToSpeech.AllTalkServerNotReachable);
+            Assert.Equal("Yêu cầu đến máy chủ AllTalk TTS đã hết thời gian chờ. Hãy kiểm tra xem máy chủ có đang chạy hay không.", Se.Language.Video.TextToSpeech.AllTalkRequestTimedOut);
+            Assert.Equal("Hãy đặt khu vực Azure trong cài đặt công cụ TTS trước khi làm mới danh sách giọng nói.", Se.Language.Video.TextToSpeech.AzureRegionRequiredForVoiceRefresh);
+            Assert.Equal("Không tìm thấy tệp thực thi máy chủ Qwen3 TTS.", Se.Language.Video.TextToSpeech.Qwen3ServerExecutableNotFound);
+            Assert.Equal("Không thể phân tích phản hồi chính sách tải lên của DashScope. Phản hồi: {0}", Se.Language.Video.AudioToText.DashScopeUploadPolicyParseFailedX);
+            Assert.Equal("Phản hồi gửi bất đồng bộ của DashScope không chứa task_id. Phản hồi: {0}", Se.Language.Video.AudioToText.DashScopeTaskIdMissingX);
+            Assert.Equal("Tác vụ DashScope đã hoàn tất nhưng không chứa transcription_url. Phản hồi: {0}", Se.Language.Video.AudioToText.DashScopeTranscriptionUrlMissingX);
+            Assert.Equal("Tác vụ phiên âm DashScope kết thúc với trạng thái {0}. Phản hồi: {1}", Se.Language.Video.AudioToText.DashScopeTaskFailedXX);
+            Assert.Equal("Yêu cầu chính sách tải lên DashScope thất bại ({0}). Phản hồi: {1}", Se.Language.Video.AudioToText.DashScopeUploadPolicyRequestFailedXX);
+            Assert.Equal("Tải tệp lên DashScope OSS thất bại ({0}). Phản hồi: {1}", Se.Language.Video.AudioToText.DashScopeOssUploadFailedXX);
+            Assert.Equal("Gửi tác vụ bất đồng bộ đến DashScope thất bại ({0}). Phản hồi: {1}", Se.Language.Video.AudioToText.DashScopeAsyncSubmitFailedXX);
+            Assert.Equal("Truy vấn tác vụ DashScope thất bại ({0}). Phản hồi: {1}", Se.Language.Video.AudioToText.DashScopeTaskPollFailedXX);
+            Assert.Equal("ffmpeg không thể trích xuất đoạn {0}/{1} ({2} giây → {3} giây) từ {4}", Se.Language.Video.AudioToText.FfmpegChunkExtractionFailedXXXXX);
+            Assert.Equal("Không thể trích xuất khung hình hiện tại - hãy xem nhật ký để biết dòng lệnh ffmpeg.", Se.Language.Video.VideoOcr.CurrentFrameExtractionFailed);
+            Assert.Equal("Không trích xuất được khung hình nào từ video - hãy xem nhật ký để biết dòng lệnh ffmpeg.", Se.Language.Video.VideoOcr.NoFramesExtracted);
+            Assert.Equal("PaddleOCR thất bại: {0}", Se.Language.Video.VideoOcr.PaddleOcrFailedX);
+            Assert.Equal("yt-dlp đã hoàn tất nhưng không tạo ra tệp video.\nThư mục tạm: {0}\nNội dung: {1}", Se.Language.Video.OpenFromUrlNoVideoProducedXX);
+            Assert.Equal("Thư mục đầu ra chưa được đặt.", Se.Language.Tools.BatchConvert.OutputFolderNotSet);
+            Assert.Equal("Lệnh gọi API Cloud Vision thất bại với mã trạng thái {0}.", Se.Language.Ocr.CloudVisionApiStatusErrorX);
+            Assert.Equal("Lỗi khi gọi API Cloud Vision: {0}", Se.Language.Ocr.CloudVisionApiCallErrorX);
+            Assert.Equal("Khóa API Cloud Vision không hợp lệ hoặc tính năng thanh toán/API chưa được bật.", Se.Language.Ocr.CloudVisionApiKeyInvalid);
+            Assert.Equal("Cloud Vision từ chối yêu cầu. Hãy kiểm tra tính năng thanh toán, trạng thái API và khóa API.", Se.Language.Ocr.CloudVisionRequestForbidden);
+            Assert.Equal("Chatterbox cần CrispASR v0.6.0 trở lên. Hãy tải lại CrispASR qua Video → Âm thanh thành văn bản → Cài đặt bộ máy → Tải lại, rồi thử lại.", Se.Language.Video.TextToSpeech.ChatterboxRequiresCrispAsrUpdate);
+            Assert.Equal("Chatterbox không thể tải mô hình — các tệp GGUF trong {0} có thể đã cũ hoặc tải xuống chưa hoàn tất. Hãy xóa chúng rồi thử lại để tải xuống lại. Kết quả đầu ra gốc: {1}", Se.Language.Video.TextToSpeech.ChatterboxModelCacheStaleXX);
+            Assert.Equal("Chatterbox TTS \"Turbo\" không tải được với CrispASR 0.8.0. Mô hình turbo không có lỗi — bước kiểm tra tokenizer/từ vựng của phiên bản 0.8.0 quá nghiêm ngặt và đã từ chối tập nhúng mở rộng hợp lệ (tokenizer 50257 token, kích thước từ vựng văn bản 50276). Lỗi này đã được sửa ở thượng nguồn (CrispStrobe/CrispASR#181): CrispASR mới hơn tải Turbo bình thường mà không cần tải lại. Trong thời gian chờ, hãy chuyển sang mô hình Chatterbox \"Base\"; mô hình này hoạt động.\n\n{0}", Se.Language.Video.TextToSpeech.ChatterboxTurboTokenizerMismatchX);
+            Assert.Equal("Mô hình Chatterbox TTS \"Turbo\" đã làm CrispASR gặp sự cố khi khởi động. Đây là sự cố đã biết ở phần phụ trợ chatterbox-turbo (đặc biệt trên macOS/CPU). Hãy thử mô hình \"Base\", hoặc báo lỗi tại https://github.com/CrispStrobe/CrispASR/issues kèm nhật ký bên dưới.\n\n{0}", Se.Language.Video.TextToSpeech.ChatterboxTurboStartupCrashX);
+            Assert.Equal("\"{0} {1}\" không hoàn tất trong vòng {2} giây và đã bị dừng.", Se.Language.Video.TextToSpeech.ProcessTimedOutXXX);
+            Assert.Equal("crispasr (chatterbox) đã thoát trong khi khởi động (mã {0}). Kết quả đầu ra: {1}", Se.Language.Video.TextToSpeech.ChatterboxExitedDuringStartupXX);
+            Assert.Equal("crispasr (chatterbox) không báo trạng thái sẵn sàng trong vòng 15 phút. Kết quả đầu ra cuối: {0}", Se.Language.Video.TextToSpeech.ChatterboxHealthTimedOutX);
+            Assert.Equal("{0} không khả dụng cho Linux ARM64.", Se.Language.General.DownloadUnavailableForLinuxArm64X);
+            Assert.Equal("Kiến trúc macOS không được hỗ trợ.", Se.Language.General.UnsupportedMacOsArchitecture);
+            Assert.Equal("Không hỗ trợ tải xuống {0} trên nền tảng này.", Se.Language.General.DownloadNotSupportedOnPlatformX);
+            Assert.Equal("Không tìm thấy URL được yêu cầu: {0}", Se.Language.General.RequestedUrlNotFoundX);
+            Assert.Equal("Tải xuống chưa hoàn tất: dự kiến {0} byte, đã nhận {1} byte", Se.Language.General.DownloadIncompleteXX);
+            Assert.Equal("Không thể tải tệp sau {0} lần thử. URL: {1}. Đã tải: {2}/{3} byte", Se.Language.General.DownloadFailedAfterAttemptsXXXX);
+            Assert.Equal("Không thể giải nén bằng {0}, mã thoát {1}: {2}", Se.Language.General.ArchiveExtractionFailedXXX);
+            Assert.Equal("Không tìm thấy tệp thực thi {0} tại {1}", Se.Language.General.ArchiveExecutableNotFoundXX);
+            Assert.Equal("yt-dlp chưa được cài đặt.", Se.Language.Video.YtDlpNotInstalled);
+            Assert.Equal("Không thể khởi động yt-dlp.", Se.Language.Video.YtDlpStartFailed);
+            Assert.Equal("yt-dlp đã thoát với mã {0}.", Se.Language.Video.YtDlpExitedWithCodeX);
+            Assert.Equal("Quá trình tải phụ đề bằng yt-dlp đã thoát với mã {0}.", Se.Language.Video.YtDlpSubtitleDownloadExitedWithCodeX);
+            Assert.Equal("Tệp yt-dlp đã tải xuống ({0}) không vượt qua bước xác minh SHA-256 — dự kiến {1}, nhận được {2}. Tệp đã bị xóa.", Se.Language.Video.YtDlpChecksumFailedXXX);
+        }
+        finally
+        {
+            Se.Language = previous;
+        }
+    }
+
+    [Fact]
     public void Task11TargetedSourceCandidatesMatchStructuredInventory()
     {
         var root = RepositoryRoot();
         var inventory = LoadInventory(root, "tests/UI/TestData/Task11LiteralInventory.json");
 
         Assert.Equal(RequiredTask11Roots, inventory.Roots);
-        var candidates = ScanCandidates(root, RequiredTask11Roots);
+        var candidates = ScanTask11Candidates(root, inventory);
         AssertInventoryMatchesCandidates(root, inventory, candidates);
     }
 
@@ -267,7 +381,7 @@ public class FirstPartyUiLiteralInventoryTests
         const string source = "userContent = \"Context text\";";
         var candidates = new List<Task10Candidate>();
 
-        AddCSharpCandidates(candidates, "sample.cs", source);
+        AddCSharpCandidates(candidates, "sample.cs", source, includeLanguageMembers: true, UiCall);
 
         var candidate = Assert.Single(candidates);
         Assert.Equal("userContent", candidate.Kind);
@@ -280,7 +394,7 @@ public class FirstPartyUiLiteralInventoryTests
         const string source = "var file = Pick(Se.Language.General.TextFiles, Se.Language.General.TextFiles);";
         var candidates = new List<Task10Candidate>();
 
-        AddCSharpCandidates(candidates, "sample.cs", source);
+        AddCSharpCandidates(candidates, "sample.cs", source, includeLanguageMembers: true, UiCall);
 
         var expressions = candidates.Where(candidate => candidate.SourceExpression == "Se.Language.General.TextFiles").ToArray();
         Assert.Equal(2, expressions.Length);
@@ -350,7 +464,30 @@ public class FirstPartyUiLiteralInventoryTests
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
         ?? throw new InvalidDataException($"Could not load literal inventory: {path}");
 
-    private static Task10Candidate[] ScanCandidates(string root, IReadOnlyList<string> roots)
+    private static Task10Candidate[] ScanTask11Candidates(string root, Task10Inventory inventory)
+    {
+        var candidates = ScanCandidates(root, RequiredTask11Roots, includeLanguageMembers: false, uiCall: Task11UiCall).ToList();
+        foreach (var row in inventory.Rows.Where(row => row.Classification == "localized"))
+        {
+            var path = ToAbsolutePath(root, row.Source);
+            var lines = File.ReadAllLines(path);
+            if (row.Line <= 0 || row.Line > lines.Length || string.IsNullOrWhiteSpace(row.SourceExpression))
+            {
+                continue;
+            }
+
+            var line = lines[row.Line - 1];
+            var column = line.IndexOf(row.SourceExpression, StringComparison.Ordinal) + 1;
+            if (column > 0)
+            {
+                AddCandidate(candidates, row.Source, row.Line, column, "localized", null, row.SourceExpression);
+            }
+        }
+
+        return candidates.ToArray();
+    }
+
+    private static Task10Candidate[] ScanCandidates(string root, IReadOnlyList<string> roots, bool includeLanguageMembers = true, Regex? uiCall = null)
     {
         var candidates = new List<Task10Candidate>();
         foreach (var relativeRoot in roots)
@@ -369,7 +506,12 @@ public class FirstPartyUiLiteralInventoryTests
                 var text = File.ReadAllText(file);
                 if (file.EndsWith(".cs", StringComparison.OrdinalIgnoreCase))
                 {
-                    AddCSharpCandidates(candidates, source, text);
+                    if (!includeLanguageMembers && source.StartsWith("src/ui/Logic/Config/Language/", StringComparison.Ordinal))
+                    {
+                        continue;
+                    }
+
+                    AddCSharpCandidates(candidates, source, text, includeLanguageMembers, uiCall ?? UiCall);
                 }
                 else
                 {
@@ -381,7 +523,7 @@ public class FirstPartyUiLiteralInventoryTests
         return candidates.ToArray();
     }
 
-    private static void AddCSharpCandidates(List<Task10Candidate> candidates, string source, string text)
+    private static void AddCSharpCandidates(List<Task10Candidate> candidates, string source, string text, bool includeLanguageMembers, Regex uiCall)
     {
         foreach (Match match in UiPropertyAssignment.Matches(text))
         {
@@ -392,7 +534,7 @@ public class FirstPartyUiLiteralInventoryTests
             }
         }
 
-        foreach (Match call in UiCall.Matches(text))
+        foreach (Match call in uiCall.Matches(text))
         {
             var arguments = call.Groups["arguments"];
             foreach (Match literal in StringLiteral.Matches(arguments.Value))
@@ -403,9 +545,12 @@ public class FirstPartyUiLiteralInventoryTests
 
         }
 
-        foreach (Match expression in LanguageMemberExpression.Matches(text))
+        if (includeLanguageMembers)
         {
-            AddCandidate(candidates, source, text, expression.Index, "language-member", null, expression.Value);
+            foreach (Match expression in LanguageMemberExpression.Matches(text))
+            {
+                AddCandidate(candidates, source, text, expression.Index, "language-member", null, expression.Value);
+            }
         }
     }
 

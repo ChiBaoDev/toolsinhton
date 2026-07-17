@@ -131,12 +131,13 @@ public partial class DownloadVideoFromUrlViewModel : ObservableObject
             var actualVideoPath = FindProducedVideo(tempDir);
             if (actualVideoPath is null)
             {
-                throw new FileNotFoundException(
-                    "yt-dlp finished but no video file was produced." + Environment.NewLine +
-                    $"Temp directory: {tempDir}" + Environment.NewLine +
-                    "Contents: " + (Directory.Exists(tempDir)
-                        ? string.Join(", ", Directory.EnumerateFiles(tempDir).Select(Path.GetFileName))
-                        : "<missing>"));
+                var contents = Directory.Exists(tempDir)
+                    ? string.Join(", ", Directory.EnumerateFiles(tempDir).Select(Path.GetFileName))
+                    : "<missing>";
+                throw new FileNotFoundException(string.Format(
+                    Se.Language.Video.OpenFromUrlNoVideoProducedXX,
+                    tempDir,
+                    contents));
             }
 
             if (File.Exists(OutputPath))

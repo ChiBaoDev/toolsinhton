@@ -8,7 +8,7 @@ public class NOcrDbNewWindow : Window
 {
     public NOcrDbNewWindow(NOcrDbNewViewModel vm)
     {
-        Title = "New/rename nOCR database";
+        Title = Se.Language.Ocr.NewRenameNOcrDatabase;
         vm.Window = this;
         UiUtil.InitializeWindow(this, GetType().Name);
         SizeToContent = SizeToContent.WidthAndHeight;

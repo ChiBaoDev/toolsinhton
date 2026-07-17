@@ -10,6 +10,7 @@ public class LanguageBatchConvert
     public string XActionsSelected { get; set; }
     public string OutputFolderSource { get; set; }
     public string OutputFolderX { get; set; }
+    public string OutputFolderNotSet { get; set; }
     public string EncodingXOverwriteY { get; set; }
     public string TargetFormatSettings { get; set; }
     public string FileNameContainsDotDotDot { get; set; }
@@ -50,6 +51,7 @@ public class LanguageBatchConvert
         XActionsSelected = "{0} actions selected";
         OutputFolderSource = " Output folder: Source folder";
         OutputFolderX = " Output folder: {0}";
+        OutputFolderNotSet = "The output folder is not set.";
         EncodingXOverwriteY = "Encoding: {0}, overwrite existing files: {1}";
         TargetFormatSettings = "Target format settings";
         FileNameContainsDotDotDot = "File name contains...";

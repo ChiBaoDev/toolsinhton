@@ -2639,7 +2639,7 @@ public class BatchConverter : IBatchConverter, IFixCallbacks
             : _config.OutputFolder;
         if (string.IsNullOrEmpty(outputFolder))
         {
-            throw new InvalidOperationException("Output folder is not set");
+            throw new InvalidOperationException(Se.Language.Tools.BatchConvert.OutputFolderNotSet);
         }
 
         var fileName = Path.GetFileNameWithoutExtension(item.FileName);

@@ -46,6 +46,24 @@ public class LanguageAudioToText
     public string EngineSettings { get; set; }
     public string EngineSettingsSubtitle { get; set; }
     public string BackendAndUpdateStatus { get; set; }
+    public string ModelFileNotFound { get; set; }
+    public string WhisperCppModelMustBeGgmlBin { get; set; }
+    public string ModelFolderNotFoundX { get; set; }
+    public string FasterWhisperModelFolderMustContainModelBin { get; set; }
+    public string InputAudioFileNotFound { get; set; }
+    public string AudioFileNotFound { get; set; }
+    public string DashScopeTranscriptionTimedOut { get; set; }
+    public string SttRequestTimedOut { get; set; }
+    public string OpenRouterTranscriptionTimedOut { get; set; }
+    public string DashScopeUploadPolicyParseFailedX { get; set; }
+    public string DashScopeTaskIdMissingX { get; set; }
+    public string DashScopeTranscriptionUrlMissingX { get; set; }
+    public string DashScopeTaskFailedXX { get; set; }
+    public string DashScopeUploadPolicyRequestFailedXX { get; set; }
+    public string DashScopeOssUploadFailedXX { get; set; }
+    public string DashScopeAsyncSubmitFailedXX { get; set; }
+    public string DashScopeTaskPollFailedXX { get; set; }
+    public string FfmpegChunkExtractionFailedXXXXX { get; set; }
 
     public LanguageAudioToText()
     {
@@ -93,5 +111,23 @@ public class LanguageAudioToText
         EngineSettings = "Speech-to-text engine settings";
         EngineSettingsSubtitle = "Speech-to-text engine";
         BackendAndUpdateStatus = "Backend and update status";
+        ModelFileNotFound = "Model file not found.";
+        WhisperCppModelMustBeGgmlBin = "A whisper.cpp model must be a ggml '.bin' file.";
+        ModelFolderNotFoundX = "Model folder not found: {0}";
+        FasterWhisperModelFolderMustContainModelBin = "A faster-whisper model folder must contain a 'model.bin' file.";
+        InputAudioFileNotFound = "Input audio file not found";
+        AudioFileNotFound = "Audio file not found";
+        DashScopeTranscriptionTimedOut = "DashScope transcription timed out after {0} seconds.";
+        SttRequestTimedOut = "STT request timed out after {0} seconds.";
+        OpenRouterTranscriptionTimedOut = "OpenRouter transcription timed out after {0} seconds.";
+        DashScopeUploadPolicyParseFailedX = "The DashScope upload-policy response could not be parsed. Response: {0}";
+        DashScopeTaskIdMissingX = "The DashScope async submit response did not contain task_id. Response: {0}";
+        DashScopeTranscriptionUrlMissingX = "The completed DashScope task did not contain transcription_url. Response: {0}";
+        DashScopeTaskFailedXX = "The DashScope transcription task ended with status {0}. Response: {1}";
+        DashScopeUploadPolicyRequestFailedXX = "The DashScope upload-policy request failed ({0}). Response: {1}";
+        DashScopeOssUploadFailedXX = "The DashScope OSS upload failed ({0}). Response: {1}";
+        DashScopeAsyncSubmitFailedXX = "The DashScope async submit failed ({0}). Response: {1}";
+        DashScopeTaskPollFailedXX = "The DashScope task poll failed ({0}). Response: {1}";
+        FfmpegChunkExtractionFailedXXXXX = "ffmpeg failed to extract chunk {0}/{1} ({2} seconds → {3} seconds) from {4}";
     }
 }

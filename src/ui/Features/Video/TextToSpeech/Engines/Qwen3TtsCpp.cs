@@ -20,6 +20,7 @@ namespace Nikse.SubtitleEdit.Features.Video.TextToSpeech.Engines;
 
 public class Qwen3TtsCpp : ITtsEngine
 {
+    private const string ServerDisplayName = "qwen3-tts-server";
     public string Name => "Qwen3 TTS";
     public string Description => "free/fast/good";
     public bool HasLanguageParameter => false;
@@ -345,7 +346,7 @@ public class Qwen3TtsCpp : ITtsEngine
             var exe = GetExecutableFileName();
             if (!File.Exists(exe))
             {
-                throw new FileNotFoundException("Qwen3 TTS server executable not found.", exe);
+                throw new FileNotFoundException(Se.Language.Video.TextToSpeech.Qwen3ServerExecutableNotFound, exe);
             }
 
             var port = FindFreeLoopbackPort();
@@ -382,7 +383,7 @@ public class Qwen3TtsCpp : ITtsEngine
             }
 
             var process = Process.Start(psi)
-                ?? throw new InvalidOperationException("Failed to start qwen3-tts-server");
+                ?? throw new InvalidOperationException(string.Format(Se.Language.Video.TextToSpeech.ServerStartFailedX, ServerDisplayName));
 
             Se.WriteToolsLog($"Qwen3 TTS server starting - PID: {process.Id}, "
                 + $"Cmd: {exe} {string.Join(' ', psi.ArgumentList)}");
@@ -427,8 +428,9 @@ public class Qwen3TtsCpp : ITtsEngine
 
             var lastOutput = SnapshotStderr(stderrBuffer);
             StopServerInternal();
-            throw new TimeoutException(
-                $"qwen3-tts-server did not report healthy within 120s. Last output: {lastOutput}");
+            throw new TimeoutException(string.Format(
+                Se.Language.Video.TextToSpeech.ServerHealthTimedOutXXX,
+                ServerDisplayName, 120, lastOutput));
         }
         finally
         {

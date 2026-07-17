@@ -64,6 +64,32 @@ public class LanguageTextToSpeech
     public string EdgeTtsVolume { get; set; }
     public string EdgeTtsVolumeDescription { get; set; }
     public string DownloadPiperPrompt { get; set; }
+    public string DownloadEngineTitle { get; set; }
+    public string CosyVoice3CrispAsrSettings { get; set; }
+    public string F5TtsCrispAsrSettings { get; set; }
+    public string IndexTtsCrispAsrSettings { get; set; }
+    public string Qwen3TtsCrispAsrSettings { get; set; }
+    public string VibeVoiceCrispAsrSettings { get; set; }
+    public string VoxCpm2CrispAsrSettings { get; set; }
+    public string CrispAsrExecutableNotFound { get; set; }
+    public string KokoroServerExecutableNotFound { get; set; }
+    public string KokoroModelOrVoicesFileMissing { get; set; }
+    public string OmniVoiceExecutableNotFound { get; set; }
+    public string OmniVoiceTranscriptRequiredX { get; set; }
+    public string OmniVoiceStartFailed { get; set; }
+    public string ServerStartFailedX { get; set; }
+    public string ServerHealthTimedOutXXX { get; set; }
+    public string AllTalkServerNotReachable { get; set; }
+    public string AllTalkRequestTimedOut { get; set; }
+    public string AzureRegionRequiredForVoiceRefresh { get; set; }
+    public string Qwen3ServerExecutableNotFound { get; set; }
+    public string ChatterboxRequiresCrispAsrUpdate { get; set; }
+    public string ChatterboxModelCacheStaleXX { get; set; }
+    public string ChatterboxTurboTokenizerMismatchX { get; set; }
+    public string ChatterboxTurboStartupCrashX { get; set; }
+    public string ProcessTimedOutXXX { get; set; }
+    public string ChatterboxExitedDuringStartupXX { get; set; }
+    public string ChatterboxHealthTimedOutX { get; set; }
 
     public string OmniVoiceTtsSettings { get; set; }
     public string ReDownloadOmniVoiceTts { get; set; }
@@ -110,6 +136,32 @@ public class LanguageTextToSpeech
     public LanguageTextToSpeech()
     {
         Title = "Text to speech";
+        DownloadEngineTitle = "TTS - Download engine";
+        CosyVoice3CrispAsrSettings = "CosyVoice3 (CrispASR) settings";
+        F5TtsCrispAsrSettings = "F5-TTS (CrispASR) settings";
+        IndexTtsCrispAsrSettings = "IndexTTS (CrispASR) settings";
+        Qwen3TtsCrispAsrSettings = "Qwen3 TTS (CrispASR) settings";
+        VibeVoiceCrispAsrSettings = "VibeVoice (CrispASR) settings";
+        VoxCpm2CrispAsrSettings = "VoxCPM2 (CrispASR) settings";
+        CrispAsrExecutableNotFound = "CrispASR executable not found. Install CrispASR via Video → Audio to text first.";
+        KokoroServerExecutableNotFound = "Kokoro TTS server executable not found.";
+        KokoroModelOrVoicesFileMissing = "Kokoro TTS model or voices file missing.";
+        OmniVoiceExecutableNotFound = "omnivoice-tts executable not found.";
+        OmniVoiceTranscriptRequiredX = "OmniVoice TTS voice cloning requires a transcript file at {0}. Re-import the voice to provide its transcript.";
+        OmniVoiceStartFailed = "Failed to start omnivoice-tts.";
+        ServerStartFailedX = "Failed to start {0}.";
+        ServerHealthTimedOutXXX = "The {0} server did not report healthy within {1} seconds. Last output: {2}";
+        AllTalkServerNotReachable = "The AllTalk TTS server is not reachable. Check that the server is running.";
+        AllTalkRequestTimedOut = "The request to the AllTalk TTS server timed out. Check that the server is running.";
+        AzureRegionRequiredForVoiceRefresh = "Set the Azure region in the TTS engine settings before refreshing voices.";
+        Qwen3ServerExecutableNotFound = "Qwen3 TTS server executable not found.";
+        ChatterboxRequiresCrispAsrUpdate = "Chatterbox requires CrispASR v0.6.0 or newer. Re-download CrispASR via Video → Audio to text → Engine settings → Re-download, then try again.";
+        ChatterboxModelCacheStaleXX = "Chatterbox failed to load its model — the GGUFs in {0} are likely stale or partially downloaded. Delete them and try again so they re-download. Original output: {1}";
+        ChatterboxTurboTokenizerMismatchX = "Chatterbox TTS \"Turbo\" does not load with CrispASR 0.8.0. The turbo model is fine — 0.8.0's tokenizer/vocab check was overly strict and rejected its benign embedding superset (50257-token tokenizer, text vocab size 50276). This is fixed upstream (CrispStrobe/CrispASR#181): a newer CrispASR loads Turbo normally, with no re-download. Until then, switch to the \"Base\" Chatterbox model, which works.\n\n{0}";
+        ChatterboxTurboStartupCrashX = "Chatterbox TTS \"Turbo\" model crashed CrispASR during startup. This is a known upstream issue in the chatterbox-turbo backend (especially on macOS/CPU). Try the \"Base\" model instead, or file an issue at https://github.com/CrispStrobe/CrispASR/issues with the log below.\n\n{0}";
+        ProcessTimedOutXXX = "\"{0} {1}\" did not finish within {2} seconds and was killed.";
+        ChatterboxExitedDuringStartupXX = "crispasr (chatterbox) exited during startup (code {0}). Output: {1}";
+        ChatterboxHealthTimedOutX = "crispasr (chatterbox) did not report healthy within 15 minutes. Last output: {0}";
         TextToSpeechEngine = "Text to speech engine";
         ReviewAudioSegments = "TTS - Review audio segments";
         ReviewAudioSegmentsHistory = "TTS - Review audio history";

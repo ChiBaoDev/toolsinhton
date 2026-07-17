@@ -226,13 +226,13 @@ public class VietnameseTranslationBatchTests
         foreach (var path in relevantAllowlistKeys.Except(englishIdenticalReviewedPaths, StringComparer.Ordinal))
             errors.Add($"{path} is a stale or extra allowlist entry; the reviewed value is not identical to English.");
 
-        Assert.Equal(1_068, reviewedLeafCounts["B1"]);
+        Assert.Equal(1_076, reviewedLeafCounts["B1"]);
         Assert.Equal(171, reviewedLeafCounts["B2"]);
         Assert.Equal(203, reviewedLeafCounts["B3"]);
-        Assert.Equal(1_239, reviewedLeafCounts["B4"]);
-        Assert.Equal(607, reviewedLeafCounts["B5"]);
+        Assert.Equal(1_242, reviewedLeafCounts["B4"]);
+        Assert.Equal(681, reviewedLeafCounts["B5"]);
         Assert.Equal(27, reviewedLeafCounts["B6"]);
-        Assert.Equal(3_315, reviewedLeafCounts.Values.Sum());
+        Assert.Equal(3_400, reviewedLeafCounts.Values.Sum());
         Assert.True(errors.Count == 0, string.Join(Environment.NewLine, errors));
     }
 

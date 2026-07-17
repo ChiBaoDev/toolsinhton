@@ -34,6 +34,7 @@ public class LanguageBurnIn
     public string UseSourceFolder { get; set; }
     public string UseSourceResolution { get; set; }
     public string OutputSettings { get; set; }
+    public string OutputSettingsTitle { get; set; }
     public string FontSizeFactor { get; set; }
     public string BoxType { get; set; }
     public string FixRightToLeft { get; set; }
@@ -46,6 +47,7 @@ public class LanguageBurnIn
     public string OneBox { get; set; }
     public string BoxPerLine { get; set; }
     public string LogoInfo { get; set; }
+    public string CurrentAssaStyleInfo { get; set; }
 
     public LanguageBurnIn()
     {
@@ -80,6 +82,7 @@ public class LanguageBurnIn
         UseSource = "Use source";
         UseSourceFolder = "Use source folder";
         OutputSettings = "Output file/folder...";
+        OutputSettingsTitle = "Output settings";
         FontSizeFactor = "Font size factor";
         BoxType = "Box type";
         FixRightToLeft = "Fix right-to-left";
@@ -93,5 +96,6 @@ public class LanguageBurnIn
         BoxPerLine = "Box per line";
         UseSourceResolution = "Use source resolution";
         LogoInfo = "Pick a PNG image and drag it to position it on the video.";
+        CurrentAssaStyleInfo = "Current ASSA style will be used\n\nChange subtitle format if\nyou want to set styles here";
     }
 }

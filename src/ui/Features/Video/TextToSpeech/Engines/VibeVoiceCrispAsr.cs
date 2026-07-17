@@ -519,7 +519,7 @@ public class VibeVoiceCrispAsr : ITtsEngine
             if (!File.Exists(exe))
             {
                 throw new FileNotFoundException(
-                    "CrispASR executable not found. Install CrispASR via Video → Audio to text first.", exe);
+                    Se.Language.Video.TextToSpeech.CrispAsrExecutableNotFound, exe);
             }
 
             // Talker GGUF: if locally staged, use directly; otherwise hand off to crispasr's

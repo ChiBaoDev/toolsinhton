@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Nikse.SubtitleEdit.Logic.Config;
 
 namespace Nikse.SubtitleEdit.Features.Video.SpeechToText.OpenAiCompatible;
 
@@ -234,7 +235,7 @@ public static class OpenAiSttChunker
     {
         if (!File.Exists(inputPath))
         {
-            throw new FileNotFoundException("Input audio file not found", inputPath);
+            throw new FileNotFoundException(Se.Language.Video.AudioToText.InputAudioFileNotFound, inputPath);
         }
 
         if (durationSeconds <= 0)
@@ -311,7 +312,7 @@ public static class OpenAiSttChunker
     {
         if (!File.Exists(audioPath))
         {
-            throw new FileNotFoundException("Audio file not found", audioPath);
+            throw new FileNotFoundException(Se.Language.Video.AudioToText.AudioFileNotFound, audioPath);
         }
 
         var noise = noiseFloorDb.ToString("0.##", CultureInfo.InvariantCulture);

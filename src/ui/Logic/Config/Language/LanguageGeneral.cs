@@ -147,6 +147,14 @@ public class LanguageGeneral
     public string DownloadX { get; set; }
     public string DownloadingX { get; set; }
     public string DownloadingXPercent { get; set; }
+    public string DownloadUnavailableForLinuxArm64X { get; set; }
+    public string UnsupportedMacOsArchitecture { get; set; }
+    public string DownloadNotSupportedOnPlatformX { get; set; }
+    public string RequestedUrlNotFoundX { get; set; }
+    public string DownloadIncompleteXX { get; set; }
+    public string DownloadFailedAfterAttemptsXXXX { get; set; }
+    public string ArchiveExtractionFailedXXX { get; set; }
+    public string ArchiveExecutableNotFoundXX { get; set; }
     public string Duplicate { get; set; }
     public string Duration { get; set; }
     public string DurationMinutes { get; set; }
@@ -904,6 +912,14 @@ public class LanguageGeneral
         DownloadX = "Download {0}";
         DownloadingX = "Downloading {0}";
         DownloadingXPercent = "Downloading {0}%";
+        DownloadUnavailableForLinuxArm64X = "{0} is not available for Linux ARM64.";
+        UnsupportedMacOsArchitecture = "Unsupported macOS architecture.";
+        DownloadNotSupportedOnPlatformX = "{0} download is not supported on this platform.";
+        RequestedUrlNotFoundX = "The requested URL was not found: {0}";
+        DownloadIncompleteXX = "Download incomplete: expected {0} bytes, received {1} bytes";
+        DownloadFailedAfterAttemptsXXXX = "Failed to download file after {0} attempts. URL: {1}. Downloaded: {2}/{3} bytes";
+        ArchiveExtractionFailedXXX = "{0} extraction failed with exit code {1}: {2}";
+        ArchiveExecutableNotFoundXX = "{0} executable not found at {1}";
         Duplicate = "Duplicate";
         Duration = "Duration";
         DurationMinutes = "Duration in minutes";

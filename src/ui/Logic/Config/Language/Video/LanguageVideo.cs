@@ -63,6 +63,12 @@ public class LanguageVideo
     public string OpenFromUrlDownloadingTitle { get; set; }
     public string OpenFromUrlSaveAs { get; set; }
     public string OpenFromUrlDownloadSubtitles { get; set; }
+    public string OpenFromUrlNoVideoProducedXX { get; set; }
+    public string YtDlpNotInstalled { get; set; }
+    public string YtDlpStartFailed { get; set; }
+    public string YtDlpExitedWithCodeX { get; set; }
+    public string YtDlpSubtitleDownloadExitedWithCodeX { get; set; }
+    public string YtDlpChecksumFailedXXX { get; set; }
     public string PickOnlineSubtitleTitle { get; set; }
     public string PickOnlineSubtitleFetching { get; set; }
     public string PickOnlineSubtitleNoneFound { get; set; }
@@ -133,6 +139,14 @@ public class LanguageVideo
         OpenFromUrlDownloadingTitle = "Downloading video";
         OpenFromUrlSaveAs = "Save video as";
         OpenFromUrlDownloadSubtitles = "Also download subtitles";
+        OpenFromUrlNoVideoProducedXX = "yt-dlp finished but no video file was produced." + Environment.NewLine +
+                                       "Temporary directory: {0}" + Environment.NewLine +
+                                       "Contents: {1}";
+        YtDlpNotInstalled = "yt-dlp is not installed.";
+        YtDlpStartFailed = "Failed to start yt-dlp.";
+        YtDlpExitedWithCodeX = "yt-dlp exited with code {0}.";
+        YtDlpSubtitleDownloadExitedWithCodeX = "yt-dlp subtitle download exited with code {0}.";
+        YtDlpChecksumFailedXXX = "Downloaded yt-dlp ({0}) failed SHA-256 verification — expected {1}, got {2}. The file has been removed.";
         PickOnlineSubtitleTitle = "Pick subtitle to download";
         PickOnlineSubtitleFetching = "Downloading subtitles...";
         PickOnlineSubtitleNoneFound = "No subtitles found for this URL.";

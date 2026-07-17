@@ -177,7 +177,8 @@
       "unbreakShortLine": "Bỏ ngắt dòng ngắn",
       "fixText": "Sửa văn bản",
       "removeSpaceBetweenNumbers": "Xóa khoảng trắng giữa các chữ số",
-      "fixDialogsOnOneLine": "Sửa hội thoại trên một dòng"
+      "fixDialogsOnOneLine": "Sửa hội thoại trên một dòng",
+      "settingsTitle": "Cài đặt sửa lỗi thường gặp"
     },
     "adjustDurations": {
       "title": "Điều chỉnh thời lượng",
@@ -332,7 +333,8 @@
       "assaChangeStyleToStyle": "sang",
       "assaChangeStyleImportStyle": "Nhập kiểu...",
       "assaChangeStyleImportedX": "Đã nhập: {0}",
-      "assaChangeStyleTrimUnusedStyles": "Loại bỏ kiểu không dùng"
+      "assaChangeStyleTrimUnusedStyles": "Loại bỏ kiểu không dùng",
+      "outputFolderNotSet": "Thư mục đầu ra chưa được đặt."
     },
     "changeCasing": {
       "title": "Thay đổi kiểu chữ hoa/thường",
@@ -619,7 +621,8 @@
     "correctWordsX": "Số từ đúng: {0}",
     "namesX": "Số tên riêng: {0}",
     "addedToDictionaryX": "Số từ đã thêm vào từ điển: {0}",
-    "doNotShowThisAgain": "Không hiển thị lại thông báo này"
+    "doNotShowThisAgain": "Không hiển thị lại thông báo này",
+    "editWholeTextTitle": "Kiểm tra chính tả - Chỉnh sửa toàn bộ văn bản"
   },
   "options": {
     "settings": {

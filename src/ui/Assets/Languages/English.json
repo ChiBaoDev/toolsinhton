@@ -147,6 +147,14 @@
     "downloadX": "Download {0}",
     "downloadingX": "Downloading {0}",
     "downloadingXPercent": "Downloading {0}%",
+    "downloadUnavailableForLinuxArm64X": "{0} is not available for Linux ARM64.",
+    "unsupportedMacOsArchitecture": "Unsupported macOS architecture.",
+    "downloadNotSupportedOnPlatformX": "{0} download is not supported on this platform.",
+    "requestedUrlNotFoundX": "The requested URL was not found: {0}",
+    "downloadIncompleteXX": "Download incomplete: expected {0} bytes, received {1} bytes",
+    "downloadFailedAfterAttemptsXXXX": "Failed to download file after {0} attempts. URL: {1}. Downloaded: {2}/{3} bytes",
+    "archiveExtractionFailedXXX": "{0} extraction failed with exit code {1}: {2}",
+    "archiveExecutableNotFoundXX": "{0} executable not found at {1}",
     "duplicate": "Duplicate",
     "duration": "Duration",
     "durationMinutes": "Duration in minutes",
@@ -1573,7 +1581,8 @@
       "unbreakShortLine": "Unbreak short line",
       "fixText": "Fix text",
       "removeSpaceBetweenNumbers": "Remove space between numbers",
-      "fixDialogsOnOneLine": "Fix dialogs on one line"
+      "fixDialogsOnOneLine": "Fix dialogs on one line",
+      "settingsTitle": "Fix common error settings"
     },
     "adjustDurations": {
       "title": "Adjust durations",
@@ -1728,7 +1737,8 @@
       "assaChangeStyleToStyle": "to",
       "assaChangeStyleImportStyle": "Import style...",
       "assaChangeStyleImportedX": "Imported: {0}",
-      "assaChangeStyleTrimUnusedStyles": "Trim unused styles"
+      "assaChangeStyleTrimUnusedStyles": "Trim unused styles",
+      "outputFolderNotSet": "The output folder is not set."
     },
     "changeCasing": {
       "title": "Change casing",
@@ -2015,7 +2025,8 @@
     "correctWordsX": "Correct words: {0}",
     "namesX": "Names: {0}",
     "addedToDictionaryX": "Added to dictionary: {0}",
-    "doNotShowThisAgain": "Do not show this message again"
+    "doNotShowThisAgain": "Do not show this message again",
+    "editWholeTextTitle": "Spell check - Edit whole text"
   },
   "video": {
     "burnIn": {
@@ -2051,6 +2062,7 @@
       "useSourceFolder": "Use source folder",
       "useSourceResolution": "Use source resolution",
       "outputSettings": "Output file/folder...",
+      "outputSettingsTitle": "Output settings",
       "fontSizeFactor": "Font size factor",
       "boxType": "Box type",
       "fixRightToLeft": "Fix right-to-left",
@@ -2062,7 +2074,8 @@
       "videoFileSize": "Video file size",
       "oneBox": "One box",
       "boxPerLine": "Box per line",
-      "logoInfo": "Pick a PNG image and drag it to position it on the video."
+      "logoInfo": "Pick a PNG image and drag it to position it on the video.",
+      "currentAssaStyleInfo": "Current ASSA style will be used\n\nChange subtitle format if\nyou want to set styles here"
     },
     "videoTransparent": {
       "title": "Generate transparent video with subtitles",
@@ -2112,7 +2125,25 @@
       "beamSizeNote": "0 decodes fastest. 5 gives the best accuracy (like Faster Whisper) at roughly 20-30% more time. Values above 5 rarely help.",
       "engineSettings": "Speech-to-text engine settings",
       "engineSettingsSubtitle": "Speech-to-text engine",
-      "backendAndUpdateStatus": "Backend and update status"
+      "backendAndUpdateStatus": "Backend and update status",
+      "modelFileNotFound": "Model file not found.",
+      "whisperCppModelMustBeGgmlBin": "A whisper.cpp model must be a ggml '.bin' file.",
+      "modelFolderNotFoundX": "Model folder not found: {0}",
+      "fasterWhisperModelFolderMustContainModelBin": "A faster-whisper model folder must contain a 'model.bin' file.",
+      "inputAudioFileNotFound": "Input audio file not found",
+      "audioFileNotFound": "Audio file not found",
+      "dashScopeTranscriptionTimedOut": "DashScope transcription timed out after {0} seconds.",
+      "sttRequestTimedOut": "STT request timed out after {0} seconds.",
+      "openRouterTranscriptionTimedOut": "OpenRouter transcription timed out after {0} seconds.",
+      "dashScopeUploadPolicyParseFailedX": "The DashScope upload-policy response could not be parsed. Response: {0}",
+      "dashScopeTaskIdMissingX": "The DashScope async submit response did not contain task_id. Response: {0}",
+      "dashScopeTranscriptionUrlMissingX": "The completed DashScope task did not contain transcription_url. Response: {0}",
+      "dashScopeTaskFailedXX": "The DashScope transcription task ended with status {0}. Response: {1}",
+      "dashScopeUploadPolicyRequestFailedXX": "The DashScope upload-policy request failed ({0}). Response: {1}",
+      "dashScopeOssUploadFailedXX": "The DashScope OSS upload failed ({0}). Response: {1}",
+      "dashScopeAsyncSubmitFailedXX": "The DashScope async submit failed ({0}). Response: {1}",
+      "dashScopeTaskPollFailedXX": "The DashScope task poll failed ({0}). Response: {1}",
+      "ffmpegChunkExtractionFailedXXXXX": "ffmpeg failed to extract chunk {0}/{1} ({2} seconds → {3} seconds) from {4}"
     },
     "textToSpeech": {
       "title": "Text to speech",
@@ -2211,7 +2242,33 @@
       "subtitleUpdatedFromReviewSingular": "Updated one line from the speech review",
       "subtitleUpdatedFromReviewPlural": "Updated {0} lines from the speech review",
       "subtitleMergedLinesAppliedSingular": "Applied one line merge from text to speech",
-      "subtitleMergedLinesAppliedPlural": "Applied {0} line merges from text to speech"
+      "subtitleMergedLinesAppliedPlural": "Applied {0} line merges from text to speech",
+      "downloadEngineTitle": "TTS - Download engine",
+      "cosyVoice3CrispAsrSettings": "CosyVoice3 (CrispASR) settings",
+      "f5TtsCrispAsrSettings": "F5-TTS (CrispASR) settings",
+      "indexTtsCrispAsrSettings": "IndexTTS (CrispASR) settings",
+      "qwen3TtsCrispAsrSettings": "Qwen3 TTS (CrispASR) settings",
+      "vibeVoiceCrispAsrSettings": "VibeVoice (CrispASR) settings",
+      "voxCpm2CrispAsrSettings": "VoxCPM2 (CrispASR) settings",
+      "crispAsrExecutableNotFound": "CrispASR executable not found. Install CrispASR via Video → Audio to text first.",
+      "kokoroServerExecutableNotFound": "Kokoro TTS server executable not found.",
+      "kokoroModelOrVoicesFileMissing": "Kokoro TTS model or voices file missing.",
+      "omniVoiceExecutableNotFound": "omnivoice-tts executable not found.",
+      "omniVoiceTranscriptRequiredX": "OmniVoice TTS voice cloning requires a transcript file at {0}. Re-import the voice to provide its transcript.",
+      "omniVoiceStartFailed": "Failed to start omnivoice-tts.",
+      "serverStartFailedX": "Failed to start {0}.",
+      "serverHealthTimedOutXXX": "The {0} server did not report healthy within {1} seconds. Last output: {2}",
+      "allTalkServerNotReachable": "The AllTalk TTS server is not reachable. Check that the server is running.",
+      "allTalkRequestTimedOut": "The request to the AllTalk TTS server timed out. Check that the server is running.",
+      "azureRegionRequiredForVoiceRefresh": "Set the Azure region in the TTS engine settings before refreshing voices.",
+      "qwen3ServerExecutableNotFound": "Qwen3 TTS server executable not found.",
+      "chatterboxRequiresCrispAsrUpdate": "Chatterbox requires CrispASR v0.6.0 or newer. Re-download CrispASR via Video → Audio to text → Engine settings → Re-download, then try again.",
+      "chatterboxModelCacheStaleXX": "Chatterbox failed to load its model — the GGUFs in {0} are likely stale or partially downloaded. Delete them and try again so they re-download. Original output: {1}",
+      "chatterboxTurboTokenizerMismatchX": "Chatterbox TTS \"Turbo\" does not load with CrispASR 0.8.0. The turbo model is fine — 0.8.0's tokenizer/vocab check was overly strict and rejected its benign embedding superset (50257-token tokenizer, text vocab size 50276). This is fixed upstream (CrispStrobe/CrispASR#181): a newer CrispASR loads Turbo normally, with no re-download. Until then, switch to the \"Base\" Chatterbox model, which works.\n\n{0}",
+      "chatterboxTurboStartupCrashX": "Chatterbox TTS \"Turbo\" model crashed CrispASR during startup. This is a known upstream issue in the chatterbox-turbo backend (especially on macOS/CPU). Try the \"Base\" model instead, or file an issue at https://github.com/CrispStrobe/CrispASR/issues with the log below.\n\n{0}",
+      "processTimedOutXXX": "\"{0} {1}\" did not finish within {2} seconds and was killed.",
+      "chatterboxExitedDuringStartupXX": "crispasr (chatterbox) exited during startup (code {0}). Output: {1}",
+      "chatterboxHealthTimedOutX": "crispasr (chatterbox) did not report healthy within 15 minutes. Last output: {0}"
     },
     "shotChanges": {
       "titleGenerateOrImport": "Generate/import shot changes",
@@ -2261,7 +2318,10 @@
       "testOcr": "Test current frame",
       "testOcrRunning": "Testing OCR on current frame...",
       "testOcrResultX": "Test result: {0}",
-      "testOcrNoTextFound": "Test: no text found in the scan area"
+      "testOcrNoTextFound": "Test: no text found in the scan area",
+      "currentFrameExtractionFailed": "Could not extract the current frame - see the log for the ffmpeg command line.",
+      "noFramesExtracted": "No frames were extracted from the video - see the log for the ffmpeg command line.",
+      "paddleOcrFailedX": "PaddleOCR failed: {0}"
     },
     "goToVideoPosition": "Go to video position",
     "generateBlankVideoDotDotDot": "Generate blank video...",
@@ -2328,7 +2388,13 @@
     "reEncodeOutputVideoFileNotGenerated": "Output video file not generated: {0}\r\nParameters: {1}",
     "reEncodeGeneratingDone": "Generating done",
     "reEncodeGeneratedFilesX": "Generated files ({0}):",
-    "reEncodeFfmpegParameters": "ffmpeg parameters"
+    "reEncodeFfmpegParameters": "ffmpeg parameters",
+    "openFromUrlNoVideoProducedXX": "yt-dlp finished but no video file was produced.\nTemporary directory: {0}\nContents: {1}",
+    "ytDlpNotInstalled": "yt-dlp is not installed.",
+    "ytDlpStartFailed": "Failed to start yt-dlp.",
+    "ytDlpExitedWithCodeX": "yt-dlp exited with code {0}.",
+    "ytDlpSubtitleDownloadExitedWithCodeX": "yt-dlp subtitle download exited with code {0}.",
+    "ytDlpChecksumFailedXXX": "Downloaded yt-dlp ({0}) failed SHA-256 verification — expected {1}, got {2}. The file has been removed."
   },
   "waveform": {
     "guessTimeCodes": "Guess time codes",
@@ -3193,6 +3259,10 @@
     "binaryImageCompareDatabase": "\"Binary image compare\" database",
     "removeXFromUnknownWordsList": "Remove \"{0}\" from unknown words list",
     "downloadingPaddleOcrEngineDotDotDot": "Downloading Paddle OCR engine...",
+    "downloadingTesseractModel": "Downloading Tesseract model",
+    "selectTesseractDictionary": "Select Tesseract dictionary:",
+    "algorithm": "Algorithm",
+    "autoDrawAlgorithmTooltip": "Algorithm used by Auto-draw to generate foreground/background lines",
     "downloadingPaddleOcrModelsDotDotDot": "Downloading Paddle OCR models...",
     "paddleOcr": "Paddle OCR",
     "binaryImageCompareInspectImageMatches": "\"Binary image compare\" - Inspect image matches",
@@ -3229,7 +3299,18 @@
     "showAllOllamaModels": "Show all models (not just vision-capable)",
     "ollamaModelLikelyWrong": "Ollama returned no text - the selected model may not support OCR / vision",
     "llamaCppNotDownloaded": "llama.cpp engine/model not downloaded - download via batch convert settings",
-    "llamaCppReturnedNoText": "llama.cpp returned no text - check the server and model"
+    "llamaCppReturnedNoText": "llama.cpp returned no text - check the server and model",
+    "inspectBinaryOcrAdditions": "Inspect Binary OCR Additions",
+    "newRenameBinaryImageCompareDatabase": "New/rename Binary Image Compare database",
+    "downloadingCrispEmbed": "Downloading CrispEmbed",
+    "downloadingGoogleLensOcr": "Downloading Google Lens OCR",
+    "downloadingPaddleOcr": "Downloading Paddle OCR",
+    "downloadingTesseract": "Downloading Tesseract",
+    "newRenameNOcrDatabase": "New/rename nOCR database",
+    "cloudVisionApiKeyInvalid": "The Cloud Vision API key is invalid, or billing/API access is not enabled.",
+    "cloudVisionRequestForbidden": "Cloud Vision rejected the request. Check billing, API status, and the API key.",
+    "cloudVisionApiStatusErrorX": "The Cloud Vision API call failed with status code {0}.",
+    "cloudVisionApiCallErrorX": "Error calling the Cloud Vision API: {0}"
   },
   "assa": {
     "assaDraw": "ASSA Draw",
@@ -3350,6 +3431,9 @@
     "rotation": "Rotation",
     "imageColorPicker": "Image color picker",
     "copyColorAsHextoClipboard": "Copy color as hex to clipboard",
+    "mouseOverColor": "Mouse-over color",
+    "clickedColor": "Clicked color",
+    "copied": "✓ Copied!",
     "generatingBackgroundBoxXOfY": "Generating background box {0} of {1}...",
     "applyAdvancedEffectTitle": "Apply advanced effect",
     "chooseEffect": "Choose effect",
@@ -3430,7 +3514,8 @@
     "advancedEffectSlideInRightDescription": "Text slides in from off-screen right, holds, then exits back to the right",
     "advancedEffectFadeInOut": "Fade in/out",
     "advancedEffectFadeInOutDescription": "Text fades in at the start and fades out at the end of each subtitle",
-    "overrideTagsHistory": "Override tags history"
+    "overrideTagsHistory": "Override tags history",
+    "drawUseShapeForErase": "Use shape for erase (iclip)"
   },
   "about": {
     "title": "About Subtitle Edit",

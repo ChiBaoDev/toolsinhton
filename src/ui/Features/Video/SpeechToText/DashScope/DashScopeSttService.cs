@@ -99,7 +99,7 @@ public class DashScopeSttService : ISttTranscriber
         {
             // Our own timeout fired, not a user cancel — surface it as an error
             // so the caller doesn't mistake it for cancellation.
-            throw new TimeoutException($"DashScope transcription timed out after {_settings.TimeoutSeconds} seconds.");
+            throw new TimeoutException(string.Format(Se.Language.Video.AudioToText.DashScopeTranscriptionTimedOut, _settings.TimeoutSeconds));
         }
     }
 
@@ -120,7 +120,10 @@ public class DashScopeSttService : ISttTranscriber
         {
             var err = await policyResponse.Content.ReadAsStringAsync(ct);
             _settings.Logger?.Invoke($"DashScope upload-policy request failed: GET {policyUrl} => {(int)policyResponse.StatusCode}: {err}");
-            throw new HttpRequestException($"DashScope upload-policy request failed ({(int)policyResponse.StatusCode}). Response: {err}");
+            throw new HttpRequestException(string.Format(
+                Se.Language.Video.AudioToText.DashScopeUploadPolicyRequestFailedXX,
+                (int)policyResponse.StatusCode,
+                err));
         }
 
         var policyJson = await policyResponse.Content.ReadAsStringAsync(ct);
@@ -129,7 +132,7 @@ public class DashScopeSttService : ISttTranscriber
         if (policy == null)
         {
             _settings.Logger?.Invoke($"DashScope upload-policy response could not be parsed: {policyJson}");
-            throw new InvalidOperationException($"DashScope upload-policy response could not be parsed. Response: {policyJson}");
+            throw new InvalidOperationException(string.Format(Se.Language.Video.AudioToText.DashScopeUploadPolicyParseFailedX, policyJson));
         }
 
         var key = $"{policy.UploadDir}/{fileName}";
@@ -153,7 +156,10 @@ public class DashScopeSttService : ISttTranscriber
         {
             var err = await uploadResponse.Content.ReadAsStringAsync(ct);
             _settings.Logger?.Invoke($"DashScope OSS upload failed: POST {policy.UploadHost} => {(int)uploadResponse.StatusCode}: {err}");
-            throw new HttpRequestException($"DashScope OSS upload failed ({(int)uploadResponse.StatusCode}). Response: {err}");
+            throw new HttpRequestException(string.Format(
+                Se.Language.Video.AudioToText.DashScopeOssUploadFailedXX,
+                (int)uploadResponse.StatusCode,
+                err));
         }
 
         return "oss://" + key;
@@ -176,14 +182,17 @@ public class DashScopeSttService : ISttTranscriber
         if (!response.IsSuccessStatusCode)
         {
             _settings.Logger?.Invoke($"DashScope async submit failed ({(int)response.StatusCode}): {json}");
-            throw new HttpRequestException($"DashScope async submit failed ({(int)response.StatusCode}). Response: {json}");
+            throw new HttpRequestException(string.Format(
+                Se.Language.Video.AudioToText.DashScopeAsyncSubmitFailedXX,
+                (int)response.StatusCode,
+                json));
         }
 
         var taskId = JsonSerializer.Deserialize<DashScopeTaskResponse>(json,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true })?.Output?.TaskId;
         if (string.IsNullOrEmpty(taskId))
         {
-            throw new InvalidOperationException($"DashScope async submit returned no task_id. Response: {json}");
+            throw new InvalidOperationException(string.Format(Se.Language.Video.AudioToText.DashScopeTaskIdMissingX, json));
         }
 
         return taskId;
@@ -205,7 +214,10 @@ public class DashScopeSttService : ISttTranscriber
             var json = await response.Content.ReadAsStringAsync(ct);
             if (!response.IsSuccessStatusCode)
             {
-                throw new HttpRequestException($"DashScope task poll failed ({(int)response.StatusCode}). Response: {json}");
+                throw new HttpRequestException(string.Format(
+                    Se.Language.Video.AudioToText.DashScopeTaskPollFailedXX,
+                    (int)response.StatusCode,
+                    json));
             }
 
             var output = JsonSerializer.Deserialize<DashScopeTaskResponse>(json, options)?.Output;
@@ -217,13 +229,13 @@ public class DashScopeSttService : ISttTranscriber
                         ?? (output?.Results != null && output.Results.Count > 0 ? output.Results[0].TranscriptionUrl : null);
                     if (string.IsNullOrEmpty(transcriptionUrl))
                     {
-                        throw new InvalidOperationException($"DashScope task succeeded but returned no transcription_url. Response: {json}");
+                        throw new InvalidOperationException(string.Format(Se.Language.Video.AudioToText.DashScopeTranscriptionUrlMissingX, json));
                     }
                     return transcriptionUrl;
 
                 case "FAILED":
                 case "UNKNOWN":
-                    throw new InvalidOperationException($"DashScope transcription task {status}. Response: {json}");
+                    throw new InvalidOperationException(string.Format(Se.Language.Video.AudioToText.DashScopeTaskFailedXX, status, json));
 
                 default: // QUEUED, PENDING, PROCESSING
                     await Task.Delay(TimeSpan.FromSeconds(3), ct);

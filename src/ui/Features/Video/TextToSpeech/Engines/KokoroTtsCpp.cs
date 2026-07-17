@@ -18,6 +18,7 @@ namespace Nikse.SubtitleEdit.Features.Video.TextToSpeech.Engines;
 
 public class KokoroTtsCpp : ITtsEngine
 {
+    private const string ServerDisplayName = "kokoro-tts-server";
     public string Name => "Kokoro TTS";
     public string Description => "free/fast/multilingual";
     public bool HasLanguageParameter => false;
@@ -293,7 +294,7 @@ public class KokoroTtsCpp : ITtsEngine
             var exe = GetExecutableFileName();
             if (!File.Exists(exe))
             {
-                throw new FileNotFoundException("Kokoro TTS server executable not found.", exe);
+                throw new FileNotFoundException(Se.Language.Video.TextToSpeech.KokoroServerExecutableNotFound, exe);
             }
 
             var modelsFolder = GetSetModelsFolder();
@@ -301,7 +302,7 @@ public class KokoroTtsCpp : ITtsEngine
             var voicesPath = Path.Combine(modelsFolder, VoicesModelFileName);
             if (!File.Exists(modelPath) || !File.Exists(voicesPath))
             {
-                throw new FileNotFoundException("Kokoro TTS model or voices file missing.",
+                throw new FileNotFoundException(Se.Language.Video.TextToSpeech.KokoroModelOrVoicesFileMissing,
                     File.Exists(modelPath) ? voicesPath : modelPath);
             }
 
@@ -327,7 +328,7 @@ public class KokoroTtsCpp : ITtsEngine
             psi.ArgumentList.Add(port.ToString());
 
             var process = Process.Start(psi)
-                ?? throw new InvalidOperationException("Failed to start kokoro-tts-server");
+                ?? throw new InvalidOperationException(string.Format(Se.Language.Video.TextToSpeech.ServerStartFailedX, ServerDisplayName));
 
             Se.WriteToolsLog($"Kokoro TTS server starting - PID: {process.Id}, "
                 + $"Cmd: {exe} {string.Join(' ', psi.ArgumentList)}");
@@ -369,8 +370,9 @@ public class KokoroTtsCpp : ITtsEngine
 
             var lastOutput = SnapshotStderr(stderrBuffer);
             StopServerInternal();
-            throw new TimeoutException(
-                $"kokoro-tts-server did not report healthy within 60s. Last output: {lastOutput}");
+            throw new TimeoutException(string.Format(
+                Se.Language.Video.TextToSpeech.ServerHealthTimedOutXXX,
+                ServerDisplayName, 60, lastOutput));
         }
         finally
         {

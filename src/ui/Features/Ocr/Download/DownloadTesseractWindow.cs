@@ -1,3 +1,4 @@
+using Nikse.SubtitleEdit.Logic.Config;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Data;
@@ -14,7 +15,7 @@ public class DownloadTesseractWindow : Window
     {
         vm.Window = this;
         UiUtil.InitializeWindow(this, GetType().Name);
-        Title = "Downloading Tesseract";
+        Title = Se.Language.Ocr.DownloadingTesseract;
         SizeToContent = SizeToContent.WidthAndHeight;
         CanResize = false;
         WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -23,7 +24,7 @@ public class DownloadTesseractWindow : Window
 
         var titleText = new TextBlock
         {
-            Text = "Downloading Tesseract",
+            Text = Se.Language.Ocr.DownloadingTesseract,
             FontSize = 20,
             FontWeight = FontWeight.Bold,
         };

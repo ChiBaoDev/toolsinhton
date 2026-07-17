@@ -1,3 +1,4 @@
+using Nikse.SubtitleEdit.Logic.Config;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Data;
@@ -13,7 +14,7 @@ public class DownloadPaddleOcrWindow : Window
     {
         vm.Window = this;
         UiUtil.InitializeWindow(this, GetType().Name);
-        Title = "Downloading Paddle OCR";
+        Title = Se.Language.Ocr.DownloadingPaddleOcr;
         SizeToContent = SizeToContent.WidthAndHeight;
         CanResize = false;
         WindowStartupLocation = WindowStartupLocation.CenterOwner;

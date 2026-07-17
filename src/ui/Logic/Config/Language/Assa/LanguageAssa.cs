@@ -25,6 +25,7 @@ public class LanguageAssa
     public string DrawSelectedLayer { get; set; }
     public string DrawToolX { get; set; }
     public string DrawHelpText { get; set; }
+    public string DrawUseShapeForErase { get; set; }
 
     // Progress Bar Generator
     public string ProgressBarTitle { get; set; }
@@ -129,6 +130,9 @@ public class LanguageAssa
     public string Rotation { get; set; }
     public string ImageColorPicker { get; set; }
     public string CopyColorAsHextoClipboard { get; set; }
+    public string MouseOverColor { get; set; }
+    public string ClickedColor { get; set; }
+    public string Copied { get; set; }
     public string GeneratingBackgroundBoxXOfY { get; set; }
 
     // Apply Advanced Effect
@@ -237,6 +241,7 @@ public class LanguageAssa
         DrawSelectedLayer = "Selected layer";
         DrawToolX = "Tool: {0}";
         DrawHelpText = "Click to add points • Enter/F8 to close shape • Shift+Drag to pan • Ctrl+Scroll to zoom";
+        DrawUseShapeForErase = "Use shape for erase (iclip)";
 
 
         // Progress Bar Generator
@@ -343,6 +348,9 @@ public class LanguageAssa
         Rotation = "Rotation";
         ImageColorPicker = "Image color picker";
         CopyColorAsHextoClipboard = "Copy color as hex to clipboard";
+        MouseOverColor = "Mouse-over color";
+        ClickedColor = "Clicked color";
+        Copied = "✓ Copied!";
         GeneratingBackgroundBoxXOfY = "Generating background box {0} of {1}...";
 
         // Apply Advanced Effect
