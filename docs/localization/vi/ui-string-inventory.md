@@ -23,7 +23,7 @@
 
 ## Task 10 fixed-scan inventory
 
-The structured source of truth is `tests/UI/TestData/Task10LiteralInventory.json`. The scanner covers C# UI literals and localized expressions, plus all English-bearing `.xaml`/`.axaml` attributes and element text after explicit technical exclusions. Every candidate and inventory row must match exactly once.
+The structured source of truth is `tests/UI/TestData/Task10LiteralInventory.json`. The scanner covers C# UI literals and every `Se.Language.*` member-expression occurrence across the exact five roots, plus all English-bearing `.xaml`/`.axaml` attributes and decoded/trimmed element text, even when ASCII English letters follow punctuation, digits, or entities. Every candidate and inventory row must match exactly once.
 
 | Source | Candidate | Classification | Language key / reason |
 |---|---|---|---|
@@ -120,8 +120,8 @@ The structured source of truth is `tests/UI/TestData/Task10LiteralInventory.json
 ## Task 10 review-fix evidence
 
 - Fixed scan roots are exactly `src/ui/Features/Main`, `Files`, `Edit`, `Sync`, and `Shared`.
-- The structured inventory contains 89 rows: 54 localized, 10 technical exceptions, 9 external-runtime values, and 16 non-UI values. No deferred classification remains.
+- The structured inventory contains 1,566 rows: 1,511 localized, 10 technical exceptions, 9 external-runtime values, and 36 non-UI values. The non-UI set includes 18 language-section object aliases, one commented-out expression, and one internal AI prompt-protocol string; these are scanned but explicitly classified because they are not display strings. No deferred classification remains.
 - All 43 formerly deferred user-visible candidates now resolve through typed `Se.Language` properties and matching English/Vietnamese catalog leaves.
 - Markup scanning covers every English-bearing attribute and element-text node; namespace URIs, bindings, identifiers, resource keys, paths, type/style metadata, and other technical values are explicitly excluded.
-- Localized expressions participate in the same symmetric candidate/inventory cardinality check as retained literals.
+- All 1,530 `Se.Language.*` member-expression occurrences participate in the same symmetric candidate/inventory cardinality check as retained literals; source columns distinguish repeated expressions on one line.
 - Catalog ownership remains in the existing B1 (`file`/`edit`), B3 (`main`), and B4 (`tools`) shards under longest-prefix ownership.

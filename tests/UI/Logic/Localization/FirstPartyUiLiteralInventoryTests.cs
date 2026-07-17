@@ -1,5 +1,7 @@
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using System.Xml;
+using System.Xml.Linq;
 using Avalonia.Headless.XUnit;
 using Nikse.SubtitleEdit.Core.VobSub;
 using Nikse.SubtitleEdit.Features.Shared.PickVobSubLanguage;
@@ -12,15 +14,15 @@ namespace UITests.Logic.Localization;
 internal sealed record Task10Inventory(string[] Roots, Task10InventoryRow[] Rows);
 
 internal sealed record Task10InventoryRow(
-    string Source, int Line, string Literal, string Classification, string? Category,
+    string Source, int Line, int Column, string Literal, string Classification, string? Category,
     string? Reason, string? LanguageKey, string? SourceExpression)
 {
-    public string Identity => $"{Source}:{Line}:{Literal}";
+    public string Identity => $"{Source}:{Line}:{Column}:{Literal}:{SourceExpression}";
 }
 
-internal sealed record Task10Candidate(string Source, int Line, string Kind, string? Literal, string? SourceExpression)
+internal sealed record Task10Candidate(string Source, int Line, int Column, string Kind, string? Literal, string? SourceExpression)
 {
-    public string Identity => $"{Source}:{Line}:{Kind}:{Literal}:{SourceExpression}";
+    public string Identity => $"{Source}:{Line}:{Column}:{Kind}:{Literal}:{SourceExpression}";
 }
 
 public class FirstPartyUiLiteralInventoryTests
@@ -43,16 +45,11 @@ public class FirstPartyUiLiteralInventoryTests
     };
 
     private static readonly Regex UiPropertyAssignment = new(
-        @"\b(?<kind>[A-Za-z0-9_]*Title|Content|Header|Watermark)\s*=\s*(?:(?<literal>""(?:\\.|[^""\\])*"")|(?<expression>Se\.Language\.[A-Za-z0-9_.]+))",
+        @"\b(?<kind>[A-Za-z0-9_]*(?:Title|Content|Header|Watermark))\s*=\s*(?:(?<literal>""(?:\\.|[^""\\])*"")|(?<expression>Se\.Language\.[A-Za-z0-9_.]+))",
         RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
     private static readonly Regex MarkupAttribute = new(
         @"(?<kind>[A-Za-z_][A-Za-z0-9_.:-]*)\s*=\s*""(?<literal>[^""]*[A-Za-z][^""]*)""",
-        RegexOptions.Compiled | RegexOptions.CultureInvariant);
-
-    private static readonly Regex MarkupElementText = new(
-        @">\s*(?<literal>[A-Za-z][^<>
-]*)\s*</[A-Za-z][^>]*>",
         RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
     private static readonly HashSet<string> TechnicalMarkupAttributes = new(StringComparer.OrdinalIgnoreCase)
@@ -63,13 +60,8 @@ public class FirstPartyUiLiteralInventoryTests
         "x:CompileBindings", "x:DataType", "x:Key", "x:Name",
     };
 
-    private static readonly Regex Task10LocalizedExpression = new(
-        @"Se\.Language\.(?:Main\.(?:LayoutTitle|DownloadingFfmpeg|DownloadingLibMpv|PickVobSubLanguageTitle|NoSubtitleFound|MatroskaContainsNoSubtitles|CouldNotExtractAudioClipFromVideo|TurnSmpteTimingOff|Mp3ContainsNoSubtitles|WavContainsNoSubtitles|OpenMediaViaVideoMenu|DownloadMpvTitle|DownloadMpvQuestion|DownloadCompleteCouldNotDeleteExistingFile|RestartSeToUseNewLibMpv)|File\.(?:ExportPacTitle|ChoosePacCodePage|ExportCavena890Title|ExportEbuStlTitle|DeleteLinesTitle|DeleteXLinesQuestion|EnterProfileNameMessage|ProfileNameMustBeUnique|RemoveImageTitle|RemoveImageQuestion|AlignmentMatchedXOfYLines|FormatNotSupportedPrefix)|Edit\.MultipleReplace\.(?:NoRuleCategoriesSelectedForExport|UnableToImportReplaceRules|NoReplaceRulesFoundInFile)|Tools\.(?:ApplyDurationLimits\.(?:MinimumDurationMilliseconds|MaximumDurationMilliseconds)|ImageBasedEdit\.(?:SetText|FormatNotFoundOrSupported|EncryptedVobSubNotSupported|NoSubtitlesToResize|NoSubtitlesToAdjust|UnableToLoadImageFile|FailedToImportImage|NoSubtitleSelected|SelectExactlyOneSubtitle|NoSubtitlesFoundInFile|UnexportedChangesTitle|UnexportedChangesQuestion|DeleteOneLineQuestion|DeleteXLinesQuestion)))",
-        RegexOptions.Compiled | RegexOptions.CultureInvariant);
-
-    private static readonly Regex LocalizedUiAssignment = new(
-        @"[A-Za-z0-9_]*(?:Title|Content|Header|Watermark)\s*=\s*[^;
-]*?(?<expression>Se\.Language\.[A-Za-z0-9_.]+)",
+    private static readonly Regex LanguageMemberExpression = new(
+        @"Se\.Language\.[A-Za-z_][A-Za-z0-9_.]*",
         RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
     private static readonly Regex UiCall = new(
@@ -132,7 +124,12 @@ public class FirstPartyUiLiteralInventoryTests
             Assert.False(string.IsNullOrWhiteSpace(row.Category));
             Assert.False(string.IsNullOrWhiteSpace(row.Reason));
             Assert.True(string.IsNullOrWhiteSpace(row.LanguageKey));
-            Assert.True(string.IsNullOrWhiteSpace(row.SourceExpression));
+            if (!string.IsNullOrWhiteSpace(row.SourceExpression))
+            {
+                Assert.StartsWith("Se.Language.", row.SourceExpression, StringComparison.Ordinal);
+                Assert.Equal("non-ui", row.Classification);
+                Assert.Contains(row.Category, new[] { "language-object-alias", "commented-code" });
+            }
         }
     }
 
@@ -187,6 +184,81 @@ public class FirstPartyUiLiteralInventoryTests
         {
             Se.Language = previous;
         }
+    }
+
+    [Theory]
+    [InlineData("<TextBlock>(Optional)</TextBlock>", "(Optional)")]
+    [InlineData("<TextBlock>1 item</TextBlock>", "1 item")]
+    [InlineData("<TextBlock>&amp; English</TextBlock>", "& English")]
+    public void MarkupElementTextFindsEnglishLettersAnywhereAfterDecodingAndTrimming(string markup, string expected)
+    {
+        var candidates = new List<Task10Candidate>();
+
+        AddMarkupCandidates(candidates, "sample.axaml", markup);
+
+        var candidate = Assert.Single(candidates);
+        Assert.Equal("element-text", candidate.Kind);
+        Assert.Equal(expected, candidate.Literal);
+    }
+
+    [Theory]
+    [InlineData("<TextBlock>Hello <Run>world</Run></TextBlock>", "Hello", "world")]
+    [InlineData("<TextBlock><![CDATA[English text]]></TextBlock>", "English text")]
+    public void MarkupElementTextScansNestedAndCDataTextNodes(string markup, params string[] expected)
+    {
+        var candidates = new List<Task10Candidate>();
+
+        AddMarkupCandidates(candidates, "sample.axaml", markup);
+
+        Assert.Equal(expected, candidates.Select(candidate => candidate.Literal));
+    }
+
+    [Fact]
+    public void MarkupElementTextIgnoresXmlComments()
+    {
+        var candidates = new List<Task10Candidate>();
+
+        AddMarkupCandidates(candidates, "sample.axaml", "<Root><!-- <TextBlock>English</TextBlock> --></Root>");
+
+        Assert.Empty(candidates);
+    }
+
+    [Fact]
+    public void IdenticalLiteralsOnOneLineRemainDistinctCandidates()
+    {
+        const string markup = "<StackPanel><TextBlock>English</TextBlock><TextBlock>English</TextBlock></StackPanel>";
+        var candidates = new List<Task10Candidate>();
+
+        AddMarkupCandidates(candidates, "sample.axaml", markup);
+
+        Assert.Equal(2, candidates.Count);
+        Assert.Equal(2, candidates.Select(candidate => candidate.Column).Distinct().Count());
+    }
+
+    [Fact]
+    public void FixedScanIncludesIdentifiersEndingInContent()
+    {
+        const string source = "userContent = \"Context text\";";
+        var candidates = new List<Task10Candidate>();
+
+        AddCSharpCandidates(candidates, "sample.cs", source);
+
+        var candidate = Assert.Single(candidates);
+        Assert.Equal("userContent", candidate.Kind);
+        Assert.Equal("Context text", candidate.Literal);
+    }
+
+    [Fact]
+    public void GenericLanguageMemberScanFindsPreviouslyUnlistedExpressionAtEveryOccurrence()
+    {
+        const string source = "var file = Pick(Se.Language.General.TextFiles, Se.Language.General.TextFiles);";
+        var candidates = new List<Task10Candidate>();
+
+        AddCSharpCandidates(candidates, "sample.cs", source);
+
+        var expressions = candidates.Where(candidate => candidate.SourceExpression == "Se.Language.General.TextFiles").ToArray();
+        Assert.Equal(2, expressions.Length);
+        Assert.Equal(new[] { 17, 48 }, expressions.Select(candidate => candidate.Column));
     }
 
     [Fact]
@@ -269,25 +341,9 @@ public class FirstPartyUiLiteralInventoryTests
 
         }
 
-        foreach (Match expression in Task10LocalizedExpression.Matches(text))
+        foreach (Match expression in LanguageMemberExpression.Matches(text))
         {
-            var line = LineNumber(text, expression.Index);
-            if ((expression.Value is "Se.Language.Main.DownloadingFfmpeg" or "Se.Language.Main.DownloadingLibMpv") && line != 17 ||
-                expression.Value == "Se.Language.Tools.ImageBasedEdit.SetText" && !source.EndsWith("/SetText/SetTextWindow.cs", StringComparison.Ordinal))
-            {
-                continue;
-            }
-
-            AddCandidate(candidates, source, text, expression.Index, "localized-source", null, expression.Value);
-        }
-
-        if (source is "src/ui/Features/Files/ExportImageBased/ImageBasedProfileViewModel.cs" or
-            "src/ui/Features/Shared/DownloadLibMpvViewModel.cs")
-        {
-            foreach (Match expression in Regex.Matches(text, @"Se\.Language\.General\.Error", RegexOptions.CultureInvariant))
-            {
-                AddCandidate(candidates, source, text, expression.Index, "localized-source", null, expression.Value);
-            }
+            AddCandidate(candidates, source, text, expression.Index, "language-member", null, expression.Value);
         }
     }
 
@@ -303,9 +359,17 @@ public class FirstPartyUiLiteralInventoryTests
             }
         }
 
-        foreach (Match match in MarkupElementText.Matches(text))
+        var document = XDocument.Parse(text, LoadOptions.PreserveWhitespace | LoadOptions.SetLineInfo);
+        foreach (var node in document.DescendantNodes().Where(node => node is XText or XCData))
         {
-            AddCandidate(candidates, source, text, match.Index, "element-text", match.Groups["literal"].Value.Trim(), null);
+            var literal = ((XText)node).Value.Trim();
+            if (!literal.Any(character => character is >= 'A' and <= 'Z' or >= 'a' and <= 'z'))
+            {
+                continue;
+            }
+
+            var lineInfo = (IXmlLineInfo)node;
+            AddCandidate(candidates, source, lineInfo.LineNumber, lineInfo.LinePosition, "element-text", literal, null);
         }
     }
 
@@ -336,13 +400,20 @@ public class FirstPartyUiLiteralInventoryTests
             return;
         }
 
-        candidates.Add(new Task10Candidate(source, LineNumber(text, index), kind, literal, sourceExpression));
+        AddCandidate(candidates, source, LineNumber(text, index), ColumnNumber(text, index), kind, literal, sourceExpression);
+    }
+
+    private static void AddCandidate(List<Task10Candidate> candidates, string source, int line, int column, string kind, string? literal, string? sourceExpression)
+    {
+        candidates.Add(new Task10Candidate(source, line, column, kind, literal, sourceExpression));
     }
 
     private static bool CandidateMatches(Task10InventoryRow row, Task10Candidate candidate) =>
         row.Source == candidate.Source &&
         row.Line == candidate.Line &&
-        (row.Classification == "localized" ? row.SourceExpression == candidate.SourceExpression : row.Literal == candidate.Literal);
+        (!string.IsNullOrWhiteSpace(row.SourceExpression)
+            ? row.Column == candidate.Column && row.SourceExpression == candidate.SourceExpression
+            : row.Literal == candidate.Literal);
 
     private static string ExpectedSourceExpression(string path) =>
         "Se.Language." + string.Join('.', path[2..].Split('.').Select(segment => char.ToUpperInvariant(segment[0]) + segment[1..]));
@@ -367,6 +438,12 @@ public class FirstPartyUiLiteralInventoryTests
 
     private static int LineNumber(string text, int index) => text[..index].Count(character => character == '\n') + 1;
 
+    private static int ColumnNumber(string text, int index)
+    {
+        var lineStart = text.LastIndexOf('\n', Math.Max(0, index - 1));
+        return index - lineStart;
+    }
+
     private static string? Unquote(string value)
     {
         var quote = value.IndexOf('"');
@@ -375,7 +452,7 @@ public class FirstPartyUiLiteralInventoryTests
 
 
     private static string Describe(Task10Candidate candidate) =>
-        $"{candidate.Source}:{candidate.Line}:{candidate.Kind}: {candidate.Literal ?? candidate.SourceExpression}";
+        $"{candidate.Source}:{candidate.Line}:{candidate.Column}:{candidate.Kind}: {candidate.Literal ?? candidate.SourceExpression}";
 
     private static string ToAbsolutePath(string root, string relativePath) =>
         Path.Combine(root, relativePath.Replace('/', Path.DirectorySeparatorChar));
