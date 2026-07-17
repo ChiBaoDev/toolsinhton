@@ -1,4 +1,4 @@
-﻿namespace Nikse.SubtitleEdit.Logic.Config.Language.Assa;
+namespace Nikse.SubtitleEdit.Logic.Config.Language.Assa;
 
 public class LanguageAssa
 {
@@ -217,8 +217,26 @@ public class LanguageAssa
     public string AdvancedEffectFadeInOutDescription { get; set; }
     public string OverrideTagsHistory { get; set; }
 
+    public string DeleteAttachment { get; set; }
+    public string DoYouWantToDeleteX { get; set; }
+    public string VideoWidthHeightCannotBeZero { get; set; }
+    public string NothingToImport { get; set; }
+    public string DoYouWantToDeleteStyleXFrom { get; set; }
+    public string DoYouWantToDeleteXStylesFrom { get; set; }
+    public string DoYouWantToDeleteStyleXFrom2 { get; set; }
+    public string DoYouWantToDeleteXStyles { get; set; }
+
     public LanguageAssa()
     {
+        DeleteAttachment = "Delete attachment?";
+        DoYouWantToDeleteX = "Do you want to delete {0}?";
+        VideoWidthHeightCannotBeZero = "Video width/height cannot be zero.";
+        NothingToImport = "Nothing to import";
+        DoYouWantToDeleteStyleXFrom = "Do you want to delete style \"{0}\" from storage?";
+        DoYouWantToDeleteXStylesFrom = "Do you want to delete {0} styles from storage?";
+        DoYouWantToDeleteStyleXFrom2 = "Do you want to delete style \"{0}\" from current file?";
+        DoYouWantToDeleteXStyles = "Do you want to delete {0} styles?";
+
         // ASSA Draw
         AssaDraw = "ASSA Draw";
         DrawSelectTool = "Select (move points)";

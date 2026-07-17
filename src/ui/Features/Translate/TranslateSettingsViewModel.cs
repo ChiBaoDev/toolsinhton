@@ -1,4 +1,4 @@
-﻿using Avalonia.Controls;
+using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -66,7 +66,7 @@ public partial class TranslateSettingsViewModel : ObservableObject
         {
             if (!PromptText.Contains("{0}") || !PromptText.Contains("{1}"))
             {
-                await MessageBox.Show(Window!, "Error",
+                await MessageBox.Show(Window!, Se.Language.General.Error,
                     "Prompt must contain {0} (source language) and {1} (target language)", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -74,13 +74,13 @@ public partial class TranslateSettingsViewModel : ObservableObject
 
         if (PromptText.Replace("{0}", string.Empty).Replace("{1}", string.Empty).Contains('{'))
         {
-            await MessageBox.Show(Window!, "Error", "Character not allowed in prompt: '{' (besides '{0}' and '{1}')", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            await MessageBox.Show(Window!, Se.Language.General.Error, "Character not allowed in prompt: '{' (besides '{0}' and '{1}')", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
         if (PromptText.Replace("{0}", string.Empty).Replace("{1}", string.Empty).Contains('}'))
         {
-            await MessageBox.Show(Window!, "Error", "Character not allowed in prompt: '}' (besides '{0}' and '{1}')", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            await MessageBox.Show(Window!, Se.Language.General.Error, "Character not allowed in prompt: '}' (besides '{0}' and '{1}')", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 

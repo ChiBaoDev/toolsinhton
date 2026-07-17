@@ -48,8 +48,8 @@ public static class PaddleOcrInstallHelper
             {
                 var answer = await MessageBox.Show(
                     window,
-                    "Download Paddle OCR?",
-                    $"{Environment.NewLine}\"Paddle OCR\" requires downloading Paddle OCR.{Environment.NewLine}{Environment.NewLine}Download and use Paddle OCR?",
+                    Se.Language.Ocr.DownloadPaddleOCR,
+                    string.Format(Se.Language.Ocr.XPaddleOCRRequiresDownloadingPaddleOCRX, Environment.NewLine, Environment.NewLine, Environment.NewLine),
                     MessageBoxButtons.Cancel,
                     MessageBoxIcon.Question,
                     "CPU",
@@ -86,8 +86,8 @@ public static class PaddleOcrInstallHelper
             {
                 var answer = await MessageBox.Show(
                     window,
-                    "Download Paddle OCR?",
-                    $"{Environment.NewLine}\"Paddle OCR\" requires downloading Paddle OCR.{Environment.NewLine}{Environment.NewLine}Download and use Paddle OCR?",
+                    Se.Language.Ocr.DownloadPaddleOCR,
+                    string.Format(Se.Language.Ocr.XPaddleOCRRequiresDownloadingPaddleOCRX, Environment.NewLine, Environment.NewLine, Environment.NewLine),
                     MessageBoxButtons.Cancel,
                     MessageBoxIcon.Question,
                     "CPU",

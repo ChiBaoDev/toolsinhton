@@ -342,7 +342,7 @@ public partial class ShortcutsViewModel : ObservableObject
             var importedShortcuts = System.Text.Json.JsonSerializer.Deserialize<List<SeShortCut>>(json, options);
             if (importedShortcuts == null || importedShortcuts.Count == 0)
             {
-                await MessageBox.Show(Window, Se.Language.General.Error, "No shortcuts found in file.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await MessageBox.Show(Window, Se.Language.General.Error, Se.Language.Options.NoShortcutsFoundInFile, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -374,7 +374,7 @@ public partial class ShortcutsViewModel : ObservableObject
         catch (Exception ex)
         {
             await MessageBox.Show(Window, Se.Language.General.Error,
-                $"Failed to import shortcuts:\r\n{ex.Message}",
+                string.Format(Se.Language.Options.FailedToImportShortcutsRNX, ex.Message),
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
@@ -411,7 +411,7 @@ public partial class ShortcutsViewModel : ObservableObject
             var importResult = Se4ShortcutsImporter.ImportFromFile(fileName);
             if (importResult.Shortcuts.Count == 0)
             {
-                await MessageBox.Show(Window, Se.Language.General.Error, "No shortcuts found in file.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await MessageBox.Show(Window, Se.Language.General.Error, Se.Language.Options.NoShortcutsFoundInFile, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -442,7 +442,7 @@ public partial class ShortcutsViewModel : ObservableObject
         catch (Exception ex)
         {
             await MessageBox.Show(Window, Se.Language.General.Error,
-                $"Failed to import SE 4 shortcuts:\r\n{ex.Message}",
+                string.Format(Se.Language.Options.FailedToImportSE4ShortcutsRN, ex.Message),
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
@@ -492,7 +492,7 @@ public partial class ShortcutsViewModel : ObservableObject
         catch (Exception ex)
         {
             await MessageBox.Show(Window, Se.Language.General.Error,
-                $"Failed to export shortcuts:\r\n{ex.Message}",
+                string.Format(Se.Language.Options.FailedToExportShortcutsRNX, ex.Message),
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }

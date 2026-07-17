@@ -1,4 +1,4 @@
-﻿using Avalonia.Controls;
+using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -104,8 +104,8 @@ public partial class FixCommonErrorsProfileViewModel : ObservableObject
             {
                 await MessageBox.Show(
                     Window!,
-                    "Error",
-                    "Please enter a profile name",
+                    Se.Language.General.Error,
+                    Se.Language.Tools.FixCommonErrors.PleaseEnterAProfileName,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 return;
@@ -115,8 +115,8 @@ public partial class FixCommonErrorsProfileViewModel : ObservableObject
             {
                 await MessageBox.Show(
                     Window!,
-                    "Error",
-                    $"Profile name '{profile.Name}' can only be used once. Please choose a different name.",
+                    Se.Language.General.Error,
+                    string.Format(Se.Language.Tools.FixCommonErrors.ProfileNameXCanOnlyBeUsedOnce, profile.Name),
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 return;

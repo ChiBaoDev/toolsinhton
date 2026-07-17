@@ -1,4 +1,4 @@
-﻿namespace Nikse.SubtitleEdit.Logic.Config.Language.Translate;
+namespace Nikse.SubtitleEdit.Logic.Config.Language.Translate;
 
 public class LanguageTranslate
 {
@@ -30,8 +30,16 @@ public class LanguageTranslate
     public string SwapLanguages { get; set; }
     public string XIsAlreadyDownloadedReDownload { get; set; }
 
+    public string DownloadLlamaCpp { get; set; }
+    public string SelectWhichLlamaCppBuildToDownload { get; set; }
+    public string TheCustomModelFileXWasNotFound { get; set; }
+
     public LanguageTranslate()
     {
+        DownloadLlamaCpp = "Download llama.cpp?";
+        SelectWhichLlamaCppBuildToDownload = "Select which llama.cpp build to download:";
+        TheCustomModelFileXWasNotFound = "The custom model file '{0}' was not found in the llama.cpp models folder.";
+
         TranslateViaCopyPaste = "Auto-translate via copy/paste";
         MaxBlockSize = "Max block size";
         LineSeparator = "Line separator";

@@ -289,7 +289,7 @@ public partial class ReviewSpeechViewModel : ObservableObject
                 await MessageBox.Show(
                     Window,
                     Se.Language.General.Error,
-                    "The audio file for this line does not exist:" + Environment.NewLine + fileName,
+                    Se.Language.Video.TextToSpeech.TheAudioFileForThisLineDoesNot + Environment.NewLine + fileName,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -500,7 +500,7 @@ public partial class ReviewSpeechViewModel : ObservableObject
                 await MessageBox.Show(
                     Window,
                     Se.Language.General.Error,
-                    $"Could not overwrite the file \"{jsonFileName}" + Environment.NewLine + e.Message,
+                    string.Format(Se.Language.Video.TextToSpeech.CouldNotOverwriteTheFileX, jsonFileName) + Environment.NewLine + e.Message,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 return;
@@ -592,7 +592,7 @@ public partial class ReviewSpeechViewModel : ObservableObject
                     await MessageBox.Show(
                         Window,
                         Se.Language.General.Error,
-                        $"Could not overwrite the file \"{targetFileName}" + Environment.NewLine + e.Message,
+                        string.Format(Se.Language.Video.TextToSpeech.CouldNotOverwriteTheFileX2, targetFileName) + Environment.NewLine + e.Message,
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                     return;
@@ -781,7 +781,7 @@ public partial class ReviewSpeechViewModel : ObservableObject
                 await MessageBox.Show(
                     Window,
                     Se.Language.General.Warning,
-                    "Cannot regenerate audio with empty text",
+                    Se.Language.Video.TextToSpeech.CannotRegenerateAudioWithEmptyText,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
             }
@@ -860,7 +860,7 @@ public partial class ReviewSpeechViewModel : ObservableObject
                         await MessageBox.Show(
                             Window,
                             Se.Language.General.Error,
-                            "Regenerating audio failed: " + detail,
+                            Se.Language.Video.TextToSpeech.RegeneratingAudioFailed + detail,
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
                     }
@@ -912,7 +912,7 @@ public partial class ReviewSpeechViewModel : ObservableObject
                     await MessageBox.Show(
                         Window,
                         Se.Language.General.Error,
-                        "TTS server error: " + ex.Message,
+                        Se.Language.Video.TextToSpeech.TTSServerError + ex.Message,
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
@@ -928,7 +928,7 @@ public partial class ReviewSpeechViewModel : ObservableObject
                     await MessageBox.Show(
                         Window,
                         Se.Language.General.Error,
-                        "Regenerating audio failed: " + ex.Message,
+                        Se.Language.Video.TextToSpeech.RegeneratingAudioFailed + ex.Message,
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }

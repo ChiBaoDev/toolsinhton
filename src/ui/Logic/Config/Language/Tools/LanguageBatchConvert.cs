@@ -1,4 +1,4 @@
-﻿using Nikse.SubtitleEdit.Features.Video.BurnIn;
+using Nikse.SubtitleEdit.Features.Video.BurnIn;
 using System;
 
 namespace Nikse.SubtitleEdit.Logic.Config.Language.Tools;
@@ -43,8 +43,16 @@ public class LanguageBatchConvert
     public string AssaChangeStyleImportedX { get; set; }
     public string AssaChangeStyleTrimUnusedStyles { get; set; }
 
+    public string PleaseSelectOutputFolder { get; set; }
+    public string DownloadPaddleOCR { get; set; }
+    public string XPaddleOCRRequiresDownloadingPaddleOCRX { get; set; }
+
     public LanguageBatchConvert()
     {
+        PleaseSelectOutputFolder = "Please select output folder";
+        DownloadPaddleOCR = "Download Paddle OCR?";
+        XPaddleOCRRequiresDownloadingPaddleOCRX = "{0}\"Paddle OCR\" requires downloading Paddle OCR.{1}{2}Download and use Paddle OCR?";
+
         Title = "Batch convert";
         BatchConvertSettings = "Batch convert settings";
         OneActionsSelected = "One action selected";

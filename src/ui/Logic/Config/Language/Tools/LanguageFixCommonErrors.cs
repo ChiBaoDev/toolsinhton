@@ -1,4 +1,4 @@
-﻿namespace Nikse.SubtitleEdit.Logic.Config.Language.Tools;
+namespace Nikse.SubtitleEdit.Logic.Config.Language.Tools;
 
 public class LanguageFixCommonErrors
 {
@@ -139,8 +139,14 @@ public class LanguageFixCommonErrors
     public string RemoveSpaceBetweenNumbers { get; set; }
     public string FixDialogsOnOneLine { get; set; }
 
+    public string PleaseEnterAProfileName { get; set; }
+    public string ProfileNameXCanOnlyBeUsedOnce { get; set; }
+
     public LanguageFixCommonErrors()
     {
+        PleaseEnterAProfileName = "Please enter a profile name";
+        ProfileNameXCanOnlyBeUsedOnce = "Profile name '{0}' can only be used once. Please choose a different name.";
+
         Title = "Fix common errors";
         SettingsTitle = "Fix common error settings";
         Step1 = "Step 1/2 - Choose which errors to fix";

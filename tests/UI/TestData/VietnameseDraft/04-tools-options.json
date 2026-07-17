@@ -178,7 +178,9 @@
       "fixText": "Sửa văn bản",
       "removeSpaceBetweenNumbers": "Xóa khoảng trắng giữa các chữ số",
       "fixDialogsOnOneLine": "Sửa hội thoại trên một dòng",
-      "settingsTitle": "Cài đặt sửa lỗi thường gặp"
+      "settingsTitle": "Cài đặt sửa lỗi thường gặp",
+      "pleaseEnterAProfileName": "Vui lòng nhập tên hồ sơ",
+      "profileNameXCanOnlyBeUsedOnce": "Tên hồ sơ '{0}' chỉ được dùng một lần. Vui lòng chọn tên khác."
     },
     "adjustDurations": {
       "title": "Điều chỉnh thời lượng",
@@ -334,7 +336,10 @@
       "assaChangeStyleImportStyle": "Nhập kiểu...",
       "assaChangeStyleImportedX": "Đã nhập: {0}",
       "assaChangeStyleTrimUnusedStyles": "Loại bỏ kiểu không dùng",
-      "outputFolderNotSet": "Thư mục đầu ra chưa được đặt."
+      "outputFolderNotSet": "Thư mục đầu ra chưa được đặt.",
+      "pleaseSelectOutputFolder": "Vui lòng chọn thư mục đầu ra",
+      "downloadPaddleOCR": "Tải Paddle OCR?",
+      "xPaddleOCRRequiresDownloadingPaddleOCRX": "{0}\"Paddle OCR\" yêu cầu tải Paddle OCR.{1}{2}Bạn có muốn tải và dùng Paddle OCR không?"
     },
     "changeCasing": {
       "title": "Thay đổi kiểu chữ hoa/thường",
@@ -363,7 +368,8 @@
       "keepTimeCodes": "Giữ nguyên mã thời gian",
       "appendTimeCodes": "Dời mã thời gian để nối tiếp các tệp",
       "addMsAfterEachFile": "Thêm số mili giây sau mỗi tệp",
-      "join": "_Ghép"
+      "join": "_Ghép",
+      "unableToReadSubtitleFromFile": "Không thể đọc phụ đề từ tệp: "
     },
     "mergeTwoSubtitles": {
       "title": "Gộp hai phụ đề",
@@ -382,7 +388,8 @@
       "alignTop": "Trên",
       "alignBottom": "Dưới",
       "merge": "_Gộp",
-      "pleaseLoadTwoSubtitles": "Vui lòng tải hai phụ đề"
+      "pleaseLoadTwoSubtitles": "Vui lòng tải hai phụ đề",
+      "unableToReadSubtitle": "Không thể đọc phụ đề: "
     },
     "splitSubtitle": {
       "title": "Tách phụ đề",
@@ -1272,7 +1279,15 @@
     },
     "chooseLanguage": {
       "title": "Chọn ngôn ngữ giao diện người dùng"
-    }
+    },
+    "fileAssociationError": "Lỗi liên kết tệp",
+    "noProfileSelectedForExport": "Chưa chọn hồ sơ để xuất",
+    "unableToImportProfiles": "Không thể nhập hồ sơ: ",
+    "noProfilesFoundInFile": "Không tìm thấy hồ sơ trong tệp",
+    "noShortcutsFoundInFile": "Không tìm thấy phím tắt trong tệp.",
+    "failedToImportShortcutsRNX": "Không thể nhập phím tắt:\r\n{0}",
+    "failedToImportSE4ShortcutsRN": "Không thể nhập phím tắt SE 4:\r\n{0}",
+    "failedToExportShortcutsRNX": "Không thể xuất phím tắt:\r\n{0}"
   },
   "plugins": {
     "title": "Trình b_ổ trợ",

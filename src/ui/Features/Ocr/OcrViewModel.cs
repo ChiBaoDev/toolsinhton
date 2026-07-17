@@ -1148,8 +1148,8 @@ public partial class OcrViewModel : ObservableObject
             {
                 var answer = await MessageBox.Show(
                     Window,
-                    "Download CrispEmbed?",
-                    $"{Environment.NewLine}\"CrispEmbed\" requires downloading the CrispEmbed engine.{Environment.NewLine}{Environment.NewLine}Download and use CrispEmbed?",
+                    Se.Language.Ocr.DownloadCrispEmbed,
+                    string.Format(Se.Language.Ocr.XCrispEmbedRequiresDownloadingTheCrispEmbedEngineX, Environment.NewLine, Environment.NewLine, Environment.NewLine),
                     MessageBoxButtons.Cancel,
                     MessageBoxIcon.Question,
                     "CPU",
@@ -1172,8 +1172,8 @@ public partial class OcrViewModel : ObservableObject
             {
                 var answer = await MessageBox.Show(
                     Window,
-                    "Download CrispEmbed?",
-                    $"{Environment.NewLine}\"CrispEmbed\" requires downloading the CrispEmbed engine.{Environment.NewLine}{Environment.NewLine}Download and use CrispEmbed?",
+                    Se.Language.Ocr.DownloadCrispEmbed,
+                    string.Format(Se.Language.Ocr.XCrispEmbedRequiresDownloadingTheCrispEmbedEngineX, Environment.NewLine, Environment.NewLine, Environment.NewLine),
                     MessageBoxButtons.Cancel,
                     MessageBoxIcon.Question,
                     "CPU",
@@ -1190,7 +1190,7 @@ public partial class OcrViewModel : ObservableObject
             {
                 var answer = await MessageBox.Show(
                     Window,
-                    "Download CrispEmbed?",
+                    Se.Language.Ocr.DownloadCrispEmbed,
                     $"{Environment.NewLine}\"CrispEmbed\" requires downloading the CrispEmbed engine ({CrispEmbedEngine.DownloadSizeText}).{Environment.NewLine}{Environment.NewLine}Download and use CrispEmbed?",
                     MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Question);
@@ -1221,7 +1221,7 @@ public partial class OcrViewModel : ObservableObject
             {
                 var answer = await MessageBox.Show(
                     Window,
-                    "Download model?",
+                    Se.Language.Ocr.DownloadModel,
                     $"{Environment.NewLine}Download the model \"{model.Model.Name}\" ({model.Model.Size})?",
                     MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Question);
@@ -1432,8 +1432,8 @@ public partial class OcrViewModel : ObservableObject
             {
                 await MessageBox.Show(
                     Window!,
-                    "Error deleting file",
-                    $"Could not delete the file {_nOcrDb!.FileName}.",
+                    Se.Language.Ocr.ErrorDeletingFile,
+                    string.Format(Se.Language.Ocr.CouldNotDeleteTheFileX, _nOcrDb!.FileName),
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -1567,7 +1567,7 @@ public partial class OcrViewModel : ObservableObject
             {
                 await MessageBox.Show(
                     Window!,
-                    "Error deleting file",
+                    Se.Language.Ocr.ErrorDeletingFile,
                     $"Could not delete the file {Path.Combine(Se.OcrFolder, dbName + BinaryOcrDb.Extension)}.",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -2272,8 +2272,8 @@ public partial class OcrViewModel : ObservableObject
             {
                 var answer = await MessageBox.Show(
                     Window!,
-                    "Download Paddle OCR?",
-                    $"{Environment.NewLine}\"Paddle OCR\" requires downloading Paddle OCR.{Environment.NewLine}{Environment.NewLine}Download and use Paddle OCR?",
+                    Se.Language.Ocr.DownloadPaddleOCR,
+                    string.Format(Se.Language.Ocr.XPaddleOCRRequiresDownloadingPaddleOCRX, Environment.NewLine, Environment.NewLine, Environment.NewLine),
                     MessageBoxButtons.Cancel,
                     MessageBoxIcon.Question,
                     "CPU",
@@ -2318,8 +2318,8 @@ public partial class OcrViewModel : ObservableObject
             {
                 var answer = await MessageBox.Show(
                     Window!,
-                    "Download Paddle OCR?",
-                    $"{Environment.NewLine}\"Paddle OCR\" requires downloading Paddle OCR.{Environment.NewLine}{Environment.NewLine}Download and use Paddle OCR?",
+                    Se.Language.Ocr.DownloadPaddleOCR,
+                    string.Format(Se.Language.Ocr.XPaddleOCRRequiresDownloadingPaddleOCRX, Environment.NewLine, Environment.NewLine, Environment.NewLine),
                     MessageBoxButtons.Cancel,
                     MessageBoxIcon.Question,
                     "CPU",
@@ -2409,8 +2409,8 @@ public partial class OcrViewModel : ObservableObject
             {
                 await MessageBox.Show(
                     Window!,
-                    "Mistral API key missing",
-                    $"You must enter a valid Mistral API key.{Environment.NewLine}{Environment.NewLine}Get your API key from https://mistral.ai/",
+                    Se.Language.Ocr.MistralAPIKeyMissing,
+                    string.Format(Se.Language.Ocr.YouMustEnterAValidMistralAPIKey, Environment.NewLine, Environment.NewLine),
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 IsOcrRunning = false;
@@ -2429,8 +2429,8 @@ public partial class OcrViewModel : ObservableObject
             {
                 var answer = await MessageBox.Show(
                     Window!,
-                    "Download Google Lens OCR?",
-                    $"{Environment.NewLine}\"Google Lens OCR\" requires downloading Google Lens OCR standalone.{Environment.NewLine}{Environment.NewLine}Download and use Google Lens OCR?",
+                    Se.Language.Ocr.DownloadGoogleLensOCR,
+                    string.Format(Se.Language.Ocr.XGoogleLensOCRRequiresDownloadingGoogleLens, Environment.NewLine, Environment.NewLine, Environment.NewLine),
                     MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Question);
 
@@ -3897,7 +3897,7 @@ public partial class OcrViewModel : ObservableObject
             await MessageBox.Show(
                 Window!,
                 Se.Language.General.Error,
-                "Tesseract OCR failed:" + Environment.NewLine + Environment.NewLine + error,
+                Se.Language.Ocr.TesseractOCRFailed + Environment.NewLine + Environment.NewLine + error,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error));
     }
@@ -4030,8 +4030,8 @@ public partial class OcrViewModel : ObservableObject
                     {
                         await MessageBox.Show(
                             Window!,
-                            "CrispEmbed error",
-                            $"The CrispEmbed server could not be started:{Environment.NewLine}{Environment.NewLine}{error}",
+                            Se.Language.Ocr.CrispEmbedError,
+                            string.Format(Se.Language.Ocr.TheCrispEmbedServerCouldNotBeStartedX, Environment.NewLine, Environment.NewLine, error),
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
                     });
@@ -4160,8 +4160,8 @@ public partial class OcrViewModel : ObservableObject
 
             var answer = await MessageBox.Show(
                 Window!,
-                "Download Tesseract OCR?",
-                $"{Environment.NewLine}\"Tesseract\" requires downloading Tesseract OCR.{Environment.NewLine}{Environment.NewLine}Download and use Tesseract OCR?",
+                Se.Language.Ocr.DownloadTesseractOCR,
+                string.Format(Se.Language.Ocr.XTesseractRequiresDownloadingTesseractOCRXX, Environment.NewLine, Environment.NewLine, Environment.NewLine),
                 MessageBoxButtons.YesNoCancel,
                 MessageBoxIcon.Question);
 
@@ -4208,10 +4208,10 @@ public partial class OcrViewModel : ObservableObject
         {
             await MessageBox.Show(
                 Window!,
-                "Please install Tesseract",
-                $"{Environment.NewLine}\"Tesseract\" was not detected. Please install Tesseract." +
+                Se.Language.Ocr.PleaseInstallTesseract,
+                string.Format(Se.Language.Ocr.XTesseractWasNotDetectedPleaseInstallTesseract, Environment.NewLine) +
                 Environment.NewLine + "" +
-                "E.g. ´brew install tesseract´.",
+                Se.Language.Ocr.EGBrewInstallTesseract,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
@@ -4220,10 +4220,10 @@ public partial class OcrViewModel : ObservableObject
         {
             await MessageBox.Show(
                 Window!,
-                "Please install Tesseract",
-                $"{Environment.NewLine}\"Tesseract\" was not detected. Please install Tesseract." +
+                Se.Language.Ocr.PleaseInstallTesseract,
+                string.Format(Se.Language.Ocr.XTesseractWasNotDetectedPleaseInstallTesseract, Environment.NewLine) +
                 Environment.NewLine +
-                $"E.g. ´sudo apt install tesseract-ocr´ or ´sudo pacman -S tesseract´.",
+                Se.Language.Ocr.EGSudoAptInstallTesseractOcrOr,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
@@ -4695,8 +4695,8 @@ public partial class OcrViewModel : ObservableObject
 
         var answer = await MessageBox.Show(
             Window,
-            "Update CrispEmbed?",
-            $"A newer version of CrispEmbed is available.{Environment.NewLine}{Environment.NewLine}Download it now?",
+            Se.Language.Ocr.UpdateCrispEmbed,
+            string.Format(Se.Language.Ocr.ANewerVersionOfCrispEmbedIsAvailableX, Environment.NewLine, Environment.NewLine),
             MessageBoxButtons.YesNoCancel,
             MessageBoxIcon.Question);
 
@@ -4732,8 +4732,8 @@ public partial class OcrViewModel : ObservableObject
 
             var result = await MessageBox.Show(
                 Window!,
-                "Discard OCR result?",
-                "Some items have OCR text. Close and discard the OCR result?",
+                Se.Language.Ocr.DiscardOCRResult,
+                Se.Language.Ocr.SomeItemsHaveOCRTextCloseAndDiscard,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
 

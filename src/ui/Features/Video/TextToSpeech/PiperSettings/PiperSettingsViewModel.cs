@@ -134,8 +134,8 @@ public partial class PiperSettingsViewModel : ObservableObject
 
         var answer = await MessageBox.Show(
             Window,
-            "Re-download Piper",
-            $"{Environment.NewLine}Download the latest Piper now?",
+            Se.Language.Video.TextToSpeech.ReDownloadPiper,
+            string.Format(Se.Language.Video.TextToSpeech.XDownloadTheLatestPiperNow, Environment.NewLine),
             MessageBoxButtons.YesNoCancel,
             MessageBoxIcon.Question);
         if (answer != MessageBoxResult.Yes)

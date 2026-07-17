@@ -1,4 +1,4 @@
-﻿using Avalonia.Controls;
+using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -63,8 +63,8 @@ public partial class BinaryOcrSettingsViewModel : ObservableObject
         var totalItemsCount = 1; // TODO: fix to get actual count from database
         var answer = await MessageBox.Show(
            Window!,
-           "Delete Binary Image Compare database?",
-           string.Format("Do you want to delete the current \"Binary image compare\" database \"{0}\" with {1:#,###,##0} items?", name, totalItemsCount),   
+           Se.Language.Ocr.DeleteBinaryImageCompareDatabase,
+           string.Format(Se.Language.Ocr.DoYouWantToDeleteTheCurrentBinary3, name, totalItemsCount),
            MessageBoxButtons.YesNoCancel,
            MessageBoxIcon.Question);
 

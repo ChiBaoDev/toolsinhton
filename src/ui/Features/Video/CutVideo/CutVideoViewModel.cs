@@ -348,9 +348,9 @@ public partial class CutVideoViewModel : ObservableObject
             Dispatcher.UIThread.Invoke(async () =>
             {
                 await MessageBox.Show(Window!,
-                    "Unable to generate video",
-                    "Output video file not generated: " + jobItem.OutputVideoFileName + Environment.NewLine +
-                    "Parameters: " + _ffmpegProcess.StartInfo.Arguments,
+                    Se.Language.Video.UnableToGenerateVideo,
+                    Se.Language.Video.OutputVideoFileNotGenerated + jobItem.OutputVideoFileName + Environment.NewLine +
+                    Se.Language.Video.Parameters + _ffmpegProcess.StartInfo.Arguments,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
 
@@ -389,7 +389,7 @@ public partial class CutVideoViewModel : ObservableObject
                 }
 
                 await MessageBox.Show(Window!,
-                    "Generating done",
+                    Se.Language.Video.GeneratingDone,
                     sb.ToString(),
                     MessageBoxButtons.OK);
             }
@@ -572,7 +572,7 @@ public partial class CutVideoViewModel : ObservableObject
             await MessageBox.Show(
                 Window!,
                 Se.Language.General.Error,
-                "The selected subtitle file contains no subtitles.",
+                Se.Language.Video.TheSelectedSubtitleFileContainsNoSubtitles,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
             return;
@@ -646,8 +646,8 @@ public partial class CutVideoViewModel : ObservableObject
         {
             await MessageBox.Show(
                 Window!,
-                "No segments added",
-                $"Add one or more segments - e.g. via the waveform",
+                Se.Language.Video.NoSegmentsAdded,
+                Se.Language.Video.AddOneOrMoreSegmentsEGVia,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
 

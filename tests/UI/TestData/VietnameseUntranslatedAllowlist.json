@@ -283,5 +283,20 @@
     "key": "$.about.payPal",
     "value": "PayPal",
     "reason": "PayPal is the exact product, engine, standard, format, or proper name used at this path."
+  },
+  {
+    "key": "$.ocr.nocr",
+    "value": "nOCR",
+    "reason": "nOCR is the exact OCR engine/database name used at this path."
+  },
+  {
+    "key": "$.video.audioToText.xx",
+    "value": "{0}: {1}",
+    "reason": "{0}: {1} is an exact language-independent placeholder and punctuation pattern at this path."
+  },
+  {
+    "key": "$.ocr.binaryOCR",
+    "value": "Binary OCR",
+    "reason": "Binary OCR is the exact OCR engine/database name used at this path."
   }
 ]

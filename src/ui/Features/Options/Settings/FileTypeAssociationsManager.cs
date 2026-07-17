@@ -156,7 +156,7 @@ public static class FileTypeAssociationsManager
         var buttons = openSettings ? MessageBoxButtons.YesNo : MessageBoxButtons.OK;
         var result = await MessageBox.Show(
             window,
-            "File Association Error",
+            Se.Language.Options.FileAssociationError,
             message,
             buttons,
             MessageBoxIcon.Warning);

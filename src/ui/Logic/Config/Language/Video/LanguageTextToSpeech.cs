@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Nikse.SubtitleEdit.Logic.Config.Language;
 
@@ -133,8 +133,129 @@ public class LanguageTextToSpeech
     public string SubtitleMergedLinesAppliedSingular { get; set; }
     public string SubtitleMergedLinesAppliedPlural { get; set; }
 
+    public string TestVoiceFailed { get; set; }
+    public string TheStabilitySliderDeterminesHowStableTheVoice { get; set; }
+    public string TheSimilaritySliderDictatesHowCloselyTheAI { get; set; }
+    public string BoostsTheSimilarityToTheOriginalSpeakerHowever { get; set; }
+    public string AdjustsTheSpeedOfTheGeneratedSpeechA { get; set; }
+    public string DeterminesTheStyleExaggerationOfTheVoiceThis { get; set; }
+    public string ReDownloadKokoroTTS { get; set; }
+    public string XDownloadTheLatestKokoroTTSNow { get; set; }
+    public string ReDownloadPiper { get; set; }
+    public string XDownloadTheLatestPiperNow { get; set; }
+    public string ReDownloadQwen3TTS { get; set; }
+    public string XSelectTheBuildToDownload { get; set; }
+    public string XDownloadTheLatestQwen3TTSNow { get; set; }
+    public string TheAudioFileForThisHistoryEntryDoes { get; set; }
+    public string TheAudioFileForThisLineDoesNot { get; set; }
+    public string CouldNotOverwriteTheFileX { get; set; }
+    public string CouldNotOverwriteTheFileX2 { get; set; }
+    public string CannotRegenerateAudioWithEmptyText { get; set; }
+    public string RegeneratingAudioFailed { get; set; }
+    public string TTSServerError { get; set; }
+    public string TextToSpeechFailed { get; set; }
+    public string SeeErrorLogTxtInTheSubtitleEdit { get; set; }
+    public string TestVoiceError { get; set; }
+    public string RefreshingVoicesFailedX { get; set; }
+    public string TextToSpeech { get; set; }
+    public string NothingToImport { get; set; }
+    public string NoUsableTTSEnginesAreAvailableCheckThe { get; set; }
+    public string MergingTheAudioSegmentsFailed { get; set; }
+    public string AddingTheAudioTrackToTheVideoFailed { get; set; }
+    public string MergingAudioFailedAtSegmentX { get; set; }
+    public string AdjustingAudioSpeedFailed { get; set; }
+    public string AudioPostProcessingFailed { get; set; }
+    public string DownloadQwen3TTS { get; set; }
+    public string XTextToSpeechRequiresQwen3TTSX { get; set; }
+    public string XTextToSpeechRequiresQwen3TTSX2 { get; set; }
+    public string DownloadQwen3TTSModels { get; set; }
+    public string DownloadKokoroTTS { get; set; }
+    public string XTextToSpeechRequiresKokoroTTSX { get; set; }
+    public string DownloadKokoroTTSModels { get; set; }
+    public string DownloadChatterboxTTSModels { get; set; }
+    public string DownloadOmniVoiceTTS { get; set; }
+    public string XTextToSpeechRequiresOmniVoiceTTSX { get; set; }
+    public string XTextToSpeechRequiresOmniVoiceTTSX2 { get; set; }
+    public string DownloadOmniVoiceTTSModels { get; set; }
+    public string AllTalkTextToSpeechRequiresARunningLocal { get; set; }
+    public string XRequiresAKeyFile { get; set; }
+    public string XRequiresAnAPIKey { get; set; }
+    public string UpdateCrispASR { get; set; }
+    public string CrispASRUpdateRequired { get; set; }
+    public string XANewerCrispASRRuntimeIsAvailableRe { get; set; }
+    public string XXXReDownloadNow { get; set; }
+    public string DownloadCrispASR { get; set; }
+    public string XXRunsThroughTheCrispASRRuntimeSelect { get; set; }
+    public string VulkanSDKMayBeRequired { get; set; }
+    public string TheVulkanVersionRequiresTheVulkanSDKTo { get; set; }
+    public string XXRunsThroughTheCrispASRRuntimeDownload { get; set; }
+    public string CrispASRCPUBuild { get; set; }
+    public string XStandardIsRecommendedForMostMachinesX { get; set; }
+
+    public string Info { get; set; }
+
     public LanguageTextToSpeech()
     {
+        Info = "Info";
+        TestVoiceFailed = "Test voice failed: ";
+        TheStabilitySliderDeterminesHowStableTheVoice = "The stability slider determines how stable the voice is and the randomness between each generation. Lowering this slider introduces a broader emotional range for the voice. As mentioned before, this is also influenced heavily by the original voice. Setting the slider too low may result in odd performances that are overly random and cause the character to speak too quickly. On the other hand, setting it too high can lead to a monotonous voice with limited emotion.";
+        TheSimilaritySliderDictatesHowCloselyTheAI = "The similarity slider dictates how closely the AI should adhere to the original voice when attempting to replicate it. If the original audio is of poor quality and the similarity slider is set too high, the AI may reproduce artifacts or background noise when trying to mimic the voice if those were present in the original recording.";
+        BoostsTheSimilarityToTheOriginalSpeakerHowever = "Boosts the similarity to the original speaker. However, using this setting requires a slightly higher computational load, which in turn increases latency. The differences introduced by this setting are generally rather subtle.";
+        AdjustsTheSpeedOfTheGeneratedSpeechA = "Adjusts the speed of the generated speech. A value of 1.0 represents the normal speed. Values greater than 1.0 will make the speech faster, while values less than 1.0 will slow it down. Values from 0.7 to 1.2 are allowed.";
+        DeterminesTheStyleExaggerationOfTheVoiceThis = "Determines the style exaggeration of the voice. This setting attempts to amplify the style of the original speaker. It does consume additional computational resources and might increase latency if set to anything other than 0. Values from 0 to 1 are allowed.";
+        ReDownloadKokoroTTS = "Re-download Kokoro TTS";
+        XDownloadTheLatestKokoroTTSNow = "{0}Download the latest Kokoro TTS now?";
+        ReDownloadPiper = "Re-download Piper";
+        XDownloadTheLatestPiperNow = "{0}Download the latest Piper now?";
+        ReDownloadQwen3TTS = "Re-download Qwen3 TTS";
+        XSelectTheBuildToDownload = "{0}Select the build to download:";
+        XDownloadTheLatestQwen3TTSNow = "{0}Download the latest Qwen3 TTS now?";
+        TheAudioFileForThisHistoryEntryDoes = "The audio file for this history entry does not exist:";
+        TheAudioFileForThisLineDoesNot = "The audio file for this line does not exist:";
+        CouldNotOverwriteTheFileX = "Could not overwrite the file \"{0}";
+        CouldNotOverwriteTheFileX2 = "Could not overwrite the file \"{0}";
+        CannotRegenerateAudioWithEmptyText = "Cannot regenerate audio with empty text";
+        RegeneratingAudioFailed = "Regenerating audio failed: ";
+        TTSServerError = "TTS server error: ";
+        TextToSpeechFailed = "Text to speech failed: ";
+        SeeErrorLogTxtInTheSubtitleEdit = "See error-log.txt in the Subtitle Edit data folder for details.";
+        TestVoiceError = "Test voice error";
+        RefreshingVoicesFailedX = "Refreshing voices failed: {0}";
+        TextToSpeech = "Text to speech";
+        NothingToImport = "Nothing to import";
+        NoUsableTTSEnginesAreAvailableCheckThe = "No usable TTS engines are available - check the engine settings and try again.";
+        MergingTheAudioSegmentsFailed = "Merging the audio segments failed: ";
+        AddingTheAudioTrackToTheVideoFailed = "Adding the audio track to the video failed - the audio file was still saved.";
+        MergingAudioFailedAtSegmentX = "Merging audio failed at segment {0}.";
+        AdjustingAudioSpeedFailed = "Adjusting audio speed failed: ";
+        AudioPostProcessingFailed = "Audio post-processing failed: ";
+        DownloadQwen3TTS = "Download Qwen3 TTS?";
+        XTextToSpeechRequiresQwen3TTSX = "{0}\"Text to speech\" requires Qwen3 TTS.{1}{2}Select a build to download:";
+        XTextToSpeechRequiresQwen3TTSX2 = "{0}\"Text to speech\" requires Qwen3 TTS.{1}{2}Download and use Qwen3 TTS?";
+        DownloadQwen3TTSModels = "Download Qwen3 TTS models?";
+        DownloadKokoroTTS = "Download Kokoro TTS?";
+        XTextToSpeechRequiresKokoroTTSX = "{0}\"Text to speech\" requires Kokoro TTS.{1}{2}Download and use Kokoro TTS?";
+        DownloadKokoroTTSModels = "Download Kokoro TTS models?";
+        DownloadChatterboxTTSModels = "Download Chatterbox TTS models?";
+        DownloadOmniVoiceTTS = "Download OmniVoice TTS?";
+        XTextToSpeechRequiresOmniVoiceTTSX = "{0}\"Text to speech\" requires OmniVoice TTS.{1}{2}Select a build to download:";
+        XTextToSpeechRequiresOmniVoiceTTSX2 = "{0}\"Text to speech\" requires OmniVoice TTS.{1}{2}Download and use OmniVoice TTS?";
+        DownloadOmniVoiceTTSModels = "Download OmniVoice TTS models?";
+        AllTalkTextToSpeechRequiresARunningLocal = "\"AllTalk\" text to speech requires a running local AllTalk web server.{0}{1}Read more?";
+        XRequiresAKeyFile = "\"{0}\" requires a key file";
+        XRequiresAnAPIKey = "\"{0}\" requires an API key";
+        UpdateCrispASR = "Update CrispASR";
+        CrispASRUpdateRequired = "CrispASR update required";
+        XANewerCrispASRRuntimeIsAvailableRe = "{0}A newer CrispASR runtime is available. Re-download it now?";
+        XXXReDownloadNow = "{0}\"{1}\"{2}. Re-download now?";
+        DownloadCrispASR = "Download CrispASR?";
+        XXRunsThroughTheCrispASRRuntimeSelect = "{0}\"{1}\" runs through the CrispASR runtime. Select a build to download:";
+        VulkanSDKMayBeRequired = "Vulkan SDK may be required";
+        TheVulkanVersionRequiresTheVulkanSDKTo = "The Vulkan version requires the Vulkan SDK to be installed.{0}{1}You can download it from:{2}https://vulkan.lunarg.com/sdk/home{3}{4}Continue with Vulkan download?";
+        XXRunsThroughTheCrispASRRuntimeDownload = "{0}\"{1}\" runs through the CrispASR runtime. Download and install now?";
+        CrispASRCPUBuild = "CrispASR CPU build";
+        XStandardIsRecommendedForMostMachinesX = "{0}Standard is recommended for most machines.{1}{2}Legacy is a fallback for older CPUs without AVX2 support.";
+
         Title = "Text to speech";
         DownloadEngineTitle = "TTS - Download engine";
         CosyVoice3CrispAsrSettings = "CosyVoice3 (CrispASR) settings";

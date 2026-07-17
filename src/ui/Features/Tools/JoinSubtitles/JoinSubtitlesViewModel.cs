@@ -121,7 +121,7 @@ public partial class JoinSubtitlesViewModel : ObservableObject
 
         if (subtitle == null || subtitle.Paragraphs.Count == 0)
         {
-            await MessageBox.Show(Window, Se.Language.General.Error, "Unable to read subtitle from file: " + fileName);
+            await MessageBox.Show(Window, Se.Language.General.Error, Se.Language.Tools.JoinSubtitles.UnableToReadSubtitleFromFile + fileName);
             return false;
         }
 

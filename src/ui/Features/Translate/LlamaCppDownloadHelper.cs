@@ -156,8 +156,8 @@ public static class LlamaCppDownloadHelper
         {
             var buildAnswer = await MessageBox.Show(
                 owner,
-                "Download llama.cpp?",
-                "Select which llama.cpp build to download:",
+                Se.Language.Translate.DownloadLlamaCpp,
+                Se.Language.Translate.SelectWhichLlamaCppBuildToDownload,
                 MessageBoxButtons.Cancel,
                 MessageBoxIcon.Question,
                 "CPU",
@@ -228,7 +228,7 @@ public static class LlamaCppDownloadHelper
             await MessageBox.Show(
                 owner,
                 Se.Language.General.Error,
-                $"The custom model file '{model.FileName}' was not found in the llama.cpp models folder.",
+                string.Format(Se.Language.Translate.TheCustomModelFileXWasNotFound, model.FileName),
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
             return false;

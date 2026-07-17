@@ -1,4 +1,4 @@
-﻿using Avalonia;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -232,8 +232,8 @@ public partial class NOcrInspectViewModel : ObservableObject
 
         await MessageBox.Show(
             Window!,
-            "nOCR",
-            "nOCR character saved",
+            Se.Language.Ocr.NOCR,
+            Se.Language.Ocr.NOCRCharacterSaved,
             MessageBoxButtons.OK,
             MessageBoxIcon.Information);
     }
@@ -249,8 +249,8 @@ public partial class NOcrInspectViewModel : ObservableObject
 
         var answer = await MessageBox.Show(
             Window!,
-            "Delete nOCR item?",
-            $"Do you want to delete the current nOCR item?",
+            Se.Language.Ocr.DeleteNOCRItem,
+            Se.Language.Ocr.DoYouWantToDeleteTheCurrentNOCR,
             MessageBoxButtons.YesNoCancel,
             MessageBoxIcon.Question);
 

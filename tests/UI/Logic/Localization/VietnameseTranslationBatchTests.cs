@@ -229,10 +229,10 @@ public class VietnameseTranslationBatchTests
         Assert.Equal(1_076, reviewedLeafCounts["B1"]);
         Assert.Equal(171, reviewedLeafCounts["B2"]);
         Assert.Equal(203, reviewedLeafCounts["B3"]);
-        Assert.Equal(1_242, reviewedLeafCounts["B4"]);
-        Assert.Equal(681, reviewedLeafCounts["B5"]);
-        Assert.Equal(27, reviewedLeafCounts["B6"]);
-        Assert.Equal(3_400, reviewedLeafCounts.Values.Sum());
+        Assert.Equal(1_257, reviewedLeafCounts["B4"]);
+        Assert.Equal(864, reviewedLeafCounts["B5"]);
+        Assert.Equal(30, reviewedLeafCounts["B6"]);
+        Assert.Equal(3_601, reviewedLeafCounts.Values.Sum());
         Assert.True(errors.Count == 0, string.Join(Environment.NewLine, errors));
     }
 

@@ -3,10 +3,10 @@
 | English catalog | `$.general.ok` | localized | `$.general.ok` |
 | English catalog | `$.title`, `$.version`, `$.translatedBy`, `$.cultureName`, `$.general`, `$.file`, `$.edit`, `$.help`, `$.about` | localized | B1 reviewed by ChiBaoDev; complete reviewed shard in `tests/UI/TestData/VietnameseDraft/01-general-file-edit.json` with exact invariant values recorded in `VietnameseUntranslatedAllowlist.json` |
 | English catalog | `$.main.menu`, `$.main.toolbar`, `$.main.waveform` | localized | B2 reviewed by ChiBaoDev; all 171 owned menu, toolbar, and waveform-navigation leaves are in `tests/UI/TestData/VietnameseDraft/02-main-navigation.json`; exact invariant retained in `VietnameseUntranslatedAllowlist.json` |
-| English catalog | `$.main` excluding `$.main.menu`, `$.main.toolbar`, and `$.main.waveform`; plus `$.waveform`, `$.sync` | localized | B3 reviewed by ChiBaoDev; all 188 owned status, waveform-operation, timing, and synchronization leaves are in `tests/UI/TestData/VietnameseDraft/03-main-sync-waveform.json`; exact invariants recorded in `VietnameseUntranslatedAllowlist.json` |
-| English catalog | `$.tools`, `$.spellCheck`, `$.options`, `$.plugins` | localized | B4 reviewed by ChiBaoDev; all 1,224 owned tool, spell-check, settings, shortcut, and plugin leaves are in `tests/UI/TestData/VietnameseDraft/04-tools-options.json`; 26 exact technical identifiers, formats, examples, units, standard modifier/category labels, and macOS symbols are recorded in `VietnameseUntranslatedAllowlist.json` |
+| English catalog | `$.main` excluding `$.main.menu`, `$.main.toolbar`, and `$.main.waveform`; plus `$.waveform`, `$.sync` | localized | B3 reviewed by ChiBaoDev; all 203 owned status, waveform-operation, timing, and synchronization leaves are in `tests/UI/TestData/VietnameseDraft/03-main-sync-waveform.json`; exact invariants recorded in `VietnameseUntranslatedAllowlist.json` |
+| English catalog | `$.tools`, `$.spellCheck`, `$.options`, `$.plugins` | localized | B4 reviewed by ChiBaoDev; all 1,257 owned tool, spell-check, settings, shortcut, and plugin leaves are in `tests/UI/TestData/VietnameseDraft/04-tools-options.json`; 26 exact technical identifiers, formats, examples, units, standard modifier/category labels, and macOS symbols are recorded in `VietnameseUntranslatedAllowlist.json` |
 
-| English catalog | `$.video`, `$.ocr`, `$.assa` | localized | B5 reviewed by ChiBaoDev; all 607 owned video, media-processing, OCR, and Advanced SubStation Alpha leaves were re-reviewed path by path against the English extract in `tests/UI/TestData/VietnameseDraft/05-video-ocr-assa.json`; exact path-specific invariant identifiers and syntax are recorded in `VietnameseUntranslatedAllowlist.json` |
+| English catalog | `$.video`, `$.ocr`, `$.assa` | localized | B5 reviewed by ChiBaoDev; all 864 owned video, media-processing, OCR, and Advanced SubStation Alpha leaves were re-reviewed path by path against the English extract in `tests/UI/TestData/VietnameseDraft/05-video-ocr-assa.json`; exact path-specific invariant identifiers and syntax are recorded in `VietnameseUntranslatedAllowlist.json` |
 
 | `src/ui/Features/Main/Layout/LayoutWindow.cs:27` | `Choose layout` | localized | `$.main.layoutTitle`; `Se.Language.Main.LayoutTitle` |
 | `src/ui/Features/Files/ExportPac/ExportPacWindow.cs:13,19` | `Export Pac`; `Choose PAC code page` | localized | `$.file.exportPacTitle`; `$.file.choosePacCodePage` |
@@ -20,6 +20,22 @@
 | `src/ui/Features/Main/MainView.cs:39; Layout/InitVideoPlayer.cs:151` | diagnostic exception text | technical-exception | diagnostics preserved |
 | `src/ui/Features/Edit/MultipleReplace/CsvExporter.cs:13` | CSV header identifiers | non-ui | schema identifiers preserved |
 | `src/ui/Features/Shared/PickMp4Track/PickMp4TrackWindow.cs:98-181` | media metadata column identifiers | external-runtime | technical media metadata preserved |
+
+
+## Task 11 fixed-scan inventory
+
+The structured source of truth is `tests/UI/TestData/Task11LiteralInventory.json`. The fixed scanner covers the required Tools, SpellCheck, OCR, Video, Translate, Options, ASSA, SSA, Plugins, Controls, and Logic roots, including direct `MessageBox.Show(...)`, qualified aliases such as `Dialogs.MessageBox.Show(...)`, the existing UI-property patterns, and the Task 11 toast/notification/exception patterns. Every candidate and inventory row must match exactly once by source, line, column, scanner kind, and literal or source expression.
+
+The independently maintained finite source manifest is `tests/UI/TestData/Task11LocalizedSourceRanges.json`. It contains 401 reviewed source ranges and drives a separate bidirectional `Se.Language.*` expression scan; expression discovery is not seeded from the inventory rows and does not sweep unrelated pre-existing catalog uses.
+
+| Inventory | Total | localized | technical-exception | external-runtime | non-ui |
+|---|---:|---:|---:|---:|---:|
+| Task 11 fixed scan | 586 | 425 | 101 | 2 | 58 |
+
+- The two `external-runtime` rows are Google Lens HTTP redirect and response-parser diagnostics written to the error log rather than rendered as application UI.
+- Every one of the 161 non-localized rows has a concrete, row-specific reason; no deferred classification remains.
+- Task 11 additions retain ownership in existing typed `Language*` classes and reviewed B4, B5, and B6 shards. Current reviewed ownership is B1 1,076; B2 171; B3 203; B4 1,257; B5 864; B6 30; total 3,601 leaves.
+- Direct-message localization explicitly covers the reviewed Batch Convert, Fix Common Errors, Join Subtitles, SSA Styles, OCR, video, speech-to-text, text-to-speech, Translate, and Options hotspots.
 
 ## Task 10 fixed-scan inventory
 

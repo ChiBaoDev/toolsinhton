@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Nikse.SubtitleEdit.Logic.Config.Language.Translate;
 
@@ -129,8 +129,94 @@ public class LanguageOcr
     public string DownloadingTesseract { get; set; }
     public string NewRenameNOcrDatabase { get; set; }
 
+    public string DeleteBinaryOCRItem { get; set; }
+    public string DoYouWantToDeleteTheCurrentBinary { get; set; }
+    public string ValidationError { get; set; }
+    public string ItemTextCannotBeEmpty { get; set; }
+    public string BinaryOCR { get; set; }
+    public string BinaryOCRCharacterUpdated { get; set; }
+    public string DeleteBinaryImageCompareItem { get; set; }
+    public string DoYouWantToDeleteTheCurrentBinary2 { get; set; }
+    public string BinaryOCRCharacterSaved { get; set; }
+    public string DeleteBinaryImageCompareDatabase { get; set; }
+    public string DoYouWantToDeleteTheCurrentBinary3 { get; set; }
+    public string DownloadPaddleOCR { get; set; }
+    public string XPaddleOCRRequiresDownloadingPaddleOCRX { get; set; }
+    public string DeleteNOCRItem { get; set; }
+    public string DoYouWantToDeleteTheCurrentNOCR { get; set; }
+    public string NOCR { get; set; }
+    public string NOCRCharacterUpdated { get; set; }
+    public string NOCRCharacterSaved { get; set; }
+    public string DeleteNOCRDatabase { get; set; }
+    public string DoYouWantToDeleteTheCurrentNOCR2 { get; set; }
+    public string DownloadCrispEmbed { get; set; }
+    public string XCrispEmbedRequiresDownloadingTheCrispEmbedEngineX { get; set; }
+    public string DownloadModel { get; set; }
+    public string ErrorDeletingFile { get; set; }
+    public string CouldNotDeleteTheFileX { get; set; }
+    public string MistralAPIKeyMissing { get; set; }
+    public string YouMustEnterAValidMistralAPIKey { get; set; }
+    public string DownloadGoogleLensOCR { get; set; }
+    public string XGoogleLensOCRRequiresDownloadingGoogleLens { get; set; }
+    public string TesseractOCRFailed { get; set; }
+    public string CrispEmbedError { get; set; }
+    public string TheCrispEmbedServerCouldNotBeStartedX { get; set; }
+    public string DownloadTesseractOCR { get; set; }
+    public string XTesseractRequiresDownloadingTesseractOCRXX { get; set; }
+    public string PleaseInstallTesseract { get; set; }
+    public string XTesseractWasNotDetectedPleaseInstallTesseract { get; set; }
+    public string EGBrewInstallTesseract { get; set; }
+    public string EGSudoAptInstallTesseractOcrOr { get; set; }
+    public string UpdateCrispEmbed { get; set; }
+    public string ANewerVersionOfCrispEmbedIsAvailableX { get; set; }
+    public string DiscardOCRResult { get; set; }
+    public string SomeItemsHaveOCRTextCloseAndDiscard { get; set; }
+
     public LanguageOcr()
     {
+        DeleteBinaryOCRItem = "Delete Binary OCR item?";
+        DoYouWantToDeleteTheCurrentBinary = "Do you want to delete the current Binary OCR item?";
+        ValidationError = "Validation Error";
+        ItemTextCannotBeEmpty = "Item text cannot be empty.";
+        BinaryOCR = "Binary OCR";
+        BinaryOCRCharacterUpdated = "Binary OCR character updated.";
+        DeleteBinaryImageCompareItem = "Delete \"Binary image compare\" item?";
+        DoYouWantToDeleteTheCurrentBinary2 = "Do you want to delete the current \"Binary image compare\" item?";
+        BinaryOCRCharacterSaved = "Binary OCR character saved";
+        DeleteBinaryImageCompareDatabase = "Delete Binary Image Compare database?";
+        DoYouWantToDeleteTheCurrentBinary3 = "Do you want to delete the current \"Binary image compare\" database \"{0}\" with {1:#,###,##0} items?";
+        DownloadPaddleOCR = "Download Paddle OCR?";
+        XPaddleOCRRequiresDownloadingPaddleOCRX = "{0}\"Paddle OCR\" requires downloading Paddle OCR.{1}{2}Download and use Paddle OCR?";
+        DeleteNOCRItem = "Delete nOCR item?";
+        DoYouWantToDeleteTheCurrentNOCR = "Do you want to delete the current nOCR item?";
+        NOCR = "nOCR";
+        NOCRCharacterUpdated = "nOCR character updated.";
+        NOCRCharacterSaved = "nOCR character saved";
+        DeleteNOCRDatabase = "Delete nOCR database?";
+        DoYouWantToDeleteTheCurrentNOCR2 = "Do you want to delete the current nOCR database \"{0}\" with {1:#,###,##0} items?";
+        DownloadCrispEmbed = "Download CrispEmbed?";
+        XCrispEmbedRequiresDownloadingTheCrispEmbedEngineX = "{0}\"CrispEmbed\" requires downloading the CrispEmbed engine.{1}{2}Download and use CrispEmbed?";
+        DownloadModel = "Download model?";
+        ErrorDeletingFile = "Error deleting file";
+        CouldNotDeleteTheFileX = "Could not delete the file {0}.";
+        MistralAPIKeyMissing = "Mistral API key missing";
+        YouMustEnterAValidMistralAPIKey = "You must enter a valid Mistral API key.{0}{1}Get your API key from https://mistral.ai/";
+        DownloadGoogleLensOCR = "Download Google Lens OCR?";
+        XGoogleLensOCRRequiresDownloadingGoogleLens = "{0}\"Google Lens OCR\" requires downloading Google Lens OCR standalone.{1}{2}Download and use Google Lens OCR?";
+        TesseractOCRFailed = "Tesseract OCR failed:";
+        CrispEmbedError = "CrispEmbed error";
+        TheCrispEmbedServerCouldNotBeStartedX = "The CrispEmbed server could not be started:{0}{1}{2}";
+        DownloadTesseractOCR = "Download Tesseract OCR?";
+        XTesseractRequiresDownloadingTesseractOCRXX = "{0}\"Tesseract\" requires downloading Tesseract OCR.{1}{2}Download and use Tesseract OCR?";
+        PleaseInstallTesseract = "Please install Tesseract";
+        XTesseractWasNotDetectedPleaseInstallTesseract = "{0}\"Tesseract\" was not detected. Please install Tesseract.";
+        EGBrewInstallTesseract = "E.g. ´brew install tesseract´.";
+        EGSudoAptInstallTesseractOcrOr = "E.g. ´sudo apt install tesseract-ocr´ or ´sudo pacman -S tesseract´.";
+        UpdateCrispEmbed = "Update CrispEmbed?";
+        ANewerVersionOfCrispEmbedIsAvailableX = "A newer version of CrispEmbed is available.{0}{1}Download it now?";
+        DiscardOCRResult = "Discard OCR result?";
+        SomeItemsHaveOCRTextCloseAndDiscard = "Some items have OCR text. Close and discard the OCR result?";
+
         LinesToDraw = "Lines to draw";
         CurrentImage = "Current image";
         AutoDrawAgain = "Auto draw again";

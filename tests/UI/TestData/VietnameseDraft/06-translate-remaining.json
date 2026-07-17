@@ -26,6 +26,9 @@
     "translationComplete": "Đã dịch xong",
     "translationCancelled": "Đã hủy dịch",
     "swapLanguages": "Hoán đổi ngôn ngữ nguồn và đích",
-    "xIsAlreadyDownloadedReDownload": "{0} đã được tải xuống. Tải lại?"
+    "xIsAlreadyDownloadedReDownload": "{0} đã được tải xuống. Tải lại?",
+    "downloadLlamaCpp": "Tải llama.cpp?",
+    "selectWhichLlamaCppBuildToDownload": "Chọn bản dựng llama.cpp cần tải:",
+    "theCustomModelFileXWasNotFound": "Không tìm thấy tệp mô hình tùy chỉnh '{0}' trong thư mục mô hình llama.cpp."
   }
 }

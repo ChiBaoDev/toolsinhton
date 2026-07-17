@@ -932,7 +932,7 @@ public partial class VideoOcrViewModel : ObservableObject
             await MessageBox.Show(
                 Window!,
                 Se.Language.General.Error,
-                "An API key is required for the GLM API engine.",
+                Se.Language.Video.AnAPIKeyIsRequiredForTheGLM,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
             return false;

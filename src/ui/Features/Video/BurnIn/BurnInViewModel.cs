@@ -415,9 +415,9 @@ public partial class BurnInViewModel : ObservableObject
             Dispatcher.UIThread.Invoke(async () =>
             {
                 await MessageBox.Show(Window!,
-                    "Unable to generate video",
-                    "Output video file not generated: " + jobItem.OutputVideoFileName + Environment.NewLine +
-                    "Parameters: " + _ffmpegProcess.StartInfo.Arguments,
+                    Se.Language.Video.UnableToGenerateVideo,
+                    Se.Language.Video.OutputVideoFileNotGenerated + jobItem.OutputVideoFileName + Environment.NewLine +
+                    Se.Language.Video.Parameters + _ffmpegProcess.StartInfo.Arguments,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
 
@@ -455,7 +455,7 @@ public partial class BurnInViewModel : ObservableObject
                 }
 
                 await MessageBox.Show(Window!,
-                    "Generating done",
+                    Se.Language.Video.GeneratingDone,
                     sb.ToString(),
                     MessageBoxButtons.OK);
             }
@@ -541,8 +541,8 @@ public partial class BurnInViewModel : ObservableObject
             _ = Dispatcher.UIThread.Invoke(async () =>
             {
                 await MessageBox.Show(Window!,
-                    "Unable to generate video",
-                    $"Bit rate too low: {bitRate}k",
+                    Se.Language.Video.UnableToGenerateVideo,
+                    string.Format(Se.Language.Video.BitRateTooLowXK, bitRate),
                     MessageBoxButtons.OK);
             });
             return false;
@@ -1056,8 +1056,8 @@ public partial class BurnInViewModel : ObservableObject
         if (error)
         {
             await MessageBox.Show(Window!,
-                    "Unable to get video info",
-                    "File skipped as video info was unavailable",
+                    Se.Language.Video.UnableToGetVideoInfo,
+                    Se.Language.Video.FileSkippedAsVideoInfoWasUnavailable,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
         }
@@ -1194,8 +1194,8 @@ public partial class BurnInViewModel : ObservableObject
         if (IsCutActive && CutFrom >= CutTo)
         {
             await MessageBox.Show(Window!,
-                "Cut settings error",
-                "Cut end time must be after cut start time",
+                Se.Language.Video.CutSettingsError,
+                Se.Language.Video.CutEndTimeMustBeAfterCutStart,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
 
@@ -1231,8 +1231,8 @@ public partial class BurnInViewModel : ObservableObject
             if (VideoFileName.Equals(outputVideoFileName, StringComparison.OrdinalIgnoreCase))
             {
                 await MessageBox.Show(Window!,
-                    "Output file error",
-                    "Output video file must be different from input video file",
+                    Se.Language.Video.OutputFileError,
+                    Se.Language.Video.OutputVideoFileMustBeDifferentFromInput,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 return;
@@ -1262,8 +1262,8 @@ public partial class BurnInViewModel : ObservableObject
             if (string.IsNullOrWhiteSpace(jobItem.SubtitleFileName))
             {
                 await MessageBox.Show(Window!,
-                    "Missing subtitle",
-                    "Please add a subtitle to all batch items",
+                    Se.Language.Video.MissingSubtitle,
+                    Se.Language.Video.PleaseAddASubtitleToAllBatchItems,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
 

@@ -13,11 +13,15 @@ namespace UITests.Logic.Localization;
 
 internal sealed record Task10Inventory(string[] Roots, Task10InventoryRow[] Rows);
 
+internal sealed record Task11SourceRangeManifest(Task11SourceRange[] Ranges);
+
+internal sealed record Task11SourceRange(string Source, int StartLine, int EndLine);
+
 internal sealed record Task10InventoryRow(
     string Source, int Line, int Column, string Literal, string Classification, string? Category,
-    string? Reason, string? LanguageKey, string? SourceExpression)
+    string? Reason, string? LanguageKey, string? SourceExpression, string? Kind = null)
 {
-    public string Identity => $"{Source}:{Line}:{Column}:{Literal}:{SourceExpression}";
+    public string Identity => $"{Source}:{Line}:{Column}:{Kind}:{Literal}:{SourceExpression}";
 }
 
 internal sealed record Task10Candidate(string Source, int Line, int Column, string Kind, string? Literal, string? SourceExpression)
@@ -84,7 +88,7 @@ public class FirstPartyUiLiteralInventoryTests
         RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.Singleline);
 
     private static readonly Regex Task11UiCall = new(
-        @"(?<kind>ToolTip\.SetTip|Show(?:MessageBox|Toast|Notification)|UiUtil\.(?:Show|Display)[A-Za-z0-9_]*|throw\s+new\s+[A-Za-z0-9_]*Exception)\s*\((?<arguments>[^;]*?)\)",
+        @"(?<kind>ToolTip\.SetTip|(?:[A-Za-z_][A-Za-z0-9_]*\.)*MessageBox\.Show|Show(?:MessageBox|Toast|Notification)|UiUtil\.(?:Show|Display)[A-Za-z0-9_]*|throw\s+new\s+[A-Za-z0-9_]*Exception)\s*\((?<arguments>[^;]*?)\)",
         RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.Singleline);
 
     private static readonly Regex StringLiteral = new(
@@ -132,7 +136,7 @@ public class FirstPartyUiLiteralInventoryTests
             Assert.StartsWith("$.", row.LanguageKey, StringComparison.Ordinal);
             Assert.False(string.IsNullOrWhiteSpace(row.SourceExpression));
             Assert.StartsWith("Se.Language.", row.SourceExpression, StringComparison.Ordinal);
-            Assert.Equal(ExpectedSourceExpression(row.LanguageKey!), row.SourceExpression);
+            Assert.Equal(row.LanguageKey, ExpectedLanguageKey(row.SourceExpression!));
             Assert.Equal(row.Literal, CatalogValue(root, "English.json", row.LanguageKey!));
             Assert.False(string.IsNullOrWhiteSpace(CatalogValue(root, "Vietnamese.json", row.LanguageKey!)));
 
@@ -155,12 +159,12 @@ public class FirstPartyUiLiteralInventoryTests
     [Fact]
     public void Task11ScannerMatchesFixedScanScope()
     {
-        const string source = "Title = Se.Language.General.Title; Title = \"Visible title\"; MessageBox.Show(\"Excluded alias\"); ShowMessageBox(\"Included message\");";
+        const string source = "Title = Se.Language.General.Title; Title = \"Visible title\"; MessageBox.Show(\"Direct message\"); Dialogs.MessageBox.Show(\"Qualified message\"); ShowMessageBox(\"Included message\");";
         var candidates = new List<Task10Candidate>();
 
         AddCSharpCandidates(candidates, "sample.cs", source, includeLanguageMembers: false, Task11UiCall);
 
-        Assert.Equal(new[] { "Visible title", "Included message" }, candidates.Select(candidate => candidate.Literal));
+        Assert.Equal(new[] { "Visible title", "Direct message", "Qualified message", "Included message" }, candidates.Select(candidate => candidate.Literal));
     }
 
     [AvaloniaFact]
@@ -269,7 +273,7 @@ public class FirstPartyUiLiteralInventoryTests
         var inventory = LoadInventory(root, "tests/UI/TestData/Task11LiteralInventory.json");
 
         Assert.Equal(RequiredTask11Roots, inventory.Roots);
-        var candidates = ScanTask11Candidates(root, inventory);
+        var candidates = ScanTask11Candidates(root);
         AssertInventoryMatchesCandidates(root, inventory, candidates);
     }
 
@@ -376,6 +380,17 @@ public class FirstPartyUiLiteralInventoryTests
     }
 
     [Fact]
+    public void CandidateMatchesRequiresExactColumnForLiteralRows()
+    {
+        var row = new Task10InventoryRow("sample.cs", 1, 10, "Duplicate", "non-ui", "test", "test", null, null, "MessageBox.Show");
+        var sameColumn = new Task10Candidate("sample.cs", 1, 10, "MessageBox.Show", "Duplicate", null);
+        var differentColumn = new Task10Candidate("sample.cs", 1, 30, "MessageBox.Show", "Duplicate", null);
+
+        Assert.True(CandidateMatches(row, sameColumn));
+        Assert.False(CandidateMatches(row, differentColumn));
+    }
+
+    [Fact]
     public void FixedScanIncludesIdentifiersEndingInContent()
     {
         const string source = "userContent = \"Context text\";";
@@ -399,6 +414,27 @@ public class FirstPartyUiLiteralInventoryTests
         var expressions = candidates.Where(candidate => candidate.SourceExpression == "Se.Language.General.TextFiles").ToArray();
         Assert.Equal(2, expressions.Length);
         Assert.Equal(new[] { 17, 48 }, expressions.Select(candidate => candidate.Column));
+    }
+
+    [Fact]
+    public void Task11LocalizedSourceScanIsIndependentAndBidirectional()
+    {
+        var root = RepositoryRoot();
+        var inventory = LoadInventory(root, "tests/UI/TestData/Task11LiteralInventory.json");
+        var localizedRows = inventory.Rows.Where(row => row.Classification == "localized").ToArray();
+        var sourceRanges = LoadTask11SourceRanges(root);
+        Assert.NotEmpty(sourceRanges);
+        var expressions = ScanLanguageExpressions(root, sourceRanges);
+
+        var expressionMatches = expressions.Select(expression => (expression, rows: localizedRows.Where(row => CandidateMatches(row, expression)).ToArray())).ToArray();
+        var unmatchedExpressions = expressionMatches.Where(match => match.rows.Length != 1).ToArray();
+        Assert.True(unmatchedExpressions.Length == 0,
+            "Localized expressions without exactly one inventory row: " + string.Join("; ", unmatchedExpressions.Select(match => $"{Describe(match.expression)} ({match.rows.Length} rows)")));
+
+        var rowMatches = localizedRows.Select(row => (row, expressions: expressions.Where(expression => CandidateMatches(row, expression)).ToArray())).ToArray();
+        var unmatchedRows = rowMatches.Where(match => match.expressions.Length != 1).ToArray();
+        Assert.True(unmatchedRows.Length == 0,
+            "Localized inventory rows without exactly one independently scanned expression: " + string.Join("; ", unmatchedRows.Select(match => $"{match.row.Identity} ({match.expressions.Length} expressions)")));
     }
 
     [Fact]
@@ -440,7 +476,7 @@ public class FirstPartyUiLiteralInventoryTests
             Assert.False(string.IsNullOrWhiteSpace(row.LanguageKey));
             Assert.StartsWith("$.", row.LanguageKey, StringComparison.Ordinal);
             Assert.False(string.IsNullOrWhiteSpace(row.SourceExpression));
-            Assert.Equal(ExpectedSourceExpression(row.LanguageKey!), row.SourceExpression);
+            Assert.Equal(row.LanguageKey, ExpectedLanguageKey(row.SourceExpression!));
             Assert.Equal(row.Literal, CatalogValue(root, "English.json", row.LanguageKey!));
             Assert.False(string.IsNullOrWhiteSpace(CatalogValue(root, "Vietnamese.json", row.LanguageKey!)));
         }
@@ -464,25 +500,45 @@ public class FirstPartyUiLiteralInventoryTests
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
         ?? throw new InvalidDataException($"Could not load literal inventory: {path}");
 
-    private static Task10Candidate[] ScanTask11Candidates(string root, Task10Inventory inventory)
+    private static Task11SourceRange[] LoadTask11SourceRanges(string root) =>
+        JsonSerializer.Deserialize<Task11SourceRangeManifest>(
+            File.ReadAllText(ToAbsolutePath(root, "tests/UI/TestData/Task11LocalizedSourceRanges.json")),
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true })?.Ranges
+        ?? throw new InvalidDataException("Could not load independent Task 11 localized source ranges.");
+
+    private static Task10Candidate[] ScanLanguageExpressions(string root, IEnumerable<Task11SourceRange> sourceRanges)
     {
-        var candidates = ScanCandidates(root, RequiredTask11Roots, includeLanguageMembers: false, uiCall: Task11UiCall).ToList();
-        foreach (var row in inventory.Rows.Where(row => row.Classification == "localized"))
+        var candidates = new List<Task10Candidate>();
+        foreach (var sourceGroup in sourceRanges
+                     .OrderBy(range => range.Source, StringComparer.Ordinal)
+                     .ThenBy(range => range.StartLine)
+                     .GroupBy(range => range.Source, StringComparer.Ordinal))
         {
-            var path = ToAbsolutePath(root, row.Source);
-            var lines = File.ReadAllLines(path);
-            if (row.Line <= 0 || row.Line > lines.Length || string.IsNullOrWhiteSpace(row.SourceExpression))
+            var path = ToAbsolutePath(root, sourceGroup.Key);
+            if (!File.Exists(path) || !path.EndsWith(".cs", StringComparison.OrdinalIgnoreCase))
             {
                 continue;
             }
 
-            var line = lines[row.Line - 1];
-            var column = line.IndexOf(row.SourceExpression, StringComparison.Ordinal) + 1;
-            if (column > 0)
+            var ranges = sourceGroup.ToArray();
+            var text = File.ReadAllText(path);
+            foreach (Match expression in LanguageMemberExpression.Matches(text))
             {
-                AddCandidate(candidates, row.Source, row.Line, column, "localized", null, row.SourceExpression);
+                var line = LineNumber(text, expression.Index);
+                if (ranges.Any(range => line >= range.StartLine && line <= range.EndLine))
+                {
+                    AddCandidate(candidates, sourceGroup.Key, text, expression.Index, "language-member", null, expression.Value);
+                }
             }
         }
+
+        return candidates.ToArray();
+    }
+
+    private static Task10Candidate[] ScanTask11Candidates(string root)
+    {
+        var candidates = ScanCandidates(root, RequiredTask11Roots, includeLanguageMembers: false, uiCall: Task11UiCall).ToList();
+        candidates.AddRange(ScanLanguageExpressions(root, LoadTask11SourceRanges(root)));
 
         return candidates.ToArray();
     }
@@ -619,11 +675,20 @@ public class FirstPartyUiLiteralInventoryTests
         row.Source == candidate.Source &&
         row.Line == candidate.Line &&
         (!string.IsNullOrWhiteSpace(row.SourceExpression)
-            ? row.Column == candidate.Column && row.SourceExpression == candidate.SourceExpression
-            : row.Literal == candidate.Literal);
+            ? row.Column == candidate.Column &&
+              (string.IsNullOrWhiteSpace(row.Kind) || row.Kind == candidate.Kind) &&
+              row.SourceExpression == candidate.SourceExpression
+            : string.IsNullOrWhiteSpace(row.Kind)
+                ? row.Literal == candidate.Literal
+                : row.Column == candidate.Column &&
+                  row.Kind == candidate.Kind &&
+                  row.Literal == candidate.Literal);
 
-    private static string ExpectedSourceExpression(string path) =>
-        "Se.Language." + string.Join('.', path[2..].Split('.').Select(segment => char.ToUpperInvariant(segment[0]) + segment[1..]));
+    private static string ExpectedLanguageKey(string sourceExpression)
+    {
+        var segments = sourceExpression["Se.Language.".Length..].Split('.');
+        return "$." + string.Join('.', segments.Select(JsonNamingPolicy.CamelCase.ConvertName));
+    }
 
     private static string CatalogValue(string root, string catalogFile, string path)
     {

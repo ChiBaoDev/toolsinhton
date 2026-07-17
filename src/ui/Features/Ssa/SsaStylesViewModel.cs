@@ -135,7 +135,7 @@ public partial class SsaStylesViewModel : ObservableObject
             await MessageBox.Show(
                 Window,
                 Se.Language.General.Error,
-                "Nothing to import",
+                Se.Language.Assa.NothingToImport,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
             return;
@@ -356,7 +356,7 @@ public partial class SsaStylesViewModel : ObservableObject
             await MessageBox.Show(
                 Window,
                 Se.Language.General.Error,
-                "Nothing to import",
+                Se.Language.Assa.NothingToImport,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
             return;
@@ -420,7 +420,7 @@ public partial class SsaStylesViewModel : ObservableObject
                     answer = await MessageBox.Show(
                         Window!,
                         Se.Language.Assa.DeleteStyleQuestion,
-                        $"Do you want to delete style \"{selectedItems[0].Name}\" from storage?",
+                        string.Format(Se.Language.Assa.DoYouWantToDeleteStyleXFrom, selectedItems[0].Name),
                         MessageBoxButtons.YesNoCancel,
                         MessageBoxIcon.Question);
                 }
@@ -429,7 +429,7 @@ public partial class SsaStylesViewModel : ObservableObject
                     answer = await MessageBox.Show(
                         Window!,
                         Se.Language.Assa.DeleteStylesQuestion,
-                        $"Do you want to delete {selectedItems.Count} styles from storage?",
+                        string.Format(Se.Language.Assa.DoYouWantToDeleteXStylesFrom, selectedItems.Count),
                         MessageBoxButtons.YesNoCancel,
                         MessageBoxIcon.Question);
                 }
@@ -925,7 +925,7 @@ public partial class SsaStylesViewModel : ObservableObject
                 answer = await MessageBox.Show(
                     Window!,
                     Se.Language.Assa.DeleteStyleQuestion,
-                    $"Do you want to delete style \"{selectedStyle.Name}\" from current file?",
+                    string.Format(Se.Language.Assa.DoYouWantToDeleteStyleXFrom2, selectedStyle.Name),
                     MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Question);
             }
@@ -975,7 +975,7 @@ public partial class SsaStylesViewModel : ObservableObject
                 answer = await MessageBox.Show(
                     Window!,
                     Se.Language.Assa.DeleteStylesQuestion,
-                    $"Do you want to delete {selectedStyles.Count} styles?",
+                    string.Format(Se.Language.Assa.DoYouWantToDeleteXStyles, selectedStyles.Count),
                     MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Question);
             }

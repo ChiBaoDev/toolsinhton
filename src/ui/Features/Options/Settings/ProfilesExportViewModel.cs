@@ -49,7 +49,7 @@ public partial class ProfilesExportViewModel : ObservableObject
             await MessageBox.Show(
                 Window!,
                 Se.Language.General.Error,
-                $"No profile selected for export",
+                Se.Language.Options.NoProfileSelectedForExport,
                 MessageBoxButtons.OK, 
                 MessageBoxIcon.Error);
 

@@ -375,7 +375,7 @@ public partial class ActorVoiceMappingViewModel : ObservableObject
                     var detail = string.IsNullOrEmpty(result.ErrorMessage)
                         ? "The engine produced no audio - see error-log.txt in the Subtitle Edit data folder."
                         : result.ErrorMessage;
-                    await MessageBox.Show(Window, Se.Language.General.Error, "Test voice failed: " + detail, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await MessageBox.Show(Window, Se.Language.General.Error, Se.Language.Video.TextToSpeech.TestVoiceFailed + detail, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
                 return;

@@ -1,4 +1,4 @@
-﻿using Avalonia.Controls;
+using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
@@ -117,7 +117,7 @@ public partial class NOcrDbEditViewModel : ObservableObject
 
         if (string.IsNullOrWhiteSpace(ItemText))
         {
-            await MessageBox.Show(Window!, "Validation Error", "Item text cannot be empty.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            await MessageBox.Show(Window!, Se.Language.Ocr.ValidationError, Se.Language.Ocr.ItemTextCannotBeEmpty, MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
@@ -128,7 +128,7 @@ public partial class NOcrDbEditViewModel : ObservableObject
 
         RefreshCharacters(newText);
 
-        await MessageBox.Show(Window!, "nOCR", "nOCR character updated.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        await MessageBox.Show(Window!, Se.Language.Ocr.NOCR, Se.Language.Ocr.NOCRCharacterUpdated, MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     [RelayCommand]
@@ -142,8 +142,8 @@ public partial class NOcrDbEditViewModel : ObservableObject
 
         var answer = await MessageBox.Show(
                    Window!,
-                   "Delete nOCR item?",
-                   $"Do you want to delete the current nOCR item?",
+                   Se.Language.Ocr.DeleteNOCRItem,
+                   Se.Language.Ocr.DoYouWantToDeleteTheCurrentNOCR,
                    MessageBoxButtons.YesNoCancel,
                    MessageBoxIcon.Question);
 
