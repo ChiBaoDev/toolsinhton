@@ -189,7 +189,7 @@ public partial class MainViewModel :
     IUndoRedoClient,
     IFindResult,
     IApplyAssaStyles,
-    IApplySsaStyles
+    IApplySsaStyles, IUiLanguageChangeSink
 {
     [ObservableProperty] private ObservableCollection<SubtitleLineViewModel> _subtitles;
     [ObservableProperty] private SubtitleLineViewModel? _selectedSubtitle;
@@ -690,7 +690,7 @@ public partial class MainViewModel :
                     var translationFiles = Directory.GetFiles(Se.TranslationFolder, language.EnglishName + ".json");
                     if (translationFiles?.Length > 0)
                     {
-                        Dispatcher.UIThread.Post(async void () => { await LoadLanguage(translationFiles[0]); });
+                        Dispatcher.UIThread.Post(async void () => { await ((UiLanguageServiceFactory)Locator.Services.GetService(typeof(UiLanguageServiceFactory))!).Create(this).TryApplyAsync(Path.GetFileNameWithoutExtension(translationFiles[0])); });
                     }
                 }
             }
@@ -9479,57 +9479,57 @@ public partial class MainViewModel :
     [RelayCommand]
     private async Task CommandShowSettingsLanguage()
     {
-        // The layout direction (which side the subtitle list and video sit on)
-        // follows the interface language, so note it before the change.
-        var wasRightToLeft = Se.Settings.General.IsLanguageRightToLeft();
         var viewModel = await ShowDialogAsync<LanguageWindow, LanguageViewModel>();
         if (viewModel.OkPressed && viewModel.SelectedLanguage != null)
-        {
-            // Note where the video is before the language is loaded: loading it
-            // rebuilds the layout, which builds a fresh video player starting at the
-            // beginning. Read afterwards the position is always zero, so it has to be
-            // taken here to be restored once the new layout is in place.
-            var videoPosition = GetVideoPlayerControl()?.VideoPlayer?.Position ?? 0;
-
-            await LoadLanguage(viewModel.SelectedLanguage.FileName);
-
-            // Strings update live already. When the new language flips the layout
-            // direction (between a right to left and a left to right language),
-            // re-apply the direction live so the subtitle list and video move to the
-            // correct side at once, instead of asking the user to restart.
-            if (Se.Settings.General.IsLanguageRightToLeft() != wasRightToLeft)
-            {
-                ApplyLayoutDirectionForCurrentLanguage(videoPosition);
-            }
-        }
+            await ((UiLanguageServiceFactory)Locator.Services.GetService(typeof(UiLanguageServiceFactory))!).Create(this).TryApplyAsync(viewModel.SelectedLanguage.Name);
     }
 
-    private async Task LoadLanguage(string jsonFileName)
+    async Task IUiLanguageChangeSink.ApplyAsync(LanguageChange change, CancellationToken cancellationToken)
     {
-        var json = await File.ReadAllTextAsync(jsonFileName, Encoding.UTF8);
-        var language = JsonSerializer.Deserialize<SeLanguage>(json,
-            new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-            });
-
-        Se.Language = language ?? new SeLanguage();
-
-        // Rebuild settings-page dropdown labels that capture Se.Language at type init.
+        var videoPosition = GetVideoPlayerControl()?.VideoPlayer?.Position ?? 0;
         SettingsViewModel.ReloadLanguageMaps();
-
-        // reload current layout
         InitMenu.Make(this);
-        if (OperatingSystem.IsMacOS())
-        {
-            Layout.InitNativeMacMenu.Rebuild(this);
-        }
+        if (OperatingSystem.IsMacOS()) Layout.InitNativeMacMenu.Rebuild(this);
         SetLayout(Se.Settings.General.LayoutNumber);
-
         RebuildToolbar();
-
         ReloadShortcuts();
+        if (change.DirectionChanged) ApplyLayoutDirectionForCurrentLanguage(videoPosition);
+        await Task.CompletedTask;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     [RelayCommand]
     private async Task OpenDataFolder()

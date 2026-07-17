@@ -1,4 +1,4 @@
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Nikse.SubtitleEdit.Features.Assa;
 using Nikse.SubtitleEdit.Features.Assa.AssaApplyAdvancedEffect;
 using Nikse.SubtitleEdit.Features.Assa.AssaApplyCustomOverrideTags;
@@ -162,6 +162,7 @@ using Nikse.SubtitleEdit.Features.Video.TextToSpeech.VoiceSettings;
 using Nikse.SubtitleEdit.Features.Video.TransparentSubtitles;
 using Nikse.SubtitleEdit.Logic;
 using Nikse.SubtitleEdit.Logic.Compression;
+using Nikse.SubtitleEdit.Logic.Config.Language;
 using Nikse.SubtitleEdit.Logic.Dictionaries;
 using Nikse.SubtitleEdit.Logic.Download;
 using Nikse.SubtitleEdit.Logic.Initializers;
@@ -221,6 +222,9 @@ public static class DependencyInjectionExtensions
         collection.AddTransient<IGoogleLensOcrDownloadService, GoogleLensOcrDownloadService>();
         collection.AddTransient<IInsertService, InsertService>();
         collection.AddTransient<ILanguageInitializer, LanguageInitializer>();
+        collection.AddSingleton<ILanguageCandidateLoader, LanguageCandidateLoader>();
+        collection.AddSingleton(provider => new UiLanguageServiceFactory(
+            provider.GetRequiredService<ILanguageCandidateLoader>()));
         collection.AddTransient<ILens, Lens>();
         collection.AddTransient<IMergeManager, MergeManager>();
         collection.AddTransient<IMpvReloader, MpvReloader>();
