@@ -10,7 +10,7 @@
   "rows": [
     {
       "source": "src/ui/Features/Main/Layout/LayoutWindow.cs",
-      "line": 26,
+      "line": 27,
       "literal": "Choose layout",
       "classification": "localized",
       "category": "user-visible",
@@ -19,7 +19,7 @@
     },
     {
       "source": "src/ui/Features/Files/ExportPac/ExportPacWindow.cs",
-      "line": 11,
+      "line": 13,
       "literal": "Export Pac",
       "classification": "localized",
       "category": "user-visible",
@@ -28,7 +28,7 @@
     },
     {
       "source": "src/ui/Features/Files/ExportPac/ExportPacWindow.cs",
-      "line": 17,
+      "line": 19,
       "literal": "Choose PAC code page",
       "classification": "localized",
       "category": "user-visible",
@@ -55,7 +55,7 @@
     },
     {
       "source": "src/ui/Features/Shared/DownloadFfmpegWindow.cs",
-      "line": 15,
+      "line": 17,
       "literal": "Downloading ffmpeg",
       "classification": "localized",
       "category": "user-visible",
@@ -64,7 +64,7 @@
     },
     {
       "source": "src/ui/Features/Shared/DownloadLibMpvWindow.cs",
-      "line": 16,
+      "line": 17,
       "literal": "Downloading libmpv",
       "classification": "localized",
       "category": "user-visible",
@@ -74,7 +74,7 @@
     {
       "source": "src/ui/Features/Shared/BinaryEdit/SetText/SetTextWindow.cs",
       "line": 18,
-      "literal": "Set Text",
+      "literal": "Set text",
       "classification": "localized",
       "category": "user-visible",
       "languageKey": "$.tools.imageBasedEdit.setText",
@@ -388,20 +388,348 @@
       "reason": "Documentation route identifier is passed to UiUtil.ShowHelp and is not displayed as UI copy."
     },
     {
-      "source": "src/ui/Features/Files/ExportCustomTextFormat/EditCustomTextFormatWindow.cs",
-      "line": 101,
-      "literal": ".",
-      "classification": "non-ui",
-      "category": "format-separator",
-      "reason": "Punctuation separator in a custom format editor, not user-facing copy."
+      "source": "src/ui/Features/Main/MainHelpers/SubtitleFileService.cs",
+      "line": 85,
+      "literal": "No subtitle found",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
     },
     {
-      "source": "src/ui/Features/Edit/MultipleReplace/CsvImporter.cs",
-      "line": 31,
-      "literal": "Find",
-      "classification": "non-ui",
-      "category": "schema-identifier",
-      "reason": "CSV column identifier consumed by the import schema."
+      "source": "src/ui/Features/Main/MainHelpers/SubtitleFileService.cs",
+      "line": 86,
+      "literal": "The Matroska file does not seem to contain any subtitles.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Main/MainViewModel.cs",
+      "line": 3551,
+      "literal": "Could not extract audio clip from video.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Main/MainViewModel.cs",
+      "line": 6963,
+      "literal": "Turn SMPTE timing off?",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Main/MainViewModel.cs",
+      "line": 15718,
+      "literal": "This file seems to be an .mp3 audio file which does not contains subtitles.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Main/MainViewModel.cs",
+      "line": 15720,
+      "literal": "You can open media files via the Video menu.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Main/MainViewModel.cs",
+      "line": 15727,
+      "literal": "This file seems to be a .wav audio file which does not contains subtitles.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Main/MainViewModel.cs",
+      "line": 15729,
+      "literal": "You can open media files via the Video menu.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Main/MainViewModel.cs",
+      "line": 17809,
+      "literal": "Download mpv?",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Main/MainViewModel.cs",
+      "line": 17810,
+      "literal": "{Environment.NewLine}\\\"Subtitle Edit\\\" requires mpv to play video/audio.{Environment.NewLine}{Environment.NewLine}Download and use mpv?",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Files/ExportImageBased/ExportImageBasedViewModel.cs",
+      "line": 338,
+      "literal": "Delete lines?",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Files/ExportImageBased/ExportImageBasedViewModel.cs",
+      "line": 339,
+      "literal": "Do you want to delete {selectedItems.Count} lines?",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Files/ExportImageBased/ImageBasedProfileViewModel.cs",
+      "line": 86,
+      "literal": "Error",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Files/ExportImageBased/ImageBasedProfileViewModel.cs",
+      "line": 87,
+      "literal": "Please enter a profile name",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Files/ExportImageBased/ImageBasedProfileViewModel.cs",
+      "line": 97,
+      "literal": "Error",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Files/ExportImageBased/ImageBasedProfileViewModel.cs",
+      "line": 98,
+      "literal": "Profile name '{profile.Name}' can only be used once. Please choose a different name.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Files/ImportImages/ImportImagesViewModel.cs",
+      "line": 96,
+      "literal": "Remove image?",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Files/ImportImages/ImportImagesViewModel.cs",
+      "line": 97,
+      "literal": "Do you want to remove {selectedStyle.FileName}?",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Files/ImportPlainText/ImportPlainTextViewModel.cs",
+      "line": 323,
+      "literal": "Alignment matched {result.MatchedLines} of {result.TotalLines} lines. ",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Edit/MultipleReplace/CategoryExportViewModel.cs",
+      "line": 51,
+      "literal": "No rule categories selected for export",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Edit/MultipleReplace/MultipleReplaceViewModel.cs",
+      "line": 566,
+      "literal": "Unable to import replace rules: ",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Edit/MultipleReplace/MultipleReplaceViewModel.cs",
+      "line": 578,
+      "literal": "No replace rules found in file",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs",
+      "line": 731,
+      "literal": "Image based subtitle format not found/supported.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs",
+      "line": 875,
+      "literal": "Encrypted VobSub subtitles are not supported.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs",
+      "line": 1441,
+      "literal": "No subtitles to resize.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs",
+      "line": 1505,
+      "literal": "No subtitles to adjust.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs",
+      "line": 1569,
+      "literal": "No subtitles to adjust.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs",
+      "line": 1633,
+      "literal": "No subtitles to adjust.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs",
+      "line": 2215,
+      "literal": "Unable to load image file.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs",
+      "line": 2229,
+      "literal": "Failed to import image: {ex.Message}",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs",
+      "line": 2245,
+      "literal": "No subtitle selected",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs",
+      "line": 2245,
+      "literal": "Please select exactly one subtitle.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs",
+      "line": 2333,
+      "literal": "Image based subtitle format not found/supported.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs",
+      "line": 2340,
+      "literal": "No subtitles found in the file.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs",
+      "line": 2546,
+      "literal": "Unexported changes",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs",
+      "line": 2547,
+      "literal": "You have unexported changes. Close and discard them?",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs",
+      "line": 2755,
+      "literal": "Do you want to delete one line?",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/BinaryEdit/BinaryEditViewModel.cs",
+      "line": 2764,
+      "literal": "Do you want to delete {selectedItems.Count} lines?",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/DownloadLibMpvViewModel.cs",
+      "line": 100,
+      "literal": "Error",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/DownloadLibMpvViewModel.cs",
+      "line": 101,
+      "literal": "Download complete, but could not delete existing file.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/DownloadLibMpvViewModel.cs",
+      "line": 102,
+      "literal": "Please restart SE to use the new libmpv.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/GetAudioClips/GetAudioClipsViewModel.cs",
+      "line": 97,
+      "literal": "Could not extract audio clip from video.",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
+    },
+    {
+      "source": "src/ui/Features/Shared/PickMatroskaTrack/PickMatroskaTrackViewModel.cs",
+      "line": 179,
+      "literal": "Format not supported: ",
+      "classification": "deferred-localization",
+      "category": "user-visible",
+      "reason": "User-visible message candidate is retained for the next localization task."
     }
   ]
 }
