@@ -3,6 +3,7 @@ using Nikse.SubtitleEdit.Core.Common;
 using Nikse.SubtitleEdit.Core.Common.TextLengthCalculator;
 using Nikse.SubtitleEdit.Core.Enums;
 using Nikse.SubtitleEdit.Core.SubtitleFormats;
+using Nikse.SubtitleEdit.Logic.Config.Language;
 using System;
 using System.Collections.Generic;
 
@@ -586,14 +587,5 @@ public class SeGeneral
         });
     }
 
-    internal bool IsLanguageRightToLeft() => Language is
-        "Arabic" or
-        "Dari" or
-        "Hebrew" or
-        "Kurdish" or
-        "Pashto" or
-        "Persian" or
-        "Sindhi" or
-        "Urdu" or
-        "Yiddish";
+    internal bool IsLanguageRightToLeft() => UiLanguageDirection.IsRightToLeft(Language);
 }

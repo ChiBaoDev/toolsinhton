@@ -22,11 +22,27 @@ internal sealed class UiLanguageServiceFactory
         new UiLanguageService(_loader, sink);
 }
 
+internal static class UiLanguageDirection
+{
+    private static readonly string[] RightToLeftLanguages =
+    [
+        "Arabic", "Dari", "Hebrew", "Kurdish", "Pashto",
+        "Persian", "Sindhi", "Urdu", "Yiddish",
+    ];
+
+    internal static bool IsRightToLeft(string? name) =>
+        Array.Exists(RightToLeftLanguages, language =>
+            string.Equals(language, name, StringComparison.OrdinalIgnoreCase));
+}
+
 internal sealed class UiLanguageService : IUiLanguageService
 {
     private readonly ILanguageCandidateLoader _loader;
     private readonly IUiLanguageChangeSink _sink;
     private readonly string _settingsPath;
+    private readonly Action<string, Se> _persistSettings;
+    private readonly Action _updateLibSeSettings;
+    private static readonly SemaphoreSlim TransactionLock = new(1, 1);
 
     public UiLanguageService(ILanguageCandidateLoader loader, IUiLanguageChangeSink sink)
         : this(loader, sink, Se.GetSettingsFilePath())
@@ -37,50 +53,66 @@ internal sealed class UiLanguageService : IUiLanguageService
         ILanguageCandidateLoader loader,
         IUiLanguageChangeSink sink,
         string settingsPath)
+        : this(loader, sink, settingsPath, Se.SaveSettingsCandidate, Se.UpdateLibSeSettingsAfterExternalCommit)
+    {
+    }
+
+    internal UiLanguageService(
+        ILanguageCandidateLoader loader,
+        IUiLanguageChangeSink sink,
+        string settingsPath,
+        Action<string, Se> persistSettings,
+        Action updateLibSeSettings)
     {
         _loader = loader;
         _sink = sink;
         _settingsPath = settingsPath;
+        _persistSettings = persistSettings;
+        _updateLibSeSettings = updateLibSeSettings;
     }
 
     public async Task<LanguageApplyResult> TryApplyAsync(
         string languageName,
         CancellationToken cancellationToken = default)
     {
-        var loaded = _loader.TryLoad(languageName);
-        var oldName = Se.Settings.General.Language ?? "English";
-        if (!loaded.Success || loaded.Language == null)
-        {
-            return new(false, oldName, loaded.Failure, loaded.Diagnostic);
-        }
-
-        Se candidate;
+        await TransactionLock.WaitAsync(cancellationToken);
         try
         {
-            candidate = Se.CloneSettings(Se.Settings);
-            candidate.General.Language = languageName;
-            Se.SaveSettings(_settingsPath, candidate);
+            var loaded = _loader.TryLoad(languageName);
+            var oldName = Se.Settings.General.Language ?? "English";
+            if (!loaded.Success || loaded.Language == null)
+            {
+                return new(false, oldName, loaded.Failure, loaded.Diagnostic);
+            }
+
+            Se candidate;
+            try
+            {
+                candidate = Se.CloneSettings(Se.Settings);
+                candidate.General.Language = languageName;
+                _persistSettings(_settingsPath, candidate);
+            }
+            catch (Exception ex)
+            {
+                return new(false, oldName, LanguageLoadFailure.ResourceUnavailable, ex.Message);
+            }
+
+            Se.Settings = candidate;
+            Se.Language = loaded.Language;
+            _updateLibSeSettings();
+
+            var change = new LanguageChange(
+                oldName,
+                languageName,
+                loaded.Language,
+                UiLanguageDirection.IsRightToLeft(oldName) != UiLanguageDirection.IsRightToLeft(languageName));
+            await _sink.ApplyAsync(change, cancellationToken);
+
+            return new(true, languageName, LanguageLoadFailure.None, null);
         }
-        catch (Exception ex)
+        finally
         {
-            return new(false, oldName, LanguageLoadFailure.ResourceUnavailable, ex.Message);
+            TransactionLock.Release();
         }
-
-        Se.Settings = candidate;
-        Se.Language = loaded.Language;
-        Se.UpdateLibSeSettingsAfterExternalCommit();
-
-        var change = new LanguageChange(
-            oldName,
-            languageName,
-            loaded.Language,
-            IsRightToLeft(oldName) != IsRightToLeft(languageName));
-        await _sink.ApplyAsync(change, cancellationToken);
-
-        return new(true, languageName, LanguageLoadFailure.None, null);
     }
-
-    private static bool IsRightToLeft(string name) =>
-        name is "Arabic" or "Dari" or "Hebrew" or "Kurdish" or "Pashto" or
-            "Persian" or "Sindhi" or "Urdu" or "Yiddish";
 }

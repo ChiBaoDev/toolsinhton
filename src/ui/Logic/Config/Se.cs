@@ -236,17 +236,23 @@ public class Se
 
     internal static void SaveSettings(string settingsFileName, Se settings)
     {
+        SaveSettingsCandidate(settingsFileName, settings);
+        UpdateLibSeSettings();
+    }
+
+    internal static void SaveSettingsCandidate(string settingsFileName, Se settings)
+    {
         var directory = Path.GetDirectoryName(settingsFileName);
         if (!string.IsNullOrEmpty(directory))
         {
             Directory.CreateDirectory(directory);
         }
 
+        var tempFileName = Path.Combine(
+            directory ?? string.Empty,
+            $".{Path.GetFileName(settingsFileName)}.{Guid.NewGuid():N}.tmp");
         try
         {
-            // Atomic write: serialize directly to a temp file (UTF-8, no string round-trip)
-            // and replace, so a process kill mid-write can't leave a truncated settings file.
-            var tempFileName = settingsFileName + ".tmp";
             using (var stream = System.IO.File.Create(tempFileName))
             {
                 JsonSerializer.Serialize(stream, settings, SeJsonContext.Default.Se);
@@ -256,14 +262,20 @@ public class Se
         }
         catch (Exception exception)
         {
-            // Log with context (e.g. no write access to the data folder) and rethrow so callers
-            // that can show UI - like the settings dialog - can tell the user the save failed
-            // instead of it disappearing silently (#12180).
             Se.LogError(exception, $"Failed to save settings to '{settingsFileName}'");
             throw;
         }
-
-        UpdateLibSeSettings();
+        finally
+        {
+            try
+            {
+                System.IO.File.Delete(tempFileName);
+            }
+            catch (Exception exception)
+            {
+                Se.LogError(exception, $"Failed to delete temporary settings file '{tempFileName}'");
+            }
+        }
     }
 
     public static void LoadSettings()
