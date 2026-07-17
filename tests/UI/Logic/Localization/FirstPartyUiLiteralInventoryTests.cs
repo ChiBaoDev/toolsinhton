@@ -36,6 +36,21 @@ public class FirstPartyUiLiteralInventoryTests
         "src/ui/Features/Shared",
     };
 
+    private static readonly string[] RequiredTask11Roots =
+    {
+        "src/ui/Features/Tools",
+        "src/ui/Features/SpellCheck",
+        "src/ui/Features/Ocr",
+        "src/ui/Features/Video",
+        "src/ui/Features/Translate",
+        "src/ui/Features/Options",
+        "src/ui/Features/Assa",
+        "src/ui/Features/Ssa",
+        "src/ui/Features/Plugins",
+        "src/ui/Controls",
+        "src/ui/Logic",
+    };
+
     private static readonly string[] AllowedClassifications =
     {
         "localized",
@@ -76,7 +91,7 @@ public class FirstPartyUiLiteralInventoryTests
     public void TargetedSourceCandidatesMatchStructuredInventory()
     {
         var root = RepositoryRoot();
-        var inventory = LoadInventory(root);
+        var inventory = LoadInventory(root, "tests/UI/TestData/Task10LiteralInventory.json");
 
         Assert.Equal(RequiredRoots, inventory.Roots);
         Assert.All(RequiredRoots, relativeRoot =>
@@ -131,6 +146,17 @@ public class FirstPartyUiLiteralInventoryTests
                 Assert.Contains(row.Category, new[] { "language-object-alias", "commented-code" });
             }
         }
+    }
+
+    [Fact]
+    public void Task11TargetedSourceCandidatesMatchStructuredInventory()
+    {
+        var root = RepositoryRoot();
+        var inventory = LoadInventory(root, "tests/UI/TestData/Task11LiteralInventory.json");
+
+        Assert.Equal(RequiredTask11Roots, inventory.Roots);
+        var candidates = ScanCandidates(root, RequiredTask11Roots);
+        AssertInventoryMatchesCandidates(root, inventory, candidates);
     }
 
     [AvaloniaFact]
@@ -282,24 +308,60 @@ public class FirstPartyUiLiteralInventoryTests
         }
     }
 
+
+    private static void AssertInventoryMatchesCandidates(string root, Task10Inventory inventory, Task10Candidate[] candidates)
+    {
+        Assert.All(inventory.Rows, row => Assert.Contains(row.Classification, AllowedClassifications));
+        Assert.Equal(inventory.Rows.Length, inventory.Rows.Select(row => row.Identity).Distinct(StringComparer.Ordinal).Count());
+        Assert.Equal(candidates.Length, candidates.Select(candidate => candidate.Identity).Distinct(StringComparer.Ordinal).Count());
+        var candidateMatches = candidates.Select(candidate => (candidate, rows: inventory.Rows.Where(row => CandidateMatches(row, candidate)).ToArray())).ToArray();
+        var missing = candidateMatches.Where(match => match.rows.Length != 1).ToArray();
+        Assert.True(missing.Length == 0, "Candidates without exactly one inventory row: " + string.Join("; ", missing.Select(match => $"{Describe(match.candidate)} ({match.rows.Length} rows)")));
+        var rowMatches = inventory.Rows.Select(row => (row, candidates: candidates.Where(candidate => CandidateMatches(row, candidate)).ToArray())).ToArray();
+        var stale = rowMatches.Where(match => match.candidates.Length != 1).ToArray();
+        Assert.True(stale.Length == 0, "Inventory rows without exactly one current candidate: " + string.Join("; ", stale.Select(match => $"{match.row.Identity} ({match.candidates.Length} candidates)")));
+        foreach (var row in inventory.Rows.Where(row => row.Classification == "localized"))
+        {
+            Assert.False(string.IsNullOrWhiteSpace(row.Category));
+            Assert.False(string.IsNullOrWhiteSpace(row.LanguageKey));
+            Assert.StartsWith("$.", row.LanguageKey, StringComparison.Ordinal);
+            Assert.False(string.IsNullOrWhiteSpace(row.SourceExpression));
+            Assert.Equal(ExpectedSourceExpression(row.LanguageKey!), row.SourceExpression);
+            Assert.Equal(row.Literal, CatalogValue(root, "English.json", row.LanguageKey!));
+            Assert.False(string.IsNullOrWhiteSpace(CatalogValue(root, "Vietnamese.json", row.LanguageKey!)));
+        }
+        foreach (var row in inventory.Rows.Where(row => row.Classification != "localized"))
+        {
+            Assert.False(string.IsNullOrWhiteSpace(row.Category));
+            Assert.False(string.IsNullOrWhiteSpace(row.Reason));
+            Assert.True(string.IsNullOrWhiteSpace(row.LanguageKey));
+        }
+    }
+
     private static SeLanguage LoadVietnameseLanguage() =>
         JsonSerializer.Deserialize<SeLanguage>(
             File.ReadAllText(ToAbsolutePath(RepositoryRoot(), "src/ui/Assets/Languages/Vietnamese.json")),
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
         ?? throw new InvalidDataException("Could not load Vietnamese language catalog.");
 
-    private static Task10Inventory LoadInventory(string root) =>
+    private static Task10Inventory LoadInventory(string root, string path) =>
         JsonSerializer.Deserialize<Task10Inventory>(
-            File.ReadAllText(ToAbsolutePath(root, "tests/UI/TestData/Task10LiteralInventory.json")),
+            File.ReadAllText(ToAbsolutePath(root, path)),
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
-        ?? throw new InvalidDataException("Could not load Task 10 literal inventory.");
+        ?? throw new InvalidDataException($"Could not load literal inventory: {path}");
 
     private static Task10Candidate[] ScanCandidates(string root, IReadOnlyList<string> roots)
     {
         var candidates = new List<Task10Candidate>();
         foreach (var relativeRoot in roots)
         {
-            foreach (var file in Directory.EnumerateFiles(ToAbsolutePath(root, relativeRoot), "*.*", SearchOption.AllDirectories)
+            var absoluteRoot = ToAbsolutePath(root, relativeRoot);
+            if (!Directory.Exists(absoluteRoot))
+            {
+                continue;
+            }
+
+            foreach (var file in Directory.EnumerateFiles(absoluteRoot, "*.*", SearchOption.AllDirectories)
                          .Where(IsScannedSourceFile)
                          .OrderBy(file => file, StringComparer.OrdinalIgnoreCase))
             {
