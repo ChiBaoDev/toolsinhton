@@ -237,6 +237,23 @@ public class VietnameseTranslationBatchTests
     }
 
     [Fact]
+    public void ReviewedTerminology_UsesGlossaryStandardBurnedInSubtitleAndAudioVisualizationTerms()
+    {
+        var batches = LoadBatches();
+        var b1 = batches.Single(batch => batch.Id == "B1");
+        var b4 = batches.Single(batch => batch.Id == "B4");
+        using var b1Shard = LocalizationJsonHelper.LoadDocument(Path.Combine(TestDataFolder(), b1.ShardFile));
+        using var b4Shard = LocalizationJsonHelper.LoadDocument(Path.Combine(TestDataFolder(), b4.ShardFile));
+        var b1Leaves = LocalizationJsonHelper.FlattenLeaves(b1Shard.RootElement);
+        var b4Leaves = LocalizationJsonHelper.FlattenLeaves(b4Shard.RootElement);
+
+        Assert.Equal("Dạng sóng/phổ âm", b1Leaves["$.general.waveformSpectrogram"].StringValue);
+        Assert.Equal("Dạng sóng/phổ âm", b4Leaves["$.options.settings.waveformSpectrogram"].StringValue);
+        Assert.Equal("Nhận dạng phụ đề nhúng cứng trong video bằng OCR", b4Leaves["$.options.shortcuts.videoOcr"].StringValue);
+        Assert.Equal("Tạo video có phụ đề nhúng cứng", b4Leaves["$.options.shortcuts.burnIn"].StringValue);
+    }
+
+    [Fact]
     public void B6_PreservesSourceSignificantNewlinesAndPlaceholders()
     {
         var b6 = LoadBatches().Single(batch => batch.Id == "B6");
