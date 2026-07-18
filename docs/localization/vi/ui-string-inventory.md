@@ -141,3 +141,18 @@ The structured source of truth is `tests/UI/TestData/Task10LiteralInventory.json
 - Markup scanning covers every English-bearing attribute and element-text node; namespace URIs, bindings, identifiers, resource keys, paths, type/style metadata, and other technical values are explicitly excluded.
 - All 1,530 `Se.Language.*` member-expression occurrences participate in the same symmetric candidate/inventory cardinality check as retained literals; source columns distinguish repeated expressions on one line.
 - Catalog ownership remains in the existing B1 (`file`/`edit`), B3 (`main`), and B4 (`tools`) shards under longest-prefix ownership.
+
+## Task 14 Windows verification update
+
+- The reviewed catalog still contains 3,601 owned leaves; Task 14 changed wording only and added no catalog path.
+- Corrected reviewed leaves:
+  - `$.general.waveformSpectrogram` → `Dạng sóng/phổ âm`
+  - `$.options.settings.waveformSpectrogram` → `Dạng sóng/phổ âm`
+  - `$.options.shortcuts.videoOcr` → `Nhận dạng phụ đề nhúng cứng trong video bằng OCR`
+  - `$.options.shortcuts.burnIn` → `Tạo video có phụ đề nhúng cứng`
+  - `$.options.settings.uiFont` → `Phông chữ giao diện người dùng`
+  - `$.options.settings.theme` → `Chủ đề`
+  - `$.options.settings.filesAndLogs` → `Tệp và nhật ký`
+- The deterministic merge regenerated `src/ui/Assets/Languages/Vietnamese.json` from the reviewed B1/B4 shards. A focused regression protects burned-in-subtitle and audio-visualization terminology.
+- Runtime and automated evidence is recorded in `docs/localization/vi/ui-verification-checklist.md`. Most portable lifecycle scenarios passed, but corrupt-catalog live selection was not separately observed; 100% and 150% launches at 1920x1080 produced partial evidence; installed-mode, 1280x720, and remaining end-to-end flow rows remain honestly blocked or not run.
+- Genuine Vietnamese language review was approved by the user on 2026-07-18 for the wording in commit `12efe61a7`.

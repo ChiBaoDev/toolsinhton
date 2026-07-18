@@ -60,3 +60,11 @@
 | WebVTT | WebVTT | Subtitle format identifier; keep unchanged | Product spelling |
 | VAD | VAD | Voice-activity-detection identifier; keep unchanged | Uppercase |
 | TTS | TTS | Text-to-speech identifier; keep unchanged | Uppercase |
+
+## Task 14 Windows verification notes
+
+- Use `phụ đề nhúng cứng` consistently for burned-in subtitles and `nhúng cứng` for the burn-in operation. Do not use `phụ đề ghi cứng`.
+- Use `Dạng sóng/phổ âm` when a single control or setting names both waveform and spectrogram views.
+- Settings labels use sentence case, including `Phông chữ giao diện người dùng`, `Chủ đề`, and `Tệp và nhật ký`.
+- Burned-in-subtitle and audio-visualization decisions are covered by `ReviewedTerminology_UsesGlossaryStandardBurnedInSubtitleAndAudioVisualizationTerms`; all listed terminology and capitalization decisions were applied to the reviewed shards and generated catalog in commit `12efe61a7`.
+- Genuine Vietnamese language review was approved by the user on 2026-07-18 for commit `12efe61a7`; the verification checklist records the approved scope and remaining environment-blocked rows.
