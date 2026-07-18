@@ -7,6 +7,10 @@
   #error Use Inno Setup unicode
 #endif
 
+#ifndef FORCE_DOTNET10_MISSING
+  #define FORCE_DOTNET10_MISSING 0
+#endif
+
 #define app_name             "Subtitle Edit"
 #define app_copyright        "Nikse"
 #define app_copyright_start  "2001"
@@ -267,12 +271,14 @@ var
   ErrorCode: Integer; // Declare the variable here
 begin
   Result := True;
+#if FORCE_DOTNET10_MISSING
+  if True then
+#else
   if not IsDotNet10Installed() then
+#endif
   begin
     if MsgBox(
-        'Subtitle Edit requires the .NET 10 Runtime, which is not installed on this computer.' + #13#10 + #13#10 +
-        'Please download and install the .NET 10 Runtime and run this setup again.' + #13#10 + #13#10 +
-        'Do you want to open the .NET 10 download page now?',
+        CustomMessage('msg_DotNet10Required'),
         mbConfirmation, MB_YESNO or MB_DEFBUTTON1) = IDYES then
       ShellExec('open', 'https://dotnet.microsoft.com/download/dotnet/10.0', '', '', SW_SHOW, ewNoWait, ErrorCode); 
     Result := False;
