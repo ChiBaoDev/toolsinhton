@@ -67,4 +67,4 @@
 - Use `Dạng sóng/phổ âm` when a single control or setting names both waveform and spectrogram views.
 - Settings labels use sentence case, including `Phông chữ giao diện người dùng`, `Chủ đề`, and `Tệp và nhật ký`.
 - Burned-in-subtitle and audio-visualization decisions are covered by `ReviewedTerminology_UsesGlossaryStandardBurnedInSubtitleAndAudioVisualizationTerms`; all listed terminology and capitalization decisions were applied to the reviewed shards and generated catalog in commit `12efe61a7`.
-- Genuine Vietnamese language review was approved by the user on 2026-07-18 for commit `12efe61a7`; the verification checklist records the approved scope and remaining environment-blocked rows.
+- Genuine Vietnamese language review was approved by the user on 2026-07-18 for commit `12efe61a7`; the verification checklist records the approved scope and remaining blocked and not-run rows.
