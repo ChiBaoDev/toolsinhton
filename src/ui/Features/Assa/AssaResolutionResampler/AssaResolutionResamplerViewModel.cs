@@ -1,4 +1,4 @@
-﻿using Avalonia.Controls;
+using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
@@ -168,7 +168,7 @@ public partial class AssaResolutionResamplerViewModel : ObservableObject
         {
             if (Window != null)
             {
-                await MessageBox.Show(Window, Se.Language.Assa.ResolutionResamplerTitle, "Video width/height cannot be zero.");
+                await MessageBox.Show(Window, Se.Language.Assa.ResolutionResamplerTitle, Se.Language.Assa.VideoWidthHeightCannotBeZero);
             }
             return;
         }

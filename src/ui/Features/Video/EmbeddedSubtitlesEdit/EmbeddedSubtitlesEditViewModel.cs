@@ -174,9 +174,9 @@ public partial class EmbeddedSubtitlesEditViewModel : ObservableObject
             Dispatcher.UIThread.Invoke(async () =>
             {
                 await MessageBox.Show(Window!,
-                    "Unable to generate video",
-                    "Output video file not generated: " + _outputFileName + Environment.NewLine +
-                    "Parameters: " + _ffmpegProcess.StartInfo.Arguments,
+                    Se.Language.Video.UnableToGenerateVideo,
+                    Se.Language.Video.OutputVideoFileNotGenerated + _outputFileName + Environment.NewLine +
+                    Se.Language.Video.Parameters + _ffmpegProcess.StartInfo.Arguments,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
 
@@ -312,8 +312,8 @@ public partial class EmbeddedSubtitlesEditViewModel : ObservableObject
         {
             await MessageBox.Show(
                 Window,
-                "No subtitles found",
-                "The selected subtitle file does not contain any subtitles.",
+                Se.Language.Video.NoSubtitlesFound,
+                Se.Language.Video.TheSelectedSubtitleFileDoesNotContainAny,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
             return;
@@ -514,8 +514,8 @@ public partial class EmbeddedSubtitlesEditViewModel : ObservableObject
         {
             await MessageBox.Show(
                 Window!,
-                "Unable to get media info",
-                $"Cannot generate video without valid media info",
+                Se.Language.Video.UnableToGetMediaInfo,
+                Se.Language.Video.CannotGenerateVideoWithoutValidMediaInfo,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
             return;
@@ -525,8 +525,8 @@ public partial class EmbeddedSubtitlesEditViewModel : ObservableObject
         {
             await MessageBox.Show(
                 Window!,
-                "No tracks added",
-                $"Add one or more tracks",
+                Se.Language.Video.NoTracksAdded,
+                Se.Language.Video.AddOneOrMoreTracks,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
 

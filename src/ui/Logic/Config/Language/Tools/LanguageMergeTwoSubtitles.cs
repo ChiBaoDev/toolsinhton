@@ -20,8 +20,12 @@ public class LanguageMergeTwoSubtitles
     public string Merge { get; set; }
     public string PleaseLoadTwoSubtitles { get; set; }
 
+    public string UnableToReadSubtitle { get; set; }
+
     public LanguageMergeTwoSubtitles()
     {
+        UnableToReadSubtitle = "Unable to read subtitle: ";
+
         Title = "Merge two subtitles";
         Subtitle1 = "Subtitle 1";
         Subtitle2 = "Subtitle 2";

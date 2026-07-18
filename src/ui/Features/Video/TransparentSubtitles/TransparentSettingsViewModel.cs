@@ -49,7 +49,7 @@ public partial class TransparentSettingsViewModel : ObservableObject
         if (UseOutputFolder && string.IsNullOrWhiteSpace(OutputFolder))
         {
             await MessageBox.Show(Window!, Se.Language.General.Error,
-                "Please select output folder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Se.Language.Video.PleaseSelectOutputFolder, MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 

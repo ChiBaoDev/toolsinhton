@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Nikse.SubtitleEdit.Logic.Config.Language.Tools;
 
@@ -63,6 +63,12 @@ public class LanguageVideo
     public string OpenFromUrlDownloadingTitle { get; set; }
     public string OpenFromUrlSaveAs { get; set; }
     public string OpenFromUrlDownloadSubtitles { get; set; }
+    public string OpenFromUrlNoVideoProducedXX { get; set; }
+    public string YtDlpNotInstalled { get; set; }
+    public string YtDlpStartFailed { get; set; }
+    public string YtDlpExitedWithCodeX { get; set; }
+    public string YtDlpSubtitleDownloadExitedWithCodeX { get; set; }
+    public string YtDlpChecksumFailedXXX { get; set; }
     public string PickOnlineSubtitleTitle { get; set; }
     public string PickOnlineSubtitleFetching { get; set; }
     public string PickOnlineSubtitleNoneFound { get; set; }
@@ -77,8 +83,64 @@ public class LanguageVideo
     public string ReEncodeGeneratedFilesX { get; set; }
     public string ReEncodeFfmpegParameters { get; set; }
 
+    public string UnableToGenerateBlankVideo { get; set; }
+    public string OutputVideoFileNotGenerated { get; set; }
+    public string Parameters { get; set; }
+    public string GeneratingDone { get; set; }
+    public string BackgroundImageFileNotSelected { get; set; }
+    public string BackgroundImageFileDoesNotExist { get; set; }
+    public string PleaseSelectOutputFolder { get; set; }
+    public string UnableToGenerateVideo { get; set; }
+    public string BitRateTooLowXK { get; set; }
+    public string UnableToGetVideoInfo { get; set; }
+    public string FileSkippedAsVideoInfoWasUnavailable { get; set; }
+    public string CutSettingsError { get; set; }
+    public string CutEndTimeMustBeAfterCutStart { get; set; }
+    public string OutputFileError { get; set; }
+    public string OutputVideoFileMustBeDifferentFromInput { get; set; }
+    public string MissingSubtitle { get; set; }
+    public string PleaseAddASubtitleToAllBatchItems { get; set; }
+    public string TheSelectedSubtitleFileContainsNoSubtitles { get; set; }
+    public string NoSegmentsAdded { get; set; }
+    public string AddOneOrMoreSegmentsEGVia { get; set; }
+    public string NoSubtitlesFound { get; set; }
+    public string TheSelectedSubtitleFileDoesNotContainAny { get; set; }
+    public string UnableToGetMediaInfo { get; set; }
+    public string CannotGenerateVideoWithoutValidMediaInfo { get; set; }
+    public string NoTracksAdded { get; set; }
+    public string AddOneOrMoreTracks { get; set; }
+    public string AnAPIKeyIsRequiredForTheGLM { get; set; }
+
     public LanguageVideo()
     {
+        UnableToGenerateBlankVideo = "Unable to generate blank video";
+        OutputVideoFileNotGenerated = "Output video file not generated: ";
+        Parameters = "Parameters: ";
+        GeneratingDone = "Generating done";
+        BackgroundImageFileNotSelected = "Background image file not selected";
+        BackgroundImageFileDoesNotExist = "Background image file does not exist: ";
+        PleaseSelectOutputFolder = "Please select output folder";
+        UnableToGenerateVideo = "Unable to generate video";
+        BitRateTooLowXK = "Bit rate too low: {0}k";
+        UnableToGetVideoInfo = "Unable to get video info";
+        FileSkippedAsVideoInfoWasUnavailable = "File skipped as video info was unavailable";
+        CutSettingsError = "Cut settings error";
+        CutEndTimeMustBeAfterCutStart = "Cut end time must be after cut start time";
+        OutputFileError = "Output file error";
+        OutputVideoFileMustBeDifferentFromInput = "Output video file must be different from input video file";
+        MissingSubtitle = "Missing subtitle";
+        PleaseAddASubtitleToAllBatchItems = "Please add a subtitle to all batch items";
+        TheSelectedSubtitleFileContainsNoSubtitles = "The selected subtitle file contains no subtitles.";
+        NoSegmentsAdded = "No segments added";
+        AddOneOrMoreSegmentsEGVia = "Add one or more segments - e.g. via the waveform";
+        NoSubtitlesFound = "No subtitles found";
+        TheSelectedSubtitleFileDoesNotContainAny = "The selected subtitle file does not contain any subtitles.";
+        UnableToGetMediaInfo = "Unable to get media info";
+        CannotGenerateVideoWithoutValidMediaInfo = "Cannot generate video without valid media info";
+        NoTracksAdded = "No tracks added";
+        AddOneOrMoreTracks = "Add one or more tracks";
+        AnAPIKeyIsRequiredForTheGLM = "An API key is required for the GLM API engine.";
+
 
         GoToVideoPosition = "Go to video position";
         GenerateBlankVideoTitle = "Generate blank video";
@@ -133,6 +195,14 @@ public class LanguageVideo
         OpenFromUrlDownloadingTitle = "Downloading video";
         OpenFromUrlSaveAs = "Save video as";
         OpenFromUrlDownloadSubtitles = "Also download subtitles";
+        OpenFromUrlNoVideoProducedXX = "yt-dlp finished but no video file was produced." + Environment.NewLine +
+                                       "Temporary directory: {0}" + Environment.NewLine +
+                                       "Contents: {1}";
+        YtDlpNotInstalled = "yt-dlp is not installed.";
+        YtDlpStartFailed = "Failed to start yt-dlp.";
+        YtDlpExitedWithCodeX = "yt-dlp exited with code {0}.";
+        YtDlpSubtitleDownloadExitedWithCodeX = "yt-dlp subtitle download exited with code {0}.";
+        YtDlpChecksumFailedXXX = "Downloaded yt-dlp ({0}) failed SHA-256 verification — expected {1}, got {2}. The file has been removed.";
         PickOnlineSubtitleTitle = "Pick subtitle to download";
         PickOnlineSubtitleFetching = "Downloading subtitles...";
         PickOnlineSubtitleNoneFound = "No subtitles found for this URL.";

@@ -1,3 +1,4 @@
+using Nikse.SubtitleEdit.Logic.Config;
 using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Layout;
@@ -10,7 +11,7 @@ public class TransparentSettingsWindow : Window
     public TransparentSettingsWindow(TransparentSettingsViewModel vm)
     {
         UiUtil.InitializeWindow(this, GetType().Name);
-        Title = "Output settings";
+        Title = Se.Language.Video.BurnIn.OutputSettingsTitle;
         SizeToContent = SizeToContent.WidthAndHeight;
         CanResize = false;
         vm.Window = this;
@@ -18,7 +19,7 @@ public class TransparentSettingsWindow : Window
 
         var checkBoxUseSourceFolder = new RadioButton
         {
-            Content = "Use source folder",
+            Content = Se.Language.General.UseSourceFolder,
             IsChecked = vm.UseSourceFolder,
             VerticalAlignment = VerticalAlignment.Center,
             [!Avalonia.Controls.Primitives.ToggleButton.IsCheckedProperty] = new Binding(nameof(vm.UseSourceFolder)) { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged },
@@ -26,7 +27,7 @@ public class TransparentSettingsWindow : Window
 
         var checkBoxUseOutputFolder = new RadioButton
         {
-            Content = "Use output folder",
+            Content = Se.Language.General.UseOutputFolder,
             IsChecked = vm.UseOutputFolder,
             VerticalAlignment = VerticalAlignment.Center,
             [!Avalonia.Controls.Primitives.ToggleButton.IsCheckedProperty] = new Binding(nameof(vm.UseOutputFolder)) { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged },

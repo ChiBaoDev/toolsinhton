@@ -335,7 +335,7 @@ public partial class DownloadSpeechToTextModelsViewModel : ObservableObject
         catch (Exception ex)
         {
             Error = ex.Message;
-            await MessageBox.Show(Window, "Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            await MessageBox.Show(Window, Se.Language.General.Error, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 

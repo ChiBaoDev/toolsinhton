@@ -160,8 +160,8 @@ public partial class Qwen3TtsSettingsViewModel : ObservableObject
         {
             var variantAnswer = await MessageBox.Show(
                 Window,
-                "Re-download Qwen3 TTS",
-                $"{Environment.NewLine}Select the build to download:",
+                Se.Language.Video.TextToSpeech.ReDownloadQwen3TTS,
+                string.Format(Se.Language.Video.TextToSpeech.XSelectTheBuildToDownload, Environment.NewLine),
                 MessageBoxButtons.Cancel,
                 MessageBoxIcon.Question,
                 "CPU",
@@ -205,8 +205,8 @@ public partial class Qwen3TtsSettingsViewModel : ObservableObject
         {
             var answer = await MessageBox.Show(
                 Window,
-                "Re-download Qwen3 TTS",
-                $"{Environment.NewLine}Download the latest Qwen3 TTS now?",
+                Se.Language.Video.TextToSpeech.ReDownloadQwen3TTS,
+                string.Format(Se.Language.Video.TextToSpeech.XDownloadTheLatestQwen3TTSNow, Environment.NewLine),
                 MessageBoxButtons.YesNoCancel,
                 MessageBoxIcon.Question);
             if (answer != MessageBoxResult.Yes)

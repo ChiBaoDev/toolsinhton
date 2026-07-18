@@ -465,7 +465,7 @@ public class ChatterboxTtsCpp : ITtsEngine
             if (!File.Exists(exe))
             {
                 throw new FileNotFoundException(
-                    "CrispASR executable not found. Install CrispASR via Video → Audio to text first.", exe);
+                    Se.Language.Video.TextToSpeech.CrispAsrExecutableNotFound, exe);
             }
 
             var port = FindFreeLoopbackPort();
@@ -553,42 +553,30 @@ public class ChatterboxTtsCpp : ITtsEngine
                     if (LooksLikeOutdatedCrispAsr(tail))
                     {
                         throw new InvalidOperationException(
-                            "Chatterbox requires CrispASR v0.6.0 or newer. Re-download CrispASR via "
-                            + "Video → Audio to text → Engine settings → Re-download, then try again."
+                            Se.Language.Video.TextToSpeech.ChatterboxRequiresCrispAsrUpdate
                             + LaunchCmdSuffix(exitedLaunchCommand));
                     }
                     if (LooksLikeStaleModelCache(tail))
                     {
-                        throw new InvalidOperationException(
-                            "Chatterbox failed to load its model — the GGUFs in "
-                            + GetSetModelsFolder() + " are likely stale or partially downloaded. "
-                            + "Delete them and try again so they re-download. Original output: " + tail
-                            + LaunchCmdSuffix(exitedLaunchCommand));
+                        throw new InvalidOperationException(string.Format(
+                            Se.Language.Video.TextToSpeech.ChatterboxModelCacheStaleXX,
+                            GetSetModelsFolder(),
+                            tail) + LaunchCmdSuffix(exitedLaunchCommand));
                     }
                     if (LooksLikeChatterboxTurboTokenizerMismatch(tail))
                     {
-                        throw new InvalidOperationException(
-                            "Chatterbox TTS \"Turbo\" does not load with CrispASR 0.8.0. The turbo model "
-                            + "is fine — 0.8.0's tokenizer/vocab check was overly strict and rejected its "
-                            + "benign embedding superset (50257-token tokenizer, text vocab size 50276). "
-                            + "This is fixed upstream (CrispStrobe/CrispASR#181): a newer CrispASR loads "
-                            + "Turbo normally, with no re-download. Until then, switch to the \"Base\" "
-                            + "Chatterbox model, which works."
-                            + Environment.NewLine + Environment.NewLine + tail
-                            + LaunchCmdSuffix(exitedLaunchCommand));
+                        throw new InvalidOperationException(string.Format(
+                            Se.Language.Video.TextToSpeech.ChatterboxTurboTokenizerMismatchX,
+                            tail) + LaunchCmdSuffix(exitedLaunchCommand));
                     }
                     if (LooksLikeChatterboxTurboStartupCrash(modelKey, tail))
                     {
-                        throw new InvalidOperationException(
-                            "Chatterbox TTS \"Turbo\" model crashed CrispASR during startup. This is a known "
-                            + "upstream issue in the chatterbox-turbo backend (especially on macOS/CPU). "
-                            + "Try the \"Base\" model instead, or file an issue at "
-                            + "https://github.com/CrispStrobe/CrispASR/issues with the log below."
-                            + Environment.NewLine + Environment.NewLine + tail
-                            + LaunchCmdSuffix(exitedLaunchCommand));
+                        throw new InvalidOperationException(string.Format(
+                            Se.Language.Video.TextToSpeech.ChatterboxTurboStartupCrashX,
+                            tail) + LaunchCmdSuffix(exitedLaunchCommand));
                     }
                     throw new InvalidOperationException(
-                        $"crispasr (chatterbox) exited during startup (code {exitCode}). Output: {tail}"
+                        string.Format(Se.Language.Video.TextToSpeech.ChatterboxExitedDuringStartupXX, exitCode, tail)
                         + LaunchCmdSuffix(exitedLaunchCommand));
                 }
                 if (await ProbeHealthAsync(port, TimeSpan.FromSeconds(2), ct))
@@ -602,7 +590,7 @@ public class ChatterboxTtsCpp : ITtsEngine
             var timeoutLaunchCommand = _serverLaunchCommand;
             StopServerInternal();
             throw new TimeoutException(
-                $"crispasr (chatterbox) did not report healthy within 15 minutes. Last output: {lastOutput}"
+                string.Format(Se.Language.Video.TextToSpeech.ChatterboxHealthTimedOutX, lastOutput)
                 + LaunchCmdSuffix(timeoutLaunchCommand));
         }
         finally

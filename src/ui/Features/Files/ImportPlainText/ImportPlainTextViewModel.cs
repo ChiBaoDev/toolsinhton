@@ -320,9 +320,11 @@ public partial class ImportPlainTextViewModel : ObservableObject
             await MessageBox.Show(
                 Window,
                 Se.Language.General.Warning,
-                $"Alignment matched {result.MatchedLines} of {result.TotalLines} lines. "
-                + $"{result.UnmatchedLines} line(s) could not be aligned and kept their original time codes. "
-                + "If the audio language or content doesn't match the script, the transcription may be off.",
+                string.Format(
+                    Se.Language.File.AlignmentMatchedXOfYLines,
+                    result.MatchedLines,
+                    result.TotalLines,
+                    result.UnmatchedLines),
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
         }

@@ -189,7 +189,7 @@ public partial class MainViewModel :
     IUndoRedoClient,
     IFindResult,
     IApplyAssaStyles,
-    IApplySsaStyles
+    IApplySsaStyles, IUiLanguageChangeSink
 {
     [ObservableProperty] private ObservableCollection<SubtitleLineViewModel> _subtitles;
     [ObservableProperty] private SubtitleLineViewModel? _selectedSubtitle;
@@ -690,7 +690,7 @@ public partial class MainViewModel :
                     var translationFiles = Directory.GetFiles(Se.TranslationFolder, language.EnglishName + ".json");
                     if (translationFiles?.Length > 0)
                     {
-                        Dispatcher.UIThread.Post(async void () => { await LoadLanguage(translationFiles[0]); });
+                        Dispatcher.UIThread.Post(async void () => { await ((UiLanguageServiceFactory)Locator.Services.GetService(typeof(UiLanguageServiceFactory))!).Create(this).TryApplyAsync(Path.GetFileNameWithoutExtension(translationFiles[0])); });
                     }
                 }
             }
@@ -3548,7 +3548,7 @@ public partial class MainViewModel :
 
             if (process.ExitCode != 0 || !File.Exists(outputFileName))
             {
-                await MessageBox.Show(Window, Se.Language.General.Error, "Could not extract audio clip from video.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await MessageBox.Show(Window, Se.Language.General.Error, Se.Language.Main.CouldNotExtractAudioClipFromVideo, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -6960,7 +6960,7 @@ public partial class MainViewModel :
         }
 
         var answer = await MessageBox.Show(Window, Se.Language.General.Information,
-            "Turn SMPTE timing off?",
+            Se.Language.Main.TurnSmpteTimingOff,
             MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
         if (answer != MessageBoxResult.Yes)
@@ -9479,57 +9479,57 @@ public partial class MainViewModel :
     [RelayCommand]
     private async Task CommandShowSettingsLanguage()
     {
-        // The layout direction (which side the subtitle list and video sit on)
-        // follows the interface language, so note it before the change.
-        var wasRightToLeft = Se.Settings.General.IsLanguageRightToLeft();
         var viewModel = await ShowDialogAsync<LanguageWindow, LanguageViewModel>();
         if (viewModel.OkPressed && viewModel.SelectedLanguage != null)
-        {
-            // Note where the video is before the language is loaded: loading it
-            // rebuilds the layout, which builds a fresh video player starting at the
-            // beginning. Read afterwards the position is always zero, so it has to be
-            // taken here to be restored once the new layout is in place.
-            var videoPosition = GetVideoPlayerControl()?.VideoPlayer?.Position ?? 0;
-
-            await LoadLanguage(viewModel.SelectedLanguage.FileName);
-
-            // Strings update live already. When the new language flips the layout
-            // direction (between a right to left and a left to right language),
-            // re-apply the direction live so the subtitle list and video move to the
-            // correct side at once, instead of asking the user to restart.
-            if (Se.Settings.General.IsLanguageRightToLeft() != wasRightToLeft)
-            {
-                ApplyLayoutDirectionForCurrentLanguage(videoPosition);
-            }
-        }
+            await ((UiLanguageServiceFactory)Locator.Services.GetService(typeof(UiLanguageServiceFactory))!).Create(this).TryApplyAsync(viewModel.SelectedLanguage.Name);
     }
 
-    private async Task LoadLanguage(string jsonFileName)
+    async Task IUiLanguageChangeSink.ApplyAsync(LanguageChange change, CancellationToken cancellationToken)
     {
-        var json = await File.ReadAllTextAsync(jsonFileName, Encoding.UTF8);
-        var language = JsonSerializer.Deserialize<SeLanguage>(json,
-            new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-            });
-
-        Se.Language = language ?? new SeLanguage();
-
-        // Rebuild settings-page dropdown labels that capture Se.Language at type init.
+        var videoPosition = GetVideoPlayerControl()?.VideoPlayer?.Position ?? 0;
         SettingsViewModel.ReloadLanguageMaps();
-
-        // reload current layout
         InitMenu.Make(this);
-        if (OperatingSystem.IsMacOS())
-        {
-            Layout.InitNativeMacMenu.Rebuild(this);
-        }
+        if (OperatingSystem.IsMacOS()) Layout.InitNativeMacMenu.Rebuild(this);
         SetLayout(Se.Settings.General.LayoutNumber);
-
         RebuildToolbar();
-
         ReloadShortcuts();
+        if (change.DirectionChanged) ApplyLayoutDirectionForCurrentLanguage(videoPosition);
+        await Task.CompletedTask;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     [RelayCommand]
     private async Task OpenDataFolder()
@@ -15715,18 +15715,18 @@ public partial class MainViewModel :
                 // check for mp3 file
                 if (subtitle == null && fileSize > 50 && FileUtil.IsMp3(fileName))
                 {
-                    await MessageBox.Show(Window!, Se.Language.General.Error, "This file seems to be an .mp3 audio file which does not contains subtitles." + Environment.NewLine +
+                    await MessageBox.Show(Window!, Se.Language.General.Error, Se.Language.Main.Mp3ContainsNoSubtitles + Environment.NewLine +
                                                                               Environment.NewLine +
-                                                                              "You can open media files via the Video menu.");
+                                                                              Se.Language.Main.OpenMediaViaVideoMenu);
                     return;
                 }
 
                 // check for wav file
                 if (subtitle == null && fileSize > 50 && FileUtil.IsWav(fileName))
                 {
-                    await MessageBox.Show(Window!, Se.Language.General.Error, "This file seems to be a .wav audio file which does not contains subtitles." + Environment.NewLine +
+                    await MessageBox.Show(Window!, Se.Language.General.Error, Se.Language.Main.WavContainsNoSubtitles + Environment.NewLine +
                                                                               Environment.NewLine +
-                                                                              "You can open media files via the Video menu.");
+                                                                              Se.Language.Main.OpenMediaViaVideoMenu);
                     return;
                 }
 
@@ -17806,8 +17806,8 @@ public partial class MainViewModel :
                 {
                     var answer = await MessageBox.Show(
                         Window!,
-                        "Download mpv?",
-                        $"{Environment.NewLine}\"Subtitle Edit\" requires mpv to play video/audio.{Environment.NewLine}{Environment.NewLine}Download and use mpv?",
+                        Se.Language.Main.DownloadMpvTitle,
+                        Environment.NewLine + Se.Language.Main.DownloadMpvQuestion,
                         MessageBoxButtons.YesNoCancel,
                         MessageBoxIcon.Question);
 

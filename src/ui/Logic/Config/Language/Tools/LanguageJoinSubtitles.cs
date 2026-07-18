@@ -1,4 +1,4 @@
-﻿namespace Nikse.SubtitleEdit.Logic.Config.Language;
+namespace Nikse.SubtitleEdit.Logic.Config.Language;
 
 public class LanguageJoinSubtitles
 {
@@ -8,8 +8,12 @@ public class LanguageJoinSubtitles
     public string AddMsAfterEachFile { get; set; }
     public string Join { get; set; }
 
+    public string UnableToReadSubtitleFromFile { get; set; }
+
     public LanguageJoinSubtitles()
     {
+        UnableToReadSubtitleFromFile = "Unable to read subtitle from file: ";
+
         Title = "Join subtitles";
         Join = "_Join";
         KeepTimeCodes = "Keep time codes";

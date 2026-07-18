@@ -3,6 +3,7 @@ using System.IO;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Nikse.SubtitleEdit.Logic.Config;
 
 namespace Nikse.SubtitleEdit.Logic.Download;
 
@@ -90,7 +91,7 @@ public static class DownloadHelper
 
                 if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                 { 
-                    throw new FileNotFoundException($"The requested URL was not found: {url}");
+                    throw new FileNotFoundException(string.Format(Se.Language.General.RequestedUrlNotFoundX, url));
                 }
 
                 response.EnsureSuccessStatusCode();
@@ -137,7 +138,7 @@ public static class DownloadHelper
                 if (totalBytes > 0 && totalReadBytes != totalBytes.Value)
                 {
                     throw new InvalidOperationException(
-                        $"Download incomplete: expected {totalBytes} bytes, received {totalReadBytes} bytes");
+                        string.Format(Se.Language.General.DownloadIncompleteXX, totalBytes, totalReadBytes));
                 }
 
                 await destination.FlushAsync(cts.Token).ConfigureAwait(false);
@@ -187,7 +188,7 @@ public static class DownloadHelper
         // All retries exhausted
         var bytesDownloaded = destination.CanSeek ? destination.Position : 0;
         throw new InvalidOperationException(
-            $"Failed to download file after {maxRetries} attempts. URL: {url}. Downloaded: {bytesDownloaded}/{totalBytes ?? 0} bytes",
+            string.Format(Se.Language.General.DownloadFailedAfterAttemptsXXXX, maxRetries, url, bytesDownloaded, totalBytes ?? 0),
             lastException);
     }
 

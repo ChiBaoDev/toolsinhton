@@ -8,7 +8,7 @@ public class BinaryOcrDbNewWindow : Window
 {
     public BinaryOcrDbNewWindow(BinaryOcrDbNewViewModel vm)
     {
-        Title = "New/rename Binary Image Compare database";
+        Title = Se.Language.Ocr.NewRenameBinaryImageCompareDatabase;
         vm.Window = this;
         UiUtil.InitializeWindow(this, GetType().Name);
         SizeToContent = SizeToContent.WidthAndHeight;

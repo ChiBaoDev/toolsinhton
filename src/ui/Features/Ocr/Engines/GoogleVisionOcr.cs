@@ -2,6 +2,7 @@
 using Nikse.SubtitleEdit.Core.VobSub.Ocr;
 using Nikse.SubtitleEdit.Core.VobSub.Ocr.Service;
 using Nikse.SubtitleEdit.Logic;
+using Nikse.SubtitleEdit.Logic.Config;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -186,24 +187,24 @@ public class GoogleVisionOcr
             var result = await _httpClient.PostAsync(uri, new StringContent(requestBodyString), cancellationToken);
             if ((int)result.StatusCode == 400)
             {
-                throw new OcrException("API key invalid (or perhaps billing/API is not enabled)?");
+                throw new OcrException(Se.Language.Ocr.CloudVisionApiKeyInvalid);
             }
 
             if ((int)result.StatusCode == 403)
             {
-                throw new OcrException("\"Perhaps billing is not enabled (or API not enabled or API key is invalid)?\"");
+                throw new OcrException(Se.Language.Ocr.CloudVisionRequestForbidden);
             }
 
             if (!result.IsSuccessStatusCode)
             {
-                throw new OcrException($"An error occurred calling Cloud Vision API - status code: {result.StatusCode}");
+                throw new OcrException(string.Format(Se.Language.Ocr.CloudVisionApiStatusErrorX, result.StatusCode));
             }
 
             content = await result.Content.ReadAsStringAsync(cancellationToken);
         }
         catch (HttpRequestException httpException)
         {
-            throw new OcrException("Error calling Cloud Vision API: " + httpException.Message, httpException);
+            throw new OcrException(string.Format(Se.Language.Ocr.CloudVisionApiCallErrorX, httpException.Message), httpException);
         }
 
         return string.Join(Environment.NewLine, JsonToStringList(language, content));

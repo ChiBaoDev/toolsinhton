@@ -1,0 +1,199 @@
+# Task 8 B5 Evidence
+
+Status: complete
+
+## Final B5 gate closure
+
+- Applied the final parser position fix: structural signatures now include ordinary text segments and escaped-brace tokens, so moving ASS tags relative to text or placeholders is rejected while prior placeholder, escaping, and ASS atom semantics remain intact.
+- Corrected residual B5 prose and labels, including merged-line status, ASSA position-tag help, checkered-image label, re-encode status, drawing help, and rotate/style labels.
+- Reduced the B5 allowlist to the exact six surviving technical invariants in `tests/UI/TestData/VietnameseUntranslatedAllowlist.json`; each reason is path-specific.
+- Final review covered all 607 B5 values against the English extract, including OCR, TTS, video processing, embedded tracks, wrapping, styles, colors, rotation, and advanced effects.
+
+### Final gate commands
+
+- `dotnet test D:/toolsinhton/.claude/worktrees/vietnamese-localization/tests/UI/UITests.csproj -c Debug --filter "FullyQualifiedName~VietnameseTranslationBatchTests|FullyQualifiedName~CompositeFormatPlaceholderParserTests" --no-restore --verbosity quiet`
+- `git diff --check`
+
+
+Commit: `042ca69cd feat: translate Vietnamese video OCR and ASSA UI`
+
+## Scope
+
+- Added complete 607-leaf B5 shard in English source order for `$.video`, `$.ocr`, and `$.assa`.
+- Enabled B5 review metadata with reviewer `ChiBaoDev` and exact required reviewer note.
+- Added exact B5 technical allowlist records and updated glossary and inventory.
+- Preserved placeholders, line breaks, markup, mnemonic structure, and ASSA syntax. Added parser coverage for literal ASSA override tags.
+- No runtime-generated Settings.json, Languages/, or unrelated runtime artifacts were staged.
+
+## Test evidence
+
+- RED captured after enabling B5 metadata before creating the shard: reviewed-batch test failed because the B5 shard was absent.
+- Required absolute-path command: `dotnet test D:/toolsinhton/.claude/worktrees/vietnamese-localization/tests/UI/UITests.csproj -c Debug --filter "FullyQualifiedName~VietnameseTranslationBatchTests" --no-restore --verbosity quiet`
+- Result: Passed 9, Failed 0, Skipped 0.
+- `git diff --check`: passed.
+- Working tree after commit: clean.
+
+## Concerns
+
+- A separate full solution build was not run; the required test command built the affected project graph successfully.
+
+
+## Corrective re-review evidence
+
+- Re-reviewed all 607 B5 leaves in `tests/UI/TestData/VietnameseDraft/05-video-ocr-assa.json` against the English source structure; source order and count remain exact (607 B5 leaves; 3,243 reviewed leaves total).
+- Rewrote machine-mixed prose and internal-key labels into Vietnamese, including video burn-in, speech-to-text, TTS, embedded tracks, video OCR, OCR preprocessing, and ASSA effects/status text. Technical identifiers and syntax were retained only where required.
+- Removed 18 stale/generic B5 allowlist entries that became translated; remaining allowlist entries are exact English identifiers/syntax/examples with path-specific reasons.
+- Parser fix: valid ASS/SSA override tags are parsed narrowly, exact tag sequence/content is included in the comparison signature, malformed and arbitrary `{\...}` composites are rejected, and numeric composite placeholders, bare `{language}`, escaped braces, repeated placeholders, alignment/format, and reorder behavior remain covered.
+- Focused parser regression coverage added for valid tags, altered/removed tags, malformed/arbitrary tags, and mixed `{language}` plus ASS tags.
+
+### Exact verification output
+
+Command:
+`dotnet test D:/toolsinhton/.claude/worktrees/vietnamese-localization/tests/UI/UITests.csproj -c Debug --filter "FullyQualifiedName~VietnameseTranslationBatchTests|FullyQualifiedName~CompositeFormatPlaceholderParserTests" --no-restore --verbosity quiet`
+
+Result: `Passed! - Failed: 0, Passed: 34, Skipped: 0, Total: 34`
+
+Command: `git diff --check`
+Result: passed.
+
+## Final all-607 corrective review
+
+- Manually re-reviewed all 607 B5 values against `.superpowers/sdd/b5-english-extract.json`, preserving exact source order/count, placeholders, markup, ASS syntax, shortcuts, bullets, significant spacing, and source-significant line breaks.
+- Rewrote internal-key values and machine-mixed prose across video burn-in, speech-to-text, TTS, shot changes, video OCR, embedded tracks, OCR preprocessing, VobSub, ASSA drawing/styles, and advanced effects.
+- The B5 untranslated allowlist contains exactly six exact path-specific invariants: CRF, URL, the resolution `x` separator, `Tesseract + LSTM`, standalone OCR, and the OCR title pattern `OCR - {0}`.
+- Confirmed parser hardening retains ordered ASS atoms and supports the B5 `\fsp` atom while rejecting malformed/arbitrary/non-finite forms.
+
+### Final exact verification output
+
+Command:
+`dotnet test D:/toolsinhton/.claude/worktrees/vietnamese-localization/tests/UI/UITests.csproj -c Debug --filter "FullyQualifiedName~VietnameseTranslationBatchTests|FullyQualifiedName~CompositeFormatPlaceholderParserTests" --no-restore --verbosity quiet`
+
+Result: `Passed! - Failed: 0, Passed: 34, Skipped: 0, Total: 34`
+
+Command: `git diff --check`
+Result: passed (Git emitted only the configured LF-to-CRLF working-copy warning for the B5 JSON shard).
+
+
+### Final B5 gate evidence
+
+- Raw-byte and decoded-value audit confirmed `$.video.videoOcr.addAssaPositionTag` decodes to literal `{\an8}` and `$.assa.advancedEffectWordSpacingDescription` decodes to literal `\fsp`; no reviewed B5 syntax value contains an unexpected control character.
+- Reviewed all 607 B5 values after the final rewrite, including OCR paths, audio-to-text, TTS, embedded tracks, progress/error messages, wrapping, styles, and advanced effects.
+- The allowlist is exactly six entries, consistently listed as `$.video.burnIn.crf=CRF`, `$.video.videoOcr.url=URL`, `$.video.resolutionSeparator=x`, `$.ocr.tesseractEngineModeBoth=Tesseract + LSTM`, `$.ocr.ocr=OCR`, and `$.ocr.ocrX=OCR - {0}`.
+- Added decoded ASS syntax/control-character regression coverage to `VietnameseTranslationBatchTests`.
+- Final verification commands: `dotnet test D:/toolsinhton/.claude/worktrees/vietnamese-localization/tests/UI/UITests.csproj -c Debug --filter "FullyQualifiedName~VietnameseTranslationBatchTests|FullyQualifiedName~CompositeFormatPlaceholderParserTests" --no-restore --verbosity quiet`; `git diff --check`; direct decoded ASS/control-character audit.
+
+Verification result: direct decoded validation passed for literal `{\an8}` and `\fsp`, zero unexpected control characters, and exactly six allowlist entries. Combined suite passed 44/44 with 0 failures. `git diff --check` passed; Git emitted only configured LF-to-CRLF working-copy warnings.
+
+
+## Independent final evidence correction
+
+- Replaced the accidental BEL (`0x07`) and form-feed (`0x0C`) bytes in the prior evidence with printable Markdown code spans showing the decoded literal ASS syntax `{\an8}` and `\fsp`. No B5 shard or parser source was changed.
+- Appended the independent review wave and both NOT APPROVED verdicts to `.superpowers/sdd/task-8-review-findings.md`.
+
+### Exact verification commands and results
+
+Command:
+```bash
+python - <<'PY'
+from pathlib import Path
+root=Path(r'D:/toolsinhton/.claude/worktrees/vietnamese-localization/.superpowers/sdd')
+files=sorted(root.glob('task-8*.md'))
+bad=[]
+for p in files:
+    for offset,value in enumerate(p.read_bytes()):
+        if value < 0x20 and value not in (0x09,0x0A,0x0D):
+            bad.append((p.name,offset,f'0x{value:02X}'))
+if bad:
+    for item in bad: print(f'{item[0]}:{item[1]}:{item[2]}')
+    raise SystemExit(1)
+print(f'PASS: audited {len(files)} Task 8 evidence Markdown files; no unexpected C0 controls')
+PY
+```
+
+Result: `PASS: audited 3 Task 8 evidence Markdown files; no unexpected C0 controls` (exit 0).
+
+Command:
+`dotnet test D:/toolsinhton/.claude/worktrees/vietnamese-localization/tests/UI/UITests.csproj -c Debug --filter "FullyQualifiedName~VietnameseTranslationBatchTests|FullyQualifiedName~CompositeFormatPlaceholderParserTests" --no-restore --verbosity quiet`
+
+Result: `Passed! - Failed: 0, Passed: 44, Skipped: 0, Total: 44` (duration 452 ms).
+
+Command: `git -C D:/toolsinhton/.claude/worktrees/vietnamese-localization diff --check`
+
+Result: passed (exit 0); Git emitted only the configured LF-to-CRLF working-copy warning for `.superpowers/sdd/task-8-report.md`.
+
+
+## Latest re-review evidence correction
+
+- Latest re-review after commit `ff01cf627` remains NOT APPROVED for spec compliance and code/translation quality because the report did not preserve the exact pre-fix control-character audit command/script and failing result.
+- This is documentation-only evidence. No B5 shard, parser, or runtime file was changed; Task 9 was not started and nothing was pushed.
+
+### Exact pre-fix control-character audit (before `ff01cf627`)
+
+Command/script run against the pre-fix report from `ff01cf627^`:
+
+```bash
+git show ff01cf627^:.superpowers/sdd/task-8-report.md | python -c "import sys; b=sys.stdin.buffer.read(); bad=[(i,x) for i,x in enumerate(b) if x<0x20 and x not in (0x09,0x0A,0x0D)]; [print(f'task-8-report.md:{i}:0x{x:02X}') for i,x in bad]; print(f'FAIL: found {len(bad)} unexpected C0 controls in pre-fix report'); raise SystemExit(1 if bad else 0)"
+```
+
+Failing output (exit 1):
+
+```text
+task-8-report.md:5392:0x07
+task-8-report.md:5468:0x0C
+task-8-report.md:6488:0x07
+task-8-report.md:6499:0x0C
+FAIL: found 4 unexpected C0 controls in pre-fix report
+pre-fix audit exit=1
+```
+
+The `0x07` bytes were BEL and the `0x0C` bytes were form-feed; the intended evidence was the printable literal ASS syntax `{{\an8}}` and `\fsp`.
+
+### Exact post-fix verification commands and results
+
+Focused 44-test command:
+
+```bash
+dotnet test D:/toolsinhton/.claude/worktrees/vietnamese-localization/tests/UI/UITests.csproj -c Debug --filter "FullyQualifiedName~VietnameseTranslationBatchTests|FullyQualifiedName~CompositeFormatPlaceholderParserTests" --no-restore --verbosity quiet
+```
+
+Output (exit 0):
+
+```text
+Test run for D:\toolsinhton\.claude\worktrees\vietnamese-localization\tests\UI\bin\Debug\net10.0\UITests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    44, Skipped:     0, Total:    44, Duration: 449 ms - UITests.dll (net10.0)
+```
+
+Post-fix C0 audit command/script:
+
+```bash
+python - <<'PY'
+from pathlib import Path
+root=Path(r'D:/toolsinhton/.claude/worktrees/vietnamese-localization/.superpowers/sdd')
+files=sorted(root.glob('task-8*.md'))
+bad=[]
+for p in files:
+    for offset,value in enumerate(p.read_bytes()):
+        if value < 0x20 and value not in (0x09,0x0A,0x0D):
+            bad.append((p.name,offset,f'0x{value:02X}'))
+if bad:
+    for item in bad: print(f'{item[0]}:{item[1]}:{item[2]}')
+    raise SystemExit(1)
+print(f'PASS: audited {len(files)} Task 8 evidence Markdown files; no unexpected C0 controls')
+PY
+```
+
+Output (exit 0):
+
+```text
+PASS: audited 3 Task 8 evidence Markdown files; no unexpected C0 controls
+```
+
+`git diff --check` command and output (exit 0):
+
+```text
+$ git -C D:/toolsinhton/.claude/worktrees/vietnamese-localization diff --check
+```
+
+No output; exit 0. The combined command run also reported `RC test=0 audit=0 diff=0`.

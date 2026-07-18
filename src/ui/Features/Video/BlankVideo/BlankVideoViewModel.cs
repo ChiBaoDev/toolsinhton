@@ -163,9 +163,9 @@ public partial class BlankVideoViewModel : ObservableObject
             Dispatcher.UIThread.Invoke(async () =>
             {
                 await MessageBox.Show(Window!,
-                    "Unable to generate blank video",
-                    "Output video file not generated: " + jobItem.OutputVideoFileName + Environment.NewLine +
-                    "Parameters: " + _ffmpegProcess.StartInfo.Arguments,
+                    Se.Language.Video.UnableToGenerateBlankVideo,
+                    Se.Language.Video.OutputVideoFileNotGenerated + jobItem.OutputVideoFileName + Environment.NewLine +
+                    Se.Language.Video.Parameters + _ffmpegProcess.StartInfo.Arguments,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
 
@@ -203,7 +203,7 @@ public partial class BlankVideoViewModel : ObservableObject
                 }
 
                 await MessageBox.Show(Window!,
-                    "Generating done",
+                    Se.Language.Video.GeneratingDone,
                     sb.ToString(),
                     MessageBoxButtons.OK);
             }
@@ -395,13 +395,13 @@ public partial class BlankVideoViewModel : ObservableObject
     {
         if (UseBackgroundImage && string.IsNullOrEmpty(_fullBackgroundImageFileName))
         {
-            await MessageBox.Show(Window!, "Background image file not selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            await MessageBox.Show(Window!, Se.Language.Video.BackgroundImageFileNotSelected, Se.Language.General.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
         if (UseBackgroundImage && !File.Exists(_fullBackgroundImageFileName))
         {
-            await MessageBox.Show(Window!, "Background image file does not exist: " + _fullBackgroundImageFileName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            await MessageBox.Show(Window!, Se.Language.Video.BackgroundImageFileDoesNotExist + _fullBackgroundImageFileName, Se.Language.General.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 

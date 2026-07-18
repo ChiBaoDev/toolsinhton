@@ -131,8 +131,8 @@ public partial class KokoroTtsSettingsViewModel : ObservableObject
 
         var answer = await MessageBox.Show(
             Window,
-            "Re-download Kokoro TTS",
-            $"{Environment.NewLine}Download the latest Kokoro TTS now?",
+            Se.Language.Video.TextToSpeech.ReDownloadKokoroTTS,
+            string.Format(Se.Language.Video.TextToSpeech.XDownloadTheLatestKokoroTTSNow, Environment.NewLine),
             MessageBoxButtons.YesNoCancel,
             MessageBoxIcon.Question);
         if (answer != MessageBoxResult.Yes)

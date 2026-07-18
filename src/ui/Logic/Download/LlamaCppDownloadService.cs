@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using Nikse.SubtitleEdit.Logic.Config;
 
 namespace Nikse.SubtitleEdit.Logic.Download;
 
@@ -93,7 +94,7 @@ public class LlamaCppDownloadService(HttpClient httpClient) : ILlamaCppDownloadS
             {
                 if (variant == VariantCuda)
                 {
-                    throw new PlatformNotSupportedException("llama.cpp CUDA build is not available for Linux ARM64.");
+                    throw new PlatformNotSupportedException(string.Format(Se.Language.General.DownloadUnavailableForLinuxArm64X, "llama.cpp CUDA build"));
                 }
 
                 return variant == VariantVulkan
@@ -113,6 +114,6 @@ public class LlamaCppDownloadService(HttpClient httpClient) : ILlamaCppDownloadS
                 : BaseUrl + "llama-" + Version + "-bin-macos-x64.tar.gz";
         }
 
-        throw new PlatformNotSupportedException("llama.cpp download is not supported on this platform.");
+        throw new PlatformNotSupportedException(string.Format(Se.Language.General.DownloadNotSupportedOnPlatformX, "llama.cpp"));
     }
 }

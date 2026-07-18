@@ -1,4 +1,4 @@
-﻿using Avalonia.Controls;
+using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
@@ -82,7 +82,7 @@ public partial class BinaryOcrDbEditViewModel : ObservableObject
 
         if (string.IsNullOrWhiteSpace(ItemText))
         {
-            await MessageBox.Show(Window!, "Validation Error", "Item text cannot be empty.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            await MessageBox.Show(Window!, Se.Language.Ocr.ValidationError, Se.Language.Ocr.ItemTextCannotBeEmpty, MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
@@ -94,7 +94,7 @@ public partial class BinaryOcrDbEditViewModel : ObservableObject
 
         RefreshCharacters(newText);
 
-        await MessageBox.Show(Window!, "Binary OCR", "Binary OCR character updated.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        await MessageBox.Show(Window!, Se.Language.Ocr.BinaryOCR, Se.Language.Ocr.BinaryOCRCharacterUpdated, MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     [RelayCommand]
@@ -108,8 +108,8 @@ public partial class BinaryOcrDbEditViewModel : ObservableObject
 
         var answer = await MessageBox.Show(
                    Window!,
-                   "Delete \"Binary image compare\" item?",
-                   $"Do you want to delete the current \"Binary image compare\" item?",
+                   Se.Language.Ocr.DeleteBinaryImageCompareItem,
+                   Se.Language.Ocr.DoYouWantToDeleteTheCurrentBinary2,
                    MessageBoxButtons.YesNoCancel,
                    MessageBoxIcon.Question);
 

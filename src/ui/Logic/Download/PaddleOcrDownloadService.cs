@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using Nikse.SubtitleEdit.Logic.Config;
 
 namespace Nikse.SubtitleEdit.Logic.Download;
 
@@ -41,7 +42,7 @@ public class PaddleOcrDownloadService : IPaddleOcrDownloadService
         {
             if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64)
             {
-                throw new PlatformNotSupportedException("PaddleOCR is not available for Linux ARM64.");
+                throw new PlatformNotSupportedException(string.Format(Se.Language.General.DownloadUnavailableForLinuxArm64X, "PaddleOCR"));
             }
 
             url = DownloadLinuxEngineCpuUrl;
@@ -58,7 +59,7 @@ public class PaddleOcrDownloadService : IPaddleOcrDownloadService
         {
             if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64)
             {
-                throw new PlatformNotSupportedException("PaddleOCR is not available for Linux ARM64.");
+                throw new PlatformNotSupportedException(string.Format(Se.Language.General.DownloadUnavailableForLinuxArm64X, "PaddleOCR"));
             }
 
             url = DownloadLinuxEngineGpuUrl;

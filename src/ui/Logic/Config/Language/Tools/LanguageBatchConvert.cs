@@ -1,4 +1,4 @@
-﻿using Nikse.SubtitleEdit.Features.Video.BurnIn;
+using Nikse.SubtitleEdit.Features.Video.BurnIn;
 using System;
 
 namespace Nikse.SubtitleEdit.Logic.Config.Language.Tools;
@@ -10,6 +10,7 @@ public class LanguageBatchConvert
     public string XActionsSelected { get; set; }
     public string OutputFolderSource { get; set; }
     public string OutputFolderX { get; set; }
+    public string OutputFolderNotSet { get; set; }
     public string EncodingXOverwriteY { get; set; }
     public string TargetFormatSettings { get; set; }
     public string FileNameContainsDotDotDot { get; set; }
@@ -42,14 +43,23 @@ public class LanguageBatchConvert
     public string AssaChangeStyleImportedX { get; set; }
     public string AssaChangeStyleTrimUnusedStyles { get; set; }
 
+    public string PleaseSelectOutputFolder { get; set; }
+    public string DownloadPaddleOCR { get; set; }
+    public string XPaddleOCRRequiresDownloadingPaddleOCRX { get; set; }
+
     public LanguageBatchConvert()
     {
+        PleaseSelectOutputFolder = "Please select output folder";
+        DownloadPaddleOCR = "Download Paddle OCR?";
+        XPaddleOCRRequiresDownloadingPaddleOCRX = "{0}\"Paddle OCR\" requires downloading Paddle OCR.{1}{2}Download and use Paddle OCR?";
+
         Title = "Batch convert";
         BatchConvertSettings = "Batch convert settings";
         OneActionsSelected = "One action selected";
         XActionsSelected = "{0} actions selected";
         OutputFolderSource = " Output folder: Source folder";
         OutputFolderX = " Output folder: {0}";
+        OutputFolderNotSet = "The output folder is not set.";
         EncodingXOverwriteY = "Encoding: {0}, overwrite existing files: {1}";
         TargetFormatSettings = "Target format settings";
         FileNameContainsDotDotDot = "File name contains...";

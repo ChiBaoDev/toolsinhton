@@ -345,9 +345,9 @@ public partial class TransparentSubtitlesViewModel : ObservableObject
             Dispatcher.UIThread.Invoke(async () =>
             {
                 await MessageBox.Show(Window!,
-                    "Unable to generate video",
-                    "Output video file not generated: " + jobItem.OutputVideoFileName + Environment.NewLine +
-                    "Parameters: " + _ffmpegProcess.StartInfo.Arguments,
+                    Se.Language.Video.UnableToGenerateVideo,
+                    Se.Language.Video.OutputVideoFileNotGenerated + jobItem.OutputVideoFileName + Environment.NewLine +
+                    Se.Language.Video.Parameters + _ffmpegProcess.StartInfo.Arguments,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
 
@@ -385,7 +385,7 @@ public partial class TransparentSubtitlesViewModel : ObservableObject
                 }
 
                 await MessageBox.Show(Window!,
-                    "Generating done",
+                    Se.Language.Video.GeneratingDone,
                     sb.ToString(),
                     MessageBoxButtons.OK);
             }
@@ -910,8 +910,8 @@ public partial class TransparentSubtitlesViewModel : ObservableObject
         if (IsCutActive && CutFrom >= CutTo)
         {
             await MessageBox.Show(Window!,
-                "Cut settings error",
-                "Cut end time must be after cut start time",
+                Se.Language.Video.CutSettingsError,
+                Se.Language.Video.CutEndTimeMustBeAfterCutStart,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
 
@@ -944,8 +944,8 @@ public partial class TransparentSubtitlesViewModel : ObservableObject
             if (string.IsNullOrWhiteSpace(jobItem.SubtitleFileName))
             {
                 await MessageBox.Show(Window!,
-                    "Missing subtitle",
-                    "Please add a subtitle to all batch items",
+                    Se.Language.Video.MissingSubtitle,
+                    Se.Language.Video.PleaseAddASubtitleToAllBatchItems,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
 

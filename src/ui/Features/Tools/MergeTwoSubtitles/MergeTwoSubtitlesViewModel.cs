@@ -226,7 +226,7 @@ public partial class MergeTwoSubtitlesViewModel : ObservableObject
         var subtitle = LoadSubtitleFile(fileName);
         if (subtitle == null)
         {
-            await MessageBox.Show(Window, Se.Language.General.Error, "Unable to read subtitle: " + fileName);
+            await MessageBox.Show(Window, Se.Language.General.Error, Se.Language.Tools.MergeTwoSubtitles.UnableToReadSubtitle + fileName);
             return;
         }
 
@@ -251,7 +251,7 @@ public partial class MergeTwoSubtitlesViewModel : ObservableObject
         var subtitle = LoadSubtitleFile(fileName);
         if (subtitle == null)
         {
-            await MessageBox.Show(Window, Se.Language.General.Error, "Unable to read subtitle: " + fileName);
+            await MessageBox.Show(Window, Se.Language.General.Error, Se.Language.Tools.MergeTwoSubtitles.UnableToReadSubtitle + fileName);
             return;
         }
 

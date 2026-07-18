@@ -1,4 +1,4 @@
-﻿using Avalonia.Controls;
+using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
@@ -142,8 +142,8 @@ public partial class NOcrCharacterHistoryViewModel : ObservableObject
         var item = NOcrChar;
         var answer = await MessageBox.Show(
             Window!,
-            "Delete nOCR item?",
-            $"Do you want to delete the current nOCR item?",
+            Se.Language.Ocr.DeleteNOCRItem,
+            Se.Language.Ocr.DoYouWantToDeleteTheCurrentNOCR,
             MessageBoxButtons.YesNoCancel,
             MessageBoxIcon.Question);
 

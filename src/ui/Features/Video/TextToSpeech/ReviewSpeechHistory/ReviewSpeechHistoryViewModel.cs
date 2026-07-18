@@ -140,7 +140,7 @@ public partial class ReviewSpeechHistoryViewModel : ObservableObject
                 await MessageBox.Show(
                     Window,
                     Se.Language.General.Error,
-                    "The audio file for this history entry does not exist:" + Environment.NewLine + item.FileName,
+                    Se.Language.Video.TextToSpeech.TheAudioFileForThisHistoryEntryDoes + Environment.NewLine + item.FileName,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }

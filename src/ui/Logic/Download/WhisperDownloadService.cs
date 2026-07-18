@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using Nikse.SubtitleEdit.Logic.Config;
 
 namespace Nikse.SubtitleEdit.Logic.Download;
 
@@ -78,7 +79,7 @@ public class WhisperDownloadService : IWhisperDownloadService
         {
             if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64)
             {
-                throw new PlatformNotSupportedException("Faster-Whisper-XXL is not available for Linux ARM64.");
+                throw new PlatformNotSupportedException(string.Format(Se.Language.General.DownloadUnavailableForLinuxArm64X, "Faster-Whisper-XXL"));
             }
 
             url = DownloadUrlPurfviewFasterWhisperXxlLinux;
@@ -86,7 +87,7 @@ public class WhisperDownloadService : IWhisperDownloadService
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
         {
-            throw new PlatformNotSupportedException("MacOS not supported.");
+            throw new PlatformNotSupportedException(string.Format(Se.Language.General.DownloadNotSupportedOnPlatformX, "Faster-Whisper-XXL"));
         }
 
         await DownloadHelper.DownloadFileAsync(_httpClient, url, destinationFileName, progress, cancellationToken);
@@ -148,7 +149,7 @@ public class WhisperDownloadService : IWhisperDownloadService
         {
             if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64)
             {
-                throw new PlatformNotSupportedException("whisper.cpp Vulkan build is not available for Linux ARM64.");
+                throw new PlatformNotSupportedException(string.Format(Se.Language.General.DownloadUnavailableForLinuxArm64X, "whisper.cpp Vulkan build"));
             }
 
             return LinuxUrl;
@@ -163,7 +164,7 @@ public class WhisperDownloadService : IWhisperDownloadService
                 case Architecture.X64:
                     return MacX64Url;
                 default:
-                    throw new PlatformNotSupportedException("Unsupported macOS architecture.");
+                    throw new PlatformNotSupportedException(Se.Language.General.UnsupportedMacOsArchitecture);
             }
         }
 
@@ -181,7 +182,7 @@ public class WhisperDownloadService : IWhisperDownloadService
         {
             if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64)
             {
-                throw new PlatformNotSupportedException("whisper.cpp CUDA build is not available for Linux ARM64.");
+                throw new PlatformNotSupportedException(string.Format(Se.Language.General.DownloadUnavailableForLinuxArm64X, "whisper.cpp CUDA build"));
             }
 
             return LinuxUrlCuBlass;

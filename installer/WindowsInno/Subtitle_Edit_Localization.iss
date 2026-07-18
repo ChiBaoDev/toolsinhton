@@ -1,4 +1,4 @@
-﻿;* Subtitle Edit - installer localization script 
+﻿;* Subtitle Edit - installer localization script
 
 ; English
 [CustomMessages]
@@ -13,6 +13,7 @@ en.tsk_ResetSettings=Reset Subtitle Edit's settings
 en.tsk_SetFileTypes=Associate common subtitle files with Subtitle Edit
 en.types_custom=Custom installation
 en.types_default=Default installation
+msg_DotNet10Required=Subtitle Edit requires the .NET 10 Runtime, which is not installed on this computer.%n%nPlease download and install the .NET 10 Runtime and run this setup again.%n%nDo you want to open the .NET 10 download page now?
 
 ; Arabic
 [CustomMessages]
@@ -498,17 +499,18 @@ uk.types_default=Типове встановлення
 
 ; Vietnamese
 [CustomMessages]
-vi.sm_com_Changelog=Subtitle Edit's Changelog
-vi.run_ViewChangelog=View Changelog
-vi.msg_DeleteSettings=Do you want to delete your personal settings for Subtitle Edit?
-vi.tsk_AllUsers=For all users
-vi.tsk_CurrentUser=For the current user only
-vi.tsk_Other=Other:
-vi.tsk_ResetDictionaries=Reset Dictionaries and delete any custom names
-vi.tsk_ResetSettings=Reset Subtitle Edit's settings
-vi.tsk_SetFileTypes=Associate common subtitle files with Subtitle Edit
-vi.types_custom=Custom installation
-vi.types_default=Default installation
+vi.sm_com_Changelog=Nhật ký thay đổi của Subtitle Edit
+vi.run_ViewChangelog=Xem nhật ký thay đổi
+vi.msg_DeleteSettings=Bạn có muốn xóa các thiết lập cá nhân của Subtitle Edit không?
+vi.tsk_AllUsers=Dành cho tất cả người dùng
+vi.tsk_CurrentUser=Chỉ dành cho người dùng hiện tại
+vi.tsk_Other=Khác:
+vi.tsk_ResetDictionaries=Đặt lại từ điển và xóa các tên tùy chỉnh
+vi.tsk_ResetSettings=Đặt lại thiết lập của Subtitle Edit
+vi.tsk_SetFileTypes=Liên kết các tệp phụ đề thông dụng với Subtitle Edit
+vi.types_custom=Cài đặt tùy chỉnh
+vi.types_default=Cài đặt mặc định
+vi.msg_DotNet10Required=Subtitle Edit yêu cầu .NET 10 Runtime nhưng máy tính này chưa cài đặt.%n%nHãy tải xuống và cài đặt .NET 10 Runtime, sau đó chạy lại bộ cài.%n%nBạn có muốn mở trang tải .NET 10 ngay bây giờ không?
 
 ; Chinese Simplified
 [CustomMessages]

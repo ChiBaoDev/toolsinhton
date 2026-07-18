@@ -1,4 +1,4 @@
-﻿using Avalonia;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -205,8 +205,8 @@ public partial class BinaryOcrInspectViewModel : ObservableObject
 
         await MessageBox.Show(
             Window!,
-            "Binary OCR",
-            "Binary OCR character saved",
+            Se.Language.Ocr.BinaryOCR,
+            Se.Language.Ocr.BinaryOCRCharacterSaved,
             MessageBoxButtons.OK,
             MessageBoxIcon.Information);
     }
@@ -222,8 +222,8 @@ public partial class BinaryOcrInspectViewModel : ObservableObject
 
         var answer = await MessageBox.Show(
                    Window!,
-                   "Delete Binary OCR item?",
-                   $"Do you want to delete the current Binary OCR item?",
+                   Se.Language.Ocr.DeleteBinaryOCRItem,
+                   Se.Language.Ocr.DoYouWantToDeleteTheCurrentBinary,
                    MessageBoxButtons.YesNoCancel,
                    MessageBoxIcon.Question);
 

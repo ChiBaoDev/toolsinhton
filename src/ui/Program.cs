@@ -1,4 +1,4 @@
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Automation;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -78,10 +78,6 @@ namespace Nikse.SubtitleEdit
                 Nikse.SubtitleEdit.Features.SpellCheck.SpellCheckConfig.UseWordSplitList = () => Se.Settings.Ocr.UseWordSplitList;
                 Nikse.SubtitleEdit.Features.SpellCheck.SpellCheckConfig.TreatInApostropheAsIng = () => Se.Settings.Tools.SpellCheckEnglishTreatInApostropheAsIng;
                 Nikse.SubtitleEdit.Features.SpellCheck.SpellCheckConfig.LogError = msg => Se.LogError(msg);
-
-                // Load the UI translation before any window or the macOS native menu bar is built,
-                // so the menu bar isn't constructed with the default English strings (issue #11505).
-                Se.LoadLanguage();
 
                 // Build and configure the app
                 var appBuilder = AppBuilder.Configure<Application>()
@@ -164,7 +160,12 @@ namespace Nikse.SubtitleEdit
                             AvaloniaNativeRenderingMode.Software
                         ]
                     })
-                    .AfterSetup(b => ConfigureApplication(b, lifetime))
+                    .AfterSetup(b =>
+                    {
+                        // AssetLoader is available now; activate the startup language before any UI is constructed.
+                        Se.LoadStartupLanguage(new Logic.Config.Language.LanguageCandidateLoader());
+                        ConfigureApplication(b, lifetime);
+                    })
                     .SetupWithLifetime(lifetime);
 
                 // Configure dependency injection

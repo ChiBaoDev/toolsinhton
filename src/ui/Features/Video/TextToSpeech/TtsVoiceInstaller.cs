@@ -7,6 +7,7 @@ using Nikse.SubtitleEdit.Features.Video.TextToSpeech.DownloadTts;
 using Nikse.SubtitleEdit.Features.Video.TextToSpeech.Engines;
 using Nikse.SubtitleEdit.Features.Video.TextToSpeech.Voices;
 using Nikse.SubtitleEdit.Logic;
+using Nikse.SubtitleEdit.Logic.Config;
 using Nikse.SubtitleEdit.Logic.Download;
 using System;
 using System.IO;
@@ -184,10 +185,10 @@ public static class TtsVoiceInstaller
 
             var answer = await MessageBox.Show(
                 window,
-                isCapable ? "Update CrispASR" : "CrispASR update required",
+                isCapable ? Se.Language.Video.TextToSpeech.UpdateCrispASR : Se.Language.Video.TextToSpeech.CrispASRUpdateRequired,
                 isCapable
-                    ? $"{Environment.NewLine}A newer CrispASR runtime is available. Re-download it now?"
-                    : $"{Environment.NewLine}\"{engineDisplayName}\"{versionRequirement}. Re-download now?",
+                    ? string.Format(Se.Language.Video.TextToSpeech.XANewerCrispASRRuntimeIsAvailableRe, Environment.NewLine)
+                    : string.Format(Se.Language.Video.TextToSpeech.XXXReDownloadNow, Environment.NewLine, engineDisplayName, versionRequirement),
                 MessageBoxButtons.YesNoCancel,
                 MessageBoxIcon.Question);
 
@@ -200,8 +201,8 @@ public static class TtsVoiceInstaller
         {
             var variantAnswer = await MessageBox.Show(
                 window,
-                "Download CrispASR?",
-                $"{Environment.NewLine}\"{engineDisplayName}\" runs through the CrispASR runtime. Select a build to download:",
+                Se.Language.Video.TextToSpeech.DownloadCrispASR,
+                string.Format(Se.Language.Video.TextToSpeech.XXRunsThroughTheCrispASRRuntimeSelect, Environment.NewLine, engineDisplayName),
                 MessageBoxButtons.Cancel,
                 MessageBoxIcon.Question,
                 "CPU",
@@ -234,8 +235,8 @@ public static class TtsVoiceInstaller
             {
                 var vulkanAnswer = await MessageBox.Show(
                     window,
-                    "Vulkan SDK may be required",
-                    $"The Vulkan version requires the Vulkan SDK to be installed.{Environment.NewLine}{Environment.NewLine}You can download it from:{Environment.NewLine}https://vulkan.lunarg.com/sdk/home{Environment.NewLine}{Environment.NewLine}Continue with Vulkan download?",
+                    Se.Language.Video.TextToSpeech.VulkanSDKMayBeRequired,
+                    string.Format(Se.Language.Video.TextToSpeech.TheVulkanVersionRequiresTheVulkanSDKTo, Environment.NewLine, Environment.NewLine, Environment.NewLine, Environment.NewLine, Environment.NewLine),
                     MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Question);
 
@@ -255,8 +256,8 @@ public static class TtsVoiceInstaller
         {
             var answer = await MessageBox.Show(
                 window,
-                "Download CrispASR?",
-                $"{Environment.NewLine}\"{engineDisplayName}\" runs through the CrispASR runtime. Download and install now?",
+                Se.Language.Video.TextToSpeech.DownloadCrispASR,
+                string.Format(Se.Language.Video.TextToSpeech.XXRunsThroughTheCrispASRRuntimeDownload, Environment.NewLine, engineDisplayName),
                 MessageBoxButtons.YesNoCancel,
                 MessageBoxIcon.Question);
 
@@ -294,8 +295,8 @@ public static class TtsVoiceInstaller
     {
         var cpuAnswer = await MessageBox.Show(
             window,
-            "CrispASR CPU build",
-            $"{Environment.NewLine}Standard is recommended for most machines.{Environment.NewLine}{Environment.NewLine}Legacy is a fallback for older CPUs without AVX2 support.",
+            Se.Language.Video.TextToSpeech.CrispASRCPUBuild,
+            string.Format(Se.Language.Video.TextToSpeech.XStandardIsRecommendedForMostMachinesX, Environment.NewLine, Environment.NewLine, Environment.NewLine),
             MessageBoxButtons.Cancel,
             MessageBoxIcon.Question,
             "Standard",

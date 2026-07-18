@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using Nikse.SubtitleEdit.Logic.Config;
 
 namespace Nikse.SubtitleEdit.Logic.Download;
 
@@ -47,6 +48,6 @@ public class LibVlcDownloadService(HttpClient httpClient) : ILibVlcDownloadServi
             }
         }
 
-        throw new PlatformNotSupportedException("LibVLC download is not supported on this platform");
+        throw new PlatformNotSupportedException(string.Format(Se.Language.General.DownloadNotSupportedOnPlatformX, "LibVLC"));
     }
 }

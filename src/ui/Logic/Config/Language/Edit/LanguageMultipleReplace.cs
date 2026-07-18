@@ -17,6 +17,9 @@ public class LanguageMultipleReplace
     public string DeleteRuleConfirm { get; set; }
     public string FindWhat { get; set; }
     public string DescriptionOptional { get; set; }
+    public string NoRuleCategoriesSelectedForExport { get; set; }
+    public string UnableToImportReplaceRules { get; set; }
+    public string NoReplaceRulesFoundInFile { get; set; }
 
     public LanguageMultipleReplace()
     {
@@ -34,5 +37,8 @@ public class LanguageMultipleReplace
         DeleteRuleConfirm = "Delete rule '{0}'?";
         FindWhat = "Find what";
         DescriptionOptional = "Description (optional)";
+        NoRuleCategoriesSelectedForExport = "No rule categories selected for export";
+        UnableToImportReplaceRules = "Unable to import replace rules: ";
+        NoReplaceRulesFoundInFile = "No replace rules found in file";
     }
 }

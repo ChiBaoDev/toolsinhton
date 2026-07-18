@@ -121,7 +121,7 @@ public static class Unpacker
             if (process.ExitCode != 0)
             {
                 var error = process.StandardError.ReadToEnd();
-                throw new Exception($"7zz extraction failed with exit code {process.ExitCode}: {error}");
+                throw new Exception(string.Format(Se.Language.General.ArchiveExtractionFailedXXX, "7zz", process.ExitCode, error));
             }
 
             // If we need to skip folder levels, move files from temp to final destination
@@ -160,7 +160,7 @@ public static class Unpacker
 
         if (!File.Exists(sevenZipPath))
         {
-            throw new FileNotFoundException($"7-zip executable not found at {sevenZipPath}");
+            throw new FileNotFoundException(string.Format(Se.Language.General.ArchiveExecutableNotFoundXX, "7-zip", sevenZipPath));
         }
 
         // Make sure 7zr is executable on Linux
@@ -225,7 +225,7 @@ public static class Unpacker
             if (process.ExitCode != 0)
             {
                 var error = process.StandardError.ReadToEnd();
-                throw new Exception($"7zip extraction failed with exit code {process.ExitCode}: {error}");
+                throw new Exception(string.Format(Se.Language.General.ArchiveExtractionFailedXXX, "7zip", process.ExitCode, error));
             }
 
             // If we need to skip folder levels, move files from temp to final destination

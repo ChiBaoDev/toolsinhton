@@ -563,7 +563,7 @@ public partial class MultipleReplaceViewModel : ObservableObject
             await MessageBox.Show(
                 Window!,
                 Se.Language.General.Error,
-                "Unable to import replace rules: " + exception.Message,
+                Se.Language.Edit.MultipleReplace.UnableToImportReplaceRules + exception.Message,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
 
@@ -575,7 +575,7 @@ public partial class MultipleReplaceViewModel : ObservableObject
             await MessageBox.Show(
                 Window!,
                 Se.Language.General.Error,
-                "No replace rules found in file",
+                Se.Language.Edit.MultipleReplace.NoReplaceRulesFoundInFile,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
             return;

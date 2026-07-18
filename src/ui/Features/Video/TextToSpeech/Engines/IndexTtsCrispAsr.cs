@@ -540,7 +540,7 @@ public class IndexTtsCrispAsr : ITtsEngine
             if (!File.Exists(exe))
             {
                 throw new FileNotFoundException(
-                    "CrispASR executable not found. Install CrispASR via Video → Audio to text first.", exe);
+                    Se.Language.Video.TextToSpeech.CrispAsrExecutableNotFound, exe);
             }
 
             // Talker + codec GGUFs: use locally staged copies when present; otherwise fall back

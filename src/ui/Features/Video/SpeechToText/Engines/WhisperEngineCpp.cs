@@ -139,12 +139,12 @@ public class WhisperEngineCpp : ISpeechToTextEngine
     {
         if (!File.Exists(sourcePath))
         {
-            throw new FileNotFoundException("Model file not found.", sourcePath);
+            throw new FileNotFoundException(Se.Language.Video.AudioToText.ModelFileNotFound, sourcePath);
         }
 
         if (!sourcePath.EndsWith(".bin", StringComparison.OrdinalIgnoreCase))
         {
-            throw new Exception("A whisper.cpp model must be a ggml '.bin' file.");
+            throw new Exception(Se.Language.Video.AudioToText.WhisperCppModelMustBeGgmlBin);
         }
 
         if (new FileInfo(sourcePath).Length < 10_000_000)

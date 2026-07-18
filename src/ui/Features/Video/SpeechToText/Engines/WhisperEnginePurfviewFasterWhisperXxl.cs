@@ -154,13 +154,13 @@ public class WhisperEnginePurfviewFasterWhisperXxl : ISpeechToTextEngine
     {
         if (!Directory.Exists(sourceDir))
         {
-            throw new DirectoryNotFoundException("Model folder not found: " + sourceDir);
+            throw new DirectoryNotFoundException(string.Format(Se.Language.Video.AudioToText.ModelFolderNotFoundX, sourceDir));
         }
 
         var modelBin = Path.Combine(sourceDir, "model.bin");
         if (!File.Exists(modelBin))
         {
-            throw new Exception("A faster-whisper model folder must contain a 'model.bin' file.");
+            throw new Exception(Se.Language.Video.AudioToText.FasterWhisperModelFolderMustContainModelBin);
         }
 
         if (new FileInfo(modelBin).Length < 10_000_000)

@@ -21,7 +21,7 @@ public class IndexTtsCrispAsrSettingsWindow : Window
     public IndexTtsCrispAsrSettingsWindow(IndexTtsCrispAsrSettingsViewModel vm)
     {
         UiUtil.InitializeWindow(this, GetType().Name);
-        Title = "IndexTTS (CrispASR) settings";
+        Title = Se.Language.Video.TextToSpeech.IndexTtsCrispAsrSettings;
         SizeToContent = SizeToContent.WidthAndHeight;
         CanResize = false;
         MinWidth = 580;

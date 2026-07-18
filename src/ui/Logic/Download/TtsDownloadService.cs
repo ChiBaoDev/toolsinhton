@@ -161,12 +161,12 @@ public class TtsDownloadService : ITtsDownloadService
         catch (HttpRequestException ex)
         {
             SeLogger.Error(ex, "AllTalk TTS server connection failed.");
-            throw new HttpRequestException("AllTalk TTS server is not reachable. Please check that the server is running.", ex);
+            throw new HttpRequestException(Se.Language.Video.TextToSpeech.AllTalkServerNotReachable, ex);
         }
         catch (TaskCanceledException ex) when (!cancellationToken.IsCancellationRequested)
         {
             SeLogger.Error(ex, "AllTalk TTS server request timed out.");
-            throw new HttpRequestException("AllTalk TTS server request timed out. Please check that the server is running.", ex);
+            throw new HttpRequestException(Se.Language.Video.TextToSpeech.AllTalkRequestTimedOut, ex);
         }
 
         using (result)
@@ -265,7 +265,7 @@ public class TtsDownloadService : ITtsDownloadService
         var region = Se.Settings.Video.TextToSpeech.AzureRegion;
         if (string.IsNullOrWhiteSpace(region))
         {
-            throw new InvalidOperationException("Azure region is not set - enter it in the TTS engine settings before refreshing voices.");
+            throw new InvalidOperationException(Se.Language.Video.TextToSpeech.AzureRegionRequiredForVoiceRefresh);
         }
 
         var url = $"https://{region.Trim()}.tts.speech.microsoft.com/cognitiveservices/voices/list";

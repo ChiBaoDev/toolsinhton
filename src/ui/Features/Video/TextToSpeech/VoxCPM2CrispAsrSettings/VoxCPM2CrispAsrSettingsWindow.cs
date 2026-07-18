@@ -21,7 +21,7 @@ public class VoxCPM2CrispAsrSettingsWindow : Window
     public VoxCPM2CrispAsrSettingsWindow(VoxCPM2CrispAsrSettingsViewModel vm)
     {
         UiUtil.InitializeWindow(this, GetType().Name);
-        Title = "VoxCPM2 (CrispASR) settings";
+        Title = Se.Language.Video.TextToSpeech.VoxCpm2CrispAsrSettings;
         SizeToContent = SizeToContent.WidthAndHeight;
         CanResize = false;
         MinWidth = 580;

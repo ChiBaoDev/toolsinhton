@@ -1,10 +1,11 @@
-﻿using Avalonia.Controls;
+using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Nikse.SubtitleEdit.Features.Shared;
 using Nikse.SubtitleEdit.Logic;
+using Nikse.SubtitleEdit.Logic.Config;
 using Nikse.SubtitleEdit.UiLogic.Ocr;
 using System.IO;
 using System.Threading.Tasks;
@@ -54,8 +55,8 @@ public partial class NOcrSettingsViewModel : ObservableObject
         var totalItemsCount = _nOcrDb.TotalCharacterCount;
         var answer = await MessageBox.Show(
            Window!,
-           "Delete nOCR database?",
-           string.Format("Do you want to delete the current nOCR database \"{0}\" with {1:#,###,##0} items?", name, totalItemsCount),   
+           Se.Language.Ocr.DeleteNOCRDatabase,
+           string.Format(Se.Language.Ocr.DoYouWantToDeleteTheCurrentNOCR2, name, totalItemsCount),
            MessageBoxButtons.YesNoCancel,
            MessageBoxIcon.Question);
 

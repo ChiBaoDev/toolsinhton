@@ -461,7 +461,7 @@ public partial class VideoOcrViewModel : ObservableObject
             await ExtractSingleFrame(frameFileName, PreviewPositionSeconds, cancellationToken);
             if (!File.Exists(frameFileName) || new FileInfo(frameFileName).Length == 0)
             {
-                throw new Exception("Could not extract the current frame - see log for the ffmpeg command line.");
+                throw new Exception(Se.Language.Video.VideoOcr.CurrentFrameExtractionFailed);
             }
 
             var group = new VideoOcrFrameGroup { RepresentativeFileName = frameFileName };
@@ -583,7 +583,7 @@ public partial class VideoOcrViewModel : ObservableObject
             var frameFileNames = Directory.GetFiles(framesFolder, "*.jpg").OrderBy(p => p, StringComparer.Ordinal).ToList();
             if (frameFileNames.Count == 0)
             {
-                throw new Exception("No frames were extracted from the video - see log for the ffmpeg command line.");
+                throw new Exception(Se.Language.Video.VideoOcr.NoFramesExtracted);
             }
 
             var lastAnalyzeUpdate = 0L;
@@ -852,7 +852,7 @@ public partial class VideoOcrViewModel : ObservableObject
             await paddleOcr.OcrBatch(engineType, batch, language, mode, progress, cancellationToken);
             if (!string.IsNullOrEmpty(paddleOcr.Error) && ocrGroups.All(p => string.IsNullOrEmpty(p.Text)))
             {
-                throw new Exception("Paddle OCR failed: " + paddleOcr.Error);
+                throw new Exception(string.Format(Se.Language.Video.VideoOcr.PaddleOcrFailedX, paddleOcr.Error));
             }
         }
         else if (engineType == OcrEngineType.Ollama)
@@ -932,7 +932,7 @@ public partial class VideoOcrViewModel : ObservableObject
             await MessageBox.Show(
                 Window!,
                 Se.Language.General.Error,
-                "An API key is required for the GLM API engine.",
+                Se.Language.Video.AnAPIKeyIsRequiredForTheGLM,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
             return false;

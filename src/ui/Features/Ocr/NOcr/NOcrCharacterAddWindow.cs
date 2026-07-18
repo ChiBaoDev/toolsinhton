@@ -224,7 +224,7 @@ public class NOcrCharacterAddWindow : Window
         };
 
         var comboBoxAlgorithm = UiUtil.MakeComboBox(vm.LineAlgorithms, vm, nameof(vm.SelectedLineAlgorithm));
-        ToolTip.SetTip(comboBoxAlgorithm, "Algorithm used by Auto-draw to generate foreground/background lines");
+        ToolTip.SetTip(comboBoxAlgorithm, Se.Language.Ocr.AutoDrawAlgorithmTooltip);
 
         var buttonClear = new SplitButton
         {
@@ -255,7 +255,7 @@ public class NOcrCharacterAddWindow : Window
             {
                 UiUtil.MakeLabel(Se.Language.Ocr.LinesToDraw).WithBold(),
                 panelLinesToDraw,
-                UiUtil.MakeLabel("Algorithm").WithMarginTop(5),
+                UiUtil.MakeLabel(Se.Language.Ocr.Algorithm).WithMarginTop(5),
                 comboBoxAlgorithm,
                 UiUtil.MakeLabel(string.Empty).WithBindText(vm, nameof(vm.LinesGeneratedInfo)).WithMarginTop(5).WithFontSize(9),
                 UiUtil.MakeButton(Se.Language.Ocr.AutoDrawAgain, vm.DrawAgainCommand).WithMinWidth(100).WithMarginTop(10).WithLeftAlignment().WithMarginLeft(0),

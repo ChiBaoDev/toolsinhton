@@ -21,7 +21,7 @@ public class Qwen3TtsCrispAsrSettingsWindow : Window
     public Qwen3TtsCrispAsrSettingsWindow(Qwen3TtsCrispAsrSettingsViewModel vm)
     {
         UiUtil.InitializeWindow(this, GetType().Name);
-        Title = "Qwen3 TTS (CrispASR) settings";
+        Title = Se.Language.Video.TextToSpeech.Qwen3TtsCrispAsrSettings;
         SizeToContent = SizeToContent.WidthAndHeight;
         CanResize = false;
         MinWidth = 580;

@@ -1,3 +1,4 @@
+using Nikse.SubtitleEdit.Logic.Config;
 using System;
 using System.Diagnostics;
 using System.Threading;
@@ -58,8 +59,11 @@ public static class ProcessExtensions
                 throw; // user cancel - propagate as cancellation, not as a timeout
             }
 
-            throw new TimeoutException(
-                $"\"{process.StartInfo.FileName} {process.StartInfo.Arguments}\" did not finish within {timeout.TotalSeconds:0} seconds and was killed.");
+            throw new TimeoutException(string.Format(
+                Se.Language.Video.TextToSpeech.ProcessTimedOutXXX,
+                process.StartInfo.FileName,
+                process.StartInfo.Arguments,
+                timeout.TotalSeconds.ToString("0")));
         }
     }
 

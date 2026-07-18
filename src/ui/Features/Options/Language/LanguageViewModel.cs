@@ -1,4 +1,4 @@
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -30,7 +30,6 @@ public partial class LanguageViewModel : ObservableObject
             return;
         }
 
-        Se.Settings.General.Language = SelectedLanguage.Name;
         OkPressed = true;
         Window?.Close();
     }

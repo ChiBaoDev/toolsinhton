@@ -232,7 +232,15 @@ public class Se
         SaveSettings(settingsFileName);
     }
 
-    public static void SaveSettings(string settingsFileName)
+    public static void SaveSettings(string settingsFileName) => SaveSettings(settingsFileName, Settings);
+
+    internal static void SaveSettings(string settingsFileName, Se settings)
+    {
+        SaveSettingsCandidate(settingsFileName, settings);
+        UpdateLibSeSettings();
+    }
+
+    internal static void SaveSettingsCandidate(string settingsFileName, Se settings)
     {
         var directory = Path.GetDirectoryName(settingsFileName);
         if (!string.IsNullOrEmpty(directory))
@@ -240,28 +248,34 @@ public class Se
             Directory.CreateDirectory(directory);
         }
 
+        var tempFileName = Path.Combine(
+            directory ?? string.Empty,
+            $".{Path.GetFileName(settingsFileName)}.{Guid.NewGuid():N}.tmp");
         try
         {
-            // Atomic write: serialize directly to a temp file (UTF-8, no string round-trip)
-            // and replace, so a process kill mid-write can't leave a truncated settings file.
-            var tempFileName = settingsFileName + ".tmp";
             using (var stream = System.IO.File.Create(tempFileName))
             {
-                JsonSerializer.Serialize(stream, Settings, SeJsonContext.Default.Se);
+                JsonSerializer.Serialize(stream, settings, SeJsonContext.Default.Se);
             }
 
             System.IO.File.Move(tempFileName, settingsFileName, overwrite: true);
         }
         catch (Exception exception)
         {
-            // Log with context (e.g. no write access to the data folder) and rethrow so callers
-            // that can show UI - like the settings dialog - can tell the user the save failed
-            // instead of it disappearing silently (#12180).
             Se.LogError(exception, $"Failed to save settings to '{settingsFileName}'");
             throw;
         }
-
-        UpdateLibSeSettings();
+        finally
+        {
+            try
+            {
+                System.IO.File.Delete(tempFileName);
+            }
+            catch (Exception exception)
+            {
+                Se.LogError(exception, $"Failed to delete temporary settings file '{tempFileName}'");
+            }
+        }
     }
 
     public static void LoadSettings()
@@ -277,6 +291,7 @@ public class Se
 
     public static void LoadSettings(string settingsFileName)
     {
+        var hasExplicitLanguage = TryReadExplicitLanguage(settingsFileName, out var explicitLanguage);
         if (!System.IO.File.Exists(settingsFileName))
         {
             MigrateMacOsFontSettings(Settings.Appearance, OperatingSystem.IsMacOS(), false);
@@ -297,6 +312,14 @@ public class Se
         }
 
         SetDefaultValues();
+        if (!hasExplicitLanguage)
+        {
+            Settings.General.Language = "English";
+        }
+        else
+        {
+            Settings.General.Language = explicitLanguage!;
+        }
 
         MigrateMacOsFontSettings(Settings.Appearance, OperatingSystem.IsMacOS(), true);
 
@@ -319,44 +342,49 @@ public class Se
         appearance.MacOsFontMigrationVersion = CurrentMacOsFontMigrationVersion;
     }
 
-    /// <summary>
-    /// Loads the UI translation named in <see cref="Settings"/>.General.Language into the global
-    /// <see cref="Language"/>. Must run before the main window is built: on macOS the native menu
-    /// bar is constructed at startup and reads <see cref="Language"/> directly, so the translation
-    /// has to be in place by then or the menu bar renders in English (issue #11505). English — or a
-    /// missing/unreadable translation file — leaves the built-in English defaults untouched.
-    /// </summary>
-    public static void LoadLanguage()
+    internal static void LoadStartupLanguage(ILanguageCandidateLoader loader)
     {
-        Settings.General.Language ??= "English";
-        if (Settings.General.Language == "English")
+        var selected = Settings.General.Language ?? "English";
+        var result = loader.TryLoad(selected);
+        if (result.Success && result.Language != null)
         {
+            Language = result.Language;
             return;
         }
+        if (!string.Equals(selected, "English", StringComparison.OrdinalIgnoreCase))
+            LogError($"Unable to load UI language '{selected}': {result.Diagnostic}");
+        Settings.General.Language = "English";
+        Language = new SeLanguage();
+    }
 
+    public static void LoadLanguage() => LoadStartupLanguage(new LanguageCandidateLoader());
+
+    private static bool TryReadExplicitLanguage(string settingsFileName, out string? language)
+    {
+        language = null;
+        if (!System.IO.File.Exists(settingsFileName)) return false;
         try
         {
-            var jsonFileName = Path.Combine(TranslationFolder, Settings.General.Language + ".json");
-            if (!System.IO.File.Exists(jsonFileName))
-            {
-                return;
-            }
-
-            var json = System.IO.File.ReadAllText(jsonFileName, Encoding.UTF8);
-            var language = JsonSerializer.Deserialize<SeLanguage>(json, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-            });
-            if (language != null)
-            {
-                Language = language;
-            }
+            using var stream = System.IO.File.OpenRead(settingsFileName);
+            using var document = JsonDocument.Parse(stream, new JsonDocumentOptions { AllowTrailingCommas = true, CommentHandling = JsonCommentHandling.Skip });
+            if (!TryGetProperty(document.RootElement, "general", out var general) || !TryGetProperty(general, "language", out var value) || value.ValueKind != JsonValueKind.String) return false;
+            language = value.GetString(); return !string.IsNullOrWhiteSpace(language);
         }
-        catch (Exception exception)
-        {
-            Se.LogError(exception, "Failed to load UI language");
-        }
+        catch { return false; }
     }
+
+    private static bool TryGetProperty(JsonElement element, string name, out JsonElement value)
+    {
+        if (element.ValueKind == JsonValueKind.Object) foreach (var property in element.EnumerateObject()) if (string.Equals(property.Name, name, StringComparison.OrdinalIgnoreCase)) { value=property.Value; return true; }
+        value=default; return false;
+    }
+
+    internal static Se CloneSettings(Se settings)
+    {
+        using var stream = new MemoryStream(); JsonSerializer.Serialize(stream, settings, SeJsonContext.Default.Se); stream.Position=0; return JsonSerializer.Deserialize(stream, SeJsonContext.Default.Se)!;
+    }
+
+    internal static void UpdateLibSeSettingsAfterExternalCommit() => UpdateLibSeSettings();
 
     private static void SetDefaultValues()
     {

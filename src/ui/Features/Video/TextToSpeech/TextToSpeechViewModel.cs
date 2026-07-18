@@ -1161,8 +1161,8 @@ public partial class TextToSpeechViewModel : ObservableObject
                 await MessageBox.Show(
                     Window,
                     Se.Language.General.Error,
-                    "Text to speech failed: " + ex.Message + Environment.NewLine + Environment.NewLine +
-                    "See error-log.txt in the Subtitle Edit data folder for details.",
+                    Se.Language.Video.TextToSpeech.TextToSpeechFailed + ex.Message + Environment.NewLine + Environment.NewLine +
+                    Se.Language.Video.TextToSpeech.SeeErrorLogTxtInTheSubtitleEdit,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -1443,7 +1443,7 @@ public partial class TextToSpeechViewModel : ObservableObject
                         : result.ErrorMessage;
                     await MessageBox.Show(
                         Window,
-                        "Test voice error",
+                        Se.Language.Video.TextToSpeech.TestVoiceError,
                         detail,
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
@@ -1469,7 +1469,7 @@ public partial class TextToSpeechViewModel : ObservableObject
             {
                 await MessageBox.Show(
                     Window,
-                    "Test voice error",
+                    Se.Language.Video.TextToSpeech.TestVoiceError,
                     ex.Message,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -1520,7 +1520,7 @@ public partial class TextToSpeechViewModel : ObservableObject
                 await MessageBox.Show(
                     Window,
                     Se.Language.General.Error,
-                    $"Refreshing voices failed: {ex.Message}",
+                    string.Format(Se.Language.Video.TextToSpeech.RefreshingVoicesFailedX, ex.Message),
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -1580,8 +1580,8 @@ public partial class TextToSpeechViewModel : ObservableObject
         {
             var answer = await MessageBox.Show(
                 Window,
-                "Text to speech",
-                "Nothing to import",
+                Se.Language.Video.TextToSpeech.TextToSpeech,
+                Se.Language.Video.TextToSpeech.NothingToImport,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
 
@@ -1671,7 +1671,7 @@ public partial class TextToSpeechViewModel : ObservableObject
             await MessageBox.Show(
                 Window,
                 Se.Language.General.Error,
-                "No usable TTS engines are available - check the engine settings and try again.",
+                Se.Language.Video.TextToSpeech.NoUsableTTSEnginesAreAvailableCheckThe,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
             return;
@@ -1746,8 +1746,8 @@ public partial class TextToSpeechViewModel : ObservableObject
                 await MessageBox.Show(
                     Window,
                     Se.Language.General.Error,
-                    "Merging the audio segments failed: " + ex.Message + Environment.NewLine + Environment.NewLine +
-                    "See error-log.txt in the Subtitle Edit data folder for details.",
+                    Se.Language.Video.TextToSpeech.MergingTheAudioSegmentsFailed + ex.Message + Environment.NewLine + Environment.NewLine +
+                    Se.Language.Video.TextToSpeech.SeeErrorLogTxtInTheSubtitleEdit,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -2045,8 +2045,8 @@ public partial class TextToSpeechViewModel : ObservableObject
                 await MessageBox.Show(
                     Window,
                     Se.Language.General.Error,
-                    "Adding the audio track to the video failed - the audio file was still saved." + Environment.NewLine + Environment.NewLine +
-                    "See error-log.txt in the Subtitle Edit data folder for details.",
+                    Se.Language.Video.TextToSpeech.AddingTheAudioTrackToTheVideoFailed + Environment.NewLine + Environment.NewLine +
+                    Se.Language.Video.TextToSpeech.SeeErrorLogTxtInTheSubtitleEdit,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -2118,8 +2118,8 @@ public partial class TextToSpeechViewModel : ObservableObject
                             await MessageBox.Show(
                                 Window,
                                 Se.Language.General.Error,
-                                $"Merging audio failed at segment {index + 1}." + Environment.NewLine + Environment.NewLine +
-                                "See error-log.txt in the Subtitle Edit data folder for details.",
+                                string.Format(Se.Language.Video.TextToSpeech.MergingAudioFailedAtSegmentX, index + 1) + Environment.NewLine + Environment.NewLine +
+                                Se.Language.Video.TextToSpeech.SeeErrorLogTxtInTheSubtitleEdit,
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
                         }
@@ -2368,7 +2368,7 @@ public partial class TextToSpeechViewModel : ObservableObject
                     await MessageBox.Show(
                         Window,
                         Se.Language.General.Error,
-                        "TTS server error: " + ex.Message,
+                        Se.Language.Video.TextToSpeech.TTSServerError + ex.Message,
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
@@ -2769,8 +2769,8 @@ public partial class TextToSpeechViewModel : ObservableObject
                     await MessageBox.Show(
                         Window,
                         Se.Language.General.Error,
-                        "Adjusting audio speed failed: " + ex.Message + Environment.NewLine + Environment.NewLine +
-                        "See error-log.txt in the Subtitle Edit data folder for details.",
+                        Se.Language.Video.TextToSpeech.AdjustingAudioSpeedFailed + ex.Message + Environment.NewLine + Environment.NewLine +
+                        Se.Language.Video.TextToSpeech.SeeErrorLogTxtInTheSubtitleEdit,
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
@@ -2864,8 +2864,8 @@ public partial class TextToSpeechViewModel : ObservableObject
                     await MessageBox.Show(
                         Window,
                         Se.Language.General.Error,
-                        "Audio post-processing failed: " + ex.Message + Environment.NewLine + Environment.NewLine +
-                        "See error-log.txt in the Subtitle Edit data folder for details.",
+                        Se.Language.Video.TextToSpeech.AudioPostProcessingFailed + ex.Message + Environment.NewLine + Environment.NewLine +
+                        Se.Language.Video.TextToSpeech.SeeErrorLogTxtInTheSubtitleEdit,
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }

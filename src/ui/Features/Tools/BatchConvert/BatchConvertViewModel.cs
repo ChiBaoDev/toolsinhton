@@ -976,8 +976,8 @@ public partial class BatchConvertViewModel : ObservableObject
         {
             var answer = await MessageBox.Show(
                 Window,
-                "Download Paddle OCR?",
-                $"{Environment.NewLine}\"Paddle OCR\" requires downloading Paddle OCR.{Environment.NewLine}{Environment.NewLine}Download and use Paddle OCR?",
+                Se.Language.Tools.BatchConvert.DownloadPaddleOCR,
+                string.Format(Se.Language.Tools.BatchConvert.XPaddleOCRRequiresDownloadingPaddleOCRX, Environment.NewLine, Environment.NewLine, Environment.NewLine),
                 MessageBoxButtons.Cancel,
                 MessageBoxIcon.Question,
                 "CPU",
@@ -1018,8 +1018,8 @@ public partial class BatchConvertViewModel : ObservableObject
         {
             var answer = await MessageBox.Show(
                 Window,
-                "Download Paddle OCR?",
-                $"{Environment.NewLine}\"Paddle OCR\" requires downloading Paddle OCR.{Environment.NewLine}{Environment.NewLine}Download and use Paddle OCR?",
+                Se.Language.Tools.BatchConvert.DownloadPaddleOCR,
+                string.Format(Se.Language.Tools.BatchConvert.XPaddleOCRRequiresDownloadingPaddleOCRX, Environment.NewLine, Environment.NewLine, Environment.NewLine),
                 MessageBoxButtons.Cancel,
                 MessageBoxIcon.Question,
                 "CPU",

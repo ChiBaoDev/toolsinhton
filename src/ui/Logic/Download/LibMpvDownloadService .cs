@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using Nikse.SubtitleEdit.Logic.Config;
 
 namespace Nikse.SubtitleEdit.Logic.Download;
 
@@ -33,7 +34,7 @@ public class LibMpvDownloadService : ILibMpvDownloadService
             return WindowsUrl;
         }
 
-        throw new PlatformNotSupportedException("Unsupported platform for libmpv download." + Environment.NewLine +
+        throw new PlatformNotSupportedException(string.Format(Se.Language.General.DownloadNotSupportedOnPlatformX, "libmpv") + Environment.NewLine +
             RuntimeInformation.OSDescription);
 
         //if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))

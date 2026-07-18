@@ -48,7 +48,7 @@ public partial class CategoryExportViewModel : ObservableObject
             await MessageBox.Show(
                 Window!,
                 Se.Language.General.Error,
-                $"No rule categories selected for export",
+                Se.Language.Edit.MultipleReplace.NoRuleCategoriesSelectedForExport,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
 

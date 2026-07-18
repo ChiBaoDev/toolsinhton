@@ -97,9 +97,9 @@ public partial class DownloadLibMpvViewModel : ObservableObject
                         {
                             _ = await MessageBox.Show(
                                 Window!,
-                                "Error",
-                                "Download complete, but could not delete existing file." + Environment.NewLine +
-                                "Please restart SE to use the new libmpv.",
+                                Se.Language.General.Error,
+                                Se.Language.Main.DownloadCompleteCouldNotDeleteExistingFile + Environment.NewLine +
+                                Se.Language.Main.RestartSeToUseNewLibMpv,
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
                             return;

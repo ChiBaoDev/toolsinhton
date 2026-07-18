@@ -45,6 +45,19 @@ public class LanguageImageBasedEdit
     public string XInTopBar { get; set; }
     public string XInBottomBar { get; set; }
     public string NoImageSubtitlesLoaded { get; set; }
+    public string FormatNotFoundOrSupported { get; set; }
+    public string EncryptedVobSubNotSupported { get; set; }
+    public string NoSubtitlesToResize { get; set; }
+    public string NoSubtitlesToAdjust { get; set; }
+    public string UnableToLoadImageFile { get; set; }
+    public string FailedToImportImage { get; set; }
+    public string NoSubtitleSelected { get; set; }
+    public string SelectExactlyOneSubtitle { get; set; }
+    public string NoSubtitlesFoundInFile { get; set; }
+    public string UnexportedChangesTitle { get; set; }
+    public string UnexportedChangesQuestion { get; set; }
+    public string DeleteOneLineQuestion { get; set; }
+    public string DeleteXLinesQuestion { get; set; }
 
     public LanguageImageBasedEdit()
     {
@@ -91,5 +104,18 @@ public class LanguageImageBasedEdit
         XInTopBar = "{0} in top bar";
         XInBottomBar = "{0} in bottom bar";
         NoImageSubtitlesLoaded = "No image subtitles loaded";
+        FormatNotFoundOrSupported = "Image-based subtitle format was not found or is not supported.";
+        EncryptedVobSubNotSupported = "Encrypted VobSub subtitles are not supported.";
+        NoSubtitlesToResize = "No subtitles to resize.";
+        NoSubtitlesToAdjust = "No subtitles to adjust.";
+        UnableToLoadImageFile = "Unable to load image file.";
+        FailedToImportImage = "Failed to import image: {0}";
+        NoSubtitleSelected = "No subtitle selected";
+        SelectExactlyOneSubtitle = "Please select exactly one subtitle.";
+        NoSubtitlesFoundInFile = "No subtitles found in the file.";
+        UnexportedChangesTitle = "Unexported changes";
+        UnexportedChangesQuestion = "You have unexported changes. Close and discard them?";
+        DeleteOneLineQuestion = "Do you want to delete one line?";
+        DeleteXLinesQuestion = "Do you want to delete {0} lines?";
     }
 }

@@ -176,7 +176,7 @@ public partial class PickMatroskaTrackViewModel : ObservableObject
         }
         else
         {
-            await MessageBox.Show(Window, Se.Language.General.Error, "Format not supported: " + trackInfo.CodecId);
+            await MessageBox.Show(Window, Se.Language.General.Error, Se.Language.File.FormatNotSupportedPrefix + trackInfo.CodecId);
         }
     }
 

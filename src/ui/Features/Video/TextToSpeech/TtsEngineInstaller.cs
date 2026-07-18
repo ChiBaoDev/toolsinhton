@@ -50,8 +50,8 @@ public static class TtsEngineInstaller
                 {
                     var variantAnswer = await MessageBox.Show(
                         window,
-                        "Download Qwen3 TTS?",
-                        $"{Environment.NewLine}\"Text to speech\" requires Qwen3 TTS.{Environment.NewLine}{Environment.NewLine}Select a build to download:",
+                        Se.Language.Video.TextToSpeech.DownloadQwen3TTS,
+                        string.Format(Se.Language.Video.TextToSpeech.XTextToSpeechRequiresQwen3TTSX, Environment.NewLine, Environment.NewLine, Environment.NewLine),
                         MessageBoxButtons.Cancel,
                         MessageBoxIcon.Question,
                         "CPU",
@@ -74,7 +74,7 @@ public static class TtsEngineInstaller
                     {
                         var vulkanAnswer = await MessageBox.Show(
                             window,
-                            "Vulkan runtime may be required",
+                            Se.Language.Video.TextToSpeech.VulkanRuntimeMayBeRequired,
                             $"The Vulkan version requires the Vulkan runtime (vulkan-1.dll) which usually ships with current GPU drivers, but was not detected on this system.{Environment.NewLine}{Environment.NewLine}You can install it from:{Environment.NewLine}https://vulkan.lunarg.com/sdk/home{Environment.NewLine}{Environment.NewLine}Continue with Vulkan download anyway?",
                             MessageBoxButtons.YesNoCancel,
                             MessageBoxIcon.Question);
@@ -95,8 +95,8 @@ public static class TtsEngineInstaller
                 {
                     var answer = await MessageBox.Show(
                         window,
-                        "Download Qwen3 TTS?",
-                        $"{Environment.NewLine}\"Text to speech\" requires Qwen3 TTS.{Environment.NewLine}{Environment.NewLine}Download and use Qwen3 TTS?",
+                        Se.Language.Video.TextToSpeech.DownloadQwen3TTS,
+                        string.Format(Se.Language.Video.TextToSpeech.XTextToSpeechRequiresQwen3TTSX2, Environment.NewLine, Environment.NewLine, Environment.NewLine),
                         MessageBoxButtons.YesNoCancel,
                         MessageBoxIcon.Question);
 
@@ -124,7 +124,7 @@ public static class TtsEngineInstaller
                 var sizeText = GetModelDownloadSizeText(engine, model);
                 var answer = await MessageBox.Show(
                     window,
-                    "Download Qwen3 TTS models?",
+                    Se.Language.Video.TextToSpeech.DownloadQwen3TTSModels,
                     $"{Environment.NewLine}\"Qwen3 TTS\" ({qwen3ModelKey}) requires models ({sizeText}).{Environment.NewLine}{Environment.NewLine}Download models?",
                     MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Question);
@@ -420,8 +420,8 @@ public static class TtsEngineInstaller
             {
                 var answer = await MessageBox.Show(
                     window,
-                    "Download Kokoro TTS?",
-                    $"{Environment.NewLine}\"Text to speech\" requires Kokoro TTS.{Environment.NewLine}{Environment.NewLine}Download and use Kokoro TTS?",
+                    Se.Language.Video.TextToSpeech.DownloadKokoroTTS,
+                    string.Format(Se.Language.Video.TextToSpeech.XTextToSpeechRequiresKokoroTTSX, Environment.NewLine, Environment.NewLine, Environment.NewLine),
                     MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Question);
 
@@ -446,7 +446,7 @@ public static class TtsEngineInstaller
             {
                 var answer = await MessageBox.Show(
                     window,
-                    "Download Kokoro TTS models?",
+                    Se.Language.Video.TextToSpeech.DownloadKokoroTTSModels,
                     $"{Environment.NewLine}\"Kokoro TTS\" requires models (~380 MB).{Environment.NewLine}{Environment.NewLine}Download models?",
                     MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Question);
@@ -476,7 +476,7 @@ public static class TtsEngineInstaller
                 var sizeText = GetModelDownloadSizeText(engine, model);
                 var answer = await MessageBox.Show(
                     window,
-                    "Download Chatterbox TTS models?",
+                    Se.Language.Video.TextToSpeech.DownloadChatterboxTTSModels,
                     $"{Environment.NewLine}\"Chatterbox TTS\" ({chatterboxModelKey}) requires models ({sizeText}).{Environment.NewLine}{Environment.NewLine}Download models?",
                     MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Question);
@@ -502,8 +502,8 @@ public static class TtsEngineInstaller
                 {
                     var variantAnswer = await MessageBox.Show(
                         window,
-                        "Download OmniVoice TTS?",
-                        $"{Environment.NewLine}\"Text to speech\" requires OmniVoice TTS.{Environment.NewLine}{Environment.NewLine}Select a build to download:",
+                        Se.Language.Video.TextToSpeech.DownloadOmniVoiceTTS,
+                        string.Format(Se.Language.Video.TextToSpeech.XTextToSpeechRequiresOmniVoiceTTSX, Environment.NewLine, Environment.NewLine, Environment.NewLine),
                         MessageBoxButtons.Cancel,
                         MessageBoxIcon.Question,
                         "CPU",
@@ -526,7 +526,7 @@ public static class TtsEngineInstaller
                     {
                         var vulkanAnswer = await MessageBox.Show(
                             window,
-                            "Vulkan runtime may be required",
+                            Se.Language.Video.TextToSpeech.VulkanRuntimeMayBeRequired,
                             $"The Vulkan version requires the Vulkan runtime (vulkan-1.dll) which usually ships with current GPU drivers, but was not detected on this system.{Environment.NewLine}{Environment.NewLine}You can install it from:{Environment.NewLine}https://vulkan.lunarg.com/sdk/home{Environment.NewLine}{Environment.NewLine}Continue with Vulkan download anyway?",
                             MessageBoxButtons.YesNoCancel,
                             MessageBoxIcon.Question);
@@ -547,8 +547,8 @@ public static class TtsEngineInstaller
                 {
                     var answer = await MessageBox.Show(
                         window,
-                        "Download OmniVoice TTS?",
-                        $"{Environment.NewLine}\"Text to speech\" requires OmniVoice TTS.{Environment.NewLine}{Environment.NewLine}Download and use OmniVoice TTS?",
+                        Se.Language.Video.TextToSpeech.DownloadOmniVoiceTTS,
+                        string.Format(Se.Language.Video.TextToSpeech.XTextToSpeechRequiresOmniVoiceTTSX2, Environment.NewLine, Environment.NewLine, Environment.NewLine),
                         MessageBoxButtons.YesNoCancel,
                         MessageBoxIcon.Question);
 
@@ -574,7 +574,7 @@ public static class TtsEngineInstaller
             {
                 var answer = await MessageBox.Show(
                     window,
-                    "Download OmniVoice TTS models?",
+                    Se.Language.Video.TextToSpeech.DownloadOmniVoiceTTSModels,
                     $"{Environment.NewLine}\"OmniVoice TTS\" requires models (~1.4 GB).{Environment.NewLine}{Environment.NewLine}Download models?",
                     MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Question);
@@ -619,7 +619,7 @@ public static class TtsEngineInstaller
             var answer = await MessageBox.Show(
                 window,
                 Se.Language.General.Error,
-                $"\"AllTalk\" text to speech requires a running local AllTalk web server.{Environment.NewLine}{Environment.NewLine}Read more?",
+                string.Format(Se.Language.Video.TextToSpeech.AllTalkTextToSpeechRequiresARunningLocal, Environment.NewLine, Environment.NewLine),
                 MessageBoxButtons.YesNoCancel,
                 MessageBoxIcon.Question);
 
@@ -658,7 +658,7 @@ public static class TtsEngineInstaller
                 await MessageBox.Show(
                 window,
                 Se.Language.General.Error,
-                $"\"{engine.Name}\" requires a key file",
+                string.Format(Se.Language.Video.TextToSpeech.XRequiresAKeyFile, engine.Name),
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
 
@@ -675,7 +675,7 @@ public static class TtsEngineInstaller
                 await MessageBox.Show(
                 window,
                 Se.Language.General.Error,
-                $"\"{engine.Name}\" requires an API key",
+                string.Format(Se.Language.Video.TextToSpeech.XRequiresAnAPIKey, engine.Name),
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
 
