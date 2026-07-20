@@ -16,6 +16,10 @@ jobs:
       - name: Check out tagged source
         uses: actions/checkout@v5
 
+      - name: Preserve committed LF line endings
+        shell: bash
+        run: git show HEAD:src/ui/Assets/Languages/Vietnamese.json > src/ui/Assets/Languages/Vietnamese.json
+
       - name: Set up .NET SDK
         uses: actions/setup-dotnet@v5
         with:
@@ -29,6 +33,9 @@ jobs:
 
       - name: Test UI
         run: dotnet test tests/UI/UITests.csproj --configuration Release --no-restore
+
+      - name: Prepare Windows x64 publish assets
+        run: dotnet restore src/ui/UI.csproj --runtime win-x64
 
       - name: Download libmpv for Windows x64
         shell: pwsh
