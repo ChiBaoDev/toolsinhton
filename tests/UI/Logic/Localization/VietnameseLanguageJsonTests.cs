@@ -207,16 +207,18 @@ public class VietnameseLanguageJsonTests
         }
     }
 
+    [Fact]
+    public void PowerShellCandidates_PreferWindowsPowerShellOnWindows()
+    {
+        var candidates = PowerShellCandidates(isWindows: true);
+
+        Assert.Equal("powershell.exe", candidates[0]);
+        Assert.Equal("pwsh", candidates[^1]);
+    }
+
     private static string FindPowerShell()
     {
-        var candidates = new[]
-        {
-            "pwsh",
-            "powershell.exe",
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "WindowsPowerShell", "v1.0", "powershell.exe"),
-            "powershell",
-        };
-        foreach (var candidate in candidates)
+        foreach (var candidate in PowerShellCandidates(OperatingSystem.IsWindows()))
         {
             try
             {
@@ -232,6 +234,21 @@ public class VietnameseLanguageJsonTests
         }
         throw new FileNotFoundException("Neither pwsh nor Windows PowerShell could be located.");
     }
+
+    private static string[] PowerShellCandidates(bool isWindows) =>
+        isWindows
+            ?
+            [
+                "powershell.exe",
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "WindowsPowerShell", "v1.0", "powershell.exe"),
+                "powershell",
+                "pwsh",
+            ]
+            :
+            [
+                "pwsh",
+                "powershell",
+            ];
 
     private static string NormalizeNewlines(string value) =>
         value.Replace("\r\n", "\n", StringComparison.Ordinal).Replace('\r', '\n');
