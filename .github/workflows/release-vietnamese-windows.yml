@@ -1,0 +1,114 @@
+name: Release Vietnamese Windows build
+
+on:
+  push:
+    tags:
+      - 'vi-v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release-windows-x64:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out tagged source
+        uses: actions/checkout@v5
+
+      - name: Preserve committed LF line endings
+        shell: bash
+        run: git show HEAD:src/ui/Assets/Languages/Vietnamese.json > src/ui/Assets/Languages/Vietnamese.json
+
+      - name: Set up .NET SDK
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore SubtitleEdit.sln
+
+      - name: Build UI
+        run: dotnet build src/ui/UI.csproj --configuration Release --no-restore
+
+      - name: Test UI
+        run: dotnet test tests/UI/UITests.csproj --configuration Release --no-restore
+
+      - name: Prepare Windows x64 publish assets
+        run: dotnet restore src/ui/UI.csproj --runtime win-x64
+
+      - name: Download libmpv for Windows x64
+        shell: pwsh
+        run: |
+          $archive = Join-Path $env:RUNNER_TEMP 'libmpv2-win64.zip'
+          $extract = Join-Path $env:RUNNER_TEMP 'libmpv2-win64'
+          Invoke-WebRequest `
+            -Uri 'https://github.com/SubtitleEdit/support-files/releases/download/libmpv-2026-04-21/libmpv2-win64.zip' `
+            -OutFile $archive
+          Expand-Archive -Path $archive -DestinationPath $extract
+          $libMpv = Get-ChildItem -Path $extract -Filter 'libmpv-2.dll' -Recurse -File |
+            Select-Object -First 1
+          if (-not $libMpv) {
+            throw 'libmpv-2.dll was not found in the downloaded archive.'
+          }
+          Copy-Item $libMpv.FullName (Join-Path $env:RUNNER_TEMP 'libmpv-2.dll')
+
+      - name: Publish self-contained Windows x64 app
+        shell: pwsh
+        run: |
+          dotnet publish src/ui/UI.csproj `
+            --configuration Release `
+            --runtime win-x64 `
+            --self-contained true `
+            --no-restore `
+            -p:PublishSingleFile=true `
+            -p:DebugSymbols=false `
+            -p:DebugType=none `
+            --output publish/windows-x64
+
+          Copy-Item `
+            (Join-Path $env:RUNNER_TEMP 'libmpv-2.dll') `
+            'publish/windows-x64/libmpv-2.dll'
+
+          Get-ChildItem -Path 'publish/windows-x64' -Filter '*.pdb' -Recurse -File |
+            Remove-Item -Force
+
+      - name: Validate published application
+        shell: pwsh
+        run: |
+          $exe = 'publish/windows-x64/SubtitleEdit.exe'
+          $libMpv = 'publish/windows-x64/libmpv-2.dll'
+          if (-not (Test-Path $exe -PathType Leaf)) {
+            throw "Missing published executable: $exe"
+          }
+          if (-not (Test-Path $libMpv -PathType Leaf)) {
+            throw "Missing video runtime dependency: $libMpv"
+          }
+          if ((Get-Item $exe).Length -le 0) {
+            throw "Published executable is empty: $exe"
+          }
+          if ((Get-Item $libMpv).Length -le 0) {
+            throw "Video runtime dependency is empty: $libMpv"
+          }
+
+      - name: Create Windows ZIP
+        shell: pwsh
+        run: |
+          $zip = 'SubtitleEdit-Vietnamese-Windows-x64.zip'
+          Compress-Archive -Path 'publish/windows-x64/*' -DestinationPath $zip
+          if (-not (Test-Path $zip -PathType Leaf)) {
+            throw "ZIP was not created: $zip"
+          }
+          if ((Get-Item $zip).Length -le 0) {
+            throw "ZIP is empty: $zip"
+          }
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Subtitle Edit Vietnamese ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          generate_release_notes: false
+          files: SubtitleEdit-Vietnamese-Windows-x64.zip

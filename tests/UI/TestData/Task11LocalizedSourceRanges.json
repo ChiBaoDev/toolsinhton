@@ -1,0 +1,2009 @@
+{
+  "ranges": [
+    {
+      "source": "src/ui/Features/Assa/AssaAttachmentsViewModel.cs",
+      "startLine": 173,
+      "endLine": 173
+    },
+    {
+      "source": "src/ui/Features/Assa/AssaAttachmentsViewModel.cs",
+      "startLine": 174,
+      "endLine": 174
+    },
+    {
+      "source": "src/ui/Features/Assa/AssaDraw/AssaDrawWindow.cs",
+      "startLine": 409,
+      "endLine": 409
+    },
+    {
+      "source": "src/ui/Features/Assa/AssaImageColorPicker/AssaImageColorPickerViewModel.cs",
+      "startLine": 168,
+      "endLine": 168
+    },
+    {
+      "source": "src/ui/Features/Assa/AssaImageColorPicker/AssaImageColorPickerWindow.cs",
+      "startLine": 106,
+      "endLine": 106
+    },
+    {
+      "source": "src/ui/Features/Assa/AssaImageColorPicker/AssaImageColorPickerWindow.cs",
+      "startLine": 115,
+      "endLine": 115
+    },
+    {
+      "source": "src/ui/Features/Assa/AssaImageColorPicker/AssaImageColorPickerWindow.cs",
+      "startLine": 133,
+      "endLine": 133
+    },
+    {
+      "source": "src/ui/Features/Assa/AssaImageColorPicker/AssaImageColorPickerWindow.cs",
+      "startLine": 150,
+      "endLine": 150
+    },
+    {
+      "source": "src/ui/Features/Assa/AssaResolutionResampler/AssaResolutionResamplerViewModel.cs",
+      "startLine": 171,
+      "endLine": 171
+    },
+    {
+      "source": "src/ui/Features/Assa/AssaStylesViewModel.cs",
+      "startLine": 152,
+      "endLine": 152
+    },
+    {
+      "source": "src/ui/Features/Assa/AssaStylesViewModel.cs",
+      "startLine": 543,
+      "endLine": 543
+    },
+    {
+      "source": "src/ui/Features/Assa/AssaStylesViewModel.cs",
+      "startLine": 552,
+      "endLine": 552
+    },
+    {
+      "source": "src/ui/Features/Assa/AssaStylesViewModel.cs",
+      "startLine": 1232,
+      "endLine": 1232
+    },
+    {
+      "source": "src/ui/Features/Assa/AssaStylesViewModel.cs",
+      "startLine": 1282,
+      "endLine": 1282
+    },
+    {
+      "source": "src/ui/Features/Ocr/BinaryOcr/BinaryOcrCharacterHistoryViewModel.cs",
+      "startLine": 43,
+      "endLine": 43
+    },
+    {
+      "source": "src/ui/Features/Ocr/BinaryOcr/BinaryOcrCharacterHistoryViewModel.cs",
+      "startLine": 135,
+      "endLine": 135
+    },
+    {
+      "source": "src/ui/Features/Ocr/BinaryOcr/BinaryOcrCharacterHistoryViewModel.cs",
+      "startLine": 136,
+      "endLine": 136
+    },
+    {
+      "source": "src/ui/Features/Ocr/BinaryOcr/BinaryOcrDbEditViewModel.cs",
+      "startLine": 85,
+      "endLine": 85
+    },
+    {
+      "source": "src/ui/Features/Ocr/BinaryOcr/BinaryOcrDbEditViewModel.cs",
+      "startLine": 97,
+      "endLine": 97
+    },
+    {
+      "source": "src/ui/Features/Ocr/BinaryOcr/BinaryOcrDbEditViewModel.cs",
+      "startLine": 111,
+      "endLine": 111
+    },
+    {
+      "source": "src/ui/Features/Ocr/BinaryOcr/BinaryOcrDbEditViewModel.cs",
+      "startLine": 112,
+      "endLine": 112
+    },
+    {
+      "source": "src/ui/Features/Ocr/BinaryOcr/BinaryOcrDbNewWindow.cs",
+      "startLine": 11,
+      "endLine": 11
+    },
+    {
+      "source": "src/ui/Features/Ocr/BinaryOcr/BinaryOcrInspectViewModel.cs",
+      "startLine": 208,
+      "endLine": 208
+    },
+    {
+      "source": "src/ui/Features/Ocr/BinaryOcr/BinaryOcrInspectViewModel.cs",
+      "startLine": 209,
+      "endLine": 209
+    },
+    {
+      "source": "src/ui/Features/Ocr/BinaryOcr/BinaryOcrInspectViewModel.cs",
+      "startLine": 225,
+      "endLine": 225
+    },
+    {
+      "source": "src/ui/Features/Ocr/BinaryOcr/BinaryOcrInspectViewModel.cs",
+      "startLine": 226,
+      "endLine": 226
+    },
+    {
+      "source": "src/ui/Features/Ocr/BinaryOcr/BinaryOcrSettingsViewModel.cs",
+      "startLine": 66,
+      "endLine": 66
+    },
+    {
+      "source": "src/ui/Features/Ocr/BinaryOcr/BinaryOcrSettingsViewModel.cs",
+      "startLine": 67,
+      "endLine": 67
+    },
+    {
+      "source": "src/ui/Features/Ocr/Download/DownloadCrispEmbedWindow.cs",
+      "startLine": 16,
+      "endLine": 16
+    },
+    {
+      "source": "src/ui/Features/Ocr/Download/DownloadGoogleLensOcrWindow.cs",
+      "startLine": 17,
+      "endLine": 17
+    },
+    {
+      "source": "src/ui/Features/Ocr/Download/DownloadPaddleOcrWindow.cs",
+      "startLine": 17,
+      "endLine": 17
+    },
+    {
+      "source": "src/ui/Features/Ocr/Download/DownloadTesseractModelWindow.cs",
+      "startLine": 21,
+      "endLine": 21
+    },
+    {
+      "source": "src/ui/Features/Ocr/Download/DownloadTesseractModelWindow.cs",
+      "startLine": 30,
+      "endLine": 30
+    },
+    {
+      "source": "src/ui/Features/Ocr/Download/DownloadTesseractModelWindow.cs",
+      "startLine": 45,
+      "endLine": 45
+    },
+    {
+      "source": "src/ui/Features/Ocr/Download/DownloadTesseractWindow.cs",
+      "startLine": 18,
+      "endLine": 18
+    },
+    {
+      "source": "src/ui/Features/Ocr/Download/DownloadTesseractWindow.cs",
+      "startLine": 27,
+      "endLine": 27
+    },
+    {
+      "source": "src/ui/Features/Ocr/Download/PaddleOcrInstallHelper.cs",
+      "startLine": 51,
+      "endLine": 51
+    },
+    {
+      "source": "src/ui/Features/Ocr/Download/PaddleOcrInstallHelper.cs",
+      "startLine": 52,
+      "endLine": 52
+    },
+    {
+      "source": "src/ui/Features/Ocr/Download/PaddleOcrInstallHelper.cs",
+      "startLine": 89,
+      "endLine": 89
+    },
+    {
+      "source": "src/ui/Features/Ocr/Download/PaddleOcrInstallHelper.cs",
+      "startLine": 90,
+      "endLine": 90
+    },
+    {
+      "source": "src/ui/Features/Ocr/Engines/GoogleVisionOcr.cs",
+      "startLine": 200,
+      "endLine": 200
+    },
+    {
+      "source": "src/ui/Features/Ocr/Engines/GoogleVisionOcr.cs",
+      "startLine": 207,
+      "endLine": 207
+    },
+    {
+      "source": "src/ui/Features/Ocr/NOcr/NOcrCharacterAddWindow.cs",
+      "startLine": 227,
+      "endLine": 227
+    },
+    {
+      "source": "src/ui/Features/Ocr/NOcr/NOcrCharacterAddWindow.cs",
+      "startLine": 258,
+      "endLine": 258
+    },
+    {
+      "source": "src/ui/Features/Ocr/NOcr/NOcrCharacterHistoryViewModel.cs",
+      "startLine": 145,
+      "endLine": 145
+    },
+    {
+      "source": "src/ui/Features/Ocr/NOcr/NOcrCharacterHistoryViewModel.cs",
+      "startLine": 146,
+      "endLine": 146
+    },
+    {
+      "source": "src/ui/Features/Ocr/NOcr/NOcrDbEditViewModel.cs",
+      "startLine": 120,
+      "endLine": 120
+    },
+    {
+      "source": "src/ui/Features/Ocr/NOcr/NOcrDbEditViewModel.cs",
+      "startLine": 131,
+      "endLine": 131
+    },
+    {
+      "source": "src/ui/Features/Ocr/NOcr/NOcrDbEditViewModel.cs",
+      "startLine": 145,
+      "endLine": 145
+    },
+    {
+      "source": "src/ui/Features/Ocr/NOcr/NOcrDbEditViewModel.cs",
+      "startLine": 146,
+      "endLine": 146
+    },
+    {
+      "source": "src/ui/Features/Ocr/NOcr/NOcrDbNewWindow.cs",
+      "startLine": 11,
+      "endLine": 11
+    },
+    {
+      "source": "src/ui/Features/Ocr/NOcr/NOcrInspectViewModel.cs",
+      "startLine": 235,
+      "endLine": 235
+    },
+    {
+      "source": "src/ui/Features/Ocr/NOcr/NOcrInspectViewModel.cs",
+      "startLine": 236,
+      "endLine": 236
+    },
+    {
+      "source": "src/ui/Features/Ocr/NOcr/NOcrInspectViewModel.cs",
+      "startLine": 252,
+      "endLine": 252
+    },
+    {
+      "source": "src/ui/Features/Ocr/NOcr/NOcrInspectViewModel.cs",
+      "startLine": 253,
+      "endLine": 253
+    },
+    {
+      "source": "src/ui/Features/Ocr/NOcr/NOcrSettingsViewModel.cs",
+      "startLine": 58,
+      "endLine": 58
+    },
+    {
+      "source": "src/ui/Features/Ocr/NOcr/NOcrSettingsViewModel.cs",
+      "startLine": 59,
+      "endLine": 59
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 1151,
+      "endLine": 1151
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 1152,
+      "endLine": 1152
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 1175,
+      "endLine": 1175
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 1176,
+      "endLine": 1176
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 1193,
+      "endLine": 1193
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 1224,
+      "endLine": 1224
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 1435,
+      "endLine": 1435
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 1436,
+      "endLine": 1436
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 1570,
+      "endLine": 1570
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 2275,
+      "endLine": 2275
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 2276,
+      "endLine": 2276
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 2321,
+      "endLine": 2321
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 2322,
+      "endLine": 2322
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 2412,
+      "endLine": 2412
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 2413,
+      "endLine": 2413
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 2432,
+      "endLine": 2432
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 2433,
+      "endLine": 2433
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 3900,
+      "endLine": 3900
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 4033,
+      "endLine": 4033
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 4034,
+      "endLine": 4034
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 4163,
+      "endLine": 4163
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 4164,
+      "endLine": 4164
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 4211,
+      "endLine": 4211
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 4212,
+      "endLine": 4212
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 4214,
+      "endLine": 4214
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 4223,
+      "endLine": 4223
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 4224,
+      "endLine": 4224
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 4226,
+      "endLine": 4226
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 4698,
+      "endLine": 4698
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 4699,
+      "endLine": 4699
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 4735,
+      "endLine": 4735
+    },
+    {
+      "source": "src/ui/Features/Ocr/OcrViewModel.cs",
+      "startLine": 4736,
+      "endLine": 4736
+    },
+    {
+      "source": "src/ui/Features/Options/Settings/FileTypeAssociationsManager.cs",
+      "startLine": 159,
+      "endLine": 159
+    },
+    {
+      "source": "src/ui/Features/Options/Settings/ProfilesExportViewModel.cs",
+      "startLine": 52,
+      "endLine": 52
+    },
+    {
+      "source": "src/ui/Features/Options/Settings/ProfilesViewModel.cs",
+      "startLine": 136,
+      "endLine": 136
+    },
+    {
+      "source": "src/ui/Features/Options/Settings/ProfilesViewModel.cs",
+      "startLine": 148,
+      "endLine": 148
+    },
+    {
+      "source": "src/ui/Features/Options/Shortcuts/ShortcutsViewModel.cs",
+      "startLine": 345,
+      "endLine": 345
+    },
+    {
+      "source": "src/ui/Features/Options/Shortcuts/ShortcutsViewModel.cs",
+      "startLine": 377,
+      "endLine": 377
+    },
+    {
+      "source": "src/ui/Features/Options/Shortcuts/ShortcutsViewModel.cs",
+      "startLine": 414,
+      "endLine": 414
+    },
+    {
+      "source": "src/ui/Features/Options/Shortcuts/ShortcutsViewModel.cs",
+      "startLine": 445,
+      "endLine": 445
+    },
+    {
+      "source": "src/ui/Features/Options/Shortcuts/ShortcutsViewModel.cs",
+      "startLine": 495,
+      "endLine": 495
+    },
+    {
+      "source": "src/ui/Features/SpellCheck/EditWholeText/EditWholeTextWindow.cs",
+      "startLine": 17,
+      "endLine": 17
+    },
+    {
+      "source": "src/ui/Features/Ssa/SsaAttachmentsViewModel.cs",
+      "startLine": 173,
+      "endLine": 173
+    },
+    {
+      "source": "src/ui/Features/Ssa/SsaAttachmentsViewModel.cs",
+      "startLine": 174,
+      "endLine": 174
+    },
+    {
+      "source": "src/ui/Features/Ssa/SsaStylesViewModel.cs",
+      "startLine": 138,
+      "endLine": 138
+    },
+    {
+      "source": "src/ui/Features/Ssa/SsaStylesViewModel.cs",
+      "startLine": 359,
+      "endLine": 359
+    },
+    {
+      "source": "src/ui/Features/Ssa/SsaStylesViewModel.cs",
+      "startLine": 423,
+      "endLine": 423
+    },
+    {
+      "source": "src/ui/Features/Ssa/SsaStylesViewModel.cs",
+      "startLine": 432,
+      "endLine": 432
+    },
+    {
+      "source": "src/ui/Features/Ssa/SsaStylesViewModel.cs",
+      "startLine": 928,
+      "endLine": 928
+    },
+    {
+      "source": "src/ui/Features/Ssa/SsaStylesViewModel.cs",
+      "startLine": 978,
+      "endLine": 978
+    },
+    {
+      "source": "src/ui/Features/Tools/BatchConvert/BatchConvertFixCommonErrorsSettingsWindow.cs",
+      "startLine": 22,
+      "endLine": 22
+    },
+    {
+      "source": "src/ui/Features/Tools/BatchConvert/BatchConvertSettingsViewModel.cs",
+      "startLine": 293,
+      "endLine": 293
+    },
+    {
+      "source": "src/ui/Features/Tools/BatchConvert/BatchConvertSettingsViewModel.cs",
+      "startLine": 294,
+      "endLine": 294
+    },
+    {
+      "source": "src/ui/Features/Tools/BatchConvert/BatchConvertViewModel.cs",
+      "startLine": 979,
+      "endLine": 979
+    },
+    {
+      "source": "src/ui/Features/Tools/BatchConvert/BatchConvertViewModel.cs",
+      "startLine": 980,
+      "endLine": 980
+    },
+    {
+      "source": "src/ui/Features/Tools/BatchConvert/BatchConvertViewModel.cs",
+      "startLine": 1021,
+      "endLine": 1021
+    },
+    {
+      "source": "src/ui/Features/Tools/BatchConvert/BatchConvertViewModel.cs",
+      "startLine": 1022,
+      "endLine": 1022
+    },
+    {
+      "source": "src/ui/Features/Tools/BatchConvert/BatchConverter.cs",
+      "startLine": 2642,
+      "endLine": 2642
+    },
+    {
+      "source": "src/ui/Features/Tools/FixCommonErrors/FixCommonErrorsProfileViewModel.cs",
+      "startLine": 107,
+      "endLine": 107
+    },
+    {
+      "source": "src/ui/Features/Tools/FixCommonErrors/FixCommonErrorsProfileViewModel.cs",
+      "startLine": 108,
+      "endLine": 108
+    },
+    {
+      "source": "src/ui/Features/Tools/FixCommonErrors/FixCommonErrorsProfileViewModel.cs",
+      "startLine": 118,
+      "endLine": 118
+    },
+    {
+      "source": "src/ui/Features/Tools/FixCommonErrors/FixCommonErrorsProfileViewModel.cs",
+      "startLine": 119,
+      "endLine": 119
+    },
+    {
+      "source": "src/ui/Features/Tools/JoinSubtitles/JoinSubtitlesViewModel.cs",
+      "startLine": 124,
+      "endLine": 124
+    },
+    {
+      "source": "src/ui/Features/Tools/MergeTwoSubtitles/MergeTwoSubtitlesViewModel.cs",
+      "startLine": 229,
+      "endLine": 229
+    },
+    {
+      "source": "src/ui/Features/Tools/MergeTwoSubtitles/MergeTwoSubtitlesViewModel.cs",
+      "startLine": 254,
+      "endLine": 254
+    },
+    {
+      "source": "src/ui/Features/Translate/LlamaCppDownloadHelper.cs",
+      "startLine": 159,
+      "endLine": 159
+    },
+    {
+      "source": "src/ui/Features/Translate/LlamaCppDownloadHelper.cs",
+      "startLine": 160,
+      "endLine": 160
+    },
+    {
+      "source": "src/ui/Features/Translate/LlamaCppDownloadHelper.cs",
+      "startLine": 231,
+      "endLine": 231
+    },
+    {
+      "source": "src/ui/Features/Translate/TranslateSettingsViewModel.cs",
+      "startLine": 69,
+      "endLine": 69
+    },
+    {
+      "source": "src/ui/Features/Translate/TranslateSettingsViewModel.cs",
+      "startLine": 77,
+      "endLine": 77
+    },
+    {
+      "source": "src/ui/Features/Translate/TranslateSettingsViewModel.cs",
+      "startLine": 83,
+      "endLine": 83
+    },
+    {
+      "source": "src/ui/Features/Video/BlankVideo/BlankVideoViewModel.cs",
+      "startLine": 166,
+      "endLine": 166
+    },
+    {
+      "source": "src/ui/Features/Video/BlankVideo/BlankVideoViewModel.cs",
+      "startLine": 167,
+      "endLine": 167
+    },
+    {
+      "source": "src/ui/Features/Video/BlankVideo/BlankVideoViewModel.cs",
+      "startLine": 168,
+      "endLine": 168
+    },
+    {
+      "source": "src/ui/Features/Video/BlankVideo/BlankVideoViewModel.cs",
+      "startLine": 206,
+      "endLine": 206
+    },
+    {
+      "source": "src/ui/Features/Video/BlankVideo/BlankVideoViewModel.cs",
+      "startLine": 398,
+      "endLine": 398
+    },
+    {
+      "source": "src/ui/Features/Video/BlankVideo/BlankVideoViewModel.cs",
+      "startLine": 404,
+      "endLine": 404
+    },
+    {
+      "source": "src/ui/Features/Video/BurnIn/BurnInSettingsViewModel.cs",
+      "startLine": 51,
+      "endLine": 51
+    },
+    {
+      "source": "src/ui/Features/Video/BurnIn/BurnInSettingsViewModel.cs",
+      "startLine": 52,
+      "endLine": 52
+    },
+    {
+      "source": "src/ui/Features/Video/BurnIn/BurnInSettingsWindow.cs",
+      "startLine": 17,
+      "endLine": 17
+    },
+    {
+      "source": "src/ui/Features/Video/BurnIn/BurnInViewModel.cs",
+      "startLine": 418,
+      "endLine": 418
+    },
+    {
+      "source": "src/ui/Features/Video/BurnIn/BurnInViewModel.cs",
+      "startLine": 419,
+      "endLine": 419
+    },
+    {
+      "source": "src/ui/Features/Video/BurnIn/BurnInViewModel.cs",
+      "startLine": 420,
+      "endLine": 420
+    },
+    {
+      "source": "src/ui/Features/Video/BurnIn/BurnInViewModel.cs",
+      "startLine": 458,
+      "endLine": 458
+    },
+    {
+      "source": "src/ui/Features/Video/BurnIn/BurnInViewModel.cs",
+      "startLine": 544,
+      "endLine": 544
+    },
+    {
+      "source": "src/ui/Features/Video/BurnIn/BurnInViewModel.cs",
+      "startLine": 545,
+      "endLine": 545
+    },
+    {
+      "source": "src/ui/Features/Video/BurnIn/BurnInViewModel.cs",
+      "startLine": 1059,
+      "endLine": 1059
+    },
+    {
+      "source": "src/ui/Features/Video/BurnIn/BurnInViewModel.cs",
+      "startLine": 1060,
+      "endLine": 1060
+    },
+    {
+      "source": "src/ui/Features/Video/BurnIn/BurnInViewModel.cs",
+      "startLine": 1197,
+      "endLine": 1197
+    },
+    {
+      "source": "src/ui/Features/Video/BurnIn/BurnInViewModel.cs",
+      "startLine": 1198,
+      "endLine": 1198
+    },
+    {
+      "source": "src/ui/Features/Video/BurnIn/BurnInViewModel.cs",
+      "startLine": 1234,
+      "endLine": 1234
+    },
+    {
+      "source": "src/ui/Features/Video/BurnIn/BurnInViewModel.cs",
+      "startLine": 1235,
+      "endLine": 1235
+    },
+    {
+      "source": "src/ui/Features/Video/BurnIn/BurnInViewModel.cs",
+      "startLine": 1265,
+      "endLine": 1265
+    },
+    {
+      "source": "src/ui/Features/Video/BurnIn/BurnInViewModel.cs",
+      "startLine": 1266,
+      "endLine": 1266
+    },
+    {
+      "source": "src/ui/Features/Video/BurnIn/BurnInWindow.cs",
+      "startLine": 396,
+      "endLine": 396
+    },
+    {
+      "source": "src/ui/Features/Video/CutVideo/CutVideoViewModel.cs",
+      "startLine": 351,
+      "endLine": 351
+    },
+    {
+      "source": "src/ui/Features/Video/CutVideo/CutVideoViewModel.cs",
+      "startLine": 352,
+      "endLine": 352
+    },
+    {
+      "source": "src/ui/Features/Video/CutVideo/CutVideoViewModel.cs",
+      "startLine": 353,
+      "endLine": 353
+    },
+    {
+      "source": "src/ui/Features/Video/CutVideo/CutVideoViewModel.cs",
+      "startLine": 392,
+      "endLine": 392
+    },
+    {
+      "source": "src/ui/Features/Video/CutVideo/CutVideoViewModel.cs",
+      "startLine": 575,
+      "endLine": 575
+    },
+    {
+      "source": "src/ui/Features/Video/CutVideo/CutVideoViewModel.cs",
+      "startLine": 649,
+      "endLine": 649
+    },
+    {
+      "source": "src/ui/Features/Video/CutVideo/CutVideoViewModel.cs",
+      "startLine": 650,
+      "endLine": 650
+    },
+    {
+      "source": "src/ui/Features/Video/EmbeddedSubtitlesEdit/EmbeddedSubtitlesEditViewModel.cs",
+      "startLine": 177,
+      "endLine": 177
+    },
+    {
+      "source": "src/ui/Features/Video/EmbeddedSubtitlesEdit/EmbeddedSubtitlesEditViewModel.cs",
+      "startLine": 178,
+      "endLine": 178
+    },
+    {
+      "source": "src/ui/Features/Video/EmbeddedSubtitlesEdit/EmbeddedSubtitlesEditViewModel.cs",
+      "startLine": 179,
+      "endLine": 179
+    },
+    {
+      "source": "src/ui/Features/Video/EmbeddedSubtitlesEdit/EmbeddedSubtitlesEditViewModel.cs",
+      "startLine": 315,
+      "endLine": 315
+    },
+    {
+      "source": "src/ui/Features/Video/EmbeddedSubtitlesEdit/EmbeddedSubtitlesEditViewModel.cs",
+      "startLine": 316,
+      "endLine": 316
+    },
+    {
+      "source": "src/ui/Features/Video/EmbeddedSubtitlesEdit/EmbeddedSubtitlesEditViewModel.cs",
+      "startLine": 517,
+      "endLine": 517
+    },
+    {
+      "source": "src/ui/Features/Video/EmbeddedSubtitlesEdit/EmbeddedSubtitlesEditViewModel.cs",
+      "startLine": 518,
+      "endLine": 518
+    },
+    {
+      "source": "src/ui/Features/Video/EmbeddedSubtitlesEdit/EmbeddedSubtitlesEditViewModel.cs",
+      "startLine": 528,
+      "endLine": 528
+    },
+    {
+      "source": "src/ui/Features/Video/EmbeddedSubtitlesEdit/EmbeddedSubtitlesEditViewModel.cs",
+      "startLine": 529,
+      "endLine": 529
+    },
+    {
+      "source": "src/ui/Features/Video/OpenFromUrl/DownloadVideoFromUrlViewModel.cs",
+      "startLine": 138,
+      "endLine": 138
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/DashScope/DashScopeSttService.cs",
+      "startLine": 102,
+      "endLine": 102
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/DashScope/DashScopeSttService.cs",
+      "startLine": 124,
+      "endLine": 124
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/DashScope/DashScopeSttService.cs",
+      "startLine": 135,
+      "endLine": 135
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/DashScope/DashScopeSttService.cs",
+      "startLine": 160,
+      "endLine": 160
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/DashScope/DashScopeSttService.cs",
+      "startLine": 186,
+      "endLine": 186
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/DashScope/DashScopeSttService.cs",
+      "startLine": 195,
+      "endLine": 195
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/DashScope/DashScopeSttService.cs",
+      "startLine": 218,
+      "endLine": 218
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/DashScope/DashScopeSttService.cs",
+      "startLine": 232,
+      "endLine": 232
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/DashScope/DashScopeSttService.cs",
+      "startLine": 238,
+      "endLine": 238
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/DownloadSpeechToTextModelsViewModel.cs",
+      "startLine": 338,
+      "endLine": 338
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/Engines/WhisperEngineCpp.cs",
+      "startLine": 142,
+      "endLine": 142
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/Engines/WhisperEngineCpp.cs",
+      "startLine": 147,
+      "endLine": 147
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/Engines/WhisperEnginePurfviewFasterWhisperXxl.cs",
+      "startLine": 157,
+      "endLine": 157
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/Engines/WhisperEnginePurfviewFasterWhisperXxl.cs",
+      "startLine": 163,
+      "endLine": 163
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/OpenAiCompatible/OpenAiSttChunker.cs",
+      "startLine": 238,
+      "endLine": 238
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/OpenAiCompatible/OpenAiSttChunker.cs",
+      "startLine": 315,
+      "endLine": 315
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/OpenAiCompatible/OpenAiSttService.cs",
+      "startLine": 106,
+      "endLine": 106
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/OpenRouter/OpenRouterSttService.cs",
+      "startLine": 83,
+      "endLine": 83
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 646,
+      "endLine": 646
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 647,
+      "endLine": 647
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 731,
+      "endLine": 731
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 732,
+      "endLine": 732
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 737,
+      "endLine": 737
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 738,
+      "endLine": 738
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 743,
+      "endLine": 743
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 744,
+      "endLine": 744
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 902,
+      "endLine": 902
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 903,
+      "endLine": 903
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 1288,
+      "endLine": 1288
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 1477,
+      "endLine": 1477
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2122,
+      "endLine": 2122
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2123,
+      "endLine": 2123
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2142,
+      "endLine": 2142
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2143,
+      "endLine": 2143
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2205,
+      "endLine": 2205
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2237,
+      "endLine": 2237
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2238,
+      "endLine": 2238
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2255,
+      "endLine": 2255
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2259,
+      "endLine": 2259
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2360,
+      "endLine": 2360
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2361,
+      "endLine": 2361
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2394,
+      "endLine": 2394
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2395,
+      "endLine": 2395
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2455,
+      "endLine": 2455
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2456,
+      "endLine": 2456
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2472,
+      "endLine": 2472
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2500,
+      "endLine": 2500
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2501,
+      "endLine": 2501
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2524,
+      "endLine": 2524
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2525,
+      "endLine": 2525
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2587,
+      "endLine": 2587
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2588,
+      "endLine": 2588
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2847,
+      "endLine": 2847
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2848,
+      "endLine": 2848
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2850,
+      "endLine": 2850
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2853,
+      "endLine": 2853
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2854,
+      "endLine": 2854
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2865,
+      "endLine": 2865
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2866,
+      "endLine": 2866
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2899,
+      "endLine": 2899
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2900,
+      "endLine": 2900
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2970,
+      "endLine": 2970
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 2971,
+      "endLine": 2971
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 3002,
+      "endLine": 3002
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 3003,
+      "endLine": 3003
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 3035,
+      "endLine": 3035
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 3036,
+      "endLine": 3036
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 3076,
+      "endLine": 3076
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 3077,
+      "endLine": 3077
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 3118,
+      "endLine": 3118
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 3119,
+      "endLine": 3119
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 3160,
+      "endLine": 3160
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 3161,
+      "endLine": 3161
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 3202,
+      "endLine": 3202
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 3203,
+      "endLine": 3203
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 3233,
+      "endLine": 3233
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 3234,
+      "endLine": 3234
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 3255,
+      "endLine": 3255
+    },
+    {
+      "source": "src/ui/Features/Video/SpeechToText/SpeechToTextViewModel.cs",
+      "startLine": 3256,
+      "endLine": 3256
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/ActorVoices/ActorVoiceMappingViewModel.cs",
+      "startLine": 378,
+      "endLine": 378
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/CosyVoice3CrispAsrSettings/CosyVoice3CrispAsrSettingsWindow.cs",
+      "startLine": 24,
+      "endLine": 24
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/DownloadTts/DownloadTtsWindow.cs",
+      "startLine": 19,
+      "endLine": 19
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/ElevenLabsSettings/ElevenLabsSettingsViewModel.cs",
+      "startLine": 117,
+      "endLine": 117
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/ElevenLabsSettings/ElevenLabsSettingsViewModel.cs",
+      "startLine": 122,
+      "endLine": 122
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/ElevenLabsSettings/ElevenLabsSettingsViewModel.cs",
+      "startLine": 127,
+      "endLine": 127
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/ElevenLabsSettings/ElevenLabsSettingsViewModel.cs",
+      "startLine": 131,
+      "endLine": 131
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/ElevenLabsSettings/ElevenLabsSettingsViewModel.cs",
+      "startLine": 135,
+      "endLine": 135
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/ChatterboxTtsCpp.cs",
+      "startLine": 468,
+      "endLine": 468
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/ChatterboxTtsCpp.cs",
+      "startLine": 556,
+      "endLine": 556
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/ChatterboxTtsCpp.cs",
+      "startLine": 562,
+      "endLine": 562
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/ChatterboxTtsCpp.cs",
+      "startLine": 569,
+      "endLine": 569
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/ChatterboxTtsCpp.cs",
+      "startLine": 575,
+      "endLine": 575
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/ChatterboxTtsCpp.cs",
+      "startLine": 579,
+      "endLine": 579
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/ChatterboxTtsCpp.cs",
+      "startLine": 593,
+      "endLine": 593
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/CosyVoice3CrispAsr.cs",
+      "startLine": 640,
+      "endLine": 640
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/F5TtsCrispAsr.cs",
+      "startLine": 554,
+      "endLine": 554
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/IndexTtsCrispAsr.cs",
+      "startLine": 543,
+      "endLine": 543
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/KokoroTtsCpp.cs",
+      "startLine": 297,
+      "endLine": 297
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/KokoroTtsCpp.cs",
+      "startLine": 305,
+      "endLine": 305
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/KokoroTtsCpp.cs",
+      "startLine": 331,
+      "endLine": 331
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/KokoroTtsCpp.cs",
+      "startLine": 374,
+      "endLine": 374
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/OmniVoiceTtsCpp.cs",
+      "startLine": 226,
+      "endLine": 226
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/OmniVoiceTtsCpp.cs",
+      "startLine": 296,
+      "endLine": 296
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/OmniVoiceTtsCpp.cs",
+      "startLine": 321,
+      "endLine": 321
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/Qwen3TtsCpp.cs",
+      "startLine": 349,
+      "endLine": 349
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/Qwen3TtsCpp.cs",
+      "startLine": 386,
+      "endLine": 386
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/Qwen3TtsCpp.cs",
+      "startLine": 432,
+      "endLine": 432
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/Qwen3TtsCrispAsr.cs",
+      "startLine": 911,
+      "endLine": 911
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/VibeVoiceCrispAsr.cs",
+      "startLine": 522,
+      "endLine": 522
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/VoxCPM2CrispAsr.cs",
+      "startLine": 592,
+      "endLine": 592
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Engines/ZonosTtsCrispAsr.cs",
+      "startLine": 494,
+      "endLine": 494
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/F5TtsCrispAsrSettings/F5TtsCrispAsrSettingsWindow.cs",
+      "startLine": 24,
+      "endLine": 24
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/IndexTtsCrispAsrSettings/IndexTtsCrispAsrSettingsWindow.cs",
+      "startLine": 24,
+      "endLine": 24
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/KokoroTtsSettings/KokoroTtsSettingsViewModel.cs",
+      "startLine": 134,
+      "endLine": 134
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/KokoroTtsSettings/KokoroTtsSettingsViewModel.cs",
+      "startLine": 135,
+      "endLine": 135
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/PiperSettings/PiperSettingsViewModel.cs",
+      "startLine": 137,
+      "endLine": 137
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/PiperSettings/PiperSettingsViewModel.cs",
+      "startLine": 138,
+      "endLine": 138
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/ProcessExtensions.cs",
+      "startLine": 63,
+      "endLine": 63
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Qwen3TtsCrispAsrSettings/Qwen3TtsCrispAsrSettingsWindow.cs",
+      "startLine": 24,
+      "endLine": 24
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Qwen3TtsSettings/Qwen3TtsSettingsViewModel.cs",
+      "startLine": 163,
+      "endLine": 163
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Qwen3TtsSettings/Qwen3TtsSettingsViewModel.cs",
+      "startLine": 164,
+      "endLine": 164
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Qwen3TtsSettings/Qwen3TtsSettingsViewModel.cs",
+      "startLine": 208,
+      "endLine": 208
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/Qwen3TtsSettings/Qwen3TtsSettingsViewModel.cs",
+      "startLine": 209,
+      "endLine": 209
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/ReviewSpeech/ReviewSpeechViewModel.cs",
+      "startLine": 292,
+      "endLine": 292
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/ReviewSpeech/ReviewSpeechViewModel.cs",
+      "startLine": 503,
+      "endLine": 503
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/ReviewSpeech/ReviewSpeechViewModel.cs",
+      "startLine": 595,
+      "endLine": 595
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/ReviewSpeech/ReviewSpeechViewModel.cs",
+      "startLine": 784,
+      "endLine": 784
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/ReviewSpeech/ReviewSpeechViewModel.cs",
+      "startLine": 863,
+      "endLine": 863
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/ReviewSpeech/ReviewSpeechViewModel.cs",
+      "startLine": 915,
+      "endLine": 915
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/ReviewSpeech/ReviewSpeechViewModel.cs",
+      "startLine": 931,
+      "endLine": 931
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/ReviewSpeechHistory/ReviewSpeechHistoryViewModel.cs",
+      "startLine": 143,
+      "endLine": 143
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TextToSpeechViewModel.cs",
+      "startLine": 1164,
+      "endLine": 1164
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TextToSpeechViewModel.cs",
+      "startLine": 1165,
+      "endLine": 1165
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TextToSpeechViewModel.cs",
+      "startLine": 1446,
+      "endLine": 1446
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TextToSpeechViewModel.cs",
+      "startLine": 1472,
+      "endLine": 1472
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TextToSpeechViewModel.cs",
+      "startLine": 1523,
+      "endLine": 1523
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TextToSpeechViewModel.cs",
+      "startLine": 1583,
+      "endLine": 1583
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TextToSpeechViewModel.cs",
+      "startLine": 1584,
+      "endLine": 1584
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TextToSpeechViewModel.cs",
+      "startLine": 1674,
+      "endLine": 1674
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TextToSpeechViewModel.cs",
+      "startLine": 1749,
+      "endLine": 1749
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TextToSpeechViewModel.cs",
+      "startLine": 1750,
+      "endLine": 1750
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TextToSpeechViewModel.cs",
+      "startLine": 2048,
+      "endLine": 2048
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TextToSpeechViewModel.cs",
+      "startLine": 2049,
+      "endLine": 2049
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TextToSpeechViewModel.cs",
+      "startLine": 2121,
+      "endLine": 2121
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TextToSpeechViewModel.cs",
+      "startLine": 2122,
+      "endLine": 2122
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TextToSpeechViewModel.cs",
+      "startLine": 2371,
+      "endLine": 2371
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TextToSpeechViewModel.cs",
+      "startLine": 2772,
+      "endLine": 2772
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TextToSpeechViewModel.cs",
+      "startLine": 2773,
+      "endLine": 2773
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TextToSpeechViewModel.cs",
+      "startLine": 2867,
+      "endLine": 2867
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TextToSpeechViewModel.cs",
+      "startLine": 2868,
+      "endLine": 2868
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsEngineInstaller.cs",
+      "startLine": 53,
+      "endLine": 53
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsEngineInstaller.cs",
+      "startLine": 54,
+      "endLine": 54
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsEngineInstaller.cs",
+      "startLine": 77,
+      "endLine": 77
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsEngineInstaller.cs",
+      "startLine": 98,
+      "endLine": 98
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsEngineInstaller.cs",
+      "startLine": 99,
+      "endLine": 99
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsEngineInstaller.cs",
+      "startLine": 127,
+      "endLine": 127
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsEngineInstaller.cs",
+      "startLine": 423,
+      "endLine": 423
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsEngineInstaller.cs",
+      "startLine": 424,
+      "endLine": 424
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsEngineInstaller.cs",
+      "startLine": 449,
+      "endLine": 449
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsEngineInstaller.cs",
+      "startLine": 479,
+      "endLine": 479
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsEngineInstaller.cs",
+      "startLine": 505,
+      "endLine": 505
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsEngineInstaller.cs",
+      "startLine": 506,
+      "endLine": 506
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsEngineInstaller.cs",
+      "startLine": 529,
+      "endLine": 529
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsEngineInstaller.cs",
+      "startLine": 550,
+      "endLine": 550
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsEngineInstaller.cs",
+      "startLine": 551,
+      "endLine": 551
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsEngineInstaller.cs",
+      "startLine": 577,
+      "endLine": 577
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsEngineInstaller.cs",
+      "startLine": 622,
+      "endLine": 622
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsEngineInstaller.cs",
+      "startLine": 661,
+      "endLine": 661
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsEngineInstaller.cs",
+      "startLine": 678,
+      "endLine": 678
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsVoiceInstaller.cs",
+      "startLine": 188,
+      "endLine": 188
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsVoiceInstaller.cs",
+      "startLine": 190,
+      "endLine": 190
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsVoiceInstaller.cs",
+      "startLine": 191,
+      "endLine": 191
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsVoiceInstaller.cs",
+      "startLine": 204,
+      "endLine": 204
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsVoiceInstaller.cs",
+      "startLine": 205,
+      "endLine": 205
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsVoiceInstaller.cs",
+      "startLine": 238,
+      "endLine": 238
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsVoiceInstaller.cs",
+      "startLine": 239,
+      "endLine": 239
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsVoiceInstaller.cs",
+      "startLine": 259,
+      "endLine": 259
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsVoiceInstaller.cs",
+      "startLine": 260,
+      "endLine": 260
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsVoiceInstaller.cs",
+      "startLine": 298,
+      "endLine": 298
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/TtsVoiceInstaller.cs",
+      "startLine": 299,
+      "endLine": 299
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/VibeVoiceCrispAsrSettings/VibeVoiceCrispAsrSettingsWindow.cs",
+      "startLine": 24,
+      "endLine": 24
+    },
+    {
+      "source": "src/ui/Features/Video/TextToSpeech/VoxCPM2CrispAsrSettings/VoxCPM2CrispAsrSettingsWindow.cs",
+      "startLine": 24,
+      "endLine": 24
+    },
+    {
+      "source": "src/ui/Features/Video/TransparentSubtitles/TransparentSettingsViewModel.cs",
+      "startLine": 52,
+      "endLine": 52
+    },
+    {
+      "source": "src/ui/Features/Video/TransparentSubtitles/TransparentSettingsWindow.cs",
+      "startLine": 14,
+      "endLine": 14
+    },
+    {
+      "source": "src/ui/Features/Video/TransparentSubtitles/TransparentSettingsWindow.cs",
+      "startLine": 22,
+      "endLine": 22
+    },
+    {
+      "source": "src/ui/Features/Video/TransparentSubtitles/TransparentSettingsWindow.cs",
+      "startLine": 30,
+      "endLine": 30
+    },
+    {
+      "source": "src/ui/Features/Video/TransparentSubtitles/TransparentSubtitlesViewModel.cs",
+      "startLine": 348,
+      "endLine": 348
+    },
+    {
+      "source": "src/ui/Features/Video/TransparentSubtitles/TransparentSubtitlesViewModel.cs",
+      "startLine": 349,
+      "endLine": 349
+    },
+    {
+      "source": "src/ui/Features/Video/TransparentSubtitles/TransparentSubtitlesViewModel.cs",
+      "startLine": 350,
+      "endLine": 350
+    },
+    {
+      "source": "src/ui/Features/Video/TransparentSubtitles/TransparentSubtitlesViewModel.cs",
+      "startLine": 388,
+      "endLine": 388
+    },
+    {
+      "source": "src/ui/Features/Video/TransparentSubtitles/TransparentSubtitlesViewModel.cs",
+      "startLine": 913,
+      "endLine": 913
+    },
+    {
+      "source": "src/ui/Features/Video/TransparentSubtitles/TransparentSubtitlesViewModel.cs",
+      "startLine": 914,
+      "endLine": 914
+    },
+    {
+      "source": "src/ui/Features/Video/TransparentSubtitles/TransparentSubtitlesViewModel.cs",
+      "startLine": 947,
+      "endLine": 947
+    },
+    {
+      "source": "src/ui/Features/Video/TransparentSubtitles/TransparentSubtitlesViewModel.cs",
+      "startLine": 948,
+      "endLine": 948
+    },
+    {
+      "source": "src/ui/Features/Video/VideoOcr/VideoOcrViewModel.cs",
+      "startLine": 464,
+      "endLine": 464
+    },
+    {
+      "source": "src/ui/Features/Video/VideoOcr/VideoOcrViewModel.cs",
+      "startLine": 586,
+      "endLine": 586
+    },
+    {
+      "source": "src/ui/Features/Video/VideoOcr/VideoOcrViewModel.cs",
+      "startLine": 855,
+      "endLine": 855
+    },
+    {
+      "source": "src/ui/Features/Video/VideoOcr/VideoOcrViewModel.cs",
+      "startLine": 935,
+      "endLine": 935
+    },
+    {
+      "source": "src/ui/Logic/Download/ChatLlmDownloadService.cs",
+      "startLine": 62,
+      "endLine": 62
+    },
+    {
+      "source": "src/ui/Logic/Download/ChatLlmDownloadService.cs",
+      "startLine": 77,
+      "endLine": 77
+    },
+    {
+      "source": "src/ui/Logic/Download/DownloadHelper.cs",
+      "startLine": 94,
+      "endLine": 94
+    },
+    {
+      "source": "src/ui/Logic/Download/DownloadHelper.cs",
+      "startLine": 141,
+      "endLine": 141
+    },
+    {
+      "source": "src/ui/Logic/Download/DownloadHelper.cs",
+      "startLine": 191,
+      "endLine": 191
+    },
+    {
+      "source": "src/ui/Logic/Download/FfmpegDownloadService.cs",
+      "startLine": 45,
+      "endLine": 45
+    },
+    {
+      "source": "src/ui/Logic/Download/GoogleLensOcrDownloadService.cs",
+      "startLine": 45,
+      "endLine": 45
+    },
+    {
+      "source": "src/ui/Logic/Download/GoogleLensOcrDownloadService.cs",
+      "startLine": 51,
+      "endLine": 51
+    },
+    {
+      "source": "src/ui/Logic/Download/LibMpvDownloadService .cs",
+      "startLine": 37,
+      "endLine": 37
+    },
+    {
+      "source": "src/ui/Logic/Download/LibVlcDownloadService.cs",
+      "startLine": 51,
+      "endLine": 51
+    },
+    {
+      "source": "src/ui/Logic/Download/LlamaCppDownloadService.cs",
+      "startLine": 97,
+      "endLine": 97
+    },
+    {
+      "source": "src/ui/Logic/Download/LlamaCppDownloadService.cs",
+      "startLine": 117,
+      "endLine": 117
+    },
+    {
+      "source": "src/ui/Logic/Download/PaddleOcrDownloadService.cs",
+      "startLine": 45,
+      "endLine": 45
+    },
+    {
+      "source": "src/ui/Logic/Download/PaddleOcrDownloadService.cs",
+      "startLine": 62,
+      "endLine": 62
+    },
+    {
+      "source": "src/ui/Logic/Download/TtsDownloadService.cs",
+      "startLine": 164,
+      "endLine": 164
+    },
+    {
+      "source": "src/ui/Logic/Download/TtsDownloadService.cs",
+      "startLine": 169,
+      "endLine": 169
+    },
+    {
+      "source": "src/ui/Logic/Download/TtsDownloadService.cs",
+      "startLine": 268,
+      "endLine": 268
+    },
+    {
+      "source": "src/ui/Logic/Download/WhisperDownloadService.cs",
+      "startLine": 82,
+      "endLine": 82
+    },
+    {
+      "source": "src/ui/Logic/Download/WhisperDownloadService.cs",
+      "startLine": 90,
+      "endLine": 90
+    },
+    {
+      "source": "src/ui/Logic/Download/WhisperDownloadService.cs",
+      "startLine": 152,
+      "endLine": 152
+    },
+    {
+      "source": "src/ui/Logic/Download/WhisperDownloadService.cs",
+      "startLine": 167,
+      "endLine": 167
+    },
+    {
+      "source": "src/ui/Logic/Download/WhisperDownloadService.cs",
+      "startLine": 185,
+      "endLine": 185
+    },
+    {
+      "source": "src/ui/Logic/Download/YtDlpDownloadService.cs",
+      "startLine": 113,
+      "endLine": 113
+    },
+    {
+      "source": "src/ui/Logic/Download/YtDlpDownloadService.cs",
+      "startLine": 132,
+      "endLine": 132
+    },
+    {
+      "source": "src/ui/Logic/Download/YtDlpDownloadService.cs",
+      "startLine": 163,
+      "endLine": 163
+    },
+    {
+      "source": "src/ui/Logic/Download/YtDlpDownloadService.cs",
+      "startLine": 197,
+      "endLine": 197
+    },
+    {
+      "source": "src/ui/Logic/Download/YtDlpDownloadService.cs",
+      "startLine": 261,
+      "endLine": 261
+    },
+    {
+      "source": "src/ui/Logic/Download/YtDlpDownloadService.cs",
+      "startLine": 281,
+      "endLine": 281
+    },
+    {
+      "source": "src/ui/Logic/Download/YtDlpDownloadService.cs",
+      "startLine": 293,
+      "endLine": 293
+    },
+    {
+      "source": "src/ui/Logic/Download/YtDlpDownloadService.cs",
+      "startLine": 329,
+      "endLine": 329
+    },
+    {
+      "source": "src/ui/Logic/Download/YtDlpDownloadService.cs",
+      "startLine": 350,
+      "endLine": 350
+    },
+    {
+      "source": "src/ui/Logic/SevenZipExtractor/Unpacker.cs",
+      "startLine": 124,
+      "endLine": 124
+    },
+    {
+      "source": "src/ui/Logic/SevenZipExtractor/Unpacker.cs",
+      "startLine": 163,
+      "endLine": 163
+    },
+    {
+      "source": "src/ui/Logic/SevenZipExtractor/Unpacker.cs",
+      "startLine": 228,
+      "endLine": 228
+    }
+  ]
+}

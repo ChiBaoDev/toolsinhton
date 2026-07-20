@@ -1,0 +1,79 @@
+[
+  {
+    "id": "B1",
+    "ownedRoots": [
+      "$.title",
+      "$.version",
+      "$.translatedBy",
+      "$.cultureName",
+      "$.general",
+      "$.file",
+      "$.edit",
+      "$.help",
+      "$.about"
+    ],
+    "reviewed": true,
+    "reviewer": "ChiBaoDev",
+    "reviewNote": "Reviewed metadata, general actions, file/edit operations, help, and about terminology against the Vietnamese glossary.",
+    "shardFile": "VietnameseDraft/01-general-file-edit.json"
+  },
+  {
+    "id": "B2",
+    "ownedRoots": [
+      "$.main.menu",
+      "$.main.toolbar",
+      "$.main.waveform"
+    ],
+    "reviewed": true,
+    "reviewer": "ChiBaoDev",
+    "reviewNote": "Reviewed main menu mnemonics, toolbar labels/tooltips, and waveform navigation in context.",
+    "shardFile": "VietnameseDraft/02-main-navigation.json"
+  },
+  {
+    "id": "B3",
+    "ownedRoots": [
+      "$.main",
+      "$.waveform",
+      "$.sync"
+    ],
+    "reviewed": true,
+    "reviewer": "ChiBaoDev",
+    "reviewNote": "Reviewed core editing statuses, waveform actions, timing, and synchronization terminology.",
+    "shardFile": "VietnameseDraft/03-main-sync-waveform.json"
+  },
+  {
+    "id": "B4",
+    "ownedRoots": [
+      "$.tools",
+      "$.spellCheck",
+      "$.options",
+      "$.plugins"
+    ],
+    "reviewed": true,
+    "reviewer": "ChiBaoDev",
+    "reviewNote": "Reviewed tools, spell-check, settings, and plugin terminology; technical engines and formats are explicitly classified.",
+    "shardFile": "VietnameseDraft/04-tools-options.json"
+  },
+  {
+    "id": "B5",
+    "ownedRoots": [
+      "$.video",
+      "$.ocr",
+      "$.assa"
+    ],
+    "reviewed": true,
+    "reviewer": "ChiBaoDev",
+    "reviewNote": "Reviewed video, media processing, OCR, and Advanced SubStation Alpha terminology.",
+    "shardFile": "VietnameseDraft/05-video-ocr-assa.json"
+  },
+  {
+    "id": "B6",
+    "ownedRoots": [
+      "$.translate"
+    ],
+    "reviewed": true,
+    "reviewer": "ChiBaoDev",
+    "reviewNote": "Reviewed translation workflow, API terminology, placeholders, and Vietnamese technical wording in context.",
+    "shardFile": "VietnameseDraft/06-translate-remaining.json"
+  }
+]

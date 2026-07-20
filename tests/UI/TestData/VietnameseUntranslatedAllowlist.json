@@ -1,0 +1,302 @@
+[
+  {
+    "key": "$.title",
+    "value": "Subtitle Edit",
+    "reason": "Subtitle Edit is the exact product name displayed in metadata."
+  },
+  {
+    "key": "$.version",
+    "value": "v5.1.0-beta15",
+    "reason": "The version string must exactly identify the application build."
+  },
+  {
+    "key": "$.general.bdnXml",
+    "value": "BDN/xml",
+    "reason": "BDN/xml is the exact product, engine, standard, format, or proper name used at this path."
+  },
+  {
+    "key": "$.general.bluRaySup",
+    "value": "Blu-ray (sup)",
+    "reason": "Blu-ray (sup) is the exact product, engine, standard, format, or proper name used at this path."
+  },
+  {
+    "key": "$.general.codec",
+    "value": "Codec",
+    "reason": "Codec is the established Vietnamese technical loanword at this exact path."
+  },
+  {
+    "key": "$.general.ip",
+    "value": "IP",
+    "reason": "IP is the exact acronym, placeholder pattern, unit, symbol, or format notation required at this path."
+  },
+  {
+    "key": "$.general.id",
+    "value": "ID",
+    "reason": "ID is the exact acronym, placeholder pattern, unit, symbol, or format notation required at this path."
+  },
+  {
+    "key": "$.general.numberSymbol",
+    "value": "#",
+    "reason": "# is the exact acronym, placeholder pattern, unit, symbol, or format notation required at this path."
+  },
+  {
+    "key": "$.general.ocrDotDotDot",
+    "value": "OCR...",
+    "reason": "OCR... is the exact acronym, placeholder pattern, unit, symbol, or format notation required at this path."
+  },
+  {
+    "key": "$.general.url",
+    "value": "URL",
+    "reason": "URL is the exact acronym, placeholder pattern, unit, symbol, or format notation required at this path."
+  },
+  {
+    "key": "$.general.alpha",
+    "value": "Alpha",
+    "reason": "Alpha is the exact graphics-channel term at this path."
+  },
+  {
+    "key": "$.general.hoursMinutesSecondsMilliseconds",
+    "value": "HH:MM:SS.FFF",
+    "reason": "HH:MM:SS.FFF is the exact acronym, placeholder pattern, unit, symbol, or format notation required at this path."
+  },
+  {
+    "key": "$.main.menu.video",
+    "value": "_Video",
+    "reason": "Video is the established Vietnamese UI loanword; the underscore preserves the mnemonic at this exact menu path."
+  },
+  {
+    "key": "$.file.ebuSaveOptions.teletext",
+    "value": "Teletext",
+    "reason": "Teletext is the exact broadcast-system name at this path."
+  },
+  {
+    "key": "$.file.import.csvXlsxFilterTitle",
+    "value": "CSV/XLSX",
+    "reason": "CSV/XLSX is the exact acronym, placeholder pattern, unit, symbol, or format notation required at this path."
+  },
+  {
+    "key": "$.file.import.separatorTab",
+    "value": "Tab",
+    "reason": "Tab is the exact keyboard/delimiter name used at this path."
+  },
+  {
+    "key": "$.file.export.titleExportVobSub",
+    "value": "VobSub (sub/idx)",
+    "reason": "VobSub (sub/idx) is the exact product, engine, standard, format, or proper name used at this path."
+  },
+  {
+    "key": "$.file.export.titleExportDCinemaSmpte2014Png",
+    "value": "D-Cinema SMPTE 2014/png",
+    "reason": "D-Cinema SMPTE 2014/png is the exact product, engine, standard, format, or proper name used at this path."
+  },
+  {
+    "key": "$.edit.modifySelection.cpsLessThan",
+    "value": "CPS <",
+    "reason": "CPS < is the exact acronym, placeholder pattern, unit, symbol, or format notation required at this path."
+  },
+  {
+    "key": "$.edit.modifySelection.cpsGreaterThan",
+    "value": "CPS >",
+    "reason": "CPS > is the exact acronym, placeholder pattern, unit, symbol, or format notation required at this path."
+  },
+  {
+    "key": "$.tools.fixCommonErrors.fixCommasExample",
+    "value": ",, -> ,",
+    "reason": ",, -> , is a language-independent transformation example whose punctuation and numeric form are exact at this path."
+  },
+  {
+    "key": "$.tools.fixCommonErrors.fixSpaceBetweenNumbersExample",
+    "value": "1 100 -> 1100",
+    "reason": "1 100 -> 1100 is a language-independent transformation example whose punctuation and numeric form are exact at this path."
+  },
+  {
+    "key": "$.tools.beautifyTimeCodesProfile.presetNetflix",
+    "value": "Netflix",
+    "reason": "Netflix is the exact product, engine, standard, format, or proper name used at this path."
+  },
+  {
+    "key": "$.tools.beautifyTimeCodesProfile.presetSdi",
+    "value": "SDI",
+    "reason": "SDI is the exact product, engine, standard, format, or proper name used at this path."
+  },
+  {
+    "key": "$.tools.beautifyTimeCodesProfile.milliseconds",
+    "value": "ms",
+    "reason": "ms is the exact acronym, placeholder pattern, unit, symbol, or format notation required at this path."
+  },
+  {
+    "key": "$.tools.mergeTwoSubtitles.outputFormatSubRip",
+    "value": "SubRip (.srt)",
+    "reason": "SubRip (.srt) is the exact product, engine, standard, format, or proper name used at this path."
+  },
+  {
+    "key": "$.tools.mergeTwoSubtitles.outputFormatAssa",
+    "value": "Advanced Sub Station Alpha (.ass)",
+    "reason": "Advanced Sub Station Alpha (.ass) is the exact product, engine, standard, format, or proper name used at this path."
+  },
+  {
+    "key": "$.tools.imageBasedEdit.gamma",
+    "value": "Gamma",
+    "reason": "Gamma is the exact image-processing parameter name at this path."
+  },
+  {
+    "key": "$.tools.imageBasedEdit.videoPreview",
+    "value": "Video",
+    "reason": "Video is the established Vietnamese UI loanword for this exact preview label."
+  },
+  {
+    "key": "$.video.burnIn.crf",
+    "value": "CRF",
+    "reason": "CRF is the exact acronym, placeholder pattern, unit, symbol, or format notation required at this path."
+  },
+  {
+    "key": "$.video.videoOcr.url",
+    "value": "URL",
+    "reason": "URL is the exact acronym, placeholder pattern, unit, symbol, or format notation required at this path."
+  },
+  {
+    "key": "$.video.resolutionSeparator",
+    "value": "x",
+    "reason": "x is the exact acronym, placeholder pattern, unit, symbol, or format notation required at this path."
+  },
+  {
+    "key": "$.waveform.spectrogramClassicViridis",
+    "value": "Viridis",
+    "reason": "Viridis is the exact color-map/palette name selected at this spectrogram path."
+  },
+  {
+    "key": "$.waveform.spectrogramClassicPlasma",
+    "value": "Plasma",
+    "reason": "Plasma is the exact color-map/palette name selected at this spectrogram path."
+  },
+  {
+    "key": "$.waveform.spectrogramClassicInferno",
+    "value": "Inferno",
+    "reason": "Inferno is the exact color-map/palette name selected at this spectrogram path."
+  },
+  {
+    "key": "$.waveform.spectrogramClassicTurbo",
+    "value": "Turbo",
+    "reason": "Turbo is the exact color-map/palette name selected at this spectrogram path."
+  },
+  {
+    "key": "$.waveform.spectrogramNeon",
+    "value": "Neon",
+    "reason": "Neon is the exact color-map/palette name selected at this spectrogram path."
+  },
+  {
+    "key": "$.options.settings.timeCodeModeHhMmSsMs",
+    "value": "HH:MM:SS:MS",
+    "reason": "HH:MM:SS:MS is the exact acronym, placeholder pattern, unit, symbol, or format notation required at this path."
+  },
+  {
+    "key": "$.options.settings.timeCodeModeHhMmSsFf",
+    "value": "HH:MM:SS:FF",
+    "reason": "HH:MM:SS:FF is the exact acronym, placeholder pattern, unit, symbol, or format notation required at this path."
+  },
+  {
+    "key": "$.options.settings.waveformMouseWheelStepMilliseconds",
+    "value": "{0} ms",
+    "reason": "{0} ms is the exact acronym, placeholder pattern, unit, symbol, or format notation required at this path."
+  },
+  {
+    "key": "$.options.settings.mpvOpenGl",
+    "value": "libmpv - OpenGL",
+    "reason": "libmpv - OpenGL is the exact product, engine, standard, format, or proper name used at this path."
+  },
+  {
+    "key": "$.options.settings.spellCheckEngineHunSpelll",
+    "value": "Hunspell",
+    "reason": "Hunspell is the exact product, engine, standard, format, or proper name used at this path."
+  },
+  {
+    "key": "$.options.settings.spellCheckEngineMsWord",
+    "value": "MS Word",
+    "reason": "MS Word is the exact product, engine, standard, format, or proper name used at this path."
+  },
+  {
+    "key": "$.options.shortcuts.categoryVideo",
+    "value": "Video",
+    "reason": "Video is the established Vietnamese UI loanword for this exact shortcut category."
+  },
+  {
+    "key": "$.options.shortcuts.categoryAi",
+    "value": "AI",
+    "reason": "AI is the exact acronym, placeholder pattern, unit, symbol, or format notation required at this path."
+  },
+  {
+    "key": "$.options.shortcuts.alt",
+    "value": "Alt",
+    "reason": "Alt is the exact keyboard modifier label or platform glyph required at this shortcut path."
+  },
+  {
+    "key": "$.options.shortcuts.win",
+    "value": "Win",
+    "reason": "Win is the exact keyboard modifier label or platform glyph required at this shortcut path."
+  },
+  {
+    "key": "$.options.shortcuts.shift",
+    "value": "Shift",
+    "reason": "Shift is the exact keyboard modifier label or platform glyph required at this shortcut path."
+  },
+  {
+    "key": "$.options.shortcuts.controlMac",
+    "value": "⌃",
+    "reason": "⌃ is the exact keyboard modifier label or platform glyph required at this shortcut path."
+  },
+  {
+    "key": "$.options.shortcuts.altMac",
+    "value": "⌥",
+    "reason": "⌥ is the exact keyboard modifier label or platform glyph required at this shortcut path."
+  },
+  {
+    "key": "$.options.shortcuts.winMac",
+    "value": "⌘",
+    "reason": "⌘ is the exact keyboard modifier label or platform glyph required at this shortcut path."
+  },
+  {
+    "key": "$.options.shortcuts.shiftMac",
+    "value": "⇧",
+    "reason": "⇧ is the exact keyboard modifier label or platform glyph required at this shortcut path."
+  },
+  {
+    "key": "$.ocr.tesseractEngineModeBoth",
+    "value": "Tesseract + LSTM",
+    "reason": "Tesseract + LSTM is the exact product, engine, standard, format, or proper name used at this path."
+  },
+  {
+    "key": "$.ocr.ocr",
+    "value": "OCR",
+    "reason": "OCR is the exact acronym, placeholder pattern, unit, symbol, or format notation required at this path."
+  },
+  {
+    "key": "$.ocr.ocrX",
+    "value": "OCR - {0}",
+    "reason": "OCR - {0} is the exact acronym, placeholder pattern, unit, symbol, or format notation required at this path."
+  },
+  {
+    "key": "$.about.gitHub",
+    "value": "GitHub",
+    "reason": "GitHub is the exact product, engine, standard, format, or proper name used at this path."
+  },
+  {
+    "key": "$.about.payPal",
+    "value": "PayPal",
+    "reason": "PayPal is the exact product, engine, standard, format, or proper name used at this path."
+  },
+  {
+    "key": "$.ocr.nocr",
+    "value": "nOCR",
+    "reason": "nOCR is the exact OCR engine/database name used at this path."
+  },
+  {
+    "key": "$.video.audioToText.xx",
+    "value": "{0}: {1}",
+    "reason": "{0}: {1} is an exact language-independent placeholder and punctuation pattern at this path."
+  },
+  {
+    "key": "$.ocr.binaryOCR",
+    "value": "Binary OCR",
+    "reason": "Binary OCR is the exact OCR engine/database name used at this path."
+  }
+]
