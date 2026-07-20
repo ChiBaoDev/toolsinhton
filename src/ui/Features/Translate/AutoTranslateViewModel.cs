@@ -1512,7 +1512,7 @@ public partial class AutoTranslateViewModel : ObservableObject
 
     internal void AutoTranslatorChanged(AvaloniaObject sender)
     {
-        var translator = SelectedAutoTranslator;
+        var translator = (sender as ComboBox)?.SelectedItem as IAutoTranslator;
         if (translator == null)
         {
             return;
